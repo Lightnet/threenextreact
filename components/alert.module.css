@@ -1,0 +1,11 @@
+/*
+https://nextjs.org/learn/basics/assets-metadata-css/styling-tips
+
+*/
+
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}

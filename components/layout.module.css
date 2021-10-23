@@ -1,0 +1,8 @@
+/* 
+  https://nextjs.org/learn/basics/assets-metadata-css/polishing-layout
+  style 
+  import styles from './layout.module.css'
+*/
+body{
+  margin: 0;
+}
