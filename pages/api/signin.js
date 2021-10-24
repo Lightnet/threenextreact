@@ -3,13 +3,14 @@
   Created by: Lightnet
 */
 
-import { PrismaClient } from '@prisma/client';
+
 import { getCsrfToken, getProviders   } from "next-auth/react";
-import prisma from '../client';
-//const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client';
+import {clientDB} from '../db';
 
 export default async (req, res)=>{
   console.log("[[[=== SIGN IN ===]]]");
+  const prisma = clientDB(PrismaClient);
 
   //const csrfToken = await getCsrfToken({ req });
   const csrfToken = await getCsrfToken();

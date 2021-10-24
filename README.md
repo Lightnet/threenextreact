@@ -4,14 +4,43 @@
 
 ## Create By: Lightnet
 
+## code script:
+- client: babel js
+- Server: babel js
+
+## Packages:
+- @prisma/client 3.3.0
+- @react-three/fiber 7.0.17
+- next 11.1.2
+- next-auth 4.0.0-beta.4
+- react 17.0.2
+- react-dom 17.0.2
+- socket.io 4.3.1
+- socket.io-client 4.3.2
+- sqlite 4.0.23
+- three 0.133.1
+- prisma 3.3.0
+
 ## Information:
   Working on prototype for threejs build with nextjs, reactjs, socket.io, sqlite, prisma, react-three/fiber and other packages.
 
   To keep it very simple but have simple database with rect and sqlite for local build for game, editor and auth testing.
 
 ## Root:
+ - components ( react components )
  - Page (url page / folder)
-    - api (request, respone / folder)
+    - api (server request, respone / folder)
+      - auth ( next-auth )
+    - _app.js ( default config nextjs )
+    - _document.js ( default config nextjs )
+    - index.js (main entry user custom code)
+    - filename.js (testing)
+ - prisma ( folder and database)
+ - next.config.js (server config / webpack)
+
+## URLs:
+- http://localhost:3000
+- 
 
 ## Layout:
 
@@ -19,32 +48,19 @@
 
   The network and database will handle some simple tests.
 
-
 # dev url testing:
 - http://localhost:5555/
 - http://localhost:3000/
-
-
-## Refs:
-- https://nextjs.org/docs/advanced-features/custom-document
-
-## Links:
-- https://nextjs.org/docs/getting-started
-- https://stackoverflow.com/questions/54067291/next-js-loads-script-tags-but-it-doesnt-execute-them/65349130
-- https://nextjs.org/docs/basic-features/data-fetching
-
-- https://vercel.com/guides/nextjs-prisma-postgres
-- https://next-auth.js.org/getting-started/example
-- https://www.prisma.io/docs/concepts/database-connectors/sqlite
-- https://stackoverflow.com/questions/51040669/next-js-use-of-app-js-and-document-js
-
-- https://www.youtube.com/watch?v=FMnlyi60avU Prisma - The Easiest Way to Work with a Database in Next.js
-- https://github.com/chenkie/next-prisma
 
 ```
 prisma init
 prisma migrate dev
 ask > init
 prisma studio //vivew database
-
 ```
+# refs Links:
+- https://nextjs.org/docs/getting-started
+
+# Notes: 
+- PrismaClient setup is tricky when dealing with react, server and client code.
+

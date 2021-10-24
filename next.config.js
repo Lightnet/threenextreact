@@ -1,13 +1,17 @@
 //NEXTJS CONFIG
 
+const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
+
 module.exports = (phase, { defaultConfig }) => {
-  /**
-  * @type {import('next').NextConfig}
-  */
-  const nextConfig = {
-    /* config options here */
-
-
+  if (phase === PHASE_DEVELOPMENT_SERVER) {
+    console.log(PHASE_DEVELOPMENT_SERVER);
+    return {
+      /* development only config options here */
+      testurl:"test"
+    }
   }
-  return nextConfig
+
+  return {
+    /* config options for all phases except development here */
+  }
 }

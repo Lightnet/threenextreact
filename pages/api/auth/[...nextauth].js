@@ -77,14 +77,23 @@ export default NextAuth({
 
   */
   callbacks: {
-    
+    //first process user login
     async jwt({ token, user, account, profile, isNewUser }) {
       console.log("[[[=== callbacks jwt ===]]");
-      console.log(token);
-      console.log(user);
-      console.log(account);
-      console.log(profile);
-      console.log(isNewUser);
+      //console.log(token);
+      //console.log(user);
+      //console.log(account);
+      //console.log(profile);
+      //console.log(isNewUser);
+
+      if (user) {//once the user login it will progress
+        token.id = user.id;
+        token.name = user.name;
+        token.role = user.role;
+      }
+      if(profile){
+        token.type=profile.type;
+      }
 
       //nope
       //if (user) {
@@ -100,14 +109,12 @@ export default NextAuth({
       
       return token; 
     },
-    
+    //after jwt finish this is process
     async session({ session, user, token }) {
       console.log("[[[=== callbacks session ===]]]");
-      console.log(session);
-      console.log(user);
-      console.log("[[[[[[[[[[token]]]]]]]]");
-
-      console.log(token);
+      //console.log(session);
+      //console.log(user);
+      //console.log(token);
       //if(user){
         //session.user=user.user;
       //}
@@ -118,7 +125,9 @@ export default NextAuth({
       if(token){//ok?
         session.user={
           name:token.name,
-          email:token.email
+          email:token.email,
+          rote:token.role,
+          id:token.id
         }
         //session.user=token.name;
       }

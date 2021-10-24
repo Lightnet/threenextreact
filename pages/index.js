@@ -3,22 +3,30 @@
   Created by: Lightnet
 */
 
-console.log("[[[=== Index Page ===]]]");
+//console.log("[[[=== Index Page ===]]]");
 //import { useSession, signIn, signOut } from "next-auth/react";
-// import { loadEnvConfig } from '@next/env'
+// import { loadEnvConfig } from '@next/env';
 import { useEffect } from 'react';
 import { getSession } from "next-auth/react";
 import SocketIOClient from "socket.io-client";
 import SignArea from "../components/componentsignarea";
 
-import { PrismaClient} from "@prisma/client";
-//const prisma = new PrismaClient();
-//import { prisma } from './database';
+import DBTest from "../components/componentdbtest";
 
-//export async function getStaticProps(ctx) {//client side
-//export async function getServerSideProps(ctx) { //works need client not seruver
+import { PrismaClient } from '@prisma/client';
+//import prisma from "./db";
+//import prisma from '../lib/prisma';
+import {clientDB} from "./db";
+
+
+//export async function getStaticProps(ctx) {// client side
+//export async function getServerSideProps(ctx) { // server
 export async function getServerSideProps(ctx) {
   console.log("[[=== getServerSideProps ===]");
+  let prisma = clientDB(PrismaClient);
+  const users = await prisma.user.findMany();
+  console.log(users);
+
   return {
     props:{
       session: await getSession(ctx)
@@ -27,22 +35,11 @@ export async function getServerSideProps(ctx) {
 }
 
 export default function IndexPage({session}) {
-  console.log("[[[=== index page session ====]]]]");
+  console.log("[[[=== INDEX PAGE ====]]]]");
   console.log(session);
-  
 
   useEffect(async () => {//mount or load data
     //console.log("[[[=== loaded data...");
-
-    if(!session){
-      //session = await getSession();
-
-      //let token = await getSession();
-      //console.log("token");
-      //console.log(token);
-      //session = token;
-    }
-
     // connect to socket server
     const socket = SocketIOClient.connect(process.env.BASE_URL, {
       path: "/api/socketio",
@@ -61,13 +58,9 @@ export default function IndexPage({session}) {
       //setChat([...chat]);
     });
 
+    console.log("index.js");
     // socket disconnet onUnmount if exists
     if (socket) return () => socket.disconnect();
-    
-    //var clientsession = await getSession();//works
-    //console.log(clientsession);
-    
-    console.log("index.js");
   }, []) // Added [] as useEffect filter so it will be executed only once, when component is mounted
 
   return (
@@ -77,6 +70,7 @@ export default function IndexPage({session}) {
         <p>Work in progress!</p>
         <p>Threejs Fiber SQLite!</p>
       </div>
+      <DBTest></DBTest>
       <SignArea></SignArea>
     </>
   );
