@@ -12,10 +12,9 @@ import SocketIOClient from "socket.io-client";
 import SignArea from "../components/componentsignarea";
 
 import DBTest from "../components/componentdbtest";
+import Sidebar from "../components/componentsidebarleft";
 
 import { PrismaClient } from '@prisma/client';
-//import prisma from "./db";
-//import prisma from '../lib/prisma';
 import {clientDB} from "./db";
 
 

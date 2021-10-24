@@ -63,4 +63,5 @@ prisma studio //vivew database
 
 # Notes: 
 - PrismaClient setup is tricky when dealing with react, server and client code.
+- div id __next css for threejs resize full screen config.
 
