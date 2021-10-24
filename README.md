@@ -1,16 +1,23 @@
-# Name: nextreactjssocketio
+# Name: threenextreact
+
+## LICENSE: MIT
+
+## Create By: Lightnet
 
 ## Information:
-  Simple blank projects that change the nextjs with react build in server side render.
+  Working on prototype for threejs build with nextjs, reactjs, socket.io, sqlite, prisma, react-three/fiber and other packages.
 
-  Testing the socket.io
+  To keep it very simple but have simple database with rect and sqlite for local build for game, editor and auth testing.
 
 ## Root:
  - Page (url page / folder)
     - api (request, respone / folder)
 
 ## Layout:
-  It took time to learn some basic file setup. This is to test out the socket.io
+
+  By using the react to create components and entities components. To develop logic, network and other things.
+
+  The network and database will handle some simple tests.
 
 
 # dev url testing:
