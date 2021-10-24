@@ -1,5 +1,9 @@
-// https://next-auth.js.org/configuration/pages
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
+// https://next-auth.js.org/configuration/pages
 
 import { getCsrfToken } from "next-auth/react";
 

@@ -1,5 +1,9 @@
-// https://next-auth.js.org/getting-started/client
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
+// https://next-auth.js.org/getting-started/client
 
 export default function AdminDashboard() {
   const { data: session } = useSession()

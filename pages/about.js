@@ -1,6 +1,7 @@
-
-
-
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 import Script from 'next/script';
 

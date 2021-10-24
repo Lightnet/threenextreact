@@ -1,3 +1,8 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 // https://github.com/nextauthjs/next-auth-example/tree/main/components
 import { signIn } from 'next-auth/client'
 

@@ -1,3 +1,8 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 import { Server as ServerIO } from "socket.io";
 
 export const config = {

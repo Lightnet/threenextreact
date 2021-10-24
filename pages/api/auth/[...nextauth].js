@@ -1,9 +1,11 @@
-// https://github.com/nextauthjs/next-auth-example/blob/main/pages/api/auth/%5B...nextauth%5D.js
-// https://github.com/nextauthjs/next-auth-example/blob/main/pages/api/auth/%5B...nextauth%5D.js
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-// https://next-auth.js.org/providers/credentials
-// https://next-auth.js.org/configuration/providers#credentials-provider
+
 export default NextAuth({
   providers: [
     /*
@@ -15,14 +17,13 @@ export default NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        alias: { label: "Alias", type: "text", placeholder: "jsmith" },
-        passphrase: {  label: "Passphrase", type: "password" }
+        alias: { label: "Alias", type: "text", placeholder: "John Doe" },
+        passphrase: {  label: "Passphrase", type: "password", placeholder:"PASSWORD" }
       },
       async authorize(credentials, req) {
-        console.log("CHECKING AUTH !!!");
+        //console.log("CHECKING AUTH !!!");
         //const user = { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         //return user;
-
         
         let hosturl;
         if(process.env.NODE_ENV == 'development'){
@@ -32,20 +33,20 @@ export default NextAuth({
         }
         //console.log(hosturl);
         let res;
-        //try{
+        try{
           //required full url path else it fail get data if there no catch
           res = await fetch(hosturl, {
             method: 'POST',
             //headers: { "Content-Type": "application/json" }
             body: JSON.stringify(credentials)
           });
-        //}catch(e){
-          //console.log(e);
-        //}
-
+        }catch(e){
+          console.log(e);
+          return null;
+        }
         const user = await res.json();
-        console.log("[[[[[[[[[[[[[[[[[[[[[[user",user);
-
+        console.log("[[[=== CredentialsProvider user ===]]]");
+        console.log(user);
         if(user.error){
           console.log("NOTFOUND! USER!");
           return null;
@@ -55,8 +56,6 @@ export default NextAuth({
         if (res.ok && user) {
           return user;
         }
-
-        console.log("SIGN IN ERROR.....................");
         
         // Return null if user data could not be retrieved
         return null;
@@ -64,39 +63,68 @@ export default NextAuth({
     })
 
   ],
+  // https://next-auth.js.org/configuration/callbacks
+  // https://next-auth.js.org/getting-started/client
+  /*
+  {
+  user: {
+    name: string
+    email: string
+    image: string
+    },
+    expires: Date // This is the expiry of the session, not any of the tokens within the session
+  }
+
+  */
   callbacks: {
-    jwt: async ({ token, user, account, profile, isNewUser })=> {
+    
+    async jwt({ token, user, account, profile, isNewUser }) {
       console.log("[[[=== callbacks jwt ===]]");
       console.log(token);
       console.log(user);
-      //console.log(account);
-      //console.log(profile);
-      //console.log(isNewUser);
+      console.log(account);
+      console.log(profile);
+      console.log(isNewUser);
 
-      if (user) {
-        if(user.token){
-          token.accessToken = user.token
-        }
-        if(user.id){
-          token.id = user.id;
-          token.name = user.alias;
-        }
-      }
-      return token;   // ...here
+      //nope
+      //if (user) {
+        //if(user.token){
+          //token.accessToken = user.token
+        //}
+        //if(user.id){
+          //token.id = user.id;
+          //token.name = user.alias;
+          //token.name = user.alias;
+        //}
+      //}
+      
+      return token; 
     },
-    session: async ({ session, user, token })=> {
+    
+    async session({ session, user, token }) {
       console.log("[[[=== callbacks session ===]]]");
       console.log(session);
       console.log(user);
+      console.log("[[[[[[[[[[token]]]]]]]]");
+
       console.log(token);
-      if(user){
-        session.user=user.user;
-      }
-      if(token){
-        session.user = token.name;
+      //if(user){
+        //session.user=user.user;
+      //}
+      //if(token){
+        //session.user = token.name;
+      //}
+
+      if(token){//ok?
+        session.user={
+          name:token.name,
+          email:token.email
+        }
+        //session.user=token.name;
       }
       return session;
     }
+    
   },
   //database: process.env.DATABASE_URL,
   //secret: process.env.SECRET,
@@ -108,7 +136,7 @@ export default NextAuth({
     updateAge: 24 * 60 * 60 // 24 hours
   },
   jwt: {
-    secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw',
+    secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw'
     //signingKey: {
       //kty: "oct",
       //kid: "Dl893BEV-iVE-x9EC52TDmlJUgGm9oZ99_ZL025Hc5Q",

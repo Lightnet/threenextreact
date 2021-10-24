@@ -1,4 +1,8 @@
-//import {NextApiRquest, NextApiResponse } from 'next';
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();

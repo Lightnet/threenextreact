@@ -1,7 +1,7 @@
-
-
-
-
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 // https://www.prisma.io/docs/guides/performance-and-optimization/connection-management
 // https://stackabuse.com/using-global-variables-in-node-js/

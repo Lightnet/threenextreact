@@ -1,10 +1,10 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
-//import { useSession, signOut, signIn } from "next-auth/react";
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-
-//import { useEffect } from 'react';
-//import { Canvas } from '@react-three/fiber';
 
 function Box(props) {
   // This reference will give us direct access to the THREE.Mesh object

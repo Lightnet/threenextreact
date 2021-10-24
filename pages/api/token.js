@@ -1,3 +1,8 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 // https://next-auth.js.org/configuration/options
 import { getToken } from "next-auth/jwt"
 
