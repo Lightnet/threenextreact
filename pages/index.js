@@ -12,11 +12,13 @@ import SocketIOClient from "socket.io-client";
 import SignArea from "../components/componentsignarea";
 
 //import DBTest from "../components/componentdbtest";
+//import Btnchild from "../components/componentbtnchild";
 import SidebarLeft from "../components/componentleftsidebar";
 import SidebarBottom from "../components/componentbottomsidebar";
 import SidebarTop from "../components/componenttopsidebar";
 
-//import Btnchild from "../components/componentbtnchild";
+import GameList from "../components/componentgamelist";
+import ProjectList from "../components/componenteditorprojectlist";
 
 import { PrismaClient } from '@prisma/client';
 import {clientDB} from "./db";
@@ -32,16 +34,13 @@ export async function getServerSideProps(ctx) {
 
   return {
     props:{
-      session: await getSession(ctx),
-      LSideBar_Width:0
+      session: await getSession(ctx)
     }
   }
 }
 
 export default function IndexPage({
   session
-  , LSideBar_Width
-
 }) {
   console.log("[[[=== INDEX PAGE ====]]]]");
   console.log(session);
@@ -50,6 +49,11 @@ export default function IndexPage({
   const [sideBarRight, setSideBarRight] = useState(false);
   const [sideBarTop, setSideBarTop] = useState(false);
   const [sideBarBottom, setSideBarBottom] = useState(false);
+
+  const [selectSection, setselectSection] = useState("");
+
+  const [panel, setPanel] = useState(<></>);
+
 
   useEffect(async () => {//mount or load data
     //console.log("[[[=== loaded data...");
@@ -103,6 +107,25 @@ export default function IndexPage({
     }
   }
 
+  function selSection(event, id){
+    event.preventDefault();
+    setselectSection(id);
+  }
+
+  useEffect(async () => { 
+
+  }, []);
+
+  function renderSection(){
+    if(selectSection == "gamelist"){
+      return(<GameList></GameList>);
+    }else if(selectSection == "projectlist"){
+      return(<ProjectList></ProjectList>);
+    }else{
+      return(<div></div>);
+    }
+  }
+
   return (
     <>
       <SidebarLeft
@@ -122,21 +145,32 @@ export default function IndexPage({
         onRequestClose={sideBarBottomToggle}
       >
       </SidebarBottom>
-
+      {/* js comment  */}
       <button onClick={(e)=> sideBarLeftToggle()}>☰ Open Sidebar</button> 
       <button onClick={(e)=> sideBarTopToggle()}>☰ Open Top Sidebar</button> 
       <button onClick={(e)=> sideBarBottomToggle()}>☰ Open Bottom Sidebar</button> 
-
+      {/*  */}
       <div>
         <p>Welcome to Next.js!</p>
         <p>Work in progress!</p>
-        <p>Threejs Fiber SQLite!</p>
       </div>
-      <a href="/threejs">Threejs</a>
+      <a href="#" onClick={(e)=>selSection(e,"three")}>Three</a>
+      <span> | </span>
+      <a href="#" onClick={(e)=>selSection(e,"projectlist")}>Editor List</a>
+      <span> | </span> 
+      <a href="#" onClick={(e)=>selSection(e,"gamelist")}>Game List</a>
+      <span> | </span> 
+      <a href="#" onClick={(e)=>selSection(e,"docs")}>Docs</a>
+      <br />
+
+      {renderSection()}
+      
+
+      <a href="/threejs">Page Threejs</a>
       <br/>
-      <a href="/editor">Editor</a>
+      <a href="/editor">Page Editor</a>
       <br/>
-      <a href="/game">Game</a>
+      <a href="/game">Page Game</a>
       <br/>
       <SignArea></SignArea>
     </>
