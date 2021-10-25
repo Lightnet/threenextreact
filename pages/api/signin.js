@@ -3,8 +3,7 @@
   Created by: Lightnet
 */
 
-
-import { getCsrfToken, getProviders   } from "next-auth/react";
+import { getCsrfToken, getProviders } from "next-auth/react";
 import { PrismaClient } from '@prisma/client';
 import {clientDB} from '../db';
 
@@ -14,9 +13,8 @@ export default async (req, res)=>{
 
   //const csrfToken = await getCsrfToken({ req });
   const csrfToken = await getCsrfToken();
-  //console.log("csrfToken:",csrfToken);
-
-  const providers = await getProviders();
+  console.log("csrfToken:",csrfToken);
+  //const providers = await getProviders();
   //console.log("Providers", providers)
 
   if(req.method !== 'POST'){
@@ -26,34 +24,24 @@ export default async (req, res)=>{
   console.log("req.body");
   console.log(req.body);
   //console.log(req.body.firstname);
-  var contactData = JSON.parse(req.body);
-  //console.log(contactData);
-  //console.log(contactData.firstname);
-  /*
-  //const contactData = req.body;
-  const saveContact = await prisma.contact.create({
-    data:contactData
-  })
-  res.json(saveContact);
-  */
-
+  var userData = JSON.parse(req.body);
   //const allUsers  = await prisma.user.findMany({
   const users = await prisma.user.findMany({
     where:{
       alias:{
-        equals:contactData.alias
+        equals:userData.alias
       }
     }
   });
   console.log("[[[=== LOGIN RESULT USER ==]]]");
   console.log(users);
   // https://next-auth.js.org/providers/credentials
-  if((users.length==0) && (contactData.newUser=="true")){ //not found
+  if((users.length==0) && (userData.newUser=="true")){ //not found
     console.log("[[[=== LOGIN REGISTER USER ==]]]");
     const saveUser = await prisma.user.create({
       data:{
-        alias:contactData.alias,
-        passphrase:contactData.passphrase
+        alias:userData.alias,
+        passphrase:userData.passphrase
       }
     })
     return res.json({

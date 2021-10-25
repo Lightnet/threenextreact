@@ -4,7 +4,7 @@
 
 */
 
-import { useSession, signOut, signIn } from "next-auth/react"
+import { useSession, signOut, signIn } from "next-auth/react";
 
 export default function Component() {
   const {data: session, loading} = useSession();

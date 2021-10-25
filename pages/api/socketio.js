@@ -35,37 +35,30 @@ export default async (req, res) => {
   res.end();
 };
 
-
 // https://stackoverflow.com/questions/57512366/how-to-use-socket-io-with-next-js-api-routes
 // https://codesandbox.io/s/piffv?file=/src/pages/api/socketio.ts
-
 /*
 import { Server } from 'socket.io'
 const ioHandler = (req, res) => {
   if (!res.socket.server.io) {
     console.log('*First use, starting socket.io')
-
     const io = new Server(res.socket.server)
-
     io.on('connection', socket => {
       socket.broadcast.emit('a user connected')
       socket.on('hello', msg => {
         socket.emit('hello', 'world!')
       })
     })
-
     res.socket.server.io = io
   } else {
     console.log('socket.io already running')
   }
   res.end()
 }
-
 export const config = {
   api: {
     bodyParser: false
   }
 }
-
 export default ioHandler
 */

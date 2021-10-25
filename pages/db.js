@@ -2,33 +2,29 @@
   LICENSE: MIT
   Created by: Lightnet
 */
-// https://www.youtube.com/watch?v=FMnlyi60avU&t=556s
-// https://www.prisma.io/docs/support/help-articles/nextjs-prisma-client-dev-practices
-// https://github.com/prisma/prisma/issues/5103
-// https://www.prisma.io/docs/reference/api-reference/prisma-client-reference
-// https://github.com/prisma/prisma-client-js/issues/228#issuecomment-618433162
 
-//import { PrismaClient } from '@prisma/client';
-//works for client browser
+// import { PrismaClient } from '@prisma/client';
+// works for client browser such as page and api folder
+// does not work with component folder
 var db;
+//check for database exist varaible in global store file js.
+// it to prevent creating another instances connections.
 export function clientDB(client){
-	console.log("database===]]]]]]]]]]]]]]]]]]]");
+	//console.log("[[[=== CHECK DATABASE VAR ===]]]");
 	if(!db){
-		console.log("set up database===]]]]]]]]]]]]]]]]]]]");
+		//console.log("[[[=== SET UP DATAABASE ===]]]");
 		db= new client(); // import { PrismaClient } from '@prisma/client';
 	}else{
-		console.log("reuse database===]]]]]]]]]]]]]]]]]]]");
+		//console.log("[[[=== REUSED DATABASE VAR ===]]]");
 	}
 	return db;
 }
-
+//testing...
 export function getDB(){
 	return db;
 }
-
 /*
 let prisma
-
 if (process.env.NODE_ENV === 'production') {
 	prisma = new PrismaClient()
 }
@@ -37,9 +33,7 @@ else {
 	if (!global.prisma) {
 		global.prisma = new PrismaClient()
 	}
-
 	prisma = global.prisma
 }
-
 export default prisma
 */

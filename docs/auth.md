@@ -28,6 +28,13 @@ export default function App({
 ```
 
 
+https://github.com/nextauthjs/next-auth/issues/717
+https://next-auth.js.org/getting-started/rest-api
+auth token check...
+
+http://localhost:3000/api/auth/csrf <- this where sign in checks
+
+
 
 
 
