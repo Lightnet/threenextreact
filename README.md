@@ -61,6 +61,10 @@ prisma studio //vivew database
 # refs Links:
 - https://nextjs.org/docs/getting-started
 
+- React Three Fiber
+  - https://docs.pmnd.rs/react-three-fiber/getting-started/examples#game-prototypes
+  - https://docs.pmnd.rs/react-three-fiber/advanced/pitfalls
+
 # Notes: 
 - PrismaClient setup is tricky when dealing with react, server and client code.
 - div id __next css for threejs resize full screen config.

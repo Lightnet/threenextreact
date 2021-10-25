@@ -10,25 +10,26 @@ export default function Component({isOpen,onRequestClose}) {
   const [SBWidth, setSBWidth] = useState(0);
 
   useEffect(async () => { 
-    console.log("Left Side Bar is open?");
+    console.log("Right Side Bar is open?");
     if(isOpen){
       setSBWidth(200);
     }else{
       setSBWidth(0);
     }
+    console.log(SBWidth);
     return ()=>{
-      console.log("clean Side bar?");
+      console.log("clean SB?");
     }
   }, [isOpen]);
 
   return (<>
-  
-    <div id="mySidebar" className="sidebar" 
-      style={{width:SBWidth+"px"}}
+    <div id="editorRSidebar" className="rSideBar" 
+      style={{width:SBWidth}}
       >
       <a href="#" className="closebtn" onClick={()=>onRequestClose()}>×</a>
-      <a href="/about">About</a>
-      <a href="/threejs">Threejs</a>
+      <a href="#">Scene</a>
+      <a href="#">Props</a>
+      <a href="#">{SBWidth}</a>
     </div>
   </>);
 }

@@ -6,34 +6,30 @@
 
 import React, {useState, useEffect} from "react";
 
-export default function Component({SB_Height,SBClose}) {
-  const [_width, _setWidth] = useState(0);
+export default function Component({isOpen,onRequestClose}) {
+  const [SBWidth, setSBWidth] = useState(0);
 
-  function closeNav(event){
-    event.preventDefault();
-    console.log("close nav?");
-    //_setWidth(0);
-    LSB_Width=0;
-  }
-
-  async function openNav(event) {
-    event.preventDefault();
-    console.log("open nav?")
-    _setWidth(200);
-  }
+  useEffect(async () => { 
+    console.log("Top Side Bar is open?");
+    if(isOpen){
+      setSBWidth(32);
+    }else{
+      setSBWidth(0);
+    }
+    return ()=>{
+      console.log("clean Side bar?");
+    }
+  }, [isOpen]);
 
   return (<>
   
     <div id="mySidebar" className="bSideBar" 
-      style={{height:SB_Height+"px"}}
+      style={{height:SBWidth}}
       >
-      <a href="#" className="closebtn" onClick={()=>SBClose()}>×</a>
+      <a href="#" className="closebtn" onClick={()=>onRequestClose()}>×</a>
+      <a href="/about">About</a>
+      <a href="/threejs">Threejs</a>
       <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
-      <a href="#">{SB_Height}</a>
-      <a href="#">Contact</a>
     </div>
   </>);
 }

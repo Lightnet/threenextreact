@@ -23,6 +23,17 @@ body,
   top: 0;
   right: 0;
 }
+
+
+.btn{
+  position: fixed;
+  top: 64px;
+  left: 0;
+}
+
+
+
+
 /* ========================================== */
 .sidebar {
   height: 100%;
@@ -77,6 +88,47 @@ body,
   .sidebar a {font-size: 18px;}
 }
 
+/*                           */
+
+
+.rSideBar {
+  height: 100%;
+  width: 100;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.rSideBar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.rSideBar a:hover {
+  color: #f1f1f1;
+}
+
+.rSideBar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+
+
+/*                           */
+
 .bSideBar {
   height: 0;
   width: 100%;
@@ -106,6 +158,44 @@ body,
 }
 
 .bSideBar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+/*                         */
+
+.tSideBar {
+  height: 0;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  /*padding-top: 60px;*/
+}
+
+.tSideBar a {
+  /*padding: 8px 8px 8px 32px;*/
+  float:left;
+  width:128px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.tSideBar a:hover {
+  color: #f1f1f1;
+}
+
+.tSideBar .closebtn {
   position: absolute;
   top: 0;
   right: 25px;

@@ -6,7 +6,14 @@
 ---map
 --
 
--index page
+- index page
+- login area
+-- map editor
+-- game room
+-- mods
+-- admin
+-- database
+--
 -three
 --editor
 --game
