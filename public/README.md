@@ -1,0 +1,1 @@
+This is default nextjs host folder files.

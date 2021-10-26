@@ -1,11 +1,12 @@
 
-
+public/upload/
 node_modules
 package-lock.json
 .env
 .env.development
 .env.production
 .env.local
+
 
 .next
 
