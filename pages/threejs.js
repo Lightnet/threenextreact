@@ -1,3 +1,7 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 
 // https://docs.pmnd.rs/react-three-fiber/API/hooks
