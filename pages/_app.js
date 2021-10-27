@@ -11,6 +11,13 @@
 import React from "react";
 import { SessionProvider } from 'next-auth/react';
 import "../styles/global.css";
+import getConfig from 'next/config';
+
+// Only holds serverRuntimeConfig and publicRuntimeConfig
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+console.log(serverRuntimeConfig);
+console.log(publicRuntimeConfig);
+
 
 export default function App({Component, pageProps}){
   //await getSession();

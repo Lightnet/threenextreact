@@ -8,7 +8,9 @@
 // https://github.com/prisma/prisma/issues/5103
 // https://www.prisma.io/docs/reference/api-reference/prisma-client-reference
 // https://github.com/prisma/prisma-client-js/issues/228#issuecomment-618433162
-
-
+// https://flaviocopes.com/nextjs-fix-prismaclient-unable-run-browser/
+// https://github.com/prisma/prisma/issues/6219
+// https://githubmemory.com/repo/prisma/prisma-client-js/issues/956
+// https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-nextjs-api-routes-auth/lib/prisma.ts
 
 

@@ -9,7 +9,7 @@
 // <Modal isOpen={isOpen} onRequestClose={closeModal}>
 import React, {useState, useEffect} from "react";
 
-export default function Component({isOpen,onRequestClose}) {
+export default function Component({isOpen,onRequestClose,children}) {
   const [SBHeight, setSBHeight] = useState(32);
 
   useEffect(async () => { 
@@ -29,12 +29,7 @@ export default function Component({isOpen,onRequestClose}) {
       style={{height:SBHeight+"px"}}
       >
       <a href="#" className="closebtn" onClick={(e)=>onRequestClose(e)}>×</a>
-      <a href="#">{SBHeight}</a>
-      <a href="#">Add Cube</a>
-      <a href="#">Add Sphere</a>
-      <a href="#">Add Plane</a>
-      <a href="#">Add Camera</a>
-      <a href="#">Add Light</a>
+      {children}
     </div>
   </>);
 }
