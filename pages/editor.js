@@ -13,6 +13,9 @@ import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 import EditorTopSideBar from "../components/componenttopsidebareditor";
 import EditorRightSideBar from "../components/componentrightsidebareditor";
 
+import EditorScene from "../components/componenteditorscene";
+import EditorProps from "../components/componenteditorprops";
+
 import { v4 as uuidv4 } from 'uuid';
 
 export async function getServerSideProps(ctx) {
@@ -90,31 +93,18 @@ export default function Page({
   const [editorTSB, seteditorTSB] = useState(true);
   const [editorRSB, seteditorRSB] = useState(true);
 
-  const [objList, setObjList] = useState([]);
-  const [objects3D, setObjects3D] = useState([]);
+  const [objList, setObjList] = useState([]); //json raw
+  const [objects3D, setObjects3D] = useState([]); //scene object
+
+  const [selectObject, setSelectObject] = useState(null); //json raw
 
   useEffect(async () => {
     console.log("INIT SET MOUNT!");
     
-    let obj = objList;
-    /*
-    obj.push({
-      type:"cube"
-      , postion:{x:0,y:0,z:0}
-    });
-    setObjList(obj);
-    */
-   /*
-    let objmap = obj.map((_entity)=>{
-      return buildModel(_entity)
-    })
-    console.log(objmap);
-    setObjects3D(objmap);
-    */
     return ()=>{
       console.log('clean up');
     };
-  }, [objList]);
+  }, []);
 
   function ToggleTopSB(){
     console.log("seteditorTSB");
@@ -163,15 +153,29 @@ export default function Page({
     console.log(event);
     console.log(param);
     if(param){
-      if(param.action=="addcube"){
-        let obj = objList;
-        obj.push({
-          id: uuidv4()
-          , type:"cube"
-          , postion:{x:0,y:0,z:0}
-        });
-        setObjList(obj);
-        updateObjects();
+      if(param.action){
+        if(param.action=="addcube"){
+          let obj = objList;
+          obj.push({
+            id: uuidv4()
+            , name:"cube"+uuidv4()
+            , type:"cube"
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          });
+          setObjList(obj);
+          updateObjects();
+        }
+
+        if(param.action=="select"){
+          for(let i =0;i<objList.length;i++){
+            if(objList[i].id == param.id){
+              setSelectObject(objList[i]);
+              break;
+            }
+          }
+        }
       }
     }
   }
@@ -202,7 +206,16 @@ export default function Page({
     <EditorRightSideBar
       isOpen={editorRSB}
       onRequestClose={ToggleRightSB}
-    ></EditorRightSideBar>
+    >
+      <EditorScene
+        ops={btnAction}
+        scene={objList}
+        ></EditorScene>
+      <EditorProps
+        selectObject={selectObject}
+      ></EditorProps>
+
+    </EditorRightSideBar>
     <div className="btn">
     <button  onClick={ToggleTopSB}>Top Side Bar</button>
     <button  onClick={ToggleRightSB}>Right Side Bar</button>

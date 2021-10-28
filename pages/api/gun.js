@@ -2,17 +2,18 @@
   LICENSE: MIT
   Created by: Lightnet
 */
+
 // https://stackoverflow.com/questions/46831742/how-to-use-gun-as-an-express-route
 // https://github.com/amark/gun/blob/master/examples/http.js
 // https://gun.eco/docs/Installation
-
-
+// https://github.com/QXIP/gun-host
+// https://stackoverflow.com/questions/35038857/setting-query-string-using-fetch-get-request
 //import { Server as ServerIO } from "socket.io";
 import GUN from "gun";
 
 export const config = {
   api: {
-    bodyParser: false,
+    //bodyParser: false,
   },
 };
 
@@ -20,20 +21,26 @@ var gun;
 
 function path(req){
   let ref = gun;
-  req.path.split('/').forEach(key => ref = ref.get(key));
+  //req.path.split('/').forEach(key => ref = ref.get(key));
   return ref;
 }
 
 export default async (req, res) => {
   //console.log(res);
   //console.log(req);
+  console.log("req.method");
   console.log(req.method);
+  console.log("req.path");
+  console.log(req.path);
+  console.log(req.url);
+  console.log(req.body);
 
   if(req.method == 'GET'){
     //path(req).val(data => res.send(data));
   }
 
   if(req.method == 'PUT'){
+    
     //path(req).put(req.param.put, ack => {
       //res.ack? 0 : res.ack = res.send(ack)
     //})

@@ -6,7 +6,7 @@
 
 import React, {useState, useEffect} from "react";
 
-export default function Component({isOpen,onRequestClose}) {
+export default function Component({isOpen,onRequestClose,children}) {
   const [SBWidth, setSBWidth] = useState(0);
 
   useEffect(async () => { 
@@ -27,9 +27,7 @@ export default function Component({isOpen,onRequestClose}) {
       style={{width:SBWidth}}
       >
       <a href="#" className="closebtn" onClick={()=>onRequestClose()}>×</a>
-      <a href="#">Scene</a>
-      <a href="#">Props</a>
-      <a href="#">{SBWidth}</a>
+      {children}
     </div>
   </>);
 }

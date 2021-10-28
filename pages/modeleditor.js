@@ -1,6 +1,9 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
+  Testing 3D model
+
 */
 
 import { useRef, useState, useEffect } from 'react';
@@ -19,7 +22,7 @@ export default function Page({session}) {
 
   useEffect(async () => {
     console.log("LOADED");
-    console.log(window);
+    //console.log(window);
     //const state = useThree();
 
   }, []) // Added [] as useEffect filter so it will be executed only once, when component is mounted
