@@ -24,13 +24,8 @@ import Loading from "../components/system/loading";
 //console.log(serverRuntimeConfig);
 //console.log(publicRuntimeConfig);
 
-//const DynamicComponentWithCustomLoading = dynamic(
-  //() => import('../components/hello'),
-  //{ loading: () => <p>...</p> }
-//)
 
 export default function App({Component, pageProps}){
-  //await getSession();
   console.log("[[[=== _app.js ===]]]");
   //console.log("session: ",session);
 
@@ -51,10 +46,9 @@ export default function App({Component, pageProps}){
       console.log("page is fully loaded _app");
       setLoading(false);
     }
-    
     //local works?
     window.addEventListener('load',load);
-    
+
     //setLoading(true);
     const handleStart = (url) => {
       //url !== router.pathname ? setLoading(true) : setLoading(false);
@@ -88,11 +82,9 @@ export default function App({Component, pageProps}){
         <Loading loading={loading} />
         <div>{loading ? "loading..." : "hello"}</div>;
       */}
-      {loading?(
-        <Loading loading={loading} />
-      ):(
+      {loading && <Loading loading={loading} /> }
+
         <Component {...pageProps} />
-      )}
     </SessionProvider>
   );
 }

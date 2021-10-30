@@ -19,6 +19,14 @@
 --game
 --serverlist
 
+# ui:
+-modal
+-window
+-panel
+-button
+
+
+
 # entery point:
 - project load list
 - game list
@@ -35,6 +43,20 @@
 - logs
 - blueprint
 - settings
+
+-json editor
+--mesh
+--material
+--t4exture
+--need check for add, update, delete editor text
+-
+
+-projectlist
+-
+
+
+
+
 
 ## information:
   Required some connection to commication or handle events.

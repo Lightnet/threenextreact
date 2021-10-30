@@ -102,9 +102,7 @@ export default function Page({
   const [physics3D, setPhysics3D] = useState([]); //physic objects
 
   //const sceneObjsRef = useRef([]);
-  //const tmpRef = useRef(null);
-
-  
+  //const ref = useRef();//get this current element react componet
 
   useEffect(async () => {
     console.log("INIT SET MOUNT!");
@@ -150,7 +148,9 @@ export default function Page({
       console.log("FOUND CUBE");
       return(<Cube
         key={item.id}
-        position={[0, 0, 0]}
+        //position={[0, 0, 0]}
+        position={[item.position[0],item.position[1],item.position[2]]}
+        
       >
       </Cube>)
     }else{
@@ -252,15 +252,6 @@ export default function Page({
     }
   }
 
-  function UpdateSelectObj(id){
-    for(let i =0;i<sceneObjs.length;i++){
-      if(sceneObjs[i].id == id){
-        setSelectObject(sceneObjs[i]);
-        break;
-      }
-    }
-  }
-
   function Non(){
 
   }
@@ -280,19 +271,35 @@ export default function Page({
       isOpen={editorTSB}
       onRequestClose={ToggleTopSB}
     >
-      <DropDownMenu
-        menuname="test"
-      >
-      </DropDownMenu>
-      <DropDownMenu
-        menuname="File"
-      >
-
+      <DropDownMenu menuname="test" >
+        <a href="#" >Select Object</a>
       </DropDownMenu>
 
-      <DropDownMenu
-        menuname="Scene"
-      >
+      <DropDownMenu menuname="File" >
+        <a href="#" >Project List</a>
+        <a href="#" >Settings</a>
+        <a href="#" >Config</a>
+      </DropDownMenu>
+
+      <DropDownMenu menuname="Tools" >
+        <a href="#" >Server</a>
+        <a href="#" >Network</a>
+        <a href="#" >Client</a>
+      </DropDownMenu>
+
+      <DropDownMenu menuname="View" >
+        <a href="#" >Assets</a>
+        <a href="#" >Material</a>
+        <a href="#" >Texture</a>
+        <a href="#" >Model</a>
+        <a href="#" >Scene</a>
+        <a href="#" >Props</a>
+        <a href="#" >Script</a>
+        <a href="#" >Blueprint</a>
+        <a href="#" >Prefab</a>
+      </DropDownMenu>
+
+      <DropDownMenu menuname="Scene" >
         <a href="#" onClick={(e)=>btnAction(e,{action:"addscene"})}>Add Scene</a>
         <a href="#" onClick={(e)=>btnAction(e,{action:"addcube"})}>Add Cube</a>
         <a href="#" onClick={(e)=>btnAction(e,{action:"addsphere"})}>Add Sphere</a>
@@ -300,8 +307,24 @@ export default function Page({
         <a href="#" onClick={(e)=>btnAction(e,{action:"addcamera"})}>Add Camera</a>
         <a href="#" onClick={(e)=>btnAction(e,{action:"addlight"})}>Add Light</a>
       </DropDownMenu>
-      
 
+      <DropDownMenu menuname="Prefab" >
+        <a href="#" >User Custom</a>
+      </DropDownMenu>
+
+      <DropDownMenu menuname="Build" >
+        <a href="#" >Play</a>
+        <a href="#" >Debug Play</a>
+        <a href="#" >Publish</a>
+      </DropDownMenu>
+
+      <DropDownMenu menuname="Help" >
+        <a href="#" >About</a>
+        <a href="#" >Docs</a>
+        <a href="#" >Github</a>
+        <a href="#" >Plugins</a>
+      </DropDownMenu>
+      
     </EditorTopSideBar>
 
     <EditorRightSideBar
@@ -321,8 +344,11 @@ export default function Page({
          
     </EditorRightSideBar>
     <div className="btn">
-    <button  onClick={ToggleTopSB}>Top Side Bar</button>
-    <button  onClick={ToggleRightSB}>Right Side Bar</button>
+      <label>Side Bars:</label>
+      <button  onClick={ToggleTopSB}>Top</button>
+      <button  onClick={ToggleRightSB}>Right</button>
+      <button  onClick={ToggleRightSB}>Bottom</button>
+      <button  onClick={ToggleRightSB}>Left</button>
     </div>
     
   </>);

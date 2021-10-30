@@ -18,6 +18,9 @@ import { useRef, useState, useEffect } from 'react';
 //import { Canvas, useFrame, useThree,render, events } from '@react-three/fiber';
 //import { Physics,usePlane, useBox } from '@react-three/cannon';
 
+import Draggable from "../components/ui/edragwindow";
+
+/*
 export async function getServerSideProps(ctx) {
 
   return {
@@ -25,7 +28,8 @@ export async function getServerSideProps(ctx) {
     }
   }
 }
-
+*/
+/*
 export async function getInitialProps(ctx) {
   console.log("getInitialProps");
   console.log(ctx);
@@ -36,8 +40,9 @@ export async function getInitialProps(ctx) {
     } 
   };
 }
+*/
 
-export default function Page({session}) {
+export default function Page(props) {
   const countRef = useRef(0);
 
   useEffect(async () => {
@@ -54,11 +59,19 @@ export default function Page({session}) {
   console.log('I rendered!');
 
   return (<>
-    {()=>{
+
+    <button onClick={handle}>Click me</button>
+    <Draggable>      
+    </Draggable>
+  </>);
+}
+/*
+
+    {()=>{//not to used this... error on compoent
       if(true){
       return (<button>Hi</button>);
       }
     }}
-    <button onClick={handle}>Click me</button>
-  </>);
-}
+
+
+*/

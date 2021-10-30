@@ -14,6 +14,8 @@ https://reactjs.org/docs/lists-and-keys.html
 https://javascript.plainenglish.io/using-forwardref-with-react-hooks-9d0d096ad810
 
 
+https://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
+
 ```js
 const [ data, setData ] = useState(false);
 setData(true);

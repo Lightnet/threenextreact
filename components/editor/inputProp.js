@@ -12,20 +12,33 @@ export default function Component({selectObject,objKey,type,ops}) {
   const [posX, setPosX] = useState(0);
 
   useEffect(async () => {
-  });
+    //select object change to update value
+    if(objKey=="positionX"){
+      setPosX(selectObject.position[0])
+    }
+    if(objKey=="positionY"){
+      setPosX(selectObject.position[1])
+    }
+    if(objKey=="positionZ"){
+      setPosX(selectObject.position[2])
+    }
+  },[selectObject]);
 
-  function inputChange(event,id){
-    console.log("x?");
-    console.log(event.target.value);
+  //need to be add for input change value
+  function inputChange(event){
+    //console.log("x?");
+    //console.log(event.target.value);
     if(!isNumber(event.target.value)){
-      console.log("BYE");
+      //console.log("BYE");
+      setPosX(0);
       return;
     }
-    if(event.target.value != ""){
+    //if(event.target.value != ""){
       setPosX(event.target.value);
-    }
+    //}
   }
 
+  //this will handle user press enter to update
   function inputKey(event){
     console.log(event.target.value);
     setPosX(event.target.value);
@@ -38,17 +51,16 @@ export default function Component({selectObject,objKey,type,ops}) {
       console.log(type)
       console.log(objKey)
       console.log(selectObject.id)
-      /*
+      
       if(event.target.value != ""){
         ops(event,{
           action:"update"
           , type: type
           , id: selectObject.id
-          , key: key
+          , key: objKey
           , setValue: parseFloat(event.target.value)
         });
       }
-      */
     }
   }
 
@@ -56,7 +68,7 @@ export default function Component({selectObject,objKey,type,ops}) {
     <input value={posX} 
       onKeyUp={inputKey} 
       onChange={inputChange}      
-       />
+      />
   </>);
 }
 /*
