@@ -9,6 +9,8 @@
 // <Modal isOpen={isOpen} onRequestClose={closeModal}>
 import React, {useState, useEffect} from "react";
 
+import styles from "./sidebartop.module.css";
+
 export default function Component({isOpen,onRequestClose,children}) {
   const [SBHeight, setSBHeight] = useState(32);
 
@@ -25,11 +27,15 @@ export default function Component({isOpen,onRequestClose,children}) {
   }, [isOpen]);
 
   return (<>
-    <div id="editorTopSideBar" className="tSideBar" 
-      style={{height:SBHeight+"px"}}
-      >
-      <a href="#" className="closebtn" onClick={(e)=>onRequestClose(e)}>×</a>
+    <div 
+      id="editorTopSideBar" 
+      className={styles.sidebar}
+      style={{height:SBHeight+"px"}} >
+      <a href="/">Home</a>
+      <a href="#" className={styles.closebtn} onClick={(e)=>onRequestClose(e)}>×</a>
+
       {children}
+
     </div>
   </>);
 }

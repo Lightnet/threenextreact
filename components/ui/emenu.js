@@ -10,6 +10,6 @@ export default function Component() {
   }, []);
   */
   return (<>
-    <label>Hello World!</label>
+    <button>Hello</button>
   </>);
 }

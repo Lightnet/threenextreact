@@ -1,12 +1,14 @@
-/**
- * Blank Component
- */
-
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 //import { getSession } from "next-auth/react";
 //import prisma from './client';
 //import React, {useState, useEffect} from "react";
 import { useEffect, useState } from 'react';
+
+import InputProp from "../editor/inputProp";
 
 // entity
 
@@ -20,10 +22,8 @@ export default function Component({selectObject,ops}) {
       console.log("PROPS:",selectObject)
       setPosX(selectObject.position[0]);
     }
-    
   });
   
-
   function inputX(event,id){
     console.log("x?");
     console.log(event.target.value);
@@ -75,6 +75,13 @@ export default function Component({selectObject,ops}) {
       {selectObject &&
       <div>
         <label>X:<input value={posX} onChange={(e)=>inputX(e,selectObject.id)}></input></label>
+        <InputProp 
+          selectObject={selectObject}
+          ops={ops}
+          objKey="positionX"
+          type="mesh"
+        />
+
         <br />
         <label>y:<input value={selectObject.position[1]}  onChange={(e)=>inputY(e,selectObject.id)}></input></label>
         <br />

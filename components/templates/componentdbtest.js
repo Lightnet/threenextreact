@@ -6,6 +6,11 @@
 // https://stackoverflow.com/questions/54229018/objects-are-not-valid-as-a-react-child-found-object-promise-if-you-meant-t/54229255
 
 import React, {useState, useEffect} from "react";
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 //import { PrismaClient } from '@prisma/client';
 //import {clientdb, getDB} from "../pages/db"; //nope used api and fetch
 

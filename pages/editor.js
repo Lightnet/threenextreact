@@ -16,6 +16,8 @@ import EditorRightSideBar from "../components/editor/editorsidebarright";
 import EditorScene from "../components/editor/editorscene";
 import EditorProps from "../components/editor/editorprops";
 
+import DropDownMenu from "../components/ui/edropdown";
+
 import { v4 as uuidv4 } from 'uuid';
 
 export async function getServerSideProps(ctx) {
@@ -278,13 +280,27 @@ export default function Page({
       isOpen={editorTSB}
       onRequestClose={ToggleTopSB}
     >
-      <a href="#" onClick={Non}>File</a>
-      <a href="#" onClick={(e)=>btnAction(e,{action:"addscene"})}>Add Scene</a>
-      <a href="#" onClick={(e)=>btnAction(e,{action:"addcube"})}>Add Cube</a>
-      <a href="#" onClick={(e)=>btnAction(e,{action:"addsphere"})}>Add Sphere</a>
-      <a href="#" onClick={(e)=>btnAction(e,{action:"addplane"})}>Add Plane</a>
-      <a href="#" onClick={(e)=>btnAction(e,{action:"addcamera"})}>Add Camera</a>
-      <a href="#" onClick={(e)=>btnAction(e,{action:"addlight"})}>Add Light</a>
+      <DropDownMenu
+        menuname="test"
+      >
+      </DropDownMenu>
+      <DropDownMenu
+        menuname="File"
+      >
+
+      </DropDownMenu>
+
+      <DropDownMenu
+        menuname="Scene"
+      >
+        <a href="#" onClick={(e)=>btnAction(e,{action:"addscene"})}>Add Scene</a>
+        <a href="#" onClick={(e)=>btnAction(e,{action:"addcube"})}>Add Cube</a>
+        <a href="#" onClick={(e)=>btnAction(e,{action:"addsphere"})}>Add Sphere</a>
+        <a href="#" onClick={(e)=>btnAction(e,{action:"addplane"})}>Add Plane</a>
+        <a href="#" onClick={(e)=>btnAction(e,{action:"addcamera"})}>Add Camera</a>
+        <a href="#" onClick={(e)=>btnAction(e,{action:"addlight"})}>Add Light</a>
+      </DropDownMenu>
+      
 
     </EditorTopSideBar>
 

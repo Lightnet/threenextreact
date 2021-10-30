@@ -1,3 +1,8 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 // https://dev.to/bhagyamudgal/how-to-make-custom-loading-screen-in-next-js-project-4e90
 // https://stackoverflow.com/questions/61184591/how-to-implement-loading-screen-in-next-js
 import React from "react";
