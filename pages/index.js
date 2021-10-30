@@ -9,16 +9,16 @@
 import { useEffect, useState } from 'react';
 import { getSession } from "next-auth/react";
 import SocketIOClient from "socket.io-client";
-import SignArea from "../components/componentsignarea";
+import SignArea from "../components/system/signarea";
 
 //import DBTest from "../components/componentdbtest";
 //import Btnchild from "../components/componentbtnchild";
-import SidebarLeft from "../components/componentleftsidebar";
-import SidebarBottom from "../components/componentbottomsidebar";
-import SidebarTop from "../components/componenttopsidebar";
+import SidebarLeft from "../components/layout/sidebarleft";
+import SidebarBottom from "../components/layout/sidebarbottom";
+import SidebarTop from "../components/layout/sidebartop";
 
-import GameList from "../components/componentgamelist";
-import ProjectList from "../components/componenteditorprojectlist";
+import GameList from "../components/game/gamelist";
+import ProjectList from "../components/editor/projectlist";
 
 import { PrismaClient } from '@prisma/client';
 import {clientDB} from "./db";
@@ -27,11 +27,10 @@ import {clientDB} from "./db";
 //export async function getStaticProps(ctx) {// client side
 //export async function getServerSideProps(ctx) { // server
 export async function getServerSideProps(ctx) {
-  console.log("[[=== getServerSideProps ===]");
+  console.log("[[=== INDEX getServerSideProps ===]");
   let prisma = clientDB(PrismaClient);
   const users = await prisma.user.findMany();
-  console.log(users);
-
+  //console.log(users);
   return {
     props:{
       session: await getSession(ctx)
@@ -43,7 +42,7 @@ export default function IndexPage({
   session
 }) {
   console.log("[[[=== INDEX PAGE ====]]]]");
-  console.log(session);
+  //console.log(session);
 
   const [sideBarLeft, setSideBarLeft] = useState(false);
   const [sideBarRight, setSideBarRight] = useState(false);
@@ -75,7 +74,7 @@ export default function IndexPage({
       //setChat([...chat]);
     });
 
-    console.log("index.js");
+    //console.log("index.js");
     // socket disconnet onUnmount if exists
     if (socket) return () => socket.disconnect();
   }, []) // Added [] as useEffect filter so it will be executed only once, when component is mounted

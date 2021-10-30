@@ -13,8 +13,8 @@ import { getSession } from "next-auth/react";
 export default function Component() {
   const { data: session, status } = useSession()
   console.log("[[[=== SIGN AREA ===]]]")
-  console.log("status",status);
-  console.log("session",session);
+  //console.log("status",status);
+  //console.log("session",session);
 
   if (session) {
     return (<>

@@ -4,6 +4,20 @@
 
 ## Create By: Lightnet
 
+## Stage Dev:
+- idea / prototyping
+
+## Information:
+  Work in progress build and testing ideas.
+  
+  To develop three.js on next.js with react build into the server side render. As well other packages to develop editor, game and other applocation build test.
+  
+  Threejs used react-three/fiber handle html react build render. To keep it very simple but have simple database with rect and sqlite for local build for game, editor and auth testing.
+
+  As for the network in co-op plan is not yet build for editor and game multiplayer network by using web socket.
+
+  Note that nextjs (https://nextjs.org/) server run differently that reduce route coding and config.
+
 ## code script:
 - client: babel js
 - Server: babel js
@@ -21,10 +35,7 @@
 - three 0.133.1
 - prisma 3.3.0
 
-## Information:
-  Working on prototype for threejs build with nextjs, reactjs, socket.io, sqlite, prisma, react-three/fiber and other packages.
 
-  To keep it very simple but have simple database with rect and sqlite for local build for game, editor and auth testing.
 
 ## Root:
  - components ( react components )

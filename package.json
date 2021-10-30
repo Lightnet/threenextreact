@@ -16,7 +16,10 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.3.0",
+    "@react-three/cannon": "^4.0.1",
+    "@react-three/drei": "^7.18.0",
     "@react-three/fiber": "^7.0.17",
+    "eventemitter3": "^4.0.7",
     "formidable-serverless": "^1.1.1",
     "gun": "^0.2020.1235",
     "next": "^11.1.2",

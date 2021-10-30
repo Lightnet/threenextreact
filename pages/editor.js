@@ -10,11 +10,11 @@ import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 
 //import ComponentEditor from "../components/componenteditormain";
 
-import EditorTopSideBar from "../components/componenttopsidebareditor";
-import EditorRightSideBar from "../components/componentrightsidebareditor";
+import EditorTopSideBar from "../components/editor/editorsidebartop";
+import EditorRightSideBar from "../components/editor/editorsidebarright";
 
-import EditorScene from "../components/componenteditorscene";
-import EditorProps from "../components/componenteditorprops";
+import EditorScene from "../components/editor/editorscene";
+import EditorProps from "../components/editor/editorprops";
 
 import { v4 as uuidv4 } from 'uuid';
 
@@ -93,19 +93,25 @@ export default function Page({
   const [editorTSB, seteditorTSB] = useState(true);
   const [editorRSB, seteditorRSB] = useState(true);
 
-  const [objList, setObjList] = useState([]); //json raw
-  const [objects3D, setObjects3D] = useState([]); //scene object
+  const [selectObject, setSelectObject] = useState(null); //select object for props div
 
-  const [selectObject, setSelectObject] = useState(null); //json raw
+  const [sceneObjs, setSceneObjs] = useState([]); //json
+  const [objects3D, setObjects3D] = useState([]); //scene objects
+  const [physics3D, setPhysics3D] = useState([]); //physic objects
+
+  //const sceneObjsRef = useRef([]);
+  //const tmpRef = useRef(null);
+
+  
 
   useEffect(async () => {
     console.log("INIT SET MOUNT!");
-    
     return ()=>{
       console.log('clean up');
     };
   }, []);
 
+  //side bar
   function ToggleTopSB(){
     console.log("seteditorTSB");
     if(editorTSB){
@@ -115,6 +121,7 @@ export default function Page({
     }
   }
 
+  //side bar
   function ToggleRightSB(){
     console.log("seteditorTSB");
     if(editorRSB){
@@ -124,8 +131,10 @@ export default function Page({
     }
   }
 
+  //update model for render {objects3D}
   function updateObjects(){
-    let obj = objList;
+    //let obj = sceneObjsRef.current;
+    let obj = sceneObjs;
     let objmap = obj.map((_entity)=>{
       return buildModel(_entity)
     })
@@ -133,6 +142,7 @@ export default function Page({
     setObjects3D(objmap);
   }
 
+  //build model by type
   function buildModel(item){
     if(item.type=="cube"){
       console.log("FOUND CUBE");
@@ -149,35 +159,108 @@ export default function Page({
     }
   }
 
+  //call from the child component events
   function btnAction(event,param){
     console.log(event);
     console.log(param);
     if(param){
       if(param.action){
         if(param.action=="addcube"){
-          let obj = objList;
-          obj.push({
-            id: uuidv4()
-            , name:"cube"+uuidv4()
-            , type:"cube"
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          });
-          setObjList(obj);
+          //let objs = sceneObjsRef.current;
+          let objs = sceneObjs;
+          objs.push(
+            {
+              id: uuidv4()
+              , name:"cube"+uuidv4()
+              , type:"cube"
+              , position:[0,0,0]
+              , rotation:[0,0,0]
+              , scale:[1,1,1]
+            });
+          setSceneObjs(objs)
+          
+          //setSceneObjs(obj);
           updateObjects();
         }
 
         if(param.action=="select"){
-          for(let i =0;i<objList.length;i++){
-            if(objList[i].id == param.id){
-              setSelectObject(objList[i]);
+          for(let i =0;i<sceneObjs.length;i++){
+            if(sceneObjs[i].id == param.id){
+              setSelectObject(sceneObjs[i]);
               break;
             }
           }
         }
+
+        if(param.action=="rename"){
+          console.log(param.name);
+          console.log(param.position[0]);
+          //let objs = sceneObjsRef.current;
+          let objs = sceneObjs;
+          for(let i =0;i<objs.length;i++){
+            if(objs[i].id == param.id){
+              objs[i].name = param.name;
+              setSceneObjs(objs);
+              console.log("update rename object?");
+              //update new render...
+              updateObjects();
+              break;
+            }
+          }
+        }
+
+        if(param.action=="update"){
+          console.log("update???======================================");
+          console.log(param);
+          //let objs = sceneObjsRef.current;
+          let objs = sceneObjs;
+          for(let i =0;i<objs.length;i++){
+            if(objs[i].id == param.id){
+              console.log("FOUND.................................")
+              //objs[i].name = param.name;
+              if(param.key == "positionX"){
+                console.log("SET POSITION XXXXXXXXXXXXXXXX")
+                console.log(param.setValue);
+                objs[i].position[0] = param.setValue;
+              }
+              if(param.key == "positionY"){
+                objs[i].position[1] = param.setValue;
+              }
+              if(param.key == "positionZ"){
+                objs[i].position[2] = param.setValue;
+              }
+              
+              //update set
+              setSceneObjs(objs);
+              console.log("UPDATE SELECT OBJECT>>>>>>>>>>>>>>>>>>>")
+              setSelectObject(objs[i]);
+
+              //update select object
+              //UpdateSelectObj(objs[i].id);
+
+              //update new render...
+              updateObjects();
+              break;
+            }
+          }
+        }
+
+
       }
     }
+  }
+
+  function UpdateSelectObj(id){
+    for(let i =0;i<sceneObjs.length;i++){
+      if(sceneObjs[i].id == id){
+        setSelectObject(sceneObjs[i]);
+        break;
+      }
+    }
+  }
+
+  function Non(){
+
   }
 
   return(<>
@@ -187,6 +270,7 @@ export default function Page({
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[1.2, 0, 0]} />
+      {/**/}
       {objects3D}
     </Canvas>
     
@@ -194,6 +278,7 @@ export default function Page({
       isOpen={editorTSB}
       onRequestClose={ToggleTopSB}
     >
+      <a href="#" onClick={Non}>File</a>
       <a href="#" onClick={(e)=>btnAction(e,{action:"addscene"})}>Add Scene</a>
       <a href="#" onClick={(e)=>btnAction(e,{action:"addcube"})}>Add Cube</a>
       <a href="#" onClick={(e)=>btnAction(e,{action:"addsphere"})}>Add Sphere</a>
@@ -207,14 +292,17 @@ export default function Page({
       isOpen={editorRSB}
       onRequestClose={ToggleRightSB}
     >
+      
       <EditorScene
         ops={btnAction}
-        scene={objList}
+        sceneObjs={sceneObjs}
         ></EditorScene>
+      {/* */}
       <EditorProps
         selectObject={selectObject}
+        ops={btnAction}
       ></EditorProps>
-
+         
     </EditorRightSideBar>
     <div className="btn">
     <button  onClick={ToggleTopSB}>Top Side Bar</button>

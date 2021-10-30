@@ -15,7 +15,7 @@ import { useRef, useState, useEffect } from 'react';
 //import { getSession } from "next-auth/react";
 import { Canvas, useFrame, useThree,render, events } from '@react-three/fiber';
 
-import Threejscanvas from "../components/threejscanvas";
+import Threejscanvas from "../components/three/threejscanvas";
 
 export async function getServerSideProps(ctx) {
 

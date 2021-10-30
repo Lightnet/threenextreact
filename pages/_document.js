@@ -8,13 +8,15 @@
 // https://stackoverflow.com/questions/51905803/next-js-how-to-change-css-of-root-div-next-on-specific-page
 
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script'
 
 class MyDocument extends Document {
-  
-  static async getInitialProps(ctx) {
-    console.log("[[[[=== INIT DOC ====]]]]");
+  //console.log("[[[[=== INIT DOC ===]]]]");
 
-    const initialProps = await Document.getInitialProps(ctx)
+  static async getInitialProps(ctx) {
+    console.log("[[[[=== INIT DOC ===]]]]");
+
+    const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps }
   }
 
@@ -22,10 +24,21 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-        </Head>
-        <body>
-          <Main />
-          <NextScript />
+          <meta property="custom" content="test" />
+          <script id="test">
+            {
+              console.log("test console _doc")
+            }
+          </script>
+
+          <script id="nextjshead"
+            dangerouslySetInnerHTML={{__html:`
+              console.log("testing...");
+              window.addEventListener('load', (event) => {
+                console.log("page is fully loaded");
+              });
+            `}}
+            />
           <style>{`
             /* Other global styles such as 'html, body' etc... */
             /*
@@ -39,7 +52,19 @@ class MyDocument extends Document {
               right: 0;
             }
             */
-          `}</style>
+          `}
+          </style>
+          
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+          <Script id="nextjs test"
+            onLoad={() => {
+              // this executes after the script is loaded
+              console.log("hello doc!");
+            }}
+            />
         </body>
       </Html>
     )
