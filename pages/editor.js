@@ -59,7 +59,13 @@ function Cube(props) {
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
 
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+  console.log("ref.current.position")
+  if(ref.current){
+    console.log(ref.current.position)
+  }
+  
+
+  //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
 
   return (
     <mesh
@@ -148,9 +154,11 @@ export default function Page({
       console.log("FOUND CUBE");
       return(<Cube
         key={item.id}
+        visible={item.visible }
+        
         //position={[0, 0, 0]}
         position={[item.position[0],item.position[1],item.position[2]]}
-        
+        rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
       >
       </Cube>)
     }else{
@@ -175,6 +183,7 @@ export default function Page({
               id: uuidv4()
               , name:"cube"+uuidv4()
               , type:"cube"
+              , visible: true
               , position:[0,0,0]
               , rotation:[0,0,0]
               , scale:[1,1,1]
@@ -189,6 +198,25 @@ export default function Page({
           for(let i =0;i<sceneObjs.length;i++){
             if(sceneObjs[i].id == param.id){
               setSelectObject(sceneObjs[i]);
+              break;
+            }
+          }
+        }
+
+        if(param.action=="visible"){
+          console.log(param.name);
+          //let objs = sceneObjsRef.current;
+          let objs = sceneObjs;
+          for(let i =0;i<objs.length;i++){
+            if(objs[i].id == param.id){
+              //objs[i].name = param.name;
+              if(objs[i].visible){
+                objs[i].visible=false;
+              }else{
+                objs[i].visible=true;
+              }
+              setSceneObjs(objs);
+              updateObjects();
               break;
             }
           }
@@ -221,8 +249,6 @@ export default function Page({
               console.log("FOUND.................................")
               //objs[i].name = param.name;
               if(param.key == "positionX"){
-                console.log("SET POSITION XXXXXXXXXXXXXXXX")
-                console.log(param.setValue);
                 objs[i].position[0] = param.setValue;
               }
               if(param.key == "positionY"){
@@ -231,16 +257,23 @@ export default function Page({
               if(param.key == "positionZ"){
                 objs[i].position[2] = param.setValue;
               }
+
+              if(param.key == "rotationX"){
+                objs[i].rotation[0] = param.setValue;
+              }
+              if(param.key == "rotationY"){
+                objs[i].rotation[1] = param.setValue;
+              }
+              if(param.key == "rotationZ"){
+                objs[i].rotation[2] = param.setValue;
+              }
               
-              //update set
+              //update objs
               setSceneObjs(objs);
               console.log("UPDATE SELECT OBJECT>>>>>>>>>>>>>>>>>>>")
-              setSelectObject(objs[i]);
-
               //update select object
-              //UpdateSelectObj(objs[i].id);
-
-              //update new render...
+              setSelectObject(objs[i]);
+              //update objs new render
               updateObjects();
               break;
             }
@@ -343,6 +376,8 @@ export default function Page({
       ></EditorProps>
          
     </EditorRightSideBar>
+
+    
     <div className="btn">
       <label>Side Bars:</label>
       <button  onClick={ToggleTopSB}>Top</button>

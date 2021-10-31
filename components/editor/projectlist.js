@@ -1,6 +1,7 @@
-/**
- * Blank Component
- */
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 // bug in key value
 // testing array

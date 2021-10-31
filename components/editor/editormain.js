@@ -1,6 +1,7 @@
-/**
- * Blank Component
- */
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 //import { useEffect } from 'react';
 //import { getSession } from "next-auth/react";

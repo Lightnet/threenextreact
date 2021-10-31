@@ -22,3 +22,5 @@ https://docs.pmnd.rs/react-three-fiber/advanced/scaling-performance
 https://stackoverflow.com/questions/68796567/react-three-fiber-lock-object-position-in-canvas
 https://stackoverflow.com/questions/63691965/how-to-know-all-attributes-of-canvas-in-react-three-fiber?rq=1
 https://github.com/pmndrs/react-three-fiber
+
+https://threejs.org/docs/#api/en/core/Object3D.visible

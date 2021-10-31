@@ -1,6 +1,8 @@
-/**
- * Blank Component
- */
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 // https://www.pluralsight.com/guides/how-to-show-components-conditionally-react
 
 import { useEffect } from 'react';
@@ -9,6 +11,16 @@ import { AnimationAction } from 'three';
 //import prisma from './client';
 //import React, {useState, useEffect} from "react";
 
+function ranName(length){
+  var result           = '';
+  var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
+
 export default function Component({sceneObjs,ops}) {
   
   useEffect(async () => { 
@@ -16,10 +28,10 @@ export default function Component({sceneObjs,ops}) {
     console.log(sceneObjs);
   }, [sceneObjs]);
   
+  /*
   function testset(id,text){
     console.log("Checkiong...");
-    let objs =sceneObjs.current;
-    
+    let objs =sceneObjs.current;    
     for(let i =0;i<objs.length;i++){
       if(objs[i].id == id){
         //console.log("FOUND",objs[i].id);
@@ -30,16 +42,7 @@ export default function Component({sceneObjs,ops}) {
       }
     }
   }
-
-  function ranName(length){
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-   }
-   return result;
-  }
+  */
 
   return (<>
     <label>Scene:</label>

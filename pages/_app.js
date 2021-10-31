@@ -81,8 +81,9 @@ export default function App({Component, pageProps}){
       {/*
         <Loading loading={loading} />
         <div>{loading ? "loading..." : "hello"}</div>;
+        {loading && <Loading loading={loading} /> }
       */}
-      {loading && <Loading loading={loading} /> }
+      
 
         <Component {...pageProps} />
     </SessionProvider>

@@ -11,14 +11,14 @@ export default function Component({selectObject,ops}) {
   return (<>
     <div>
       <div>
-        <label>Transform</label>
+        <label>Rotation</label>
       </div>
       <div>
         <label>X:
           <InputProp 
             selectObject={selectObject}
             ops={ops}
-            objKey="positionX"
+            objKey="rotationX"
             type="mesh"
           />
         </label>
@@ -29,7 +29,7 @@ export default function Component({selectObject,ops}) {
           <InputProp 
             selectObject={selectObject}
             ops={ops}
-            objKey="positionY"
+            objKey="rotationY"
             type="mesh"
           />
         </label>
@@ -40,7 +40,7 @@ export default function Component({selectObject,ops}) {
           <InputProp 
             selectObject={selectObject}
             ops={ops}
-            objKey="positionZ"
+            objKey="rotationZ"
             type="mesh"
           />
         </label>

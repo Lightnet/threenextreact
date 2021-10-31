@@ -1,3 +1,7 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 //https://stackoverflow.com/questions/9326653/javascript-for-float-and-integer-number-validation
 
@@ -21,6 +25,16 @@ export default function Component({selectObject,objKey,type,ops}) {
     }
     if(objKey=="positionZ"){
       setPosX(selectObject.position[2])
+    }
+
+    if(objKey=="rotationX"){
+      setPosX(selectObject.rotation[0])
+    }
+    if(objKey=="rotationY"){
+      setPosX(selectObject.rotation[1])
+    }
+    if(objKey=="rotationZ"){
+      setPosX(selectObject.rotation[2])
     }
   },[selectObject]);
 

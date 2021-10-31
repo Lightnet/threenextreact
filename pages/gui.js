@@ -9,20 +9,17 @@
 
 //import { useEffect } from 'react';
 //import React, { useRef, useState, useEffect } from 'react';
-
 //import { getSession } from "next-auth/react";
-
 //import Threejscanvas from "../components/threejscanvas";
-
 import { useRef, useState, useEffect } from 'react';
 //import { Canvas, useFrame, useThree,render, events } from '@react-three/fiber';
 //import { Physics,usePlane, useBox } from '@react-three/cannon';
-
 import Draggable from "../components/ui/edragwindow";
+
+import Modal from "../components/ui/emodal";
 
 /*
 export async function getServerSideProps(ctx) {
-
   return {
     props:{
     }
@@ -36,13 +33,15 @@ export async function getInitialProps(ctx) {
   //const initialProps = await Document.getInitialProps(ctx)
   return { 
     props:{
-
     } 
   };
 }
 */
 
 export default function Page(props) {
+  const [ isOPen, setisOpen ]=useState('block');
+
+
   const countRef = useRef(0);
 
   useEffect(async () => {
@@ -54,6 +53,7 @@ export default function Page(props) {
   const handle = () => {
     countRef.current++;
     console.log(`Clicked ${countRef.current} times`);
+    setisOpen(true);
   };
 
   console.log('I rendered!');
@@ -63,6 +63,9 @@ export default function Page(props) {
     <button onClick={handle}>Click me</button>
     <Draggable>      
     </Draggable>
+
+    <Modal
+    isOpen={isOPen}></Modal>
   </>);
 }
 /*
