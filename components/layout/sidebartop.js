@@ -7,6 +7,8 @@
 // https://www.falldowngoboone.com/blog/talk-to-your-react-components-with-custom-events/
 
 // <Modal isOpen={isOpen} onRequestClose={closeModal}>
+
+import styles from "./sidebartop.module.css";
 import React, {useState, useEffect} from "react";
 
 export default function Component({isOpen,onRequestClose,children}) {
@@ -25,13 +27,12 @@ export default function Component({isOpen,onRequestClose,children}) {
   }, [isOpen]);
 
   return (<>
-    <div id="editorTopSideBar" className="tSideBar" style={{height:SBHeight+"px"}}>
-      <a href="#" className="closebtn" onClick={(e)=>onRequestClose(e)}>×</a>
-      <a href="#">Messages</a>
-      <a href="#">Editor</a>
-      <a href="#">Game</a>
-      <a href="#">Server</a>
+    <div id="editorTopSideBar" className={styles.sidebar} style={{height:SBHeight+"px"}}>
+      <a href="#" className={styles.closebtn} onClick={(e)=>onRequestClose(e)}>×</a>
       {children}
     </div>
   </>);
 }
+/*
+
+*/

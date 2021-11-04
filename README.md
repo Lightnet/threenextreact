@@ -23,19 +23,17 @@
 - Server: babel js
 
 ## Packages:
-- @prisma/client 3.3.0
+- @prisma/client 3.4.0
 - @react-three/fiber 7.0.17
-- next 11.1.2
+- next 12.0.2
 - next-auth 4.0.0-beta.4
 - react 17.0.2
 - react-dom 17.0.2
 - socket.io 4.3.1
 - socket.io-client 4.3.2
 - sqlite 4.0.23
-- three 0.133.1
-- prisma 3.3.0
-
-
+- three 0.134.0
+- prisma 3.4.0
 
 ## Root:
  - components ( react components )
@@ -60,15 +58,15 @@
   The network and database will handle some simple tests.
 
 # dev url testing:
-- http://localhost:5555/
-- http://localhost:3000/
+- http://localhost:5555/ web page
+- http://localhost:3000/ database
+
 
 ```
-prisma init
-prisma migrate dev
-ask > init
-prisma studio //vivew database
+$ prisma migrate dev --name init
+$ prisma studio //view database and server database
 ```
+
 # refs Links:
 - https://nextjs.org/docs/getting-started
 
@@ -83,3 +81,9 @@ prisma studio //vivew database
 
 - gun.js testing...
 
+# .env
+```
+HOST="http://localhost:3000"
+NEXTAUTH_URL="http://localhost:3000"
+DATABASE_URL="file:./dev.db"
+```

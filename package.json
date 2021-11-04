@@ -15,24 +15,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@prisma/client": "^3.3.0",
+    "@prisma/client": "^3.4.0",
     "@react-three/cannon": "^4.0.1",
-    "@react-three/drei": "^7.18.0",
+    "@react-three/drei": "^7.19.6",
     "@react-three/fiber": "^7.0.17",
     "eventemitter3": "^4.0.7",
     "formidable-serverless": "^1.1.1",
     "gun": "^0.2020.1235",
-    "next": "^11.1.2",
-    "next-auth": "^4.0.0-beta.4",
+    "next": "^12.0.2",
+    "next-auth": "^4.0.0-beta.26",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "socket.io": "^4.3.1",
     "socket.io-client": "^4.3.2",
     "sqlite": "^4.0.23",
-    "three": "^0.133.1",
+    "three": "^0.134.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "prisma": "^3.3.0"
+    "prisma": "^3.4.0"
   }
 }

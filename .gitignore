@@ -11,5 +11,6 @@ package-lock.json
 .next
 
 prisma/migrations
+prisma/dev.db-journal
 prisma/dev.db
 radata/

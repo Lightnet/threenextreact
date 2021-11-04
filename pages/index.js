@@ -21,7 +21,7 @@ import GameList from "../components/game/gamelist";
 import ProjectList from "../components/editor/projectlist";
 
 import { PrismaClient } from '@prisma/client';
-import {clientDB} from "./db";
+import { clientDB } from "./db";
 
 
 //export async function getStaticProps(ctx) {// client side
@@ -136,7 +136,10 @@ export default function IndexPage({
         isOpen={sideBarTop}
         onRequestClose={sideBarTopToggle}
       >
-        <a href="#">Add Light</a>
+        <a href="#">Messages</a>
+        <a href="#">Editor</a>
+        <a href="#">Game</a>
+        <a href="#">Server</a>
       </SidebarTop>
 
       <SidebarBottom
@@ -150,7 +153,7 @@ export default function IndexPage({
       <button onClick={(e)=> sideBarBottomToggle()}>☰ Open Bottom Sidebar</button> 
       {/*  */}
       <div>
-        <p>Welcome to Next.js!</p>
+        <p>Welcome to Next.js for threejs and other packages to build threejs development builds!</p>
         <p>Work in progress!</p>
       </div>
       <a href="#" onClick={(e)=>selSection(e,"three")}>Three</a>

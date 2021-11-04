@@ -24,7 +24,7 @@ export default function Component() {
   }
   
   return (<>
-    <label> Not signed in: User </label>
+    <label> Not signed in: Guest </label>
     <button onClick={() => signIn()}>Sign in</button>
     <a href="/auth/credentials-signup">Sign Up</a>
   </>);

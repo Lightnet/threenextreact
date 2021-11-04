@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react";
 
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
 //import ComponentEditor from "../components/componenteditormain";
 
@@ -93,6 +94,40 @@ function Foo(props){
     </mesh>
     )
 }
+
+function CameraTest(props){
+  const ref = useRef();
+
+
+  return (
+    <PerspectiveCamera
+      makeDefault // Registers it as the default camera system-wide (default=false)
+      {...props}
+      ref={ref}
+      >
+    </PerspectiveCamera>
+    )
+}
+
+function CameraCtrl(props){
+  const ref = useRef();
+
+
+  return (
+    <>
+      <PerspectiveCamera
+        makeDefault // Registers it as the default camera system-wide (default=false)
+        {...props}
+        ref={ref}
+        position={[0, 5, 5]} 
+        >
+      </PerspectiveCamera>
+      <OrbitControls camera={ref.current} />
+    </>
+    )
+}
+
+
 
 export default function Page({
   session
@@ -298,6 +333,12 @@ export default function Page({
       <Box position={[1.2, 0, 0]} />
       {/**/}
       {objects3D}
+
+      <CameraCtrl />
+
+
+
+
     </Canvas>
     
     <EditorTopSideBar

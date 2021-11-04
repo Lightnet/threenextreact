@@ -27,9 +27,9 @@ export default NextAuth({
         
         let hosturl;
         if(process.env.NODE_ENV == 'development'){
-          hosturl=process.env.HOSTURL + '/api/signin';
+          hosturl=process.env.NEXTAUTH_URL + '/api/signin';
         }else{
-          hosturl=process.env.HOSTURL +'/api/signin';
+          hosturl=process.env.NEXTAUTH_URL +'/api/signin';
         }
         //console.log(hosturl);
         let res;

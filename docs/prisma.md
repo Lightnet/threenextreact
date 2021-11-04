@@ -14,3 +14,9 @@
 // https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-nextjs-api-routes-auth/lib/prisma.ts
 
 
+```
+$ prisma init //exist used the next commands
+$ prisma migrate dev
+$ ask > init
+$ prisma studio //view database
+```
