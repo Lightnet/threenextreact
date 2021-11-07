@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 
 import TransformProp from "../editor/transform";
 import RotationProp from "../editor/rotation";
+import ScaleProp from "../editor/objscale";
 
 // entity
 
@@ -39,6 +40,13 @@ export default function Component({selectObject,ops}) {
 
       {selectObject &&
         <RotationProp
+          ops={ops}
+          selectObject={selectObject}
+          />
+      }
+
+      {selectObject &&
+        <ScaleProp
           ops={ops}
           selectObject={selectObject}
           />

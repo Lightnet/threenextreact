@@ -65,14 +65,13 @@ function Cube(props) {
     console.log(ref.current.position)
   }
   
-
   //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
 
   return (
     <mesh
       {...props}
       ref={ref}
-      scale={active ? 1.5 : 1}
+      //scale={active ? 1.5 : 1}
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
@@ -194,6 +193,8 @@ export default function Page({
         //position={[0, 0, 0]}
         position={[item.position[0],item.position[1],item.position[2]]}
         rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
+        scale={[item.scale[0],item.scale[1],item.scale[2]]}
+        //scale={[10,10,10]}
       >
       </Cube>)
     }else{
@@ -259,12 +260,34 @@ export default function Page({
 
         if(param.action=="rename"){
           console.log(param.name);
-          console.log(param.position[0]);
           //let objs = sceneObjsRef.current;
           let objs = sceneObjs;
           for(let i =0;i<objs.length;i++){
             if(objs[i].id == param.id){
               objs[i].name = param.name;
+              setSceneObjs(objs);
+              console.log("update rename object?");
+              //update new render...
+              updateObjects();
+              break;
+            }
+          }
+        }
+
+        if(param.action=="remove"){
+          console.log(param.name);
+          //let objs = sceneObjsRef.current;
+          let objs = sceneObjs;
+          for(let i =0;i<objs.length;i++){
+            if(objs[i].id == param.id){
+              objs[i].name = param.name;
+
+              if(selectObject == objs[i]){
+                setSelectObject(null);
+              }
+
+              objs.splice(i,1);
+
               setSceneObjs(objs);
               console.log("update rename object?");
               //update new render...
@@ -302,6 +325,17 @@ export default function Page({
               if(param.key == "rotationZ"){
                 objs[i].rotation[2] = param.setValue;
               }
+
+              if(param.key == "scaleX"){
+                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+                objs[i].scale[0] = param.setValue;
+              }
+              if(param.key == "scaleY"){
+                objs[i].scale[1] = param.setValue;
+              }
+              if(param.key == "scaleZ"){
+                objs[i].scale[2] = param.setValue;
+              }
               
               //update objs
               setSceneObjs(objs);
@@ -335,9 +369,6 @@ export default function Page({
       {objects3D}
 
       <CameraCtrl />
-
-
-
 
     </Canvas>
     

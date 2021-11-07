@@ -36,6 +36,16 @@ export default function Component({selectObject,objKey,type,ops}) {
     if(objKey=="rotationZ"){
       setPosX(selectObject.rotation[2])
     }
+
+    if(objKey=="scaleX"){
+      setPosX(selectObject.scale[0])
+    }
+    if(objKey=="scaleY"){
+      setPosX(selectObject.scale[1])
+    }
+    if(objKey=="scaleZ"){
+      setPosX(selectObject.scale[2])
+    }
   },[selectObject]);
 
   //need to be add for input change value
