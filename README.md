@@ -7,6 +7,46 @@
 ## Stage Dev:
 - idea / prototyping
 
+## urls:
+- http://localhost:3000/three (main)
+- http://localhost:3000/
+
+## TO DO LIST:
+- account (added / partly working)
+  - auth (simple user and password)
+  - sign up (added / need work)
+- editor
+  - save (not build) 
+  - load (not build) 
+  - shape
+    - add cube (add)
+    - add plane (not build)
+    - add sphere (not build)
+    - add ... (not build)
+  - camera (not build)
+  - light (not build)
+  - orbit camera ( added / work in progres )
+
+  - scene panel
+    - rename (work in progress)
+    - visiable ( added )
+    - remove ( added / needs work)
+    - select ( added )
+  - props
+    - transform postion ( added )
+    - rotation ( added )
+    - scale ( added )
+  - material  (not build)
+  - texture  (not build)
+  - model  (not build)
+  - animation  (not build)
+  - prefab entity  (not build)
+- game  (not build)
+  - load  (not build)
+  - save  (not build)
+  - config  (not build)
+
+
 ## Information:
   Work in progress build and testing ideas.
   
