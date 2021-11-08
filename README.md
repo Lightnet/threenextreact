@@ -80,7 +80,8 @@
 
 ## Root:
  - components ( react components )
- - Page (url page / folder)
+ - lib (helper / database / server /client)
+ - pages (url page / folder)
     - api (server request, respone / folder)
       - auth ( next-auth )
     - _app.js ( default config nextjs )
