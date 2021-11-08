@@ -70,3 +70,7 @@
 
 ## Information:
   Simple test upload file.
+
+
+
+https://github.com/npm/rfcs/blob/main/implemented/0025-install-peer-deps.md

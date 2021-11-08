@@ -1,21 +1,20 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+  Note:
+  - This will override document.js
 */
 
 // pages/_document.js
-
 // https://stackoverflow.com/questions/51905803/next-js-how-to-change-css-of-root-div-next-on-specific-page
 
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script'
 
 class MyDocument extends Document {
-  //console.log("[[[[=== INIT DOC ===]]]]");
-
+  
   static async getInitialProps(ctx) {
     console.log("[[[[=== INIT DOC ===]]]]");
-
     const initialProps = await Document.getInitialProps(ctx);
     return { ...initialProps }
   }

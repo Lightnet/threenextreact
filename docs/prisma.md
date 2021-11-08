@@ -20,3 +20,8 @@ $ prisma migrate dev
 $ ask > init
 $ prisma studio //view database
 ```
+
+```
+$ prisma migrate dev --name init
+$ prisma studio //view database and server database
+```
