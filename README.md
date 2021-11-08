@@ -23,7 +23,7 @@
 
 ## urls:
 - http://localhost:3000/editor ( main / work in progress )
-- http://localhost:3000/three (tests)
+- http://localhost:3000/examples (tests)
 - http://localhost:3000/ (entry point home page)
 
 ## TO DO LIST:
