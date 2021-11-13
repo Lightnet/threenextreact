@@ -10,11 +10,10 @@
 import React, { useState, useEffect } from "react";
 import { SessionProvider } from 'next-auth/react';
 import { useRouter } from "next/router";
-//import dynamic from 'next/dynamic'
 //import getConfig from 'next/config';
 import "../styles/global.css";
 //import './styles.css';
-//import Loading from "../components/system/loading";
+import Loading from "../components/system/loading";
 
 // Only holds serverRuntimeConfig and publicRuntimeConfig
 //const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
@@ -27,12 +26,10 @@ export default function App({Component, pageProps}){
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
-  useEffect(async () => {
+  useEffect(() => {
     //console.log("APP INIT USEDEFFECT!");
-    //setLoading(true);
     const handleStart = (url) => {
       url !== router.pathname ? setLoading(true) : setLoading(false);
-      //setLoading(true);
       //console.log("loading:",loading);
     };
     const handleComplete = (url) =>{ 
@@ -48,7 +45,16 @@ export default function App({Component, pageProps}){
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     }
-  }, []);
+  }, [loading,router]);
+
+  function isRenderLoading(){
+    if(loading){
+      //console.log("render loading:",loading);
+      //return (<div>Loading...</div>);
+      return <Loading></Loading>;
+    }
+    return (<></>);
+  }
   
   return (    
     <SessionProvider 
@@ -56,24 +62,8 @@ export default function App({Component, pageProps}){
       // Re-fetch session every 5 minutes
       refetchInterval={5 * 60}
       >
+      {isRenderLoading()}
       <Component {...pageProps} />
     </SessionProvider>
   );
 }
-/*
-function Auth({ children }) {
-  const { data: session, status } = useSession()
-  const isUser = !!session?.user
-  React.useEffect(() => {
-    if (status === "loading") return // Do nothing while loading
-    if (!isUser) signIn() // If not authenticated, force log in
-  }, [isUser, status])
-
-  if (isUser) {
-    return children
-  }
-  // Session is being fetched, or no user.
-  // If no user, useEffect() will redirect.
-  return <div>Loading...</div>
-}
-*/

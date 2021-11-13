@@ -14,6 +14,7 @@ import SidebarBottom from "../components/layout/sidebarbottom";
 import SidebarTop from "../components/layout/sidebartop";
 import GameList from "../components/game/gamelist";
 import ProjectList from "../components/editor/projectlist";
+import Link from 'next/link';
 
 export async function getServerSideProps(ctx) {
   console.log("[[=== INDEX getServerSideProps ===]");
@@ -117,11 +118,11 @@ export default function IndexPage({
       {renderSection()}
       
 
-      <a href="/threejs">Page Threejs</a>
+      <Link href="/threejs">Page Threejs</Link>
       <br/>
-      <a href="/editor">Page Editor</a>
+      <Link href="/editor">Page Editor</Link>
       <br/>
-      <a href="/game">Page Game</a>
+      <Link href="/game">Page Game</Link>
       <br/>
       <SignArea></SignArea>
     </>

@@ -4,21 +4,21 @@
 */
 
 //import {useState, useEffect} from "react";
-import InputProp from "../editor/inputProp";
+import InputProp from "../input/inputProp";
 
 export default function Component({selectObject,ops}) {
 
   return (<>
     <div>
       <div>
-        <label>Scale</label>
+        <label>Transform</label>
       </div>
       <div>
         <label>X:
           <InputProp 
             selectObject={selectObject}
             ops={ops}
-            objKey="scaleX"
+            objKey="positionX"
             type="mesh"
           />
         </label>
@@ -29,7 +29,7 @@ export default function Component({selectObject,ops}) {
           <InputProp 
             selectObject={selectObject}
             ops={ops}
-            objKey="scaleY"
+            objKey="positionY"
             type="mesh"
           />
         </label>
@@ -40,7 +40,7 @@ export default function Component({selectObject,ops}) {
           <InputProp 
             selectObject={selectObject}
             ops={ops}
-            objKey="scaleZ"
+            objKey="positionZ"
             type="mesh"
           />
         </label>

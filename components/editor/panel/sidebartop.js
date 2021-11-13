@@ -31,7 +31,6 @@ export default function Component({isOpen,onRequestClose,children}) {
       id="editorTopSideBar" 
       className={styles.sidebar}
       style={{height:SBHeight+"px"}} >
-      <a href="/">Home</a>
       <a href="#" className={styles.closebtn} onClick={(e)=>onRequestClose(e)}>×</a>
 
       {children}

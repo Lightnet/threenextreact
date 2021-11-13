@@ -10,9 +10,9 @@ import { useEffect, useState } from 'react';
 
 //import InputProp from "../editor/inputProp";
 
-import TransformProp from "../editor/transform";
-import RotationProp from "../editor/rotation";
-import ScaleProp from "../editor/objscale";
+import ObjectPosition from "./objectposition";
+import RotationProp from "./objectrotation";
+import ScaleProp from "./objectscale";
 
 // entity
 
@@ -32,7 +32,7 @@ export default function Component({selectObject,ops}) {
       </div>
       
       {selectObject &&
-        <TransformProp
+        <ObjectPosition
           ops={ops}
           selectObject={selectObject}
           />

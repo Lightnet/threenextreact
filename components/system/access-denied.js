@@ -1,22 +1,22 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
 */
 
-// https://github.com/nextauthjs/next-auth-example/tree/main/components
-import { signIn } from 'next-auth/client'
+import { useSession, signOut, signIn } from "next-auth/react";
 
-export default function AccessDenied () {
-  return (
-    <>
-      <h1>Access Denied</h1>
-      <p>
-        <a href="/api/auth/signin"
-           onClick={(e) => {
-           e.preventDefault()
-           signIn()
-        }}>You must be signed in to view this page</a>
-      </p>
-    </>
-  )
+export default function Component() {
+  const {data: session, loading} = useSession();
+  //console.log("[[[[[[session");
+  //console.log(session);
+  if (session) {
+    return (<>
+      <button onClick={() => signOut()}>Sign out</button>
+    </>);
+  }
+  return (<>
+    <button onClick={() => signIn()}>Sign in</button>
+    <a href="/auth/signup">Sign Up</a>
+  </>);
 }

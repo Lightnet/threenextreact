@@ -24,15 +24,11 @@ body,
   right: 0;
 }
 
-
 .btn{
   position: fixed;
   top: 64px;
   left: 0;
 }
-
-
-
 
 /* ========================================== */
 .sidebar {
@@ -88,8 +84,7 @@ body,
   .sidebar a {font-size: 18px;}
 }
 
-/*                           */
-
+/* ================  */
 
 .rSideBar {
   height: 100%;
@@ -126,9 +121,7 @@ body,
   margin-left: 50px;
 }
 
-
-
-/*                           */
+/* ================  */
 
 .bSideBar {
   height: 0;

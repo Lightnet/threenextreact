@@ -14,12 +14,14 @@ export default function Component(props) {
   }, []);
   */
   return (<>
-    <div className={props.loading ? styles.body_loading : styles.none}>
-      <div
-        className={styles.lds_ellipsis}
-      >
+    <div className={styles.body_loading}>
+      <div className={styles.lds_ellipsis}>
         <div>Loading....</div>
       </div>
     </div>
   </>);
 }
+/*
+<div className={props.loading ? styles.body_loading : styles.none}>
+
+*/

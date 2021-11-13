@@ -32,29 +32,38 @@ export default NextAuth({
           hosturl=process.env.NEXTAUTH_URL +'/api/signin';
         }
         //console.log(hosturl);
-        let res;
+        let user;
+        
         try{
           //required full url path else it fail get data if there no catch
-          res = await fetch(hosturl, {
+          let res = await fetch(hosturl, {
             method: 'POST',
             //headers: { "Content-Type": "application/json" }
             body: JSON.stringify(credentials)
           });
+          user = await res.json();
         }catch(e){
           console.log(e);
           return null;
         }
-        const user = await res.json();
+         
         console.log("[[[=== CredentialsProvider user ===]]]");
         console.log(user);
-        if(user.error){
+        if(user.error=="FAIL"){
           console.log("NOTFOUND! USER!");
           return null;
+        }else if(user.error == "EXIST"){
+          throw new Error('USEREXIST');
+        }else if(user.error == "PASSWORDFAIL"){
+          throw new Error('PASSWORDFAIL');
+        }else if(user.error == "NOTFOUND"){
+          throw new Error('NOTFOUND');
         }
-  
         // If no error and we have user data, return it
-        if (res.ok && user) {
-          return user;
+        if (!user.error) {// error is null
+          if(user.token){//check if token has var
+            return user;
+          }
         }
         
         // Return null if user data could not be retrieved
@@ -95,18 +104,6 @@ export default NextAuth({
         token.type=profile.type;
       }
 
-      //nope
-      //if (user) {
-        //if(user.token){
-          //token.accessToken = user.token
-        //}
-        //if(user.id){
-          //token.id = user.id;
-          //token.name = user.alias;
-          //token.name = user.alias;
-        //}
-      //}
-      
       return token; 
     },
     //after jwt finish this is process
@@ -115,12 +112,6 @@ export default NextAuth({
       //console.log(session);
       //console.log(user);
       //console.log(token);
-      //if(user){
-        //session.user=user.user;
-      //}
-      //if(token){
-        //session.user = token.name;
-      //}
 
       if(token){//ok?
         session.user={
@@ -156,13 +147,13 @@ export default NextAuth({
   // https://stackoverflow.com/questions/68188861/next-auth-how-the-registration-is-handled-with-a-email-password-credential-p
   // https://github.com/nextauthjs/next-auth/discussions/791
   // https://next-auth.js.org/configuration/pages
-  //pages: {
+  pages: {
     // signIn: '/auth/signin',  // Displays signin buttons
     // signOut: '/auth/signout', // Displays form with sign out button
-    // error: '/auth/error', // Error code passed in query string as ?error=
+    error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: '/auth/new-user' // If set, new users will be directed here on first sign in
-  //},
+  },
   theme: 'light',
   debug: true
 })
