@@ -4,9 +4,9 @@
 */
 
 import styles from "./modal.module.css";
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function Component({isOpen,closeModal}) {
+export default function Modal({isOpen,closeModal,children}) {
   const [ sDisplay, setsDisplay ]=useState('none');
 
   useEffect(async () => { 
@@ -18,20 +18,22 @@ export default function Component({isOpen,closeModal}) {
     }
   }, [isOpen]);
   
-
-  function closeModal(){
-    console.log("close?")
-    setsDisplay("none");
-  }
+  //function closeModal(){
+    //console.log("close?")
+    //setsDisplay("none");
+  //}
 
   return (<>
 
-  <div id="myModal" className={styles.modal} style={{display:sDisplay}}>
+  <div className={styles.modal} style={{display:sDisplay}}>
     <div className={styles.modalcontent}>
       <span className={styles.close} onClick={closeModal}>&times;</span>
-      <p>Some text in the Modal..</p>
+      {children}
     </div>
   </div>
 
   </>);
 }
+/*
+<p>Some text in the Modal..</p>
+*/

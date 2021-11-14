@@ -82,6 +82,25 @@ export default async (req, res) => {
             return res.json({error:"FAIL"});
           }
         }
+
+        if(data.action == 'UPDATE'){
+          let query={
+            id:data.editorid
+          }
+          let update={
+            name:data.name
+            , description:data.description
+          }
+          const updateeditor = await Editor.findOneAndUpdate(query,update,{new:true}).exec();
+          return res.json({action:"UPDATE",editor:updateeditor});
+        }
+
+        if(data.action == 'DELETE'){
+          const deleteEditor = await Editor.deleteOne({id:data.editorid}).exec();
+          console.log(deleteEditor);
+
+          return res.json({action:"DELETE",id:data.editorid});
+        }
         //END ACTION
       }
     }

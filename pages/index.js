@@ -13,7 +13,7 @@ import SidebarLeft from "../components/layout/sidebarleft";
 import SidebarBottom from "../components/layout/sidebarbottom";
 import SidebarTop from "../components/layout/sidebartop";
 import GameList from "../components/game/gamelist";
-import EditorProjects from "../components/editor/editorprojects";
+import EditorProjects from "../components/editor/project/projects";
 import Link from 'next/link';
 
 export async function getServerSideProps(ctx) {
