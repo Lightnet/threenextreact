@@ -73,7 +73,7 @@ export default function Component() {
       <tbody>
         {gameList.map((item)=>{
           return(
-            <tr>
+            <tr key={item.id}>
             <th>
               <label>{item.name}</label>
             </th>

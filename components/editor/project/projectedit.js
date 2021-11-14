@@ -37,10 +37,10 @@ export default function ProjectEdit({editor,ops}) {
     }
   }
 
-
   function onChangeEditorName(e){
     setEditorName(e.target.value);
   }
+  
   function onChangeEditorDescription(e){
     setEditorDescription(e.target.value);
   }

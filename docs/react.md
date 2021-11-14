@@ -1,3 +1,21 @@
+
+loading components
+
+https://www.digitalocean.com/community/conceptual_articles/react-loading-components-dynamically-hooks
+https://stackoverflow.com/questions/36952448/dynamic-loading-of-react-components
+https://www.sung.codes/blog/2018/loading-react-components-dynamically-on-demand-using-react-lazy
+
+https://reactjs.org/docs/code-splitting.html#reactlazy
+
+
+```js
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+```
+
+
+
+
+
 https://reactjs.org/docs/hooks-reference.html
 https://reactjs.org/docs/hooks-effect.html
 https://www.robinwieruch.de/react-hooks-fetch-data/

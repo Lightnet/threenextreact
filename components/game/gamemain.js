@@ -1,20 +1,19 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
+  Information:
+    This will handle loading and query.
+
 */
 
-import { getSession } from "next-auth/react";
+// https://stackoverflow.com/questions/38282997/rendering-an-array-map-in-react/38283182
+// https://www.thiscodeworks.com/add-property-to-each-object-in-array-javascript-using-map-code-example-undefined/5faa3e49aa4cd50014938e6e
+// https://javascript.info/map-set
+// https://stackoverflow.com/questions/48131100/react-render-array-of-components
+
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-
-export async function getServerSideProps(ctx) {
-
-  return {
-    props:{
-      session: await getSession(ctx),
-    }
-  }
-}
 
 function Box(props) {
   // This reference will give us direct access to the THREE.Mesh object
@@ -52,32 +51,18 @@ function Foo(props){
     )
 }
 
-export default function Page({
+export default function GameMain({
   session
 }){
-  var list = [1,2];
-// https://stackoverflow.com/questions/38282997/rendering-an-array-map-in-react/38283182
-// https://www.thiscodeworks.com/add-property-to-each-object-in-array-javascript-using-map-code-example-undefined/5faa3e49aa4cd50014938e6e
-// https://javascript.info/map-set
-// https://stackoverflow.com/questions/48131100/react-render-array-of-components
-
-  //list.push(Foo);
-  var listm = list.map((item)=>{ 
-    return (<Foo>{item} </Foo>);
-  });
-  console.log(listm);
 
   return(<>
     <Canvas>
-      {listm}
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[1.2, 0, 0]} />
     </Canvas>
   </>);
 }
-
 /*
-
 
 */

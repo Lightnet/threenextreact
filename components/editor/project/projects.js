@@ -102,7 +102,7 @@ export default function Projects() {
                 break;
               }
             }
-            setDataType('update');
+            setDataType('updateproject');
             setIsOpenModal(true);
           }
           if(args.datatype=='deleteproject'){

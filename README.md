@@ -120,3 +120,12 @@ DATABASE_URL="mongodb://127.0.0.1/reactthree"
 - div id __next css for threejs resize full screen config.
 - gun.js tests
 
+npm command:
+```
+$ npm update //clean up unused packages
+
+https://www.npmjs.com/package/npm-check-updates
+$ npm install -g npm-check-updates
+
+$ ncu // check package to updates
+```

@@ -12,7 +12,7 @@ import SignArea from "../components/system/signarea";
 import SidebarLeft from "../components/layout/sidebarleft";
 import SidebarBottom from "../components/layout/sidebarbottom";
 import SidebarTop from "../components/layout/sidebartop";
-import GameList from "../components/game/gamelist";
+import GameList from "../components/game/gamesection";
 import EditorProjects from "../components/editor/project/projects";
 import Link from 'next/link';
 
@@ -37,7 +37,7 @@ export default function IndexPage({
   const [sideBarTop, setSideBarTop] = useState(false);
   const [sideBarBottom, setSideBarBottom] = useState(false);
 
-  const [selectSection, setselectSection] = useState("");
+  const [selectSection, setselectSection] = useState("editorprojects");
 
   const [panel, setPanel] = useState(<></>);
 
