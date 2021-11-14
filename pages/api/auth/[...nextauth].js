@@ -70,21 +70,9 @@ export default NextAuth({
         return null;
       }
     })
-
   ],
   // https://next-auth.js.org/configuration/callbacks
   // https://next-auth.js.org/getting-started/client
-  /*
-  {
-  user: {
-    name: string
-    email: string
-    image: string
-    },
-    expires: Date // This is the expiry of the session, not any of the tokens within the session
-  }
-
-  */
   callbacks: {
     //first process user login
     async jwt({ token, user, account, profile, isNewUser }) {
@@ -99,6 +87,7 @@ export default NextAuth({
         token.id = user.id;
         token.name = user.name;
         token.role = user.role;
+        token.token = user.token;
       }
       if(profile){
         token.type=profile.type;
@@ -118,7 +107,8 @@ export default NextAuth({
           name:token.name,
           email:token.email,
           rote:token.role,
-          id:token.id
+          id:token.id,
+          token:token.token
         }
         //session.user=token.name;
       }

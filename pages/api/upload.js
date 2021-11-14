@@ -19,6 +19,8 @@
 
 import formidable from "formidable-serverless";
 import fs from "fs";
+import { getSession } from "next-auth/react";
+import db from "../../lib/database";
 
 export const config = {
   api: {
@@ -27,6 +29,7 @@ export const config = {
 }
 
 export default async function handler(req, res) {
+
   /*
   if (req.method === 'POST') {
     // Process a POST request
@@ -36,8 +39,47 @@ export default async function handler(req, res) {
     res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   }
   */
-  //res.status(200).json({ name: 'John Doe' })
 
+  const session = await getSession({ req });
+  let userid;
+  let username;
+
+  if(session){
+    if(!session.user.name){
+      return res.json({error:"FAIL"});  
+    }
+    if(!session.user.token){
+      return res.json({error:"FAIL"});  
+    }
+
+    if(session.user.token){
+      const User = db.model('User');
+      const user = await User.findOne({username: session.user.name}).exec();
+      if(typeof session.user.token == "string"){
+        //console.log("STRING DATA...");
+        if(user){
+          //console.log("FOUND???");
+          let bcheck = user.checkToken(session.user.token);
+          console.log("TOKEN: ", bcheck);
+          //console.log(user);
+          if(bcheck){
+            // pass
+            log('PASS TOKEN');
+            userid = user._id;
+            username = user.username;
+          }else{
+            log('FAIL TOKEN');
+            return res.json({error:"FAIL"});
+          }
+        }else{
+          return res.json({error:"FAIL"});
+        }
+      }
+    }
+  }else{
+    return res.json({error:"FAIL"});
+  }
+  
   // parse form with a Promise wrapper
   //const data = await new Promise(async (resolve, reject) => {
   return new Promise(async (resolve, reject) => {
@@ -83,23 +125,3 @@ export default async function handler(req, res) {
 
   res.status(200).json({ name: 'John Doe' })
 }
-
-/*
-try {
-    console.log("DATA FILE!!=====]]]]]");
-    console.log(req.body);
-    console.log(req.file);
-    console.log(req.files);
-    if (!req.files) {
-      res.send({
-        status: false,
-        message: "No file uploaded",
-      });
-    }else{
-      let image = req.files.file;
-      console.log(image)
-    }
-  } catch (err) {
-    res.status(500).send(err);
-  }
-*/

@@ -13,7 +13,7 @@ import SidebarLeft from "../components/layout/sidebarleft";
 import SidebarBottom from "../components/layout/sidebarbottom";
 import SidebarTop from "../components/layout/sidebartop";
 import GameList from "../components/game/gamelist";
-import ProjectList from "../components/editor/projectlist";
+import EditorProjects from "../components/editor/editorprojects";
 import Link from 'next/link';
 
 export async function getServerSideProps(ctx) {
@@ -29,7 +29,7 @@ export async function getServerSideProps(ctx) {
 export default function IndexPage({
   session
 }) {
-  console.log("[[[=== INDEX PAGE ====]]]]");
+  //console.log("[[[=== INDEX PAGE ====]]]]");
   //console.log(session);
 
   const [sideBarLeft, setSideBarLeft] = useState(false);
@@ -43,7 +43,8 @@ export default function IndexPage({
 
 
   useEffect(async () => {//mount or load data
-  }, []) // Added [] as useEffect filter so it will be executed only once, when component is mounted
+    console.log(session)
+  }, [session]) // Added [] as useEffect filter so it will be executed only once, when component is mounted
 
   function sideBarLeftToggle(){
     console.log("seteditorTSB");
@@ -68,11 +69,29 @@ export default function IndexPage({
   function renderSection(){
     if(selectSection == "gamelist"){
       return(<GameList></GameList>);
-    }else if(selectSection == "projectlist"){
-      return(<ProjectList></ProjectList>);
+    }else if(selectSection == "editorprojects"){
+      return(<EditorProjects></EditorProjects>);
+    }else if(selectSection == "three"){
+      return(<>
+        <div>
+        <label>Examples:</label>
+        <br />
+        <a href="/examples/threejs"> three.js fiber </a>
+        <br />
+        <a href="/examples/threejscannon"> three.js fiber cannon </a>
+        </div>
+      </>);
     }else{
       return(<div></div>);
     }
+  }
+
+  if ((!session)) {//if there no sesson then render here basic login page.
+    return(<>
+      <SignArea></SignArea>
+      <p>Next.js and Three.js development builds!</p>
+      <p>Work in progress!</p>
+    </>)
   }
 
   return (
@@ -98,17 +117,20 @@ export default function IndexPage({
       >
       </SidebarBottom>
       {/* js comment  */}
-      <button onClick={(e)=> sideBarLeftToggle()}>☰ Open Sidebar</button> 
-      <button onClick={(e)=> sideBarTopToggle()}>☰ Open Top Sidebar</button> 
-      <button onClick={(e)=> sideBarBottomToggle()}>☰ Open Bottom Sidebar</button> 
+
+      {/* 
+      <button onClick={(e)=> sideBarLeftToggle()}>Open Sidebar</button> 
+      <button onClick={(e)=> sideBarTopToggle()}> Open Top Sidebar</button> 
+      <button onClick={(e)=> sideBarBottomToggle()}> Open Bottom Sidebar</button> 
+      */}
+
       {/*  */}
       <div>
-        <p>Welcome to Next.js for threejs and other packages to build threejs development builds!</p>
-        <p>Work in progress!</p>
+        <SignArea></SignArea>
       </div>
-      <a href="#" onClick={(e)=>selSection(e,"three")}>Three</a>
+      <a href="#" onClick={(e)=>selSection(e,"three")}>Three.js</a>
       <span> | </span>
-      <a href="#" onClick={(e)=>selSection(e,"projectlist")}>Editor List</a>
+      <a href="#" onClick={(e)=>selSection(e,"editorprojects")}>Editor Projects</a>
       <span> | </span> 
       <a href="#" onClick={(e)=>selSection(e,"gamelist")}>Game List</a>
       <span> | </span> 
@@ -117,14 +139,16 @@ export default function IndexPage({
 
       {renderSection()}
       
-
       <Link href="/threejs">Page Threejs</Link>
-      <br/>
+      <span> | </span>
       <Link href="/editor">Page Editor</Link>
-      <br/>
+      <span> | </span>
       <Link href="/game">Page Game</Link>
-      <br/>
-      <SignArea></SignArea>
+      <span> | </span>
+      
+
+      <p>Next.js and Three.js development builds!</p>
+      <p>Work in progress!</p>
     </>
   );
 }

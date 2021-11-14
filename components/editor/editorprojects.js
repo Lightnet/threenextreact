@@ -9,32 +9,14 @@
 import { useEffect, useState } from 'react';
 
 export default function Component() {
-  const [projectList, setprojectList] = useState([]);
+  const [editorProjects, setEditorProjects] = useState([]);
+  const [editorName, setEditorName] = useState("");
+  const [editorDescription, setEditorDescription] = useState("");
+  const [editorID, setEditorID] = useState(null);
   
-
-  useEffect(async () => { 
-    let editorlist=[];
-    editorlist.push({
-      id:"0"
-      , name:"test"
-      , description:"s"
-      , authors:"d"
-      , access:"f"
-      , gamemodes:"g"
-    });
-
-    editorlist.push({
-      id:"1"
-      , name:"tests"
-      , description:"s"
-      , authors:"d"
-      , access:"f"
-      , gamemodes:"g"
-    });
-    setprojectList(editorlist);
+  useEffect(() => { 
+    getEditorProject();
   }, []);
-
-  console.log("editor list update????????????????????????");
 
   function loadGame(e,id){
     e.preventDefault();
@@ -46,8 +28,52 @@ export default function Component() {
     console.log("REMOVE GAME",id);
   }
 
+  function onChangeEditorName(e){
+    setEditorName(e.target.value);
+  }
+  function onChangeEditorDescription(e){
+    setEditorDescription(e.target.value);
+  }
+
+  async function getEditorProject(){
+    let res = await fetch('api/editor',{
+      method:'POST',
+      body: JSON.stringify({ 
+        action:'LIST',
+        name:editorName,
+        description:editorDescription
+      })
+    });
+    let data = await res.json();
+    console.log(data);
+    if(data.action=='LIST'){
+      setEditorProjects(data.editors);
+    }
+  }
+
+  async function createEditorProject(e){
+    let res = await fetch('api/editor',{
+      method:'POST',
+      body: JSON.stringify({ 
+        action:'CREATE',
+        name:editorName,
+        description:editorDescription
+      })
+    });
+    let data = await res.json();
+    console.log(data);
+    if(data.action=='CREATE'){
+      editorProjects.push(data.editor);
+      setEditorProjects(editorProjects);
+    }
+  }
+
   return (<>
-    <label>Project List</label>
+    <label>Editor Projects</label>
+    <button onClick={createEditorProject}>Create</button>
+    
+    <input value={editorName} onChange={onChangeEditorName} placeholder="Name"></input>
+    <input value={editorDescription} onChange={onChangeEditorDescription} placeholder="Description"></input>
 
     <table>
       <thead>
@@ -74,9 +100,9 @@ export default function Component() {
       </thead>
       <tbody>
         {/* key map error bug */}
-        {projectList.map((item)=>{
+        {editorProjects.map((item)=>{
           return(
-            <tr>
+            <tr key={item.id}>
               <th>
                 <label>{item.name}</label>
               </th>

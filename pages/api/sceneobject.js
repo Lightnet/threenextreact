@@ -3,12 +3,14 @@
   Created by: Lightnet
 */
 
-import { getSession } from "next-auth/react";
+import { getSession } from "next-auth/client";
 import db from "../../lib/database";
 
-export default function handler(req, res) {
+export default async (req, res) => {
+  const session = await getSession({ req })
+  console.log("session");
+  console.log(session);
 
-  const session = await getSession({ req });
   let userid;
   let username;
   
@@ -48,6 +50,7 @@ export default function handler(req, res) {
     return res.json({error:"FAIL"});
   }
 
-  
-  res.status(200).json({ name: 'John Doe' })
+
+
+  res.end();
 }
