@@ -21,7 +21,7 @@ import Loading from "../components/system/loading";
 //console.log(publicRuntimeConfig);
 
 export default function App({Component, pageProps}){
-  console.log("[[[=== _app.js ===]]]");
+  //console.log("[[[=== _app.js ===]]]");
   //console.log("session: ",session);
   const router = useRouter();
   const [loading, setLoading] = useState(false);

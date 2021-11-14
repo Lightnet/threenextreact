@@ -11,7 +11,7 @@ export default function Component(props) {
   const [menuName, setMenuName] = useState(false)
 
   useEffect(async () => {
-    console.log("init menu drop down.")
+    //console.log("init menu drop down.");
     if(!props.menuname){
       //props.menuname="test";
       setMenuName("test");
@@ -33,7 +33,6 @@ export default function Component(props) {
       */}
       {props.children}
     </div>
-    
   </div> 
   </>);
 }

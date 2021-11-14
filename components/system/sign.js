@@ -17,7 +17,7 @@ export default function Sign() {
     </>)
   }
 
-  if ((session !=null)&&(status === "authenticated")) {
+  if ((session !=null)&&(status === "authenticated")){
     return (<>
     <button onClick={() => signOut()}>Sign out</button>
     </>);

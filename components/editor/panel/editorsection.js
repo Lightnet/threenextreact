@@ -128,30 +128,45 @@ export default function EditorSection({editorid}){
   const [objects3D, setObjects3D] = useState([]); //scene objects
   const [physics3D, setPhysics3D] = useState([]); //physic objects
 
+  const [editorID, setEditorID] = useState(null);
+
   //const sceneObjsRef = useRef([]);
   //const ref = useRef();//get this current element react component
 
   useEffect(() => {
-    console.log("INIT SET MOUNT!");
+    //console.log("INIT SET MOUNT!");
     if(editorid){
       console.log("FOUND")
+      setEditorID(editorid);
+      initEditorDefaultScene()
     }else{
       console.log("NOT FOUND")
     }
     return ()=>{
-      console.log('clean up');
+      console.log('EDITOR CLEAN UP!');
     };
   }, [editorid]);
 
+
+  function initEditorDefaultScene(){
+    console.log("INIT... EDITOR ID:", editorID);
+  }
+
+
+
+
+
+
+
   //side bar
   function ToggleTopSB(){
-    console.log("seteditorTSB");
-      seteditorTSB(!editorTSB);
+    //console.log("seteditorTSB");
+    seteditorTSB(!editorTSB);
   }
 
   //side bar
   function ToggleRightSB(){
-    console.log("seteditorTSB");
+    //console.log("seteditorTSB");
     seteditorRSB(!editorRSB);
   }
 
@@ -162,14 +177,14 @@ export default function EditorSection({editorid}){
     let objmap = obj.map((_entity)=>{
       return buildModel(_entity)
     })
-    console.log(objmap);
+    //console.log(objmap);
     setObjects3D(objmap);
   }
 
   //build model by type
   function buildModel(item){
     if(item.type=="cube"){
-      console.log("FOUND CUBE");
+      //console.log("FOUND CUBE");
       return(<Cube
         key={item.id}
         visible={item.visible }
@@ -209,7 +224,6 @@ export default function EditorSection({editorid}){
               , scale:[1,1,1]
             });
           setSceneObjs(objs)
-          
           //setSceneObjs(obj);
           updateObjects();
         }
@@ -264,14 +278,10 @@ export default function EditorSection({editorid}){
           let objs = sceneObjs;
           for(let i =0;i<objs.length;i++){
             if(objs[i].id == param.id){
-              objs[i].name = param.name;
-
               if(selectObject == objs[i]){
                 setSelectObject(null);
               }
-
               objs.splice(i,1);
-
               setSceneObjs(objs);
               console.log("update rename object?");
               //update new render...
@@ -282,7 +292,7 @@ export default function EditorSection({editorid}){
         }
 
         if(param.action=="update"){
-          console.log("update???======================================");
+          console.log("[[[=== ACTION UPDATE ===]]");
           console.log(param);
           //let objs = sceneObjsRef.current;
           let objs = sceneObjs;
@@ -311,7 +321,6 @@ export default function EditorSection({editorid}){
               }
 
               if(param.key == "scaleX"){
-                console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
                 objs[i].scale[0] = param.setValue;
               }
               if(param.key == "scaleY"){

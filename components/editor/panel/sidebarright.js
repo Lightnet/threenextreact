@@ -8,16 +8,16 @@ import React, {useState, useEffect} from "react";
 export default function Component({isOpen,onRequestClose,children}) {
   const [SBWidth, setSBWidth] = useState(0);
 
-  useEffect(async () => { 
-    console.log("Right Side Bar is open?");
+  useEffect(() => { 
+    //console.log("Right Side Bar is open?");
     if(isOpen){
       setSBWidth(200);
     }else{
       setSBWidth(0);
     }
-    console.log(SBWidth);
+    //console.log(SBWidth);
     return ()=>{
-      console.log("clean SB?");
+      //console.log("clean SB?");
     }
   }, [isOpen]);
 

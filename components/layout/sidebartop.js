@@ -14,15 +14,15 @@ import React, {useState, useEffect} from "react";
 export default function Component({isOpen,onRequestClose,children}) {
   const [SBHeight, setSBHeight] = useState(32);
 
-  useEffect(async () => { 
-    console.log("Top Side Bar is open?");
+  useEffect(() => { 
+    //console.log("Top Side Bar is open?");
     if(isOpen){
       setSBHeight(32);
     }else{
       setSBHeight(0);
     }
     return ()=>{
-      console.log("clean Side bar?");
+      //console.log("clean Side bar?");
     }
   }, [isOpen]);
 

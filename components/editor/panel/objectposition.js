@@ -11,7 +11,7 @@ export default function Component({selectObject,ops}) {
   return (<>
     <div>
       <div>
-        <label>Transform</label>
+        <label>Position:</label>
       </div>
       <div>
         <label>X:

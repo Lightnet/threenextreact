@@ -43,21 +43,21 @@ export default function IndexPage({
 
 
   useEffect(async () => {//mount or load data
-    console.log(session)
+    //console.log(session);
   }, [session]) // Added [] as useEffect filter so it will be executed only once, when component is mounted
 
   function sideBarLeftToggle(){
-    console.log("seteditorTSB");
+    //console.log("seteditorTSB");
     setSideBarLeft(!sideBarLeft);
   }
 
   function sideBarTopToggle(){
-    console.log("seteditorTSB");
+    //console.log("seteditorTSB");
     setSideBarTop(!sideBarTop);
   }
 
   function sideBarBottomToggle(){
-    console.log("seteditorTSB");
+    //console.log("seteditorTSB");
     setSideBarBottom(!sideBarBottom);
   }
 
@@ -99,7 +99,10 @@ export default function IndexPage({
       <SidebarLeft
         isOpen={sideBarLeft}
         onRequestClose={sideBarLeftToggle}
-      ></SidebarLeft>
+      >
+        <a href="/about">About</a>
+        <a href="/threejs">Threejs</a>
+      </SidebarLeft>
 
       <SidebarTop
         isOpen={sideBarTop}
@@ -115,13 +118,17 @@ export default function IndexPage({
         isOpen={sideBarBottom}
         onRequestClose={sideBarBottomToggle}
       >
+        <a href="/about">About</a>
+        <a href="/threejs">Threejs</a>
+        <a href="#">Test</a>
       </SidebarBottom>
       {/* js comment  */}
 
-      {/* 
+      
       <button onClick={(e)=> sideBarLeftToggle()}>Open Sidebar</button> 
       <button onClick={(e)=> sideBarTopToggle()}> Open Top Sidebar</button> 
       <button onClick={(e)=> sideBarBottomToggle()}> Open Bottom Sidebar</button> 
+      {/*
       */}
 
       {/*  */}

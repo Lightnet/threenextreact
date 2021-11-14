@@ -4,19 +4,24 @@
 
 */
 
-import { useSession, signOut, signIn } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function Component() {
-  const {data: session, loading} = useSession();
-  //console.log("[[[[[[session");
-  //console.log(session);
-  if (session) {
+  const {data: session, status} = useSession();
+  //console.log("session: ", session);
+
+  if (status === "loading") {
+    return(<>
+      <label>Loading...</label>
+    </>)
+  }
+
+  if ((session !=null)&&(status === "authenticated")){
     return (<>
       <button onClick={() => signOut()}>Sign out</button>
     </>);
   }
   return (<>
-    <button onClick={() => signIn()}>Sign in</button>
-    <a href="/auth/signup">Sign Up</a>
+    <label> [ ACCESS DENIED ] </label>
   </>);
 }
