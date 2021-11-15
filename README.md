@@ -2,7 +2,7 @@
 
 ## LICENSE: MIT
 
-## Create By: Lightnet
+## Created By: Lightnet
 
 ## Stage Dev:
 - Idea
@@ -31,10 +31,18 @@
   - auth (simple user and password)
   - sign up (added / need work)
 - editor
-  - save (not build) 
-  - load (not build) 
+  - project
+    - list (added)
+    - update/edit (added)
+    - delete (added)
+      - sub folders (not build)
+  - save (added) 
+    - database  (partly working)
+  - load (added ) 
+    - database (partly working)
   - shape
     - add cube (add)
+      - database (partly working)
     - add plane (not build)
     - add sphere (not build)
     - add ... (not build)
@@ -43,12 +51,13 @@
   - orbit camera ( added / work in progres )
 
   - scene panel
+    - database save and load (partly working)
     - rename (work in progress)
     - visiable ( added )
     - remove ( added / needs work)
     - select ( added )
   - props
-    - transform postion ( added )
+    - position ( added )
     - rotation ( added )
     - scale ( added )
   - material  (not build)
@@ -62,10 +71,12 @@
   - config  (not build)
 
 ## Packages:
-- @react-three/fiber 7.0.17
-- next 12.0.2
-- next-auth 4.0.0-beta.4
-- react 17.0.2
+- @react-three/fiber 7.0.19
+- @react-three/cannon 4.0.1
+- @react-three/drei 7.20.6
+- next 12.0.3
+- next-auth 4.0.0-beta.26
+- react 17.0.3
 - three 0.134.0
 - mongoose 6.0.12
 - jsonwebtoken 8.5.1
