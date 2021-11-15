@@ -10,10 +10,11 @@ import { useEffect, useState } from 'react';
 import Modal from '../../ui/emodal';
 import ProjectDelete from './projectdelete';
 import ProjectEdit from './projectedit';
-
+import { useRouter } from 'next/router';
 
 export default function Projects() {
 
+  const router = useRouter();
   const [editorProjects, setEditorProjects] = useState([]);
   const [editorName, setEditorName] = useState("");
   const [editorDescription, setEditorDescription] = useState("");
@@ -119,6 +120,10 @@ export default function Projects() {
             setDataType('deleteproject');
             setIsOpenModal(true);
           }
+        }
+
+        if(args.action == 'load'){
+          router.push('/editor?projectid='+args.id)
         }
         //END ACTION
       }

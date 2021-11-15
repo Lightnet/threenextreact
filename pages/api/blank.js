@@ -9,8 +9,9 @@
   //res.status(200).json({ text: 'Hello' })
 //}
 
-import { getSession } from "next-auth/client";
-import db from "../../lib/database";;
+import { getSession } from "next-auth/react";
+import db from "../../lib/database";
+import { log } from "../../lib/log";
 
 export default async (req, res) => {
   const session = await getSession({ req })
@@ -57,9 +58,6 @@ export default async (req, res) => {
   }
 
 
-
-
-
-
-  res.end();
+  //res.end();
+  return res.json({error:"FAIL"});
 }

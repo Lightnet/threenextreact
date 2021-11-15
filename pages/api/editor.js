@@ -6,11 +6,13 @@
 import { getSession } from "next-auth/react";
 import db from "../../lib/database";
 import {log} from "../../lib/log";
+import { nanoid32 } from "../../lib/helper";
 
 export default async (req, res) => {
-  const session = await getSession({ req })
-  console.log("session");
-  console.log(session);
+
+  const session = await getSession({ req });
+  //console.log("session");
+  //console.log(session);
 
   let userid;
   let username;
@@ -51,6 +53,15 @@ export default async (req, res) => {
     return res.json({error:"FAIL"});
   }
 
+  if(req.method == 'GET'){
+    const Editor = db.model('Editor');
+    if(data.action == 'LIST'){
+      const editors = await Editor.find({userid: userid}).exec();
+      console.log(editors);
+      return res.json({action:'LIST',editors:editors});
+    }
+  }
+
   if(req.method == 'POST'){
     let data = JSON.parse(req.body);
     console.log(data);
@@ -64,12 +75,27 @@ export default async (req, res) => {
         }
 
         if(data.action == 'CREATE'){
+          let editorID = nanoid32();
+          let sceneID = nanoid32();
+
           let newEditor = new Editor({
-            userid: userid
+            id:editorID
+            , userid: userid
             , username: username
             , name:data.name
             , description: data.description
+            , defaultsceneid:sceneID
           });
+
+          const Scene = db.model('Scene');
+
+          let newScene = new Scene({
+            editorid:editorID
+            , id:sceneID
+            , userid: userid
+            , username: username
+          })
+
 
           try{
             let saveEditor = await newEditor.save();
@@ -77,6 +103,10 @@ export default async (req, res) => {
             // saved!
             console.log("save user");
             console.log(saveEditor);
+
+            let saveScene = await newScene.save();
+            console.log(saveScene);
+
             return res.json({action:'CREATE',editor:saveEditor});
           }catch(e){
             return res.json({error:"FAIL"});
@@ -101,8 +131,16 @@ export default async (req, res) => {
 
           return res.json({action:"DELETE",id:data.editorid});
         }
+
+        if(data.action == 'DEFAULTSCENE'){
+          const editor = await Editor.findOne({id: data.editorid}).exec();
+          console.log(editor);
+          return res.json({action:"UPDATE",sceneid:editor.defaultsceneid});
+        }
         //END ACTION
       }
+
+
     }
   }
 
