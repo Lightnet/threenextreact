@@ -15,7 +15,7 @@ export default function Component({selectObject,objKey,type,ops}) {
 
   const [posX, setPosX] = useState(0);
 
-  useEffect(async () => {
+  useEffect(() => {
     //select object change to update value
     if(objKey=="positionX"){
       setPosX(selectObject.position[0])
@@ -52,11 +52,11 @@ export default function Component({selectObject,objKey,type,ops}) {
   function inputChange(event){
     //console.log("x?");
     //console.log(event.target.value);
-    if(!isNumber(event.target.value)){
+    //if(!isNumber(event.target.value)){
       //console.log("BYE");
-      setPosX(0);
-      return;
-    }
+      //setPosX(0);
+      //return;
+    //}
     //if(event.target.value != ""){
       setPosX(event.target.value);
     //}
@@ -64,17 +64,22 @@ export default function Component({selectObject,objKey,type,ops}) {
 
   //this will handle user press enter to update
   function inputKey(event){
-    console.log(event.target.value);
+    //console.log(event.target.value);
     setPosX(event.target.value);
     if (event.keyCode === 13) {
-      console.log("Enter!")
+      //console.log("Enter!")
+      if(!isNumber(event.target.value)){
+        console.log("NOT NUMBER!");
+        return;
+      }
+
       if(event.target.value == ""){
         console.log("Empty!");
         return;
       }
-      console.log(type)
-      console.log(objKey)
-      console.log(selectObject.id)
+      //console.log(type)
+      //console.log(objKey)
+      //console.log(selectObject.id)
       
       if(event.target.value != ""){
         ops(event,{

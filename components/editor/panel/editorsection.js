@@ -20,7 +20,7 @@ import DropDownMenu from "../../ui/edropdown";
 import EditorScene from "./objectscene";
 import EditorProps from "./objectprops";
 
-import { v4 as uuidv4 } from 'uuid';
+//import { v4 as uuidv4 } from 'uuid';
 import { nanoid32 } from "../../../lib/helper";
 
 
@@ -441,10 +441,6 @@ export default function EditorSection({editorid}){
     }
   }
 
-  function Non(){
-
-  }
-
   return(<>
     
     <Canvas>
@@ -454,9 +450,9 @@ export default function EditorSection({editorid}){
       <Box position={[1.2, 0, 0]} />
       {/**/}
       {objects3D}
-
+      {/* */}
       <CameraCtrl />
-
+      
     </Canvas>
     
     <EditorTopSideBar
@@ -538,7 +534,6 @@ export default function EditorSection({editorid}){
          
     </EditorRightSideBar>
 
-    
     <div className="btn">
       <label>Side Bars:</label>
       <button  onClick={ToggleTopSB}>Top</button>
