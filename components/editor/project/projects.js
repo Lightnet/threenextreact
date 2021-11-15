@@ -27,15 +27,10 @@ export default function Projects() {
     getEditorProject();
   }, []);
 
-  function loadGame(e,id){
-    e.preventDefault();
-    console.log("LOAD GAME",id);
-  }
-
-  function removeGame(e,id){
-    e.preventDefault();
-    console.log("REMOVE GAME",id);
-  }
+  useEffect(()=>{
+    //console.log("editorProjects>>>>>>>>>>>>>>");
+    //console.log(editorProjects);
+  },[editorProjects])
 
   function onChangeEditorName(e){
     setEditorName(e.target.value);
@@ -54,7 +49,7 @@ export default function Projects() {
       })
     });
     let data = await res.json();
-    console.log(data);
+    //console.log(data);
     if(data.action=='LIST'){
       setEditorProjects(data.editors);
     }
@@ -72,7 +67,11 @@ export default function Projects() {
     let data = await res.json();
     console.log(data);
     if(data.action=='CREATE'){
+      //console.log('API CREATE???');
+      //console.log(editorProjects)
       editorProjects.push(data.editor);
+      //odd bug not update?
+      setEditorProjects([]);
       setEditorProjects(editorProjects);
     }
   }
@@ -164,8 +163,7 @@ export default function Projects() {
   }
 
   return (<>
-    <label>Editor Projects</label>
-    <button onClick={createEditorProject}>Create</button>
+    <label>Editor Projects</label> <button onClick={()=>createEditorProject()}>Create</button>
     
     <input value={editorName} onChange={onChangeEditorName} placeholder="Name"></input>
     <input value={editorDescription} onChange={onChangeEditorDescription} placeholder="Description"></input>
@@ -226,7 +224,6 @@ export default function Projects() {
         {/**/}
       </tbody>
     </table>
-
 
     <Modal 
       isOpen={isOpenModal}

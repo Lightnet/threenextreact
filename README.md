@@ -30,8 +30,9 @@
 - account (added / partly working)
   - auth (simple user and password)
   - sign up (added / need work)
+  - third partly sign token (not build)
 - editor
-  - project
+  - project work space
     - list (added)
     - update/edit (added)
     - delete (added)
@@ -80,6 +81,8 @@
 - three 0.134.0
 - mongoose 6.0.12
 - jsonwebtoken 8.5.1
+## 
+- webpack 5 (nextjs build in for dev)
 
 ### Not Used:
 - prisma 3.4.0
@@ -107,7 +110,7 @@
 
   The network and database will handle some simple tests.
 
-## dev url testing:
+## Dev url testing:
 - http://localhost:5555/ web page
 - http://localhost:3000/ database
 
@@ -118,7 +121,7 @@ NEXTAUTH_URL="http://localhost:3000"
 DATABASE_URL="mongodb://127.0.0.1/reactthree"
 ```
 
-# refs Links:
+# Refs Links:
 - https://nextjs.org/docs/getting-started
 - https://nextjs.org/
 
@@ -131,7 +134,7 @@ DATABASE_URL="mongodb://127.0.0.1/reactthree"
 - div id __next css for threejs resize full screen config.
 - gun.js tests
 
-npm command:
+# npm command:
 ```
 $ npm update //clean up unused packages
 
