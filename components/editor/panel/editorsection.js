@@ -23,101 +23,11 @@ import EditorProps from "./objectprops";
 //import { v4 as uuidv4 } from 'uuid';
 import { nanoid32 } from "../../../lib/helper";
 
-
-function Box(props) {
-  // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01))
-  //console.log("Box");
-  // Return the view, these are regular Threejs elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  )
-}
-
-function Cube(props) {
-  // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
-
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-
-  console.log("ref.current.position")
-  if(ref.current){
-    console.log(ref.current.position)
-  }
-  
-  //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
-
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      //scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  )
-}
-
-function Foo(props){
-  const ref = useRef();
-  //console.log("Foo");
-
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      >
-    </mesh>
-    )
-}
-
-function CameraTest(props){
-  const ref = useRef();
-
-  return (
-    <PerspectiveCamera
-      makeDefault // Registers it as the default camera system-wide (default=false)
-      {...props}
-      ref={ref}
-      >
-    </PerspectiveCamera>
-    )
-}
-
-function CameraCtrl(props){
-  const ref = useRef();
-
-  return (
-    <>
-      <PerspectiveCamera
-        makeDefault // Registers it as the default camera system-wide (default=false)
-        {...props}
-        ref={ref}
-        position={[0, 5, 5]} 
-        >
-      </PerspectiveCamera>
-      <OrbitControls camera={ref.current} />
-    </>
-    )
-}
+import Box from '../../entities/box';
+import Cube from '../../entities/cube';
+import Foo from '../../entities/foo';
+import CameraTest from '../../entities/cameratest';
+import CameraCtrl from '../../entities/cameractrl';
 
 export default function EditorSection({editorid}){
 
