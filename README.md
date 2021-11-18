@@ -59,7 +59,7 @@
     - move another scene  (not build)
     - prefab (not added / need parent code script id and tags)
     - delete save object3d if accident remove from scene.
-    
+
   - scene panel
     - database save and load (partly working)
     - object3d list (added )
@@ -164,6 +164,7 @@ DATABASE_URL="mongodb://127.0.0.1/reactthree"
 - PrismaClient setup is tricky when dealing with react, server and client code.
 - div id __next css for threejs resize full screen config.
 - gun.js tests
+- Reworking the array format for easy build. To handle react component update call.
 
 # npm command:
 ```
