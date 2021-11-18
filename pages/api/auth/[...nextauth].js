@@ -17,7 +17,7 @@ export default NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        alias: { label: "Alias", type: "text", placeholder: "John Doe" },
+        alias: { label: "Alias", type: "text", placeholder: "User Name" },
         passphrase: {  label: "Passphrase", type: "password", placeholder:"PASSWORD" }
       },
       async authorize(credentials, req) {
@@ -117,7 +117,7 @@ export default NextAuth({
     
   },
   //database: process.env.DATABASE_URL,
-  //secret: process.env.SECRET,
+  secret: process.env.SECRET,
   // https://next-auth.js.org/configuration/options
   session: {
     jwt: true,
@@ -126,7 +126,7 @@ export default NextAuth({
     updateAge: 24 * 60 * 60 // 24 hours
   },
   jwt: {
-    secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw'
+    secret: process.env.SECRET
     //signingKey: {
       //kty: "oct",
       //kid: "Dl893BEV-iVE-x9EC52TDmlJUgGm9oZ99_ZL025Hc5Q",

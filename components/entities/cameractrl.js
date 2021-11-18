@@ -19,7 +19,16 @@ export default function CameraCtrl(props){
         position={[0, 5, 5]} 
         >
       </PerspectiveCamera>
-      <OrbitControls camera={ref.current} />
+      <OrbitControls 
+        enablePan={true}
+        enableZoom={false} 
+        enableRotate={true}
+        enableDamping={false}
+        camera={ref.current} 
+        />
     </>
     )
 }
+/*
+
+*/

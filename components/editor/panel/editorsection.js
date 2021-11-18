@@ -16,6 +16,7 @@ import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/
 import EditorTopSideBar from "./sidebartop";
 import EditorRightSideBar from "./sidebarright";
 import DropDownMenu from "../../ui/edropdown";
+import Modal from '../../ui/emodal';
 
 // PANEL
 import EditorScene from "./objectscene";
@@ -28,6 +29,11 @@ import Cube from '../../entities/cube';
 import Foo from '../../entities/foo';
 //import CameraTest from '../../entities/cameratest';
 import CameraCtrl from '../../entities/cameractrl';
+
+//events:
+import useEvent from '../../hook/useEvent';
+import SceneSection from '../scene/scenesection';
+import AssetsSection from '../assets/assetssection';
 
 export default function EditorSection({editorid}){
 
@@ -43,8 +49,27 @@ export default function EditorSection({editorid}){
   const [editorID, setEditorID] = useState(null);
   const [sceneID, setSceneID] = useState(null);
 
+  const [viewModal, setViewModal] = useState(null);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   //const sceneObjsRef = useRef([]);
   //const ref = useRef();//get this current element react component
+
+  useEffect(()=>{
+    
+  },[]);
+
+  useEvent('keydown',keydown);
+
+  useEvent('keyup',keyup);
+
+  function keydown(e){
+    console.log("press....");
+  }
+
+  function keyup(e){
+    console.log("press....");
+  }
 
   useEffect(() => {
     //console.log("INIT SET MOUNT!");
@@ -228,8 +253,6 @@ export default function EditorSection({editorid}){
       return;
     }
 
-
-    
   }
 
   //call from the child component events
@@ -364,10 +387,45 @@ export default function EditorSection({editorid}){
           }
         }
 
+        if(param.action=='loadscene'){
+          setSceneObjs([]);
+          setObjects3D([]);
+          setSelectObject(null);
+          setSceneID(param.id);
+        }
+
         //END ACTION STRING
       }
     }
   }
+
+  function closeModal(){
+    setIsOpenModal(false);
+    setViewModal(null);//clean up react element
+  }
+
+  function renderModal(){
+    if(viewModal=='scenes'){
+      return <SceneSection editorid={editorID} ops={callBackOPS}></SceneSection>
+    }else if(viewModal == 'assets'){
+      return <AssetsSection editorid={editorID}></AssetsSection>
+    }
+    return (<>
+    
+    </>)
+  }
+
+  function showViewModal(name){
+    setViewModal(name)
+    setIsOpenModal(true);
+  }
+
+  //function showScenes(){
+    //setViewModal('scenes')
+    //setIsOpenModal(true);
+  //}
+
+
 
   return(<>
     
@@ -380,6 +438,7 @@ export default function EditorSection({editorid}){
       {objects3D}
       {/* */}
       <CameraCtrl />
+      
       
     </Canvas>
     
@@ -406,15 +465,15 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="View" >
-        <a href="#" >Assets</a>
-        <a href="#" >Material</a>
-        <a href="#" >Texture</a>
-        <a href="#" >Model</a>
-        <a href="#" >Scene</a>
+        <a href="#" onClick={()=>showViewModal('assets')} >Assets</a>
+        <a href="#" onClick={()=>showViewModal('materials')} >Materials</a>
+        <a href="#" onClick={()=>showViewModal('textures')} >Textures</a>
+        <a href="#" onClick={()=>showViewModal('models')} >Models</a>
+        <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a>
         <a href="#" >Props</a>
-        <a href="#" >Script</a>
-        <a href="#" >Blueprint</a>
-        <a href="#" >Prefab</a>
+        <a href="#" onClick={()=>showViewModal('script')} >Script</a>
+        <a href="#" onClick={()=>showViewModal('blueprint')} >Blueprint</a>
+        <a href="#" onClick={()=>showViewModal('prefab')} >Prefab</a>
       </DropDownMenu>
 
       <DropDownMenu menuname="Scene" >
@@ -469,6 +528,13 @@ export default function EditorSection({editorid}){
       <button  onClick={ToggleRightSB}>Bottom</button>
       <button  onClick={ToggleRightSB}>Left</button>
     </div>
+
+    <Modal 
+      isOpen={isOpenModal}
+      closeModal={closeModal}
+    >
+      {renderModal()}
+    </Modal>
     
   </>);
 }

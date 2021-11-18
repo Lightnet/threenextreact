@@ -150,6 +150,7 @@
 HOST="http://localhost:3000"
 NEXTAUTH_URL="http://localhost:3000"
 DATABASE_URL="mongodb://127.0.0.1/reactthree"
+SECRET=""
 ```
 
 # Refs Links:

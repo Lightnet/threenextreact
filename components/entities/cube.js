@@ -2,9 +2,10 @@
   LICENSE: MIT
   Created by: Lightnet
 */
+
 import { useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
+//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+//import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
 export default function Cube(props) {
   // This reference will give us direct access to the THREE.Mesh object
@@ -13,10 +14,10 @@ export default function Cube(props) {
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
 
-  console.log("ref.current.position")
-  if(ref.current){
-    console.log(ref.current.position)
-  }
+  //console.log("ref.current.position")
+  //if(ref.current){
+    //console.log(ref.current.position)
+  //}
   
   //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
 

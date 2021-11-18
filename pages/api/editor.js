@@ -51,6 +51,7 @@ export default async (req, res) => {
 
           let newScene = new Scene({
             editorid:editorID
+            , name: nanoid32()
             , id:sceneID
             , userid: userid
             , username: username
