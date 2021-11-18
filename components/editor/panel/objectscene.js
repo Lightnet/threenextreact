@@ -44,10 +44,10 @@ export default function Component({sceneObjs,ops}) {
           <div key={_entity.id}>
             <label> Name:{_entity?.name} </label>
             {/*<button onClick={()=>testset(_entity.id,"testss")}>SET</button>*/}
-            <button onClick={(event)=>ops(event,{action:"rename",id:_entity.id,name:ranName(10)})}>Rename</button>
-            <button onClick={(event)=>ops(event,{action:"select",id:_entity.id})}>Select</button>
-            <button onClick={(event)=>ops(event,{action:"visible",id:_entity.id})}>Visible</button>
-            <button onClick={(event)=>ops(event,{action:"remove",id:_entity.id})}>Remove</button>
+            <button onClick={()=>ops({action:"rename",id:_entity.id,name:ranName(10)})}>Rename</button>
+            <button onClick={()=>ops({action:"select",id:_entity.id})}>Select</button>
+            <button onClick={()=>ops({action:"visible",id:_entity.id})}>Visible</button>
+            <button onClick={()=>ops({action:"remove",id:_entity.id})}>Remove</button>
           </div>
         )
       })

@@ -1,4 +1,8 @@
 
+
+
+
+
 loading components
 
 https://www.digitalocean.com/community/conceptual_articles/react-loading-components-dynamically-hooks
@@ -13,6 +17,9 @@ const OtherComponent = React.lazy(() => import('./OtherComponent'));
 ```
 
 
+https://dev.to/pnkfluffy/passing-data-from-child-to-parent-with-react-hooks-1ji3
+-child to parent
+https://dev.to/sabrinasuarezarrieta/send-information-from-child-to-parent-callbacks-in-react-471k
 
 
 

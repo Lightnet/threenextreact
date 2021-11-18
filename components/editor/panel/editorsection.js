@@ -140,7 +140,6 @@ export default function EditorSection({editorid}){
     //let obj = sceneObjsRef.current;
     if(sceneObjs){
       let obj = sceneObjs;
-      console.log("obj>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
       console.log(obj);
       let objmap = obj.map((_entity)=>{
         return buildModel(_entity)
@@ -234,11 +233,12 @@ export default function EditorSection({editorid}){
   }
 
   //call from the child component events
-  function btnAction(event,param){
-    console.log(event);
+  function callBackOPS(param){
     console.log(param);
     if(param){
       if(param.action){
+        console.log("param.action: ",param.action)
+
         if(param.action=="addcube"){
           //let objs = sceneObjs;
           let data = {
@@ -322,33 +322,33 @@ export default function EditorSection({editorid}){
             if(objs[i].id == param.id){
               console.log("[[[[==============  FOUND OBJECT ============]]]")
               //objs[i].name = param.name;
-              if(param.key == "positionX"){
+              if(param.objkey == "positionX"){
                 objs[i].position[0] = param.setValue;
               }
-              if(param.key == "positionY"){
+              if(param.objkey == "positionY"){
                 objs[i].position[1] = param.setValue;
               }
-              if(param.key == "positionZ"){
+              if(param.objkey == "positionZ"){
                 objs[i].position[2] = param.setValue;
               }
 
-              if(param.key == "rotationX"){
+              if(param.objkey == "rotationX"){
                 objs[i].rotation[0] = param.setValue;
               }
-              if(param.key == "rotationY"){
+              if(param.objkey == "rotationY"){
                 objs[i].rotation[1] = param.setValue;
               }
-              if(param.key == "rotationZ"){
+              if(param.objkey == "rotationZ"){
                 objs[i].rotation[2] = param.setValue;
               }
 
-              if(param.key == "scaleX"){
+              if(param.objkey == "scaleX"){
                 objs[i].scale[0] = param.setValue;
               }
-              if(param.key == "scaleY"){
+              if(param.objkey == "scaleY"){
                 objs[i].scale[1] = param.setValue;
               }
-              if(param.key == "scaleZ"){
+              if(param.objkey == "scaleZ"){
                 objs[i].scale[2] = param.setValue;
               }
 
@@ -418,12 +418,12 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Scene" >
-        <a href="#" onClick={(e)=>btnAction(e,{action:"addscene"})}>Add Scene</a>
-        <a href="#" onClick={(e)=>btnAction(e,{action:"addcube"})}>Add Cube</a>
-        <a href="#" onClick={(e)=>btnAction(e,{action:"addsphere"})}>Add Sphere</a>
-        <a href="#" onClick={(e)=>btnAction(e,{action:"addplane"})}>Add Plane</a>
-        <a href="#" onClick={(e)=>btnAction(e,{action:"addcamera"})}>Add Camera</a>
-        <a href="#" onClick={(e)=>btnAction(e,{action:"addlight"})}>Add Light</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addscene"})}>Add Scene</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcube"})}>Add Cube</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addsphere"})}>Add Sphere</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcamera"})}>Add Camera</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addlight"})}>Add Light</a>
       </DropDownMenu>
 
       <DropDownMenu menuname="Prefab" >
@@ -451,13 +451,13 @@ export default function EditorSection({editorid}){
     >
       
       <EditorScene
-        ops={btnAction}
+        ops={callBackOPS}
         sceneObjs={sceneObjs}
         ></EditorScene>
       {/* */}
       <EditorProps
         selectObject={selectObject}
-        ops={btnAction}
+        ops={callBackOPS}
       ></EditorProps>
          
     </EditorRightSideBar>

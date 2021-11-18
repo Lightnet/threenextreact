@@ -2,47 +2,71 @@
   LICENSE: MIT
   Created by: Lightnet
 */
-
-//import {useState, useEffect} from "react";
-import InputProp from "../input/inputProp";
+import { useEffect, useState } from "react";
+import PropNumber from "../input/propnumber";
 
 export default function Component({selectObject,ops}) {
+
+  const [objID, setObjID] = useState(null);
+  const [rotX, setRotX] = useState(0);
+  const [rotY, setRotY] = useState(0);
+  const [rotZ, setRotZ] = useState(0);
+
+  useEffect(()=>{
+    if(selectObject){
+      if(selectObject.id){
+        setObjID(selectObject.id);
+      }
+      if(selectObject.rotation){
+        setRotX(selectObject.rotation[0]);
+      }
+      if(selectObject.rotation){
+        setRotY(selectObject.rotation[1]);
+      }
+      if(selectObject.rotation){
+        setRotZ(selectObject.rotation[2]);
+      }
+    }
+  });
 
   return (<>
     <div>
       <div>
-        <label>Rotation</label>
+        <label>Rotation:</label>
       </div>
       <div>
         <label>X:
-          <InputProp 
-            selectObject={selectObject}
+        <PropNumber 
             ops={ops}
+            objid={objID}
             objKey="rotationX"
-            type="mesh"
-          />
+            value={rotX} 
+            objtype="object3d"
+            ></PropNumber>
         </label>
       </div>
 
       <div>
         <label>Y:
-          <InputProp 
-            selectObject={selectObject}
+          <PropNumber 
             ops={ops}
+            objid={objID}
             objKey="rotationY"
-            type="mesh"
-          />
+            value={rotY} 
+            objtype="object3d"
+            ></PropNumber>
         </label>
       </div>
 
       <div>
         <label>Z:
-          <InputProp 
-            selectObject={selectObject}
+          <PropNumber 
             ops={ops}
-            objKey="rotationZ"
-            type="mesh"
-          />
+            objid={objID}
+            objKey="rotationY"
+            value={rotZ} 
+            objtype="object3d"
+            ></PropNumber>
         </label>
       </div>
 

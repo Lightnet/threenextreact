@@ -3,10 +3,31 @@
   Created by: Lightnet
 */
 
-//import {useState, useEffect} from "react";
-import InputProp from "../input/inputProp";
+import { useEffect, useState } from "react";
+import NumberProp from "../input/propnumber";
 
 export default function Component({selectObject,ops}) {
+  const [objID, setObjID] = useState(null);
+  const [posX, setPosX] = useState(0);
+  const [posY, setPosY] = useState(0);
+  const [posZ, setPosZ] = useState(0);
+
+  useEffect(()=>{
+    if(selectObject){
+      if(selectObject.id){
+        setObjID(selectObject.id);
+      }
+      if(selectObject.position){
+        setPosX(selectObject.position[0]);
+      }
+      if(selectObject.position){
+        setPosY(selectObject.position[1]);
+      }
+      if(selectObject.position){
+        setPosZ(selectObject.position[2]);
+      }
+    }
+  });
 
   return (<>
     <div>
@@ -15,34 +36,37 @@ export default function Component({selectObject,ops}) {
       </div>
       <div>
         <label>X:
-          <InputProp 
-            selectObject={selectObject}
+        <NumberProp 
             ops={ops}
+            objid={objID}
             objKey="positionX"
-            type="mesh"
-          />
+            value={posX} 
+            objtype="object3d"
+            ></NumberProp>
         </label>
       </div>
 
       <div>
         <label>Y:
-          <InputProp 
-            selectObject={selectObject}
+        <NumberProp 
             ops={ops}
+            objid={objID}
             objKey="positionY"
-            type="mesh"
-          />
+            value={posY} 
+            objtype="object3d"
+            ></NumberProp>
         </label>
       </div>
 
       <div>
         <label>Z:
-          <InputProp 
-            selectObject={selectObject}
+        <NumberProp 
             ops={ops}
+            objid={objID}
             objKey="positionZ"
-            type="mesh"
-          />
+            value={posZ} 
+            objtype="object3d"
+            ></NumberProp>
         </label>
       </div>
 
