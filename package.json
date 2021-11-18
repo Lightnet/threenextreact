@@ -1,5 +1,5 @@
 {
-  "name": "nextreactjs",
+  "name": "threenextreact",
   "version": "1.0.0",
   "description": "Prototype test build react, threejs and other package to build applications, game and editor.",
   "main": "index.js",
@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@react-three/cannon": "^4.0.1",
-    "@react-three/drei": "^7.20.6",
+    "@react-three/drei": "^7.22.0",
     "@react-three/fiber": "^7.0.19",
     "dayjs": "^1.10.7",
     "eventemitter3": "^4.0.7",
@@ -27,8 +27,8 @@
     "three": "^0.134.0",
     "gun": "^0.2020.1235",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.12",
-    "next": "^12.0.3",
+    "mongoose": "^6.0.13",
+    "next": "^12.0.4",
     "react": "^17.0.2",
     "uuid": "^8.3.2"
   },

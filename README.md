@@ -11,32 +11,32 @@
 ## Information:
   Work in progress builds and testing ideas.
 
-  To develop 3D editor and game with three.js and next.js to create browser client game.
+  To develop 3D editor and game with Next.js, React.js and Three.js to create browser client game or application. Used Next.js with built in server, api and React.js to prerender browser client page render. Three.js does have other third party packages to handle React.js components in modules design. The database will be used is MongoDB to able save and load data for editing and game to manage them in json format. Note that nextjs (https://nextjs.org/) server run differently that reduce route coding and config.
 
-  It used next.js, react.js, threejs and other support packages to handle components and modules design. To render browser client to reduce page render by pre-render the client in server side.
-
-  The database will be used to save and load data for editing and game to manage them in json format.
-
-  Note that nextjs (https://nextjs.org/) server run differently that reduce route coding and config.
+  By using the Three.js with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game current set. Required creating components and api calls.
 
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
 
 ## urls:
 - http://localhost:3000/editor ( main / work in progress )
 - http://localhost:3000/examples (tests)
+- http://localhost:3000/app (tests / not added any feature yet.)
 - http://localhost:3000/ (entry point home page)
 
 ## TO DO LIST:
-- account (added / partly working)
+- account / auth (added / partly working)
   - auth (simple user and password)
   - sign up (added / need work)
   - third partly sign token (not build)
+
+- project work space
+  - list (added)
+  - update/edit (added)
+  - delete (added)
+    - sub folders (not build)
+
 - editor
-  - project work space
-    - list (added)
-    - update/edit (added)
-    - delete (added)
-      - sub folders (not build)
+  - auto save and load when user interact with the object3D  
   - save (added) 
     - database  (partly working)
   - load (added ) 
@@ -51,22 +51,53 @@
   - light (not build)
   - orbit camera ( added / work in progres )
 
+  - object3d
+    - database save and load (partly working)
+    - create object (add base secene id)
+    - delete object (add base secene id)
+    - update object (add base secene id)
+    - move another scene  (not build)
+    - prefab (not added / need parent code script id and tags)
+    - delete save object3d if accident remove from scene.
+    
   - scene panel
     - database save and load (partly working)
-    - rename (work in progress)
-    - visiable ( added )
-    - remove ( added / needs work)
-    - select ( added )
+    - object3d list (added )
+    - object3d delete (added)
+    - object3d rename (not added / random name)
+    - object3d select ( added )
+    - object3d list update (added)
+    - object3d visiable ( added )
+    - create (not added)
+    - delete (not added)
+    
   - props
     - position ( added )
     - rotation ( added )
     - scale ( added )
+
   - material  (not build)
+    - create
+    - update
+    - delete
   - texture  (not build)
+    - create
+    - update
+    - delete
   - model  (not build)
+    - create
+    - update
+    - delete
   - animation  (not build)
+    - create
+    - update
+    - delete
   - prefab entity  (not build)
+    - create
+    - update
+    - delete
 - game  (not build)
+  - delete  (not build)
   - load  (not build)
   - save  (not build)
   - config  (not build)
@@ -82,7 +113,7 @@
 - mongoose 6.0.12
 - jsonwebtoken 8.5.1
 ## 
-- webpack 5 (nextjs build in for dev)
+- webpack 5 (Next.js build in for dev)
 
 ### Not Used:
 - prisma 3.4.0
@@ -112,7 +143,7 @@
 
 ## Dev url testing:
 - http://localhost:5555/ web page
-- http://localhost:3000/ database
+- http://localhost:3000/ database (not in used)
 
 # .env
 ```
