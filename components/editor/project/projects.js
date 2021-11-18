@@ -11,6 +11,7 @@ import Modal from '../../ui/emodal';
 import ProjectDelete from './projectdelete';
 import ProjectEdit from './projectedit';
 import { useRouter } from 'next/router';
+import useFetch from '../../hook/usefetch';
 
 export default function Projects() {
 
@@ -40,15 +41,11 @@ export default function Projects() {
   }
 
   async function getEditorProject(){
-    let res = await fetch('api/editor',{
-      method:'POST',
-      body: JSON.stringify({ 
-        action:'LIST',
-        name:editorName,
-        description:editorDescription
-      })
-    });
-    let data = await res.json();
+    let data = await useFetch('api/editor');
+    if(data.error){
+      console.log("ERROR FETCH PROJECT LIST")
+      return;
+    }
     //console.log(data);
     if(data.action=='LIST'){
       setEditorProjects(data.editors);
@@ -56,7 +53,7 @@ export default function Projects() {
   }
 
   async function createEditorProject(e){
-    let res = await fetch('api/editor',{
+    let data = await useFetch('api/editor',{
       method:'POST',
       body: JSON.stringify({ 
         action:'CREATE',
@@ -64,7 +61,10 @@ export default function Projects() {
         description:editorDescription
       })
     });
-    let data = await res.json();
+    if(data.error){
+      console.log("ERROR FETCH CREATE PROJECT");
+      return;
+    }
     console.log(data);
     if(data.action=='CREATE'){
       //console.log('API CREATE???');

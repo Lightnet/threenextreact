@@ -4,8 +4,6 @@
 */
 
 import { getCsrfToken, getProviders } from "next-auth/react";
-//import { PrismaClient } from '@prisma/client';
-//import {clientDB} from '../db';
 import db from "../../lib/database";
 
 export default async (req, res)=>{

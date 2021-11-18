@@ -3,6 +3,8 @@
   Created by: Lightnet
 */
 
+import { useEffect, useState } from "react";
+
 // https://www.pluralsight.com/guides/how-to-show-components-conditionally-react
 
 //import { useEffect } from 'react';
@@ -23,18 +25,24 @@ function ranName(length){
 
 export default function Component({sceneObjs,ops}) {
   
-  //useEffect(() => { 
-    //console.log("panel scene");
-    //console.log(sceneObjs);
-  //}, [sceneObjs]);
+  const [object3D, setObject3D] = useState([]);
+
+  useEffect(() => {
+    if(sceneObjs){
+      setObject3D(sceneObjs);
+    }
+    return ()=>{
+      setObject3D(null);
+    }
+  }, [sceneObjs]);
 
   function renderSceneObjects(){
-    if (sceneObjs){
+    if (object3D){
       //return <label>Found</label>
-      return sceneObjs.map((_entity)=>{
+      return object3D?.map((_entity)=>{
         return (
           <div key={_entity.id}>
-            <label> Name:{_entity.name} </label>
+            <label> Name:{_entity?.name} </label>
             {/*<button onClick={()=>testset(_entity.id,"testss")}>SET</button>*/}
             <button onClick={(event)=>ops(event,{action:"rename",id:_entity.id,name:ranName(10)})}>Rename</button>
             <button onClick={(event)=>ops(event,{action:"select",id:_entity.id})}>Select</button>

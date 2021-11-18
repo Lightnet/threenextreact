@@ -4,52 +4,22 @@
 */
 
 import { getSession } from "next-auth/react";
-import db from "../../lib/database";
+import db,{ sessionTokenCheck } from "../../lib/database";
 import { log } from "../../lib/log";
 
 export default async (req, res) => {
-  const session = await getSession({ req })
-  console.log("session");
-  console.log(session);
-
-  let userid;
-  let username;
   
-  if(session){
-    if(!session.user.name){
-      return res.json({error:"FAIL"});  
-    }
-    if(!session.user.token){
-      return res.json({error:"FAIL"});  
-    }
+  const session = await getSession({ req })
+  //console.log("session", session);
 
-    if(session.user.token){
-      const User = db.model('User');
-      const user = await User.findOne({username: session.user.name}).exec();
-      if(typeof session.user.token == "string"){
-        //console.log("STRING DATA...");
-        if(user){
-          //console.log("FOUND???");
-          let bcheck = user.checkToken(session.user.token);
-          console.log("TOKEN: ", bcheck);
-          //console.log(user);
-          if(bcheck){
-            // pass
-            log('PASS TOKEN');
-            userid = user._id;
-            username = user.username;
-          }else{
-            log('FAIL TOKEN');
-            return res.json({error:"FAIL"});
-          }
-        }else{
-          return res.json({error:"FAIL"});
-        }
-      }
-    }
-  }else{
-    return res.json({error:"FAIL"});
+  let {error, userid, username} = await sessionTokenCheck(session);
+  //console.log(error);
+  //console.log(userid);
+  //console.log(username);
+  if(error){
+    return res.json({message:"FAIL"});
   }
+
   const Object3D = db.model('Object3D');
   //check for scene id from database current set
   if(req.method == 'GET'){
@@ -57,7 +27,9 @@ export default async (req, res) => {
   }
 
   if(req.method == 'POST'){
-    let data = JSON.parse(req.body);
+    //let data = JSON.parse(req.body);
+    let data = req.body;
+    console.log(data)
     if(data.action){
       if(data.action == 'LIST'){
         const object3ds = await Object3D.find({sceneid: data.sceneid}).exec();
@@ -95,9 +67,9 @@ export default async (req, res) => {
       }
 
       if(data.action == 'DELETE'){
-        let doc = await Object3D.findOneAndDelete({id:data.data.id});
+        let doc = await Object3D.findOneAndDelete({id:data.id});
         console.log(doc);
-        return res.json({action:"DELETE",id:data.data.id});
+        return res.json({action:"DELETE",id:data.id});
       }
 
       //END ACTION

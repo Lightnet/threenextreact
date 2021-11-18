@@ -4,6 +4,7 @@
 */
 
 import { useRef, useEffect, useState } from 'react';
+import useFetch from "../../hook/usefetch";
 import Link from 'next/link';
 
 // THREE
@@ -20,13 +21,12 @@ import DropDownMenu from "../../ui/edropdown";
 import EditorScene from "./objectscene";
 import EditorProps from "./objectprops";
 
-//import { v4 as uuidv4 } from 'uuid';
 import { nanoid32 } from "../../../lib/helper";
 
 import Box from '../../entities/box';
 import Cube from '../../entities/cube';
 import Foo from '../../entities/foo';
-import CameraTest from '../../entities/cameratest';
+//import CameraTest from '../../entities/cameratest';
 import CameraCtrl from '../../entities/cameractrl';
 
 export default function EditorSection({editorid}){
@@ -78,15 +78,19 @@ export default function EditorSection({editorid}){
     if(!editorID){
       return;
     }
-    let res = await fetch('api/editor',{
+    let data = await useFetch('api/editor',{
       method:'POST',
       body:JSON.stringify({
         action:'DEFAULTSCENE'
         , editorid:editorID
       })
     })
-    let data = await res.json();
     console.log(data);
+    if(data.error){
+      console.log("FETCH GET DEFAULT SCENE ID");
+      return;
+    }
+
     if(data.action == 'UPDATE'){
       if(data.sceneid){
         console.log("SCENE ID:",data.sceneid)
@@ -96,20 +100,22 @@ export default function EditorSection({editorid}){
   }
 
   async function loadSceneObjects(){
-    let res = await fetch('api/object3d',{
+    let data = await useFetch('api/object3d',{
       method:'POST',
       body:JSON.stringify({
         action:'LIST'
         , sceneid:sceneID
       })
     })
-    let data = await res.json();
+    if(data.error){
+      console.log("FETCH ERROR OBJECT3DS")
+      return;
+    }
     console.log("objects: ", data);
     if(data.action){
       if(data.action == 'UPDATE'){
         //api server need fixed?
         setSceneObjs(data.object3ds);
-        
       }
       if(data.action == 'NOOBJECT3DS'){
         console.log("NO object3ds")
@@ -132,12 +138,16 @@ export default function EditorSection({editorid}){
   //update model for render {objects3D}
   function updateObjects(){
     //let obj = sceneObjsRef.current;
-    let obj = sceneObjs;
-    let objmap = obj.map((_entity)=>{
-      return buildModel(_entity)
-    })
-    //console.log(objmap);
-    setObjects3D(objmap);
+    if(sceneObjs){
+      let obj = sceneObjs;
+      console.log("obj>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      console.log(obj);
+      let objmap = obj.map((_entity)=>{
+        return buildModel(_entity)
+      })
+      //console.log(objmap);
+      setObjects3D(objmap);
+    }
   }
 
   //build model by type
@@ -167,44 +177,60 @@ export default function EditorSection({editorid}){
     if(!sceneID){
       console.log('ERROR NULL SCENEID');
     }
-    let res = await fetch('api/object3d',{
+    let data = await useFetch('api/object3d',{
       method:'POST'
       , body:JSON.stringify({ 
         action:'CREATE'
         , sceneid: sceneID
         , data:obj})
     });
-    let data = await res.json();
     console.log(data);
+    if(data.error){
+      console.log("ERROR FETCH SAVE OBJECT3D");
+      return;
+    }
+
+
   }
   async function apiUpdateObject3D(obj){
     if(!sceneID){
       console.log('ERROR NULL SCENEID');
     }
-    let res = await fetch('api/object3d',{
+    let data = await useFetch('api/object3d',{
       method:'POST'
       , body:JSON.stringify({ 
         action:'UPDATE'
         , sceneid: sceneID
         , data:obj})
     });
-    let data = await res.json();
+    if(data.error){
+      console.log("ERROR FETCH UPDATE OBJECT3D");
+      return;
+    }
     console.log(data);
+
   }
 
-  async function apiDeleteObject3D(obj){
+  async function apiDeleteObject3D(id){
     if(!sceneID){
       console.log('ERROR NULL SCENEID');
     }
-    let res = await fetch('api/object3d',{
+    let data = await useFetch('api/object3d',{
       method:'POST'
       , body:JSON.stringify({ 
         action:'DELETE'
         , sceneid: sceneID
-        , data:obj})
+        , id:id
+      })
     });
-    let data = await res.json();
     console.log(data);
+    if(data.error){
+      console.log("ERROR FETCH DELETE OBJECT3D")
+      return;
+    }
+
+
+    
   }
 
   //call from the child component events
@@ -214,8 +240,7 @@ export default function EditorSection({editorid}){
     if(param){
       if(param.action){
         if(param.action=="addcube"){
-          let objs = sceneObjs;
-
+          //let objs = sceneObjs;
           let data = {
             id: nanoid32()
             , name:"cube"
@@ -227,15 +252,15 @@ export default function EditorSection({editorid}){
           };
           apiSaveObject3D(data);
 
-          objs.push(data);
-          setSceneObjs(objs)
+          //objs.push(data);
+          setSceneObjs([...sceneObjs,data]);
           updateObjects();
         }
 
         if(param.action=="select"){
-          for(let i =0;i<sceneObjs.length;i++){
-            if(sceneObjs[i].id == param.id){
-              setSelectObject(sceneObjs[i]);
+          for(const obj3D of sceneObjs){
+            if(obj3D.id == param.id){
+              setSelectObject(obj3D);
               break;
             }
           }
@@ -243,6 +268,7 @@ export default function EditorSection({editorid}){
 
         if(param.action=="visible"){
           console.log(param.name);
+          //need to fixed this array new format array
           let objs = sceneObjs;
           for(let i =0;i<objs.length;i++){
             if(objs[i].id == param.id){
@@ -262,38 +288,30 @@ export default function EditorSection({editorid}){
 
         if(param.action=="rename"){
           console.log(param.name);
-          let objs = sceneObjs;
-          for(let i =0;i<objs.length;i++){
-            if(objs[i].id == param.id){
-              objs[i].name = param.name;
-              apiUpdateObject3D(objs[i]);
-              setSceneObjs(objs);
-              console.log("update rename object?");
-              //update new render...
-              updateObjects();
-              break;
+
+          setSceneObjs(sceneObjs.map(item=>{
+            if(item.id === param.id){
+              item.name=param.name;
+              apiUpdateObject3D(item);
+              return {...item, name:param.name};
+            }else{
+              return item
             }
-          }
+          }));
+
+          updateObjects();
         }
 
         if(param.action=="remove"){
           console.log(param.name);
-          let objs = sceneObjs;
-          for(let i =0;i<objs.length;i++){
-            if(objs[i].id == param.id){
-              if(selectObject == objs[i]){
-                setSelectObject(null);
-              }
-              apiDeleteObject3D(objs[i]);
-              objs.splice(i,1);
-
-              setSceneObjs(objs);
-              console.log("update rename object?");
-              //update new render...
-              updateObjects();
-              break;
+          apiDeleteObject3D(param.id);
+          for(const obj3d of sceneObjs){
+            if(selectObject == obj3d){
+              setSelectObject(null);
             }
           }
+          setSceneObjs(sceneObjs.filter(item=>item.id !== param.id ));
+          updateObjects();
         }
 
         if(param.action=="update"){
