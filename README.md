@@ -68,8 +68,11 @@
     - object3d select ( added )
     - object3d list update (added)
     - object3d visiable ( added )
-    - create (not added)
-    - delete (not added)
+    
+   - (view/scenes)
+    - create (added)
+    - edit (added)
+    - delete (added)
     
   - props
     - position ( added )

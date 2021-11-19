@@ -51,6 +51,18 @@ export default async (req, res) => {
   //edit update
   if(req.method == 'PATCH'){
     let data = req.body;
+    console.log(data)
+    let query={
+      id:data.id
+    }
+    let update={
+      name:data.sceneName,
+      description:data.description
+    }
+
+    let patchScene = await Scene.findOneAndUpdate(query,update,{new:true}).exec();
+
+    return res.json({action:'PATCH',scene:patchScene});
   }
 
   if(req.method == 'DELETE'){

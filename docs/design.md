@@ -39,7 +39,7 @@ If you cannot guarantee that b is short enough, you should use a standard loop-b
 ```js
 const numbers = [1, 2, 3, 4, 5];
 const listItems = numbers.map((number) =>
-  <li key={}>{number}</li> // key to deal with id key that check duplicate
+  <li key={id}>{number}</li> // key to deal with id key that check duplicate
 );
 
 return(
