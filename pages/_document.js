@@ -26,7 +26,7 @@ class MyDocument extends Document {
           <meta property="custom" content="test" />
           <script id="test">
             {
-              console.log("test console _doc")
+              console.log("[server see] _doc console.log test")
             }
           </script>
 
@@ -34,7 +34,7 @@ class MyDocument extends Document {
             dangerouslySetInnerHTML={{__html:`
               console.log("testing...");
               window.addEventListener('load', (event) => {
-                console.log("page is fully loaded");
+                console.log("[client] _doc page is fully loaded");
               });
             `}}
             />

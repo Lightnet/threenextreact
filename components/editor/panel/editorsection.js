@@ -110,7 +110,7 @@ export default function EditorSection({editorid}){
         , editorid:editorID
       })
     })
-    console.log(data);
+    //console.log(data);
     if(data.error){
       console.log("FETCH GET DEFAULT SCENE ID");
       return;
@@ -128,7 +128,7 @@ export default function EditorSection({editorid}){
     let data = await useFetch('api/object3d',{
       method:'POST',
       body:JSON.stringify({
-        action:'LIST'
+        action:'OBJECT3DS'
         , sceneid:sceneID
       })
     })
@@ -165,7 +165,7 @@ export default function EditorSection({editorid}){
     //let obj = sceneObjsRef.current;
     if(sceneObjs){
       let obj = sceneObjs;
-      console.log(obj);
+      //console.log(obj);
       let objmap = obj.map((_entity)=>{
         return buildModel(_entity)
       })
@@ -221,18 +221,17 @@ export default function EditorSection({editorid}){
       console.log('ERROR NULL SCENEID');
     }
     let data = await useFetch('api/object3d',{
-      method:'POST'
+      method:'PATCH'
       , body:JSON.stringify({ 
         action:'UPDATE'
         , sceneid: sceneID
         , data:obj})
     });
+    //console.log(data);
     if(data.error){
       console.log("ERROR FETCH UPDATE OBJECT3D");
       return;
     }
-    console.log(data);
-
   }
 
   async function apiDeleteObject3D(id){
@@ -240,19 +239,16 @@ export default function EditorSection({editorid}){
       console.log('ERROR NULL SCENEID');
     }
     let data = await useFetch('api/object3d',{
-      method:'POST'
+      method:'DELETE'
       , body:JSON.stringify({ 
-        action:'DELETE'
-        , sceneid: sceneID
-        , id:id
+        id:id
       })
     });
-    console.log(data);
+    //console.log(data);
     if(data.error){
       console.log("ERROR FETCH DELETE OBJECT3D")
       return;
     }
-
   }
 
   //call from the child component events
@@ -425,8 +421,6 @@ export default function EditorSection({editorid}){
     //setIsOpenModal(true);
   //}
 
-
-
   return(<>
     
     <Canvas>
@@ -448,21 +442,23 @@ export default function EditorSection({editorid}){
     >
       <Link href="/">Home</Link>
 
-      <DropDownMenu menuname="test" >
-        <a href="#" >Select Object</a>
-      </DropDownMenu>
-
       <DropDownMenu menuname="File" >
         <a href="#" >Project List</a>
         <a href="#" >Settings</a>
         <a href="#" >Config</a>
       </DropDownMenu>
 
+      <DropDownMenu menuname="Select" >
+        <a href="#" >Select Object</a>
+      </DropDownMenu>
+
+      {/*
       <DropDownMenu menuname="Tools" >
         <a href="#" >Server</a>
         <a href="#" >Network</a>
         <a href="#" >Client</a>
       </DropDownMenu>
+      */}
 
       <DropDownMenu menuname="View" >
         <a href="#" onClick={()=>showViewModal('assets')} >Assets</a>
@@ -499,7 +495,7 @@ export default function EditorSection({editorid}){
         <a href="#" >About</a>
         <a href="#" >Docs</a>
         <a href="#" >Github</a>
-        <a href="#" >Plugins</a>
+        {/*<a href="#" >Plugins</a>*/}
       </DropDownMenu>
       
     </EditorTopSideBar>

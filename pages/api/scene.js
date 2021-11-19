@@ -18,7 +18,7 @@ export default async (req, res) => {
   //console.log(userid);
   //console.log(username);
   if(error){
-    return res.json({message:"FAIL"});
+    return res.json({error:"FAIL"});
   }
   const Scene = db.model('Scene');
 
@@ -30,20 +30,29 @@ export default async (req, res) => {
   if(req.method == 'POST'){
     let data = req.body;
     if(data.action){
+
       if(data.action=='SCENES'){
-        let scenes = await Scene.find({editorid:data.id}).exec();
-        console.log(scenes)
-        return res.json({action:"SCENES",scenes:scenes});
+        try{
+          let scenes = await Scene.find({editorid:data.id}).exec();
+          //console.log(scenes)
+          return res.json({action:"SCENES",scenes:scenes});
+        }catch(e){
+          return res.json({error:"FAILSCENES"});
+        }
       }
+
       if(data.action=='CREATE'){
         let newScene = new Scene({
           editorid:data.id,
           name:nanoid16()
         });
+        try{
+          let saveScene = await newScene.save();
 
-        let saveScene = await newScene.save();
-
-        return res.json({action:'CREATE',scene:saveScene});
+          return res.json({action:'CREATE',scene:saveScene});
+        }catch(e){
+          return res.json({error:"FAILCREATE"});
+        }
       }
     }
   }
@@ -51,7 +60,7 @@ export default async (req, res) => {
   //edit update
   if(req.method == 'PATCH'){
     let data = req.body;
-    console.log(data)
+    //console.log(data)
     let query={
       id:data.id
     }
@@ -59,10 +68,13 @@ export default async (req, res) => {
       name:data.sceneName,
       description:data.description
     }
+    try{
+      let patchScene = await Scene.findOneAndUpdate(query,update,{new:true}).exec();
 
-    let patchScene = await Scene.findOneAndUpdate(query,update,{new:true}).exec();
-
-    return res.json({action:'PATCH',scene:patchScene});
+      return res.json({action:'PATCH',scene:patchScene});
+    }catch(e){
+      return res.json({error:"FAILUPDATE"});
+    }
   }
 
   if(req.method == 'DELETE'){
@@ -70,10 +82,14 @@ export default async (req, res) => {
     if(!data.id){
       return res.json({error:"FAIL"});    
     }
-    let deleteScene = await Scene.findOneAndDelete({id:data.id});
-    console.log('deleteScene:' , deleteScene)
+    try{
+      let deleteScene = await Scene.findOneAndDelete({id:data.id});
+      console.log('deleteScene:' , deleteScene)
 
-    return res.json({action:'DELETE',id:data.id});
+      return res.json({action:'DELETE',id:data.id});
+    }catch(e){
+      return res.json({error:"FAILDELETE"});
+    }
   }
 
   return res.json({error:"FAIL"});

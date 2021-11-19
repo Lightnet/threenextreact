@@ -3,13 +3,26 @@
   Created by: Lightnet
 */
 
-export default function Component() {
-  /*
-  useEffect(async () => { 
+import { useState, useEffect } from "react";
 
-  }, []);
-  */
+export default function ESwitch({isswitch,updateSwitch}) {
+  const [isSwitch, setIsSwitch] = useState(false);
+  
+  useEffect(() => { 
+    setIsSwitch(isswitch);
+  }, [isswitch]);
+
+  useEffect(() => { 
+    if(typeof updateSwitch !== 'undefined'){
+      updateSwitch(isSwitch);
+    }
+  }, [isSwitch]);
+
+  function clickSwitch(){
+    setIsSwitch(!isSwitch);
+  }
+  
   return (<>
-    <button>Hello</button>
+    <button onClick={clickSwitch}>{isSwitch?"[on]/off":"on/[off]"}</button>
   </>);
 }

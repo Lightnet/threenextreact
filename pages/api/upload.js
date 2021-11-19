@@ -48,7 +48,7 @@ export default async function handler(req, res) {
   //console.log(userid);
   //console.log(username);
   if(error){
-    return res.json({message:"FAIL"});
+    return res.json({error:"FAIL"});
   }
   
   // parse form with a Promise wrapper

@@ -1,6 +1,7 @@
 
 
 import { useState, useEffect } from 'react';
+import useFetch from '../../hook/usefetch';
 
 export default function ProjectEdit({editor,ops}) {
 
@@ -15,17 +16,18 @@ export default function ProjectEdit({editor,ops}) {
   },[editor])
 
   async function updateEditorProject(e){
-    let res = await fetch('api/editor',{
-      method:'POST',
+    let data = await useFetch('api/editor',{
+      method:'PATCH',
       body: JSON.stringify({ 
-        action:'UPDATE',
         editorid:editor.id,
         name:editorName,
         description:editorDescription
       })
     });
-    let data = await res.json();
-    console.log(data);
+    //console.log(data);
+    if(data.error){
+      console.log("ERROR FETCH EDITOR UPDATE")
+    }
     if(data.action=='UPDATE'){
       ops({
         action:'update'

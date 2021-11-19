@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 export default function Modal({isOpen,closeModal,children}) {
   const [ sDisplay, setsDisplay ]=useState('none');
 
-  useEffect(async () => { 
+  useEffect(() => { 
     if(isOpen==true){
       setsDisplay("block");  
     }
@@ -24,16 +24,14 @@ export default function Modal({isOpen,closeModal,children}) {
   //}
 
   return (<>
-
   <div className={styles.modal} style={{display:sDisplay}}>
     <div className={styles.modalcontent}>
       <span className={styles.close} onClick={closeModal}>&times;</span>
       {children}
     </div>
   </div>
-
   </>);
 }
 /*
-<p>Some text in the Modal..</p>
+
 */

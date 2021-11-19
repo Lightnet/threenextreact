@@ -8,13 +8,12 @@ export default function ProjectDelete({editor,ops}) {
 
   async function deleteEditorProject(e){
     let data = await useFetch('api/editor',{
-      method:'POST',
+      method:'DELETE',
       body: JSON.stringify({ 
         editorid:editor.id,
-        action:'DELETE'
       })
     });
-    console.log(data);
+    //console.log(data);
     if(data.error){
       console.log('ERROR FETCH DELETE PROJECT')
       return;

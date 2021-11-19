@@ -3,9 +3,11 @@
   Created by: Lightnet
 */
 
-export default function Component() {
+import { useState, useEffect } from "react";
+
+export default function EMenu() {
   /*
-  useEffect(async () => { 
+  useEffect(() => { 
 
   }, []);
   */

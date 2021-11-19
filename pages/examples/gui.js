@@ -3,78 +3,73 @@
   Created by: Lightnet
 */
 
-
-// https://docs.pmnd.rs/react-three-fiber/API/hooks
-// https://dmitripavlutin.com/react-useref-guide/
-
-//import { useEffect } from 'react';
-//import React, { useRef, useState, useEffect } from 'react';
-//import { getSession } from "next-auth/react";
-//import Threejscanvas from "../components/threejscanvas";
 import { useRef, useState, useEffect } from 'react';
-//import { Canvas, useFrame, useThree,render, events } from '@react-three/fiber';
-//import { Physics,usePlane, useBox } from '@react-three/cannon';
 import Draggable from "../../components/ui/edragwindow";
 
-import Modal from "../../components/ui/emodal";
-
-/*
-export async function getServerSideProps(ctx) {
-  return {
-    props:{
-    }
-  }
-}
-*/
-/*
-export async function getInitialProps(ctx) {
-  console.log("getInitialProps");
-  console.log(ctx);
-  //const initialProps = await Document.getInitialProps(ctx)
-  return { 
-    props:{
-    } 
-  };
-}
-*/
+import ESwitch from '../../components/ui/eswitch';
+import EInput from '../../components/ui/einput';
+import ECheckBox from '../../components/ui/echeckbox';
 
 export default function Page(props) {
-  const [ isOPen, setisOpen ]=useState('block');
-
-
+  //const [ isOPen, setisOpen ]=useState('block');
+  //console.log(props)
   const countRef = useRef(0);
 
-  useEffect(async () => {
-    console.log("LOADED");
-    //const state = useThree();
+  const [isSwitch, setIsSwitch] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
-  }, []) // Added [] as useEffect filter so it will be executed only once, when component is mounted
+  useEffect(() => {
+    console.log("LOADED");
+  }, []) 
 
   const handle = () => {
     countRef.current++;
     console.log(`Clicked ${countRef.current} times`);
-    setisOpen(true);
   };
 
   console.log('I rendered!');
 
+  function updateSwitch(isswitch){
+    console.log(isswitch)
+    setIsSwitch(isswitch);
+  }
+
+  function getSwitch(){
+    console.log(isSwitch);
+  }
+
+  function inputUpdateValue(val){
+    setInputValue(val)
+    console.log("INPUT: ",val);
+
+  }
+
   return (<>
-
     <button onClick={handle}>Click me</button>
-    <Draggable>      
-    </Draggable>
 
-    <Modal
-    isOpen={isOPen}></Modal>
+    <br />
+
+    <ESwitch
+      isswitch={isSwitch}
+      updateSwitch={updateSwitch}
+    ></ESwitch>
+
+    <button onClick={getSwitch}>getSwitch{isSwitch?"[on]/off":"on/[off]"}</button>
+    <br />
+
+    <EInput
+      value={inputValue}
+      updateValue={inputUpdateValue}
+     />
+
+     <ECheckBox />
+
+
   </>);
 }
 /*
 
-    {()=>{//not to used this... error on compoent
-      if(true){
-      return (<button>Hi</button>);
-      }
-    }}
-
+<Draggable>      
+    </Draggable>
 
 */

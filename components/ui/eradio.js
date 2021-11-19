@@ -3,13 +3,19 @@
   Created by: Lightnet
 */
 
-export default function Component() {
-  /*
-  useEffect(async () => { 
+// https://www.w3schools.com/tags/att_input_type_radio.asp
+
+import { useState, useEffect } from "react";
+
+export default function ERadio() {
+  
+  const [isSelect, setIsSelect] = useState(false);
+
+  useEffect(() => { 
 
   }, []);
-  */
+  
   return (<>
-    <button>Hello</button>
+    <input type="radio" />
   </>);
 }

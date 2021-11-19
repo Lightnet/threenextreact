@@ -3,18 +3,18 @@
   Created by: Lightnet
 */
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from "./dropdown.module.css";
 
 export default function Component(props) {
   
   const [menuName, setMenuName] = useState(false)
 
-  useEffect(async () => {
+  useEffect(() => {
     //console.log("init menu drop down.");
     if(!props.menuname){
       //props.menuname="test";
-      setMenuName("test");
+      setMenuName("menu");
     }else{
       setMenuName(props.menuname);
     }
@@ -26,11 +26,6 @@ export default function Component(props) {
       <i className="fa fa-caret-down"></i>
     </button>
     <div className={styles.dropdowncontent}>
-      {/*
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-      */}
       {props.children}
     </div>
   </div> 

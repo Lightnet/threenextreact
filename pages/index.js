@@ -18,7 +18,7 @@ import Link from 'next/link';
 
 export async function getServerSideProps(ctx) {
   console.log("[[=== INDEX getServerSideProps ===]");
-  //console.log(users);
+  //console.log(ctx);
   return {
     props:{
       session: await getSession(ctx)

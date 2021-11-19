@@ -3,13 +3,21 @@
   Created by: Lightnet
 */
 
-export default function Component() {
-  /*
-  useEffect(async () => { 
+import { useState, useEffect } from "react";
+
+export default function ECheckBox({}) {
+
+  const [isCheckBox, setIsCheckBox] = useState(false);
+  
+  useEffect(() => { 
 
   }, []);
-  */
+
+  function clickChange(e){
+    console.log("change?",e.target.value)
+  }
+  
   return (<>
-    <button>Hello</button>
+    <input onChange={clickChange} type="checkbox" name="test" value="hello" />
   </>);
 }
