@@ -56,7 +56,9 @@ export default function Component({sceneObjs,ops}) {
   }
   
   return (<>
-    <label>Scene:</label>
+    <div>
+      <label>Scene:</label>
+    </div>
     <div>
       {renderSceneObjects()}
     </div>

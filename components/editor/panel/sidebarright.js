@@ -31,10 +31,13 @@ export default function Right({isOpen,onRequestClose,children}) {
   }
 
   return (<>
-    <div className={styles.sideBar}
-      style={{width:SBWidth}} >
-      <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
-      {children}
+    <div className={styles.sideBar} style={{width:SBWidth}} >
+      <div style={{height:'28px'}}>
+        <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
+      </div>
+      <div>
+        {children}
+      </div>
     </div>
   </>);
 }
