@@ -3,10 +3,10 @@
   Created by: Lightnet
 */
 
-
+import styles from "./sidebarleft.module.css";
 import React, {useState, useEffect} from "react";
 
-export default function Component({isOpen,onRequestClose,children}) {
+export default function SideBarLeft({isOpen,onRequestClose,children}) {
   const [SBWidth, setSBWidth] = useState(0);
 
   useEffect(() => { 
@@ -21,12 +21,18 @@ export default function Component({isOpen,onRequestClose,children}) {
     }
   }, [isOpen]);
 
+  function closeSideBar(){
+    if(typeof onRequestClose !== 'undefined'){
+      onRequestClose();
+    }
+  }
+
   return (<>
   
-    <div id="mySidebar" className="sidebar" 
+    <div className={styles.sidebar}
       style={{width:SBWidth+"px"}}
       >
-      <a href="#" className="closebtn" onClick={()=>onRequestClose()}>×</a>
+      <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
       {children}
     </div>
   </>);

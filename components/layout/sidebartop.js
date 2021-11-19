@@ -11,7 +11,7 @@
 import styles from "./sidebartop.module.css";
 import React, {useState, useEffect} from "react";
 
-export default function Component({isOpen,onRequestClose,children}) {
+export default function SideBarTop({isOpen,onRequestClose,children}) {
   const [SBHeight, setSBHeight] = useState(32);
 
   useEffect(() => { 
@@ -26,9 +26,15 @@ export default function Component({isOpen,onRequestClose,children}) {
     }
   }, [isOpen]);
 
+  function closeSideBar(){
+    if(typeof onRequestClose !== 'undefined'){
+      onRequestClose();
+    }
+  }
+
   return (<>
-    <div id="editorTopSideBar" className={styles.sidebar} style={{height:SBHeight+"px"}}>
-      <a href="#" className={styles.closebtn} onClick={(e)=>onRequestClose(e)}>×</a>
+    <div className={styles.sidebar} style={{height:SBHeight+"px"}}>
+      <a href="#" className={styles.closebtn} onClick={(e)=>closeSideBar(e)}>×</a>
       {children}
     </div>
   </>);

@@ -26,12 +26,17 @@ export default function Component({isOpen,onRequestClose,children}) {
     }
   }, [isOpen]);
 
+  function closeSideBar(){
+    if(typeof onRequestClose !== 'undefined'){
+      onRequestClose();
+    }
+  }
+
   return (<>
     <div 
-      id="editorTopSideBar" 
       className={styles.sidebar}
       style={{height:SBHeight+"px"}} >
-      <a href="#" className={styles.closebtn} onClick={(e)=>onRequestClose(e)}>×</a>
+      <a href="#" className={styles.closebtn} onClick={(e)=>closeSideBar(e)}>×</a>
       {children}
     </div>
   </>);

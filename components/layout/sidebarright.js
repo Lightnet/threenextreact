@@ -3,21 +3,22 @@
   Created by: Lightnet
 */
 
-import styles from "./sidebarbottom.module.css";
 import React, {useState, useEffect} from "react";
+import styles from "./sidebarright.module.css";
 
-export default function SideBarBottom({isOpen,onRequestClose,children}) {
+export default function SideBarRight({isOpen,onRequestClose,children}) {
   const [SBWidth, setSBWidth] = useState(0);
 
   useEffect(() => { 
-    //console.log("Top Side Bar is open?");
+    //console.log("Right Side Bar is open?");
     if(isOpen){
-      setSBWidth(32);
+      setSBWidth(200);
     }else{
       setSBWidth(0);
     }
+    //console.log(SBWidth);
     return ()=>{
-      //console.log("clean Side bar?");
+      //console.log("clean SB?");
     }
   }, [isOpen]);
 
@@ -28,9 +29,8 @@ export default function SideBarBottom({isOpen,onRequestClose,children}) {
   }
 
   return (<>
-  
     <div className={styles.SideBar}
-      style={{height:SBWidth}}
+      style={{width:SBWidth}}
       >
       <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
       {children}

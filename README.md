@@ -69,7 +69,7 @@
     - object3d list update (added)
     - object3d visiable ( added )
     
-   - (view/scenes)
+  - (view/scenes)
     - create (added)
     - edit (added)
     - delete (added)

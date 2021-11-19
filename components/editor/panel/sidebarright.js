@@ -4,6 +4,7 @@
 */
 
 import React, {useState, useEffect} from "react";
+import styles from "./sidebartop.module.css";
 
 export default function Component({isOpen,onRequestClose,children}) {
   const [SBWidth, setSBWidth] = useState(0);
@@ -21,11 +22,18 @@ export default function Component({isOpen,onRequestClose,children}) {
     }
   }, [isOpen]);
 
+  function closeSideBar(){
+    if(typeof onRequestClose !== 'undefined'){
+      onRequestClose();
+    }
+  }
+
   return (<>
-    <div id="editorRSidebar" className="rSideBar" 
+    <div 
+      className={styles.sidebar}
       style={{width:SBWidth}}
       >
-      <a href="#" className="closebtn" onClick={()=>onRequestClose()}>×</a>
+      <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
       {children}
     </div>
   </>);

@@ -8,13 +8,18 @@
 // import { loadEnvConfig } from '@next/env';
 import { useEffect, useState } from 'react';
 import { getSession } from "next-auth/react";
+import Link from 'next/link';
+
 import SignArea from "../components/system/signarea";
+
 import SidebarLeft from "../components/layout/sidebarleft";
 import SidebarBottom from "../components/layout/sidebarbottom";
 import SidebarTop from "../components/layout/sidebartop";
+import SideBarRight from "../components/layout/sidebarright";
 import GameList from "../components/game/gamesection";
+
 import EditorProjects from "../components/editor/project/projects";
-import Link from 'next/link';
+
 
 export async function getServerSideProps(ctx) {
   console.log("[[=== INDEX getServerSideProps ===]");
@@ -59,6 +64,11 @@ export default function IndexPage({
   function sideBarBottomToggle(){
     //console.log("seteditorTSB");
     setSideBarBottom(!sideBarBottom);
+  }
+
+  function sideBarRightToggle(){
+    //console.log("seteditorTSR");
+    setSideBarRight(!sideBarRight);
   }
 
   function selSection(event, id){
@@ -123,11 +133,18 @@ export default function IndexPage({
         <a href="#">Test</a>
       </SidebarBottom>
       {/* js comment  */}
+      <SideBarRight
+        isOpen={sideBarRight}
+        onRequestClose={sideBarRightToggle}
+      >
+        <a href="#" >Right</a>
+      </SideBarRight>
 
       
       <button onClick={(e)=> sideBarLeftToggle()}>Open Sidebar</button> 
       <button onClick={(e)=> sideBarTopToggle()}> Open Top Sidebar</button> 
       <button onClick={(e)=> sideBarBottomToggle()}> Open Bottom Sidebar</button> 
+      <button onClick={(e)=> sideBarRightToggle()}> Open Right Sidebar</button> 
       {/*
       */}
 
