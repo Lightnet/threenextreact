@@ -8,11 +8,10 @@ import useFetch from "../../hook/usefetch";
 import Link from 'next/link';
 
 // THREE
-import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
+//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+//import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei';
 
 // UI
-//import ComponentEditor from "../components/componenteditormain";
 import EditorTopSideBar from "./sidebartop";
 import EditorRightSideBar from "./sidebarright";
 import DropDownMenu from "../../ui/edropdown";
@@ -34,11 +33,14 @@ import CameraCtrl from '../../entities/cameractrl';
 import useEvent from '../../hook/useEvent';
 import SceneSection from '../scene/scenesection';
 import AssetsSection from '../assets/assetssection';
+import SideBarRight from '../../layout/sidebarright';
 
 export default function EditorSection({editorid}){
 
-  const [editorTSB, seteditorTSB] = useState(true);
-  const [editorRSB, seteditorRSB] = useState(true);
+  const [isSideBarTop, setIsSideBarTop] = useState(true);
+  const [isSideBarBottom, setIsSideBarBottom] = useState(true);
+  const [isSideBarLeft, setIsSideBarLeft] = useState(true);
+  const [isSideBarRight, setIsSideBarRight] = useState(true);
 
   const [selectObject, setSelectObject] = useState(null); //select object for props div
 
@@ -55,12 +57,10 @@ export default function EditorSection({editorid}){
   //const sceneObjsRef = useRef([]);
   //const ref = useRef();//get this current element react component
 
-  useEffect(()=>{
-    
-  },[]);
+  //useEffect(()=>{
+  //},[]);
 
   useEvent('keydown',keydown);
-
   useEvent('keyup',keyup);
 
   function keydown(e){
@@ -149,15 +149,15 @@ export default function EditorSection({editorid}){
   }
 
   //side bar
-  function ToggleTopSB(){
+  function ToggleSBTop(){
     //console.log("seteditorTSB");
-    seteditorTSB(!editorTSB);
+    setIsSideBarTop(!isSideBarTop);
   }
 
   //side bar
-  function ToggleRightSB(){
+  function ToggleSBRight(){
     //console.log("seteditorTSB");
-    seteditorRSB(!editorRSB);
+    setIsSideBarRight(!isSideBarRight);
   }
 
   //update model for render {objects3D}
@@ -423,22 +423,25 @@ export default function EditorSection({editorid}){
 
   return(<>
     
+    {/*
     <Canvas>
       <Foo />
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[1.2, 0, 0]} />
-      {/**/}
+      
       {objects3D}
-      {/* */}
+      
       <CameraCtrl />
       
       
     </Canvas>
+    */}
+
     
     <EditorTopSideBar
-      isOpen={editorTSB}
-      onRequestClose={ToggleTopSB}
+      isOpen={isSideBarTop}
+      onRequestClose={ToggleSBTop}
     >
       <Link href="/">Home</Link>
 
@@ -501,8 +504,8 @@ export default function EditorSection({editorid}){
     </EditorTopSideBar>
 
     <EditorRightSideBar
-      isOpen={editorRSB}
-      onRequestClose={ToggleRightSB}
+      isOpen={isSideBarRight}
+      onRequestClose={ToggleSBRight}
     >
       
       <EditorScene
@@ -517,12 +520,14 @@ export default function EditorSection({editorid}){
          
     </EditorRightSideBar>
 
-    <div className="btn">
+    <div style={{position:'fixed',top:'64px',left:0}}>
       <label>Side Bars:</label>
-      <button  onClick={ToggleTopSB}>Top</button>
-      <button  onClick={ToggleRightSB}>Right</button>
+      <button  onClick={ToggleSBTop}>Top</button>
+      <button  onClick={ToggleSBRight}>Right</button>
+      {/*
       <button  onClick={ToggleRightSB}>Bottom</button>
       <button  onClick={ToggleRightSB}>Left</button>
+       */}
     </div>
 
     <Modal 

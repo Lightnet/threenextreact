@@ -3,8 +3,8 @@ https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 Global CSS
 import '../styles/global.css'
 */
-
 /*body{margin: 0;}*/
+
 html,
 body,
 #root {
@@ -24,16 +24,11 @@ body,
   right: 0;
 }
 
-.btn{
-  position: fixed;
-  top: 64px;
-  left: 0;
-}
-
 /* ========================================== */
-
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+/* ========================================== */
+

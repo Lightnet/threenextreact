@@ -1,5 +1,5 @@
 
-.SideBar {
+.sideBar {
   height: 100%;
   width: 100;
   position: fixed;
@@ -13,7 +13,7 @@
   padding-top: 60px;
 }
 
-.SideBar a {
+.sideBar a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
@@ -22,11 +22,11 @@
   transition: 0.3s;
 }
 
-.SideBar a:hover {
+.sideBar a:hover {
   color: #f1f1f1;
 }
 
-.SideBar .closebtn {
+.sideBar .closebtn {
   position: absolute;
   top: 0;
   right: 25px;

@@ -29,7 +29,7 @@ export default function SideBarRight({isOpen,onRequestClose,children}) {
   }
 
   return (<>
-    <div className={styles.SideBar}
+    <div className={styles.sideBar}
       style={{width:SBWidth}}
       >
       <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>

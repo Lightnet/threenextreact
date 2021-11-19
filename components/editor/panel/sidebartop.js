@@ -8,7 +8,6 @@
 
 // <Modal isOpen={isOpen} onRequestClose={closeModal}>
 import React, {useState, useEffect} from "react";
-
 import styles from "./sidebartop.module.css";
 
 export default function Component({isOpen,onRequestClose,children}) {

@@ -4,10 +4,12 @@
 */
 
 import React, {useState, useEffect} from "react";
-import styles from "./sidebartop.module.css";
+import styles from "./sidebarright.module.css";
 
-export default function Component({isOpen,onRequestClose,children}) {
+export default function Right({isOpen,onRequestClose,children}) {
+
   const [SBWidth, setSBWidth] = useState(0);
+  //console.log(styles);
 
   useEffect(() => { 
     //console.log("Right Side Bar is open?");
@@ -29,12 +31,13 @@ export default function Component({isOpen,onRequestClose,children}) {
   }
 
   return (<>
-    <div 
-      className={styles.sidebar}
-      style={{width:SBWidth}}
-      >
+    <div className={styles.sideBar}
+      style={{width:SBWidth}} >
       <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
       {children}
     </div>
   </>);
 }
+/*
+
+*/
