@@ -31,13 +31,8 @@ export default function Component({sceneObjs,ops}) {
   const [object3D, setObject3D] = useState([]);
 
   useEffect(() => {
-    console.log("objectscene sceneID:",sceneID);
-    console.log("objectscene sceneID:",sceneID);
-    console.log("objectscene sceneID:",sceneID);
-    console.log("objectscene sceneID:",sceneID);
+    //console.log("objectscene sceneID:",sceneID);
   }, [sceneID]);
-
-
 
   useEffect(() => {
     if(sceneObjs){
@@ -69,7 +64,10 @@ export default function Component({sceneObjs,ops}) {
   
   return (<>
     <div>
-      <label>Scene:</label>
+      <label>ID Scene: {sceneID}</label>
+    </div>
+    <div>
+      <label>Object3Ds:</label>
     </div>
     <div>
       {renderSceneObjects()}

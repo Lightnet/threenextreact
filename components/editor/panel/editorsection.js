@@ -514,7 +514,7 @@ export default function EditorSection({editorid}){
         {/*<a href="#" >Plugins</a>*/}
       </DropDownMenu>
 
-      <label> ID: {editorID} </label>
+      <label> Editor ID: {editorID} </label>
       
     </EditorTopSideBar>
 
