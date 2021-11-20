@@ -26,13 +26,13 @@ function ranName(length){
 
 export default function Component({sceneObjs,ops}) {
 
-  const [sceneID, setSceneID] = useScene();
+  const {sceneID, setSceneID} = useScene();
   
   const [object3D, setObject3D] = useState([]);
 
-  useEffect(() => {
+  //useEffect(() => {
     //console.log("objectscene sceneID:",sceneID);
-  }, [sceneID]);
+  //}, [sceneID]);
 
   useEffect(() => {
     if(sceneObjs){

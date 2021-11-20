@@ -8,8 +8,8 @@ import useFetch from "../../hook/usefetch";
 import Link from 'next/link';
 
 // THREE
-//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-//import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei';
+import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei';
 
 // UI
 import EditorTopSideBar from "./sidebartop";
@@ -50,10 +50,10 @@ export default function EditorSection({editorid}){
   const [physics3D, setPhysics3D] = useState([]); //physic objects
 
   //const [editorID, setEditorID] = useState(null);
-  const [editorID, setEditorID] = useEditor();
+  const {editorID, setEditorID} = useEditor();
 
   //const [sceneID, setSceneID] = useState(null);
-  const [sceneID, setSceneID] = useScene();
+  const {sceneID, setSceneID} = useScene();
 
   const [viewModal, setViewModal] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -122,7 +122,7 @@ export default function EditorSection({editorid}){
 
     if(data.action == 'UPDATE'){
       if(data.sceneid){
-        console.log("SCENE ID:",data.sceneid)
+        //console.log("SCENE ID:",data.sceneid);
         setSceneID(data.sceneid);
       }
     }
@@ -140,7 +140,7 @@ export default function EditorSection({editorid}){
       console.log("FETCH ERROR OBJECT3DS")
       return;
     }
-    console.log("objects: ", data);
+    //console.log("objects: ", data);
     if(data.action){
       if(data.action == 'UPDATE'){
         //api server need fixed?
@@ -427,7 +427,6 @@ export default function EditorSection({editorid}){
 
   return(<>
     
-    {/*
     <Canvas>
       <Foo />
       <ambientLight />
@@ -440,6 +439,7 @@ export default function EditorSection({editorid}){
       
       
     </Canvas>
+    {/*
     */}
 
     

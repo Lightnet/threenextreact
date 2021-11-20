@@ -19,12 +19,12 @@ export default function Editor(){
 
   useEffect(() => {
     //console.log("INIT SET MOUNT!");
-    console.log("router.query")
-    console.log(router.query);
+    //console.log("router.query")
+    //console.log(router.query);
     const {projectid } = router.query;
 
     if(projectid){
-      console.log("assign project id???")
+      //console.log("assign project id???")
       setProjectID(projectid);
     }
 
