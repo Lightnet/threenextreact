@@ -34,6 +34,7 @@ import useEvent from '../../hook/useEvent';
 import SceneSection from '../scene/scenesection';
 import AssetsSection from '../assets/assetssection';
 import SideBarRight from '../../layout/sidebarright';
+import { useEditor, useScene } from '../context/editorprovider';
 
 export default function EditorSection({editorid}){
 
@@ -48,8 +49,11 @@ export default function EditorSection({editorid}){
   const [objects3D, setObjects3D] = useState([]); // scene objects render react
   const [physics3D, setPhysics3D] = useState([]); //physic objects
 
-  const [editorID, setEditorID] = useState(null);
-  const [sceneID, setSceneID] = useState(null);
+  //const [editorID, setEditorID] = useState(null);
+  const [editorID, setEditorID] = useEditor();
+
+  //const [sceneID, setSceneID] = useState(null);
+  const [sceneID, setSceneID] = useScene();
 
   const [viewModal, setViewModal] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -509,6 +513,8 @@ export default function EditorSection({editorid}){
         <a href="#" >Github</a>
         {/*<a href="#" >Plugins</a>*/}
       </DropDownMenu>
+
+      <label> ID: {editorID} </label>
       
     </EditorTopSideBar>
 

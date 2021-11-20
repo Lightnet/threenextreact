@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import AuthAccess from '../components/system/authaccess';
 import EditorSection from '../components/editor/panel/editorsection';
 import { useRouter } from 'next/router';
+import { EditorProvider } from '../components/editor/context/editorprovider';
 
 export default function Editor(){
 
@@ -34,9 +35,9 @@ export default function Editor(){
 
   return(<>
     <AuthAccess>
-      <EditorSection editorid={projectID}>
-
-      </EditorSection>
+      <EditorProvider>
+        <EditorSection editorid={projectID}></EditorSection>
+      </EditorProvider>
     </AuthAccess>
   </>)
 }

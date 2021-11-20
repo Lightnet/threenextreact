@@ -4,6 +4,7 @@
 */
 
 import { useEffect, useState } from "react";
+import { useScene } from "../context/editorprovider";
 
 // https://www.pluralsight.com/guides/how-to-show-components-conditionally-react
 
@@ -24,8 +25,19 @@ function ranName(length){
 }
 
 export default function Component({sceneObjs,ops}) {
+
+  const [sceneID, setSceneID] = useScene();
   
   const [object3D, setObject3D] = useState([]);
+
+  useEffect(() => {
+    console.log("objectscene sceneID:",sceneID);
+    console.log("objectscene sceneID:",sceneID);
+    console.log("objectscene sceneID:",sceneID);
+    console.log("objectscene sceneID:",sceneID);
+  }, [sceneID]);
+
+
 
   useEffect(() => {
     if(sceneObjs){

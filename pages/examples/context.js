@@ -9,6 +9,13 @@
 // https://javascript.plainenglish.io/a-guide-to-react-context-api-with-an-example-b6e7f494f05e
 // https://javascript.works-hub.com/learn/building-with-react-context-provider-pattern-1af4b
 
+
+
+// https://react-redux.js.org/tutorials/quick-start
+// https://blog.isquaredsoftware.com/2018/11/react-redux-history-implementation/
+
+
+
 import React,{ useContext, Component, createContext } from "react";
 
 export const RandomContext = createContext({ user: null });
