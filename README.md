@@ -29,6 +29,14 @@
   - sign up (added / need work)
   - third partly sign token (not build)
 
+- upload file type (work in progress)
+  - save to database as base64 string
+  - delete (not added)
+  - update ?
+  
+- load image (testing)
+  - png (tested)
+
 - project work space
   - list (added)
   - update/edit (added)

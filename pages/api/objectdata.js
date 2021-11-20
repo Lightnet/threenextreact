@@ -5,11 +5,13 @@
 
 import { getSession } from "next-auth/react";
 import db,{ sessionTokenCheck } from "../../lib/database";
+import { nanoid16 } from "../../lib/helper";
 import { log } from "../../lib/log";
 
 export default async (req, res) => {
+
   const session = await getSession({ req })
-  //console.log("session", session);
+  //console.log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
   //console.log(error);
@@ -18,26 +20,19 @@ export default async (req, res) => {
   if(error){
     return res.json({error:"FAIL"});
   }
+  const ObjectData = db.model('ObjectData');
 
-  if(req.method == 'POST'){
-
-  }
-
-  if(req.method == 'DELETE'){
-    let data = req.body;
-    if(!data.id){
-      return res.json({error:"FAIL"});    
-    }
+  //check for scene id from database current set
+  if(req.method == 'GET'){
     try{
-      let deleteScene = await Scene.findOneAndDelete({id:data.id});
-      console.log('deleteScene:' , deleteScene)
-
-      return res.json({action:'DELETE',id:data.id});
+      let objectDatas = await ObjectData.find().exec();
+      //console.log(scenes)
+      return res.json({action:"OBJECTDATAS",objectdatas:objectDatas});
     }catch(e){
-      return res.json({error:"FAILDELETE"});
+      return res.json({error:"FAILSCENES"});
     }
   }
 
-  //res.end();
+
   return res.json({error:"FAIL"});
 }

@@ -12,13 +12,10 @@
 // https://morioh.com/p/c7ad109c8fd4
 // https://stackoverflow.com/questions/60465564/create-upload-files-api-in-next-js
 
-//import formidable from "formidable";
-// you might want to use regular 'fs' and not a promise one
-//import { promises as fs } from 'fs';
-//import path from "path";
-
 import formidable from "formidable-serverless";
 import fs from "fs";
+import path from "path";
+
 import { getSession } from "next-auth/react";
 import db,{ sessionTokenCheck } from "../../lib/database";
 
@@ -30,18 +27,8 @@ export const config = {
 
 export default async function handler(req, res) {
 
-  /*
-  if (req.method === 'POST') {
-    // Process a POST request
-    res.status(200).json({ data: 'success' });
-  } else {
-    // Handle any other HTTP method
-    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
-  }
-  */
-
-  const session = await getSession({ req });
-  //console.log("session", session);
+  const session = await getSession({ req })
+  //console.log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
   //console.log(error);
@@ -50,7 +37,23 @@ export default async function handler(req, res) {
   if(error){
     return res.json({error:"FAIL"});
   }
-  
+
+  /*
+  if (req.method === 'POST') {
+    // Process a POST request
+    res.status(200).json({ data: 'success' });
+  }
+  */
+
+  var extfile=[
+    'jpg'
+  , 'js'
+  , 'png'
+  , 'gif'
+  , 'txt'
+  , 'txt'
+  ]
+
   // parse form with a Promise wrapper
   //const data = await new Promise(async (resolve, reject) => {
   return new Promise(async (resolve, reject) => {
@@ -59,12 +62,41 @@ export default async function handler(req, res) {
       keepExtensions: true
     });
     form
-      .on("file", (name, file) => {
+      .on("file", async (name, file) => {
         const data = fs.readFileSync(file.path);
-        console.log(file.path);
-        console.log(data);
+        //console.log("name: ", name); //   <input name="[file]" type="file" />
+        //console.log("file.path: ", file.path);
+        //console.log("ext: ", path.extname(file.path));
+        //console.log("file: ", file.name);
+        //console.log(data);
+        //console.log(data.toString('base64'));
+
+        let datafile = file.name.split(".");
+
+        const ObjectData = db.model('ObjectData');
+
+        let objectData = new ObjectData({
+          userid:userid,
+          name:datafile[0],
+          datatype:datafile[1],
+          data:data.toString('base64')
+        })
+        await objectData.save();
+        //let saveObjectData = await objectData.save();
+        //console.log("saveObjectData: ",saveObjectData);
+
+        if(path.extname(file.path)){
+          console.log("FOUND EXT.")
+        }else{
+          console.log("NOT FOUND EXT.")
+        }
+
+        //if(name=='file'){
+          //reject(res.status(500).send('Aborted'));
+          //return;
+        //}
         //need create folder else it error out dir fail create.
-        fs.writeFileSync(`public/upload/${file.name}`, data);
+        //fs.writeFileSync(`public/upload/${file.name}`, data);
         fs.unlinkSync(file.path);
       })
       .on("aborted", () => {

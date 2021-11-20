@@ -446,9 +446,11 @@ export default function EditorSection({editorid}){
       <Link href="/">Home</Link>
 
       <DropDownMenu menuname="File" >
+        {/*
         <a href="#" >Project List</a>
         <a href="#" >Settings</a>
         <a href="#" >Config</a>
+        */}
       </DropDownMenu>
 
       <DropDownMenu menuname="Select" >
@@ -465,23 +467,28 @@ export default function EditorSection({editorid}){
 
       <DropDownMenu menuname="View" >
         <a href="#" onClick={()=>showViewModal('assets')} >Assets</a>
+        <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a>
+        {/*
         <a href="#" onClick={()=>showViewModal('materials')} >Materials</a>
         <a href="#" onClick={()=>showViewModal('textures')} >Textures</a>
         <a href="#" onClick={()=>showViewModal('models')} >Models</a>
-        <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a>
         <a href="#" >Props</a>
         <a href="#" onClick={()=>showViewModal('script')} >Script</a>
         <a href="#" onClick={()=>showViewModal('blueprint')} >Blueprint</a>
         <a href="#" onClick={()=>showViewModal('prefab')} >Prefab</a>
+        */}
       </DropDownMenu>
 
       <DropDownMenu menuname="Scene" >
-        <a href="#" onClick={(e)=>callBackOPS({action:"addscene"})}>Add Scene</a>
+        
         <a href="#" onClick={(e)=>callBackOPS({action:"addcube"})}>Add Cube</a>
+        {/*
+        <a href="#" onClick={(e)=>callBackOPS({action:"addscene"})}>Add Scene</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addsphere"})}>Add Sphere</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcamera"})}>Add Camera</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addlight"})}>Add Light</a>
+        */}
       </DropDownMenu>
 
       <DropDownMenu menuname="Prefab" >
@@ -489,9 +496,11 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Build" >
+        {/*}
         <a href="#" >Play</a>
         <a href="#" >Debug Play</a>
         <a href="#" >Publish</a>
+      */}
       </DropDownMenu>
 
       <DropDownMenu menuname="Help" >

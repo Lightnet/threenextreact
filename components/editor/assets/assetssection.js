@@ -7,22 +7,22 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hook/usefetch";
 
 export default function AssetsSection({editorid}) {
-  const [scenes, setScenes] = useState([])
+  const [assets, setAssets] = useState([])
   const [editorID, setEditorID] = useState(null)
   
   useEffect(() => {
     if(editorid){
       setEditorID(editorid);
-      //getScenes();
+      //getAssets();
     }
   },[editorid]);
 
-  async function getScenes(){
+  async function getAssets(){
     if(!editorID){
       console.log('editorid NULL');
       return;
     }
-    let data = await useFetch('api/scene',{
+    let data = await useFetch('api/assets',{
       method:'POST'
       , body:JSON.stringify({action:'SCENES',id:editorID})
     });
@@ -36,14 +36,62 @@ export default function AssetsSection({editorid}) {
       }
     }
   }
+
+  async function createAsset(){
+    if(!editorID){
+      console.log('editorid NULL');
+      return;
+    }
+    let data = await useFetch('api/assets',{
+      method:'POST'
+      , body:JSON.stringify({action:'SCENES',id:editorID})
+    });
+    console.log(data);
+    if(data.error){
+      console.log('ERROR FETCH SCENES');
+    }
+    if(data.action){
+      if(data.action=='SCENES'){
+        setScenes(data.scenes);
+      }
+    }
+  }
+
+  async function deleteAsset(id){
+    if(!editorID){
+      console.log('editorid NULL');
+      return;
+    }
+    let data = await useFetch('api/assets',{
+      method:'DELETE'
+      , body:JSON.stringify({action:'SCENES',id:id})
+    });
+    console.log(data);
+    if(data.error){
+      console.log('ERROR FETCH DELETE ASSET');
+    }
+    if(data.action){
+      if(data.action=='SCENES'){
+        setScenes(data.scenes);
+      }
+    }
+  }
   
   return (<>
   <div>
     <div>
-      <label>Scene</label>
+      <label>Assets:</label>
     </div>
     <div>
-      <label>Scene</label>
+      {assets.map((item)=>{
+        return (<>
+          <div key={item.id}>
+            <label>[ID:{item.id}] <button onClick={()=>deleteAsset(item.id)}></button> </label>
+            <label>Name:{item.name}</label>
+          </div>
+        
+        </>);
+      })}
     </div>
   </div>
   </>);
