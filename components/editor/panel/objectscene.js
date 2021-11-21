@@ -24,29 +24,29 @@ function ranName(length){
   return result;
 }
 
-export default function Component({sceneObjs,ops}) {
+export default function Component({object3ds,ops}) {
 
   const {sceneID, setSceneID} = useScene();
   
-  const [object3D, setObject3D] = useState([]);
+  const [object3Ds, setObject3Ds] = useState([]);
 
   //useEffect(() => {
     //console.log("objectscene sceneID:",sceneID);
   //}, [sceneID]);
 
   useEffect(() => {
-    if(sceneObjs){
-      setObject3D(sceneObjs);
+    if(object3ds){
+      setObject3Ds(object3ds);
     }
     return ()=>{
-      setObject3D(null);
+      setObject3Ds(null);
     }
-  }, [sceneObjs]);
+  }, [object3ds]);
 
   function renderSceneObjects(){
-    if (object3D){
+    if (object3Ds){
       //return <label>Found</label>
-      return object3D?.map((_entity)=>{
+      return object3Ds?.map((_entity)=>{
         return (
           <div key={_entity.id}>
             <label> Name:{_entity?.name} </label>

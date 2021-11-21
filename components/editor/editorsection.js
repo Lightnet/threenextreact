@@ -30,6 +30,8 @@ import {NotificationsManager,Color} from "../notify";
 
 import EditorTopSideBar from "./panel/sidebartop";
 import EditorRightSideBar from "./panel/sidebarright";
+import EditorLeftSideBar from "./panel/sidebarleft";
+
 import EditorScene from "./panel/objectscene";
 import EditorProps from "./panel/objectprops";
 
@@ -37,6 +39,7 @@ import SceneSection from './scene/scenesection';
 import AssetsSection from './assets/assetssection';
 
 import { useEditor, useScene } from './context/editorprovider';
+import ViewPanel from './panel/viewpanel';
 
 export default function EditorSection({editorid}){
 
@@ -47,7 +50,7 @@ export default function EditorSection({editorid}){
 
   const [selectObject, setSelectObject] = useState(null); //select object for props div
 
-  const [sceneObjs, setSceneObjs] = useState([]); // scene objects array json
+  const [object3Ds, setObject3Ds] = useState([]); // scene objects array json
   const [objects3D, setObjects3D] = useState([]); // scene objects render react
   const [physics3D, setPhysics3D] = useState([]); //physic objects
 
@@ -61,9 +64,6 @@ export default function EditorSection({editorid}){
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const [notify,setNotify] = useState(); //notify call when detect change in state
-
-  //const sceneObjsRef = useRef([]);
-  //const ref = useRef();//get this current element react component
 
   //useEffect(()=>{
   //},[]);
@@ -101,10 +101,10 @@ export default function EditorSection({editorid}){
   },[sceneID]);
 
   useEffect(()=>{
-    if(sceneObjs){
+    if(object3Ds){
       updateObjects();//update scene object3ds
     }
-  },[sceneObjs]);
+  },[object3Ds]);
 
   
   function notitfyInfo(children, autoClose) {
@@ -144,14 +144,14 @@ export default function EditorSection({editorid}){
     notitfyInfo(<label>{msg}</label>,true);
   }
 
-  function createSuccess(msg){
+  function msgSuccess(msg){
     notitfySuccess(<label>{msg}</label>,true);
   }
-  function createError(msg){
+  function msgError(msg){
     notitfyError(<label>{msg}</label>,true);
   }
 
-  function createWarn(msg){
+  function msgWarn(msg){
     notitfyWarning(<label>{msg}</label>,true);
   }
 
@@ -170,6 +170,7 @@ export default function EditorSection({editorid}){
     //console.log(data);
     if(data.error){
       console.log("FETCH GET DEFAULT SCENE ID");
+      msgWarn('Fetch Error Fail GET default Scene ID');
       return;
     }
 
@@ -191,13 +192,14 @@ export default function EditorSection({editorid}){
     })
     if(data.error){
       console.log("FETCH ERROR OBJECT3DS")
+      msgWarn('Fetch Error Fail GET OBJECT3DS');
       return;
     }
     //console.log("objects: ", data);
     if(data.action){
       if(data.action == 'UPDATE'){
         //api server need fixed?
-        setSceneObjs(data.object3ds);
+        setObject3Ds(data.object3ds);
       }
       if(data.action == 'NOOBJECT3DS'){
         console.log("NO object3ds")
@@ -217,11 +219,15 @@ export default function EditorSection({editorid}){
     setIsSideBarRight(!isSideBarRight);
   }
 
+  function ToggleSBLeft(){
+    //console.log("seteditorTSB");
+    setIsSideBarLeft(!isSideBarLeft);
+  }
+
   //update model for render {objects3D}
   function updateObjects(){
-    //let obj = sceneObjsRef.current;
-    if(sceneObjs){
-      let obj = sceneObjs;
+    if(object3Ds){
+      let obj = object3Ds;
       //console.log(obj);
       let objmap = obj.map((_entity)=>{
         return buildModel(_entity)
@@ -268,10 +274,10 @@ export default function EditorSection({editorid}){
     //console.log(data);
     if(data.error){
       //console.log("ERROR FETCH SAVE OBJECT3D");
-      createError('Fetch Error on Save Object3D');
+      msgError('Fetch Error on Save Object3D');
       return;
     }
-    createSuccess('Success! Save Object3D');
+    msgSuccess('Success! Save Object3D');
   }
   async function apiUpdateObject3D(obj){
     if(!sceneID){
@@ -287,6 +293,7 @@ export default function EditorSection({editorid}){
     //console.log(data);
     if(data.error){
       console.log("ERROR FETCH UPDATE OBJECT3D");
+      msgError('Fetch Error Fail UPDATE object3D');
       return;
     }
   }
@@ -294,6 +301,7 @@ export default function EditorSection({editorid}){
   async function apiDeleteObject3D(id){
     if(!sceneID){
       console.log('ERROR NULL SCENEID');
+      msgWarn('Error Fail Null SceneID');
     }
     let data = await useFetch('api/object3d',{
       method:'DELETE'
@@ -304,10 +312,10 @@ export default function EditorSection({editorid}){
     //console.log(data);
     if(data.error){
       //console.log("ERROR FETCH DELETE OBJECT3D")
-      createError('Fetch Error on DELETE Object3D');
+      msgError('Fetch Error on DELETE Object3D');
       return;
     }
-    createSuccess('Success! DELETE Object3D');
+    msgSuccess('Success! DELETE Object3D');
   }
 
   //call from the child component events
@@ -318,7 +326,6 @@ export default function EditorSection({editorid}){
         console.log("args.action: ",args.action)
 
         if(args.action=="addcube"){
-          //let objs = sceneObjs;
           let data = {
             id: nanoid32()
             , name:"cube"
@@ -331,12 +338,12 @@ export default function EditorSection({editorid}){
           apiSaveObject3D(data);
 
           //objs.push(data);
-          setSceneObjs([...sceneObjs,data]);
+          setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="select"){
-          for(const obj3D of sceneObjs){
+          for(const obj3D of object3Ds){
             if(obj3D.id == args.id){
               setSelectObject(obj3D);
               break;
@@ -345,29 +352,26 @@ export default function EditorSection({editorid}){
         }
 
         if(args.action=="visible"){
-          console.log(args.name);
-          //need to fixed this array new format array
-          let objs = sceneObjs;
-          for(let i =0;i<objs.length;i++){
-            if(objs[i].id == args.id){
-              //objs[i].name = args.name;
-              if(objs[i].visible){
-                objs[i].visible=false;
-              }else{
-                objs[i].visible=true;
-              }
-              apiUpdateObject3D(objs[i]);
-              setSceneObjs(objs);
-              updateObjects();
-              break;
+          //console.log(args.visible);
+          setObject3Ds(object3Ds.map(item=>{
+            if(item.id === args.id){
+              console.log(item.visible);
+              //if(item.visible){
+                item.visible=!item.visible;
+              //}
+              apiUpdateObject3D(item);
+              //return {...item, name:args.name};
+              return item
+            }else{
+              return item
             }
-          }
+          }));
+          updateObjects();
         }
 
         if(args.action=="rename"){
           console.log(args.name);
-
-          setSceneObjs(sceneObjs.map(item=>{
+          setObject3Ds(object3Ds.map(item=>{
             if(item.id === args.id){
               item.name=args.name;
               apiUpdateObject3D(item);
@@ -376,74 +380,78 @@ export default function EditorSection({editorid}){
               return item
             }
           }));
-
           updateObjects();
         }
 
         if(args.action=="remove"){
           console.log(args.name);
           apiDeleteObject3D(args.id);
-          for(const obj3d of sceneObjs){
+          for(const obj3d of object3Ds){
             if(selectObject == obj3d){
               setSelectObject(null);
             }
           }
-          setSceneObjs(sceneObjs.filter(item=>item.id !== args.id ));
+          setObject3Ds(object3Ds.filter(item=>item.id !== args.id ));
           updateObjects();
         }
 
         if(args.action=="update"){
           console.log("[[[=== ACTION UPDATE ===]]");
           console.log(args);
-          let objs = sceneObjs;
-          for(let i =0;i<objs.length;i++){
-            if(objs[i].id == args.id){
-              console.log("[[[[==============  FOUND OBJECT ============]]]")
-              //objs[i].name = args.name;
+
+          setObject3Ds(object3Ds.map(item=>{
+            if(item.id === args.id){
+              //return {...item, name:args.name};
+
               if(args.objkey == "positionX"){
-                objs[i].position[0] = args.setValue;
+                item.position[0] = args.setValue;
               }
               if(args.objkey == "positionY"){
-                objs[i].position[1] = args.setValue;
+                item.position[1] = args.setValue;
               }
               if(args.objkey == "positionZ"){
-                objs[i].position[2] = args.setValue;
+                item.position[2] = args.setValue;
               }
 
               if(args.objkey == "rotationX"){
-                objs[i].rotation[0] = args.setValue;
+                item.rotation[0] = args.setValue;
               }
               if(args.objkey == "rotationY"){
-                objs[i].rotation[1] = args.setValue;
+                item.rotation[1] = args.setValue;
               }
               if(args.objkey == "rotationZ"){
-                objs[i].rotation[2] = args.setValue;
+                item.rotation[2] = args.setValue;
               }
 
               if(args.objkey == "scaleX"){
-                objs[i].scale[0] = args.setValue;
+                item.scale[0] = args.setValue;
               }
               if(args.objkey == "scaleY"){
-                objs[i].scale[1] = args.setValue;
+                item.scale[1] = args.setValue;
               }
               if(args.objkey == "scaleZ"){
-                objs[i].scale[2] = args.setValue;
+                item.scale[2] = args.setValue;
               }
 
-              apiUpdateObject3D(objs[i]);
-              //update objs
-              setSceneObjs(objs);
-              //update select object
-              setSelectObject(objs[i]);
-              //update objs new render
-              updateObjects();
-              break;
+              apiUpdateObject3D(item);
+              //check select object client
+              for(const obj3d of object3Ds){
+                if(selectObject == obj3d){
+                  setSelectObject(item);
+                }
+              }
+
+              return item;
+            }else{
+              return item;
             }
-          }
+          }));
+          updateObjects();
+
         }
 
         if(args.action=='loadscene'){
-          setSceneObjs([]);
+          setObject3Ds([]);
           setObjects3D([]);
           setSelectObject(null);
           setSceneID(args.id);
@@ -491,7 +499,6 @@ export default function EditorSection({editorid}){
       {objects3D}
       
       <CameraCtrl />
-      
       
     </Canvas>
     {/*
@@ -580,7 +587,7 @@ export default function EditorSection({editorid}){
       
       <EditorScene
         ops={callBackOPS}
-        sceneObjs={sceneObjs}
+        object3ds={object3Ds}
         ></EditorScene>
       {/* */}
       <EditorProps
@@ -590,10 +597,19 @@ export default function EditorSection({editorid}){
          
     </EditorRightSideBar>
 
-    <div style={{position:'fixed',top:'64px',left:0}}>
+    <EditorLeftSideBar
+      isOpen={isSideBarLeft}
+      onRequestClose={ToggleSBLeft}
+      >
+      <ViewPanel></ViewPanel>
+
+    </EditorLeftSideBar>
+
+    <div style={{position:'fixed',top:'28px',left:100}}>
       <label>Side Bars:</label>
       <button  onClick={ToggleSBTop}>Top</button>
       <button  onClick={ToggleSBRight}>Right</button>
+      <button  onClick={ToggleSBLeft}>Left</button>
       {/*
       <button  onClick={ToggleRightSB}>Bottom</button>
       <button  onClick={ToggleRightSB}>Left</button>
