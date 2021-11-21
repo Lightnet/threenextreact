@@ -8,7 +8,9 @@
 
 //import React, { useRef, useState, useEffect } from 'react';
 import { useRef, useState, useEffect } from 'react';
-import Draggable from "../../components/ui/edragwindow";
+import ThemeSection from "../../components/system/themesection";
+
+import EWindow from "../../components/ui/ewindow";
 
 import Modal from "../../components/ui/emodal";
 
@@ -33,10 +35,10 @@ export default function Page(props) {
   console.log('I rendered!');
 
   return (<>
-
+    <ThemeSection></ThemeSection>
     <button onClick={handle}>Click me</button>
-    <Draggable>      
-    </Draggable>
+    <EWindow>      
+    </EWindow>
 
     <Modal
     isOpen={isOPen}

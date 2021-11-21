@@ -46,10 +46,9 @@ export default function IndexPage({
 
   const [panel, setPanel] = useState(<></>);
 
-
-  useEffect(async () => {//mount or load data
+  //useEffect(() => {//mount or load data
     //console.log(session);
-  }, [session]) // Added [] as useEffect filter so it will be executed only once, when component is mounted
+  //}, [session]) // Added [] as useEffect filter so it will be executed only once, when component is mounted
 
   function sideBarLeftToggle(){
     //console.log("seteditorTSB");
@@ -139,13 +138,11 @@ export default function IndexPage({
       >
         <a href="#" >Right</a>
       </SideBarRight>
-
-      
+      {/*
       <button onClick={(e)=> sideBarLeftToggle()}>Open Sidebar</button> 
       <button onClick={(e)=> sideBarTopToggle()}> Open Top Sidebar</button> 
       <button onClick={(e)=> sideBarBottomToggle()}> Open Bottom Sidebar</button> 
       <button onClick={(e)=> sideBarRightToggle()}> Open Right Sidebar</button> 
-      {/*
       */}
 
       {/*  */}

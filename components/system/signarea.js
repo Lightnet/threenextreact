@@ -8,6 +8,7 @@
 //import { useEffect } from 'react';
 import { useSession, signOut, signIn } from "next-auth/react"
 import Link from 'next/link';
+import ThemeSection from "./themesection";
 
 export default function Component() {
   const { data: session, status } = useSession()
@@ -33,5 +34,6 @@ export default function Component() {
     <button onClick={() => signIn()}>Sign in</button>
     <span> | or | </span>
     <Link href="/auth/signup">Sign Up</Link>
+    <ThemeSection></ThemeSection>
   </>);
 }

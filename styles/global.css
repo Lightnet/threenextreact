@@ -3,7 +3,6 @@ https://nextjs.org/learn/basics/assets-metadata-css/global-styles
 Global CSS
 import '../styles/global.css'
 */
-/*body{margin: 0;}*/
 
 html,
 body,
@@ -32,3 +31,60 @@ body,
 }
 /* ========================================== */
 
+:root {
+  --main-bg-color: brown;
+  --bg-color: #fff;  
+  --primary-color: #302AE6;
+  --secondary-color: #536390;
+  --font-color: #424242;
+  --heading-color: #292922;
+
+  --header-color:#999999;
+  --header-font:black;
+  --content-color:#e6e6e6;
+  --content-font:black;
+  --footer-color:#cccccc;
+  --footer-font:black;
+}
+
+[data-theme="dark"] {
+  --primary-color: #9A97F3;
+  --bg-color: #161625;
+  --secondary-color: #818cab;
+  --font-color: #e1e1ff;
+  --heading-color: #818cab;
+
+  --header-color:black;
+  --header-font:#999999;
+  --content-color:#333333;
+  --content-font:#cccccc;
+  --footer-color:#4d4d4d;
+  --footer-font:#cccccc;
+}
+
+body{
+  background-color: var(--bg-color); 
+}
+
+.headerpanel{
+  background-color: var(--header-color);
+  color:var(--header-font);
+}
+
+.contentpanel{
+  background-color: var(--content-color);
+  color:var(--content-font);
+}
+
+.footerpanel{
+  background-color: var(--footer-color);
+  color:var(--footer-font);
+}
+
+a{
+  color: var(--font-color);
+}
+
+label{
+  color: var(--font-color);
+}
