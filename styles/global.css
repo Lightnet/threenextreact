@@ -45,6 +45,9 @@ body,
   --content-font:black;
   --footer-color:#cccccc;
   --footer-font:black;
+
+  --icon-color:gray;
+  --icon-hover:white;
 }
 
 [data-theme="dark"] {
@@ -87,4 +90,13 @@ a{
 
 label{
   color: var(--font-color);
+}
+
+
+.imgicon {
+  background-color: var(--icon-color);
+}
+
+.imgicon:hover {
+  background-color: var(--icon-hover);
 }

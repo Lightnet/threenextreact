@@ -21,7 +21,7 @@ export default function CameraCtrl(props){
       </PerspectiveCamera>
       <OrbitControls 
         enablePan={true}
-        enableZoom={false} 
+        enableZoom={true} 
         enableRotate={true}
         enableDamping={false}
         camera={ref.current} 

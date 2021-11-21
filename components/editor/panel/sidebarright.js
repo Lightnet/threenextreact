@@ -14,7 +14,7 @@ export default function Right({isOpen,onRequestClose,children}) {
   useEffect(() => { 
     //console.log("Right Side Bar is open?");
     if(isOpen){
-      setSBWidth(200);
+      setSBWidth(250);
     }else{
       setSBWidth(0);
     }

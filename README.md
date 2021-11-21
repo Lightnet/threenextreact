@@ -215,3 +215,7 @@ $ ncu // check package to updates
 
 
 
+# Credits:
+## svgrepo:
+  Free svg icons.
+- https://www.svgrepo.com

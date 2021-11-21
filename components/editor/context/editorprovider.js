@@ -31,6 +31,7 @@ export function useScene(){
 export function EditorProvider(props){
   const [editorID, setEditorID] = useState(null);
   const [sceneID, setSceneID] = useState(null);
+  //const [object3Ds, setObject3Ds] = useState([]);
 
   const value = useMemo(()=>({
     editorID, setEditorID,
