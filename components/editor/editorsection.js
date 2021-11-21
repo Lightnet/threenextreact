@@ -4,37 +4,39 @@
 */
 
 import { useRef, useEffect, useState } from 'react';
-import useFetch from "../../hook/usefetch";
+// lib 
+import { nanoid32 } from "../../lib/helper";
+
+// event / use
+import useFetch from "../hook/usefetch";
 import Link from 'next/link';
+import useEvent from '../hook/useEvent';
 
 // THREE
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei';
 
-// UI
-import EditorTopSideBar from "./sidebartop";
-import EditorRightSideBar from "./sidebarright";
-import DropDownMenu from "../../ui/edropdown";
-import Modal from '../../ui/emodal';
-
-// PANEL
-import EditorScene from "./objectscene";
-import EditorProps from "./objectprops";
-
-import { nanoid32 } from "../../../lib/helper";
-
-import Box from '../../entities/box';
-import Cube from '../../entities/cube';
-import Foo from '../../entities/foo';
+//three object3d
+import Box from '../entities/box';
+import Cube from '../entities/cube';
+import Foo from '../entities/foo';
 //import CameraTest from '../../entities/cameratest';
-import CameraCtrl from '../../entities/cameractrl';
+import CameraCtrl from '../entities/cameractrl';
 
-//events:
-import useEvent from '../../hook/useEvent';
-import SceneSection from '../scene/scenesection';
-import AssetsSection from '../assets/assetssection';
-import SideBarRight from '../../layout/sidebarright';
-import { useEditor, useScene } from '../context/editorprovider';
+// UI / PANEL
+import DropDownMenu from "../ui/edropdown";
+import Modal from '../ui/emodal';
+import {NotificationsManager,Color} from "../notify";
+
+import EditorTopSideBar from "./panel/sidebartop";
+import EditorRightSideBar from "./panel/sidebarright";
+import EditorScene from "./panel/objectscene";
+import EditorProps from "./panel/objectprops";
+
+import SceneSection from './scene/scenesection';
+import AssetsSection from './assets/assetssection';
+
+import { useEditor, useScene } from './context/editorprovider';
 
 export default function EditorSection({editorid}){
 
@@ -57,6 +59,8 @@ export default function EditorSection({editorid}){
 
   const [viewModal, setViewModal] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const [notify,setNotify] = useState(); //notify call when detect change in state
 
   //const sceneObjsRef = useRef([]);
   //const ref = useRef();//get this current element react component
@@ -101,6 +105,55 @@ export default function EditorSection({editorid}){
       updateObjects();//update scene object3ds
     }
   },[sceneObjs]);
+
+  
+  function notitfyInfo(children, autoClose) {
+    //console.log("info");
+    return setNotify({
+      color: Color.info,
+      children,
+      autoClose,
+    });
+  }
+
+  function notitfySuccess(children, autoClose) {
+    return setNotify({
+      color: Color.success,
+      children,
+      autoClose,
+    });
+  }
+  
+  function notitfyWarning(children, autoClose) {
+    return setNotify({
+      color: Color.warning,
+      children,
+      autoClose,
+    });
+  }
+  
+  function notitfyError(children, autoClose) {
+    return setNotify({
+      color: Color.error,
+      children,
+      autoClose,
+    });
+  }
+
+  function createInfo(msg){
+    notitfyInfo(<label>{msg}</label>,true);
+  }
+
+  function createSuccess(msg){
+    notitfySuccess(<label>{msg}</label>,true);
+  }
+  function createError(msg){
+    notitfyError(<label>{msg}</label>,true);
+  }
+
+  function createWarn(msg){
+    notitfyWarning(<label>{msg}</label>,true);
+  }
 
   async function initEditorDefaultScene(){
     console.log("INIT... EDITOR ID:", editorID);
@@ -212,13 +265,13 @@ export default function EditorSection({editorid}){
         , sceneid: sceneID
         , data:obj})
     });
-    console.log(data);
+    //console.log(data);
     if(data.error){
-      console.log("ERROR FETCH SAVE OBJECT3D");
+      //console.log("ERROR FETCH SAVE OBJECT3D");
+      createError('Fetch Error on Save Object3D');
       return;
     }
-
-
+    createSuccess('Success! Save Object3D');
   }
   async function apiUpdateObject3D(obj){
     if(!sceneID){
@@ -250,19 +303,21 @@ export default function EditorSection({editorid}){
     });
     //console.log(data);
     if(data.error){
-      console.log("ERROR FETCH DELETE OBJECT3D")
+      //console.log("ERROR FETCH DELETE OBJECT3D")
+      createError('Fetch Error on DELETE Object3D');
       return;
     }
+    createSuccess('Success! DELETE Object3D');
   }
 
   //call from the child component events
-  function callBackOPS(param){
-    console.log(param);
-    if(param){
-      if(param.action){
-        console.log("param.action: ",param.action)
+  function callBackOPS(args){
+    console.log(args);
+    if(args){
+      if(args.action){
+        console.log("args.action: ",args.action)
 
-        if(param.action=="addcube"){
+        if(args.action=="addcube"){
           //let objs = sceneObjs;
           let data = {
             id: nanoid32()
@@ -280,22 +335,22 @@ export default function EditorSection({editorid}){
           updateObjects();
         }
 
-        if(param.action=="select"){
+        if(args.action=="select"){
           for(const obj3D of sceneObjs){
-            if(obj3D.id == param.id){
+            if(obj3D.id == args.id){
               setSelectObject(obj3D);
               break;
             }
           }
         }
 
-        if(param.action=="visible"){
-          console.log(param.name);
+        if(args.action=="visible"){
+          console.log(args.name);
           //need to fixed this array new format array
           let objs = sceneObjs;
           for(let i =0;i<objs.length;i++){
-            if(objs[i].id == param.id){
-              //objs[i].name = param.name;
+            if(objs[i].id == args.id){
+              //objs[i].name = args.name;
               if(objs[i].visible){
                 objs[i].visible=false;
               }else{
@@ -309,14 +364,14 @@ export default function EditorSection({editorid}){
           }
         }
 
-        if(param.action=="rename"){
-          console.log(param.name);
+        if(args.action=="rename"){
+          console.log(args.name);
 
           setSceneObjs(sceneObjs.map(item=>{
-            if(item.id === param.id){
-              item.name=param.name;
+            if(item.id === args.id){
+              item.name=args.name;
               apiUpdateObject3D(item);
-              return {...item, name:param.name};
+              return {...item, name:args.name};
             }else{
               return item
             }
@@ -325,54 +380,54 @@ export default function EditorSection({editorid}){
           updateObjects();
         }
 
-        if(param.action=="remove"){
-          console.log(param.name);
-          apiDeleteObject3D(param.id);
+        if(args.action=="remove"){
+          console.log(args.name);
+          apiDeleteObject3D(args.id);
           for(const obj3d of sceneObjs){
             if(selectObject == obj3d){
               setSelectObject(null);
             }
           }
-          setSceneObjs(sceneObjs.filter(item=>item.id !== param.id ));
+          setSceneObjs(sceneObjs.filter(item=>item.id !== args.id ));
           updateObjects();
         }
 
-        if(param.action=="update"){
+        if(args.action=="update"){
           console.log("[[[=== ACTION UPDATE ===]]");
-          console.log(param);
+          console.log(args);
           let objs = sceneObjs;
           for(let i =0;i<objs.length;i++){
-            if(objs[i].id == param.id){
+            if(objs[i].id == args.id){
               console.log("[[[[==============  FOUND OBJECT ============]]]")
-              //objs[i].name = param.name;
-              if(param.objkey == "positionX"){
-                objs[i].position[0] = param.setValue;
+              //objs[i].name = args.name;
+              if(args.objkey == "positionX"){
+                objs[i].position[0] = args.setValue;
               }
-              if(param.objkey == "positionY"){
-                objs[i].position[1] = param.setValue;
+              if(args.objkey == "positionY"){
+                objs[i].position[1] = args.setValue;
               }
-              if(param.objkey == "positionZ"){
-                objs[i].position[2] = param.setValue;
-              }
-
-              if(param.objkey == "rotationX"){
-                objs[i].rotation[0] = param.setValue;
-              }
-              if(param.objkey == "rotationY"){
-                objs[i].rotation[1] = param.setValue;
-              }
-              if(param.objkey == "rotationZ"){
-                objs[i].rotation[2] = param.setValue;
+              if(args.objkey == "positionZ"){
+                objs[i].position[2] = args.setValue;
               }
 
-              if(param.objkey == "scaleX"){
-                objs[i].scale[0] = param.setValue;
+              if(args.objkey == "rotationX"){
+                objs[i].rotation[0] = args.setValue;
               }
-              if(param.objkey == "scaleY"){
-                objs[i].scale[1] = param.setValue;
+              if(args.objkey == "rotationY"){
+                objs[i].rotation[1] = args.setValue;
               }
-              if(param.objkey == "scaleZ"){
-                objs[i].scale[2] = param.setValue;
+              if(args.objkey == "rotationZ"){
+                objs[i].rotation[2] = args.setValue;
+              }
+
+              if(args.objkey == "scaleX"){
+                objs[i].scale[0] = args.setValue;
+              }
+              if(args.objkey == "scaleY"){
+                objs[i].scale[1] = args.setValue;
+              }
+              if(args.objkey == "scaleZ"){
+                objs[i].scale[2] = args.setValue;
               }
 
               apiUpdateObject3D(objs[i]);
@@ -387,11 +442,11 @@ export default function EditorSection({editorid}){
           }
         }
 
-        if(param.action=='loadscene'){
+        if(args.action=='loadscene'){
           setSceneObjs([]);
           setObjects3D([]);
           setSelectObject(null);
-          setSceneID(param.id);
+          setSceneID(args.id);
         }
 
         //END ACTION STRING
@@ -551,6 +606,10 @@ export default function EditorSection({editorid}){
     >
       {renderModal()}
     </Modal>
+
+    <NotificationsManager
+      setNotify={notify}
+    />
     
   </>);
 }

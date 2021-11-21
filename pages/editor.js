@@ -8,7 +8,7 @@
 
 import { useEffect, useState } from 'react';
 import AuthAccess from '../components/system/authaccess';
-import EditorSection from '../components/editor/panel/editorsection';
+import EditorSection from '../components/editor/editorsection';
 import { useRouter } from 'next/router';
 import { EditorProvider } from '../components/editor/context/editorprovider';
 
