@@ -34,7 +34,7 @@ body,
 :root {
   --main-bg-color: brown;
   --bg-color: #fff;  
-  --primary-color: #302AE6;
+  --primary-color: #888888;
   --secondary-color: #536390;
   --font-color: #424242;
   --heading-color: #292922;
@@ -48,6 +48,9 @@ body,
 
   --icon-color:gray;
   --icon-hover:white;
+
+  --button-hover:black;
+  --button-color:white;
 }
 
 [data-theme="dark"] {
@@ -63,6 +66,10 @@ body,
   --content-font:#cccccc;
   --footer-color:#4d4d4d;
   --footer-font:#cccccc;
+
+  --button-hover:black;
+  --button-color:white;
+
 }
 
 body{
@@ -84,6 +91,16 @@ body{
   color:var(--footer-font);
 }
 
+button{
+  background-color: var(--primary-color);
+  color: var(--font-color);
+}
+
+button:hover{
+  background-color: var(--button-hover);
+  color: var(--button-color);
+}
+
 a{
   color: var(--font-color);
 }
@@ -91,7 +108,6 @@ a{
 label{
   color: var(--font-color);
 }
-
 
 .imgicon {
   background-color: var(--icon-color);

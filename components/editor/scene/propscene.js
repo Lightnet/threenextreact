@@ -1,31 +1,43 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
+  view port for scene?
+
 */
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useEditor, useScene } from "../context/editorprovider";
 import useFetch from "../../hook/usefetch";
+import { isEmpty } from "../../../lib/helper";
 
-export default function SceneSection({editorid,ops}) {
-  const [scenes, setScenes] = useState([])
-  const [editorID, setEditorID] = useState(null);
-  const [sceneID, setSceneID] = useState(null);
+export default function PropScene({ops}) {
 
-  const [sceneName,setSceneName]=useState("")
-  const [description,setDescription]=useState("description")
-  
+  const {editorID, setEditorID} = useEditor();
+
+  const { sceneID, setSceneID} = useScene();
+  const [scenes, setScenes] = useState([]);
+
+  const [sceneName,setSceneName]=useState("");
+
+  const [isEdit,setIsEdit]=useState(false);
+  const [editName,setEditName]=useState(false);
+  const [selectID,setSelectID]=useState('');
+  //const [selectID,setSelectID]=useState('');
+
+  ///console.log(editorID);
+
   useEffect(() => {
-    console.log("hello?")
-    if(editorid){
-      console.log("scene section editorid:", editorid);
-      setEditorID(editorid);
+    console.log("get scene")
+    if(editorID){
+      console.log("propscene editorid:", editorID);
       getScenes();
     }
     return  ()=>{
-      console.log('scenes clean');
-      setEditorID(null)
+      console.log('propscene clean');
     }
-  },[editorid,editorID]);
+  },[editorID]);
+  
 
   async function getScenes(){
     if(!editorID){
@@ -44,6 +56,23 @@ export default function SceneSection({editorid,ops}) {
       if(data.action=='SCENES'){
         setScenes(data.scenes);
       }
+    }
+  }
+
+  function typeEditName(e){
+    setEditName(e.target.value);
+  }
+
+  function enterEditName(event){
+    if (event.keyCode === 13) {
+      //check for string empty
+      if(isEmpty(event.target.value)){
+        console.log("Empty!");
+        return;
+      }
+      updateNameScene();
+      
+      setIsEdit(false);
     }
   }
 
@@ -90,9 +119,8 @@ export default function SceneSection({editorid,ops}) {
       method:'PATCH'
       , body:JSON.stringify({
         action:'PATCH',
-        id:sceneID,
-        sceneName:sceneName,
-        description:description
+        id:selectID,
+        sceneName:editName,
       })
     });
     console.log(data);
@@ -110,37 +138,46 @@ export default function SceneSection({editorid,ops}) {
     }
   }
 
-  function typeName(e){
-    setSceneName(e.target.value);
-  }
-
-  function typeDesription(e){
-    setDescription(e.target.value);
-  }
-
   function editSceneID(id){
-    setSceneID(id);
+    console.log('edit?')
+    setSelectID(id);
+    setIsEdit(true);
     for(const scene of scenes){
       if(scene.id == id){
-        setSceneName(scene.name);
-        setDescription(scene.description);
+        setEditName(scene.name);
         break;
       }
     }
   }
-  
+
   return (<>
   <div>
     <div>
-      <label>Scenes</label> <button onClick={()=>createScene()}>Create</button><input value={sceneName} onChange={typeName}></input> <input value={description} onChange={typeDesription}></input><button onClick={updateNameScene}> Update </button> <label>ID: {sceneID}</label>
+      <label>ID Scene: {sceneID}</label>
+    </div>
+    <div>
+      <label>ID Scene: {sceneID}</label>
     </div>
     {scenes.map((item)=>{
       return(<div key={item.id}>
-        <button onClick={()=>deleteScene(item.id)}>Delete</button>  <label>[ID: {item.id}] [Name:] {item.name} </label> 
-        <button onClick={()=>editSceneID(item.id)}>Select Edit</button>
-        <button onClick={()=>ops({action:'loadscene',id:item.id})}>Load</button>
+        {(isEdit == true && item.id == selectID)?(
+          <input value={editName} onChange={typeEditName} onKeyUp={enterEditName}/>
+        ):(
+          <label> {item.name} </label> 
+        )}
+        
+        
+        <img src="/icon/edit01.svg" width="16" height="16" onClick={()=>editSceneID(item.id)} />
+        <img src="/icon/delete01.svg" width="16" height="16" />
       </div>);
     })}
   </div>
-  </>);
+    </>);
 }
+/*
+<input value={sceneName} ></input> <input value={description} onChange={typeDesription}></input><button onClick={updateNameScene}> Update </button>
+<button onClick={()=>createScene()}>Create</button>
+<button onClick={()=>deleteScene(item.id)}>Delete</button>  
+        <button onClick={()=>editSceneID(item.id)}>Select Edit</button>
+        <button onClick={()=>ops({action:'loadscene',id:item.id})}>Load</button>
+*/

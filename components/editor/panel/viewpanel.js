@@ -10,7 +10,15 @@
 
 import { useState } from "react";
 
-export default function ViewPanel() {
+import PropScene from "../scene/propscene";
+import PropObject3Ds from "../object/propobject3ds";
+
+import PropObjectData from "../assets/propobjectdata";
+import PropObject from "../object/propobject";
+import ViewScene from "../scene/viewscene";
+import PropNode from "../node/propnode";
+
+export default function ViewPanel({ops}) {
 
   const [view, setView] = useState('');
 
@@ -21,8 +29,27 @@ export default function ViewPanel() {
 
   function renderView(){
 
-    if(view==''){
-      return (<></>);  
+    if(view=='scene'){
+      return <ViewScene ops={ops}></ViewScene>
+    }
+    if(view=='scenes'){
+      return <PropScene ops={ops}></PropScene>
+    }
+    if(view=='object3ds'){
+      console.log("OBJECT3DS")
+      return <PropObject3Ds ops={ops}></PropObject3Ds>
+    }
+    if(view=='props'){
+      return <PropObject ops={ops}></PropObject>
+    }
+    if(view=='objectdatas'){
+      return <PropObjectData ops={ops}></PropObjectData>
+    }
+    if(view=='projects'){
+      return <></>
+    }
+    if(view=='node'){
+      return <PropNode></PropNode>
     }
 
     return (<></>);
@@ -35,10 +62,13 @@ export default function ViewPanel() {
         <select value={view} onChange={onChangeView}>
           <option disabled value=''> Select </option>
           <option value="scene"> Scene </option>
+          <option value="scenes"> Scenes </option>
+          <option value="object3ds"> Object3Ds </option>
           <option value="props"> Props </option>
           <option value="projects"> Projects </option>
           <option value="assets"> Assets </option>
-          <option value="objectdata"> ObjectData </option>
+          <option value="objectdatas"> ObjectDatas </option>
+          <option value="node"> node </option>
         </select>
       </div>
       <div>

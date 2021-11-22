@@ -24,6 +24,7 @@ import Foo from '../entities/foo';
 import CameraCtrl from '../entities/cameractrl';
 
 // UI / PANEL
+import ThemeSection from "../system/themesection";
 import DropDownMenu from "../ui/edropdown";
 import Modal from '../ui/emodal';
 import {NotificationsManager,Color} from "../notify";
@@ -50,7 +51,9 @@ export default function EditorSection({editorid}){
 
   const [selectObject, setSelectObject] = useState(null); //select object for props div
 
-  const [object3Ds, setObject3Ds] = useState([]); // scene objects array json
+  //const [object3Ds, setObject3Ds] = useState([]); // scene objects array json
+  const {object3Ds, setObject3Ds} = useEditor();
+
   const [objects3D, setObjects3D] = useState([]); // scene objects render react
   const [physics3D, setPhysics3D] = useState([]); //physic objects
 
@@ -226,6 +229,7 @@ export default function EditorSection({editorid}){
 
   //update model for render {objects3D}
   function updateObjects(){
+    /*
     if(object3Ds){
       let obj = object3Ds;
       //console.log(obj);
@@ -235,6 +239,7 @@ export default function EditorSection({editorid}){
       //console.log(objmap);
       setObjects3D(objmap);
     }
+    */
   }
 
   //build model by type
@@ -496,7 +501,11 @@ export default function EditorSection({editorid}){
       <pointLight position={[10, 10, 10]} />
       <Box position={[1.2, 0, 0]} />
       
-      {objects3D}
+      {/*objects3D*/}
+      {object3Ds.map((_entity)=>{
+        return buildModel(_entity)
+      })}
+
       
       <CameraCtrl />
       
@@ -532,7 +541,7 @@ export default function EditorSection({editorid}){
       */}
 
       <DropDownMenu menuname="View" >
-        <a href="#" onClick={()=>showViewModal('assets')} >Assets</a>
+        <a href="#" onClick={()=>showViewModal('assets')} >Assets</a><br/>
         <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a>
         {/*
         <a href="#" onClick={()=>showViewModal('materials')} >Materials</a>
@@ -570,11 +579,15 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Help" >
-        <a href="#" >About</a>
-        <a href="#" >Docs</a>
+        <a href="#" >About</a><br/>
+        <a href="#" >Docs</a><br/>
         <a href="#" >Github</a>
         {/*<a href="#" >Plugins</a>*/}
       </DropDownMenu>
+
+      
+
+      <ThemeSection></ThemeSection>
 
       <label> Editor ID: {editorID} </label>
       
@@ -601,7 +614,7 @@ export default function EditorSection({editorid}){
       isOpen={isSideBarLeft}
       onRequestClose={ToggleSBLeft}
       >
-      <ViewPanel></ViewPanel>
+      <ViewPanel ops={callBackOPS}></ViewPanel>
 
     </EditorLeftSideBar>
 
