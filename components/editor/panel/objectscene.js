@@ -6,7 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper";
-import { useScene } from "../context/editorprovider";
+import { useEditor, useScene } from "../context/editorprovider";
 
 // https://www.pluralsight.com/guides/how-to-show-components-conditionally-react
 
@@ -29,6 +29,7 @@ function ranName(length){
 export default function Component({object3ds,ops}) {
 
   const {sceneID, setSceneID} = useScene();
+  const {sceneName, setSceneName} = useEditor();
   const [object3Ds, setObject3Ds] = useState([]);
 
   const [object3DID, setObject3DID] = useState('');
@@ -109,7 +110,9 @@ export default function Component({object3ds,ops}) {
   
   return (<>
     <div>
-      <label>ID Scene: {sceneID}</label>
+      <label>ID: {sceneID}</label>
+      <br />
+      <label>Name: {sceneName}</label>
     </div>
     <div>
       <label>Object3Ds:</label>

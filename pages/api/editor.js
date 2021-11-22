@@ -73,11 +73,15 @@ export default async (req, res) => {
           }
         }
 
-        if(data.action == 'DEFAULTSCENE'){
+        if(data.action == 'INFO'){
           try{
             const editor = await Editor.findOne({id: data.editorid}).exec();
             //console.log(editor);
-            return res.json({action:"UPDATE",sceneid:editor.defaultsceneid});
+            return res.json({
+              action:"UPDATE",
+              sceneid:editor.defaultsceneid,
+              editorname:editor.name
+            });
           }catch(e){
             return res.json({error:"FAILDEFAULTSCENE"});
           }

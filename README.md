@@ -33,6 +33,8 @@
 - upload file type (work in progress)
   - save to database as base64 string
   - delete (not added)
+  - file limit size check? (not added)
+  - check file type (not added)
   - update ?
   
 - load image (testing)
@@ -92,22 +94,32 @@
     - create
     - update
     - delete
+
   - texture  (not build)
     - create
     - update
     - delete
+
   - model  (not build)
     - create
     - update
     - delete
+
   - animation  (not build)
     - create
     - update
     - delete
+
   - prefab entity  (not build)
     - create
     - update
     - delete
+  
+  - physics  (not build)
+    - create
+    - update
+    - delete
+    
 - game  (not build)
   - delete  (not build)
   - load  (not build)

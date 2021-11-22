@@ -66,7 +66,7 @@ export default async (req, res) => {
     }
     let update={
       name:data.sceneName,
-      description:data.description
+      //description:data.description
     }
     try{
       let patchScene = await Scene.findOneAndUpdate(query,update,{new:true}).exec();

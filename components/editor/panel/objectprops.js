@@ -13,7 +13,7 @@ import RotationProp from "./objectrotation";
 import ScaleProp from "./objectscale";
 
 // entity
-export default function Component({selectObject,ops}) {
+export default function ObjectProps({selectObject,ops}) {
   //console.log("PROPS RENDER>>>>>>>")
   //useEffect(() => {
     //console.log("PROPS:]]]]]upodate]]]]]]]]]",selectObject)

@@ -29,18 +29,31 @@ export function useScene(){
 }
 
 export function EditorProvider(props){
-  const [editorID, setEditorID] = useState(null);
-  const [sceneID, setSceneID] = useState(null);
+  const [editorID, setEditorID] = useState('');
+  const [editorName, setEditorName] = useState('');
+  const [sceneID, setSceneID] = useState('');
+  const [sceneName, setSceneName] = useState('');
   const [object3Ds, setObject3Ds] = useState([]);
+  const [scenes, setScenes] = useState([]);
+
+  const [selectObject, setSelectObject] = useState(null);
 
   const value = useMemo(()=>({
     editorID, setEditorID,
+    editorName, setEditorName,
     sceneID, setSceneID,
-    object3Ds, setObject3Ds
+    sceneName, setSceneName,
+    scenes, setScenes,
+    object3Ds, setObject3Ds,
+    selectObject, setSelectObject
   }),[
     editorID,
+    editorName,
     sceneID,
-    object3Ds
+    sceneName,
+    scenes,
+    object3Ds,
+    selectObject
   ])
 
   return <EditorContext.Provider value={value} {...props} />

@@ -9,7 +9,7 @@
   background-color:gray;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  /*padding-top: 60px;*/
 }
 
 .sidebar a {
@@ -17,7 +17,7 @@
   text-decoration: none;
   /*font-size: 25px;*/
   color: #424242;
-  display: block;
+  /*display: block;*/
   transition: 0.3s;
 }
 
@@ -28,9 +28,9 @@
 .sidebar .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 20px;
+  right: 8px;
+  font-size: 24px;
+  /*margin-left: 20px;*/
 }
 
 .openbtn {

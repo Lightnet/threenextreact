@@ -15,6 +15,10 @@ export default function PropObjectData() {
 
   useEffect(()=>{
     getObjectDatas();
+    return ()=>{
+      console.log("OBJECTDATAS CLEAN UP!");
+      setObjectData([])
+    }
   },[])
 
   async function getObjectDatas(){

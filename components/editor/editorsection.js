@@ -49,7 +49,8 @@ export default function EditorSection({editorid}){
   const [isSideBarLeft, setIsSideBarLeft] = useState(true);
   const [isSideBarRight, setIsSideBarRight] = useState(true);
 
-  const [selectObject, setSelectObject] = useState(null); //select object for props div
+  //const [selectObject, setSelectObject] = useState(null); //select object for props div
+  const {selectObject, setSelectObject} = useEditor();
 
   //const [object3Ds, setObject3Ds] = useState([]); // scene objects array json
   const {object3Ds, setObject3Ds} = useEditor();
@@ -59,9 +60,12 @@ export default function EditorSection({editorid}){
 
   //const [editorID, setEditorID] = useState(null);
   const {editorID, setEditorID} = useEditor();
+  const {editorName, setEditorName} = useEditor();
 
   //const [sceneID, setSceneID] = useState(null);
   const {sceneID, setSceneID} = useScene();
+  const {scenes, setScenes} = useEditor();
+  const {sceneName, setSceneName} = useEditor();
 
   const [viewModal, setViewModal] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -87,11 +91,12 @@ export default function EditorSection({editorid}){
     if(editorid){
       console.log("EDITOR ID FOUND")
       setEditorID(editorid);
+      initEditorDefaultScene();
+      getScenes();
     }else{
       console.log("NOT FOUND")
     }
 
-    initEditorDefaultScene()
     return ()=>{
       console.log('EDITOR CLEAN UP!');
     };
@@ -100,6 +105,12 @@ export default function EditorSection({editorid}){
   useEffect(()=>{
     if(sceneID){
       loadSceneObjects();
+      for(let scene of scenes){
+        if(scene.id == sceneID){
+          setSceneName(scene.name);
+          break;
+        }
+      }
     }
   },[sceneID]);
 
@@ -166,7 +177,7 @@ export default function EditorSection({editorid}){
     let data = await useFetch('api/editor',{
       method:'POST',
       body:JSON.stringify({
-        action:'DEFAULTSCENE'
+        action:'INFO'
         , editorid:editorID
       })
     })
@@ -181,6 +192,27 @@ export default function EditorSection({editorid}){
       if(data.sceneid){
         //console.log("SCENE ID:",data.sceneid);
         setSceneID(data.sceneid);
+        setEditorName(data.editorname);
+      }
+    }
+  }
+
+  async function getScenes(){
+    if(!editorID){
+      console.log('editorid NULL');
+      return;
+    }
+    let data = await useFetch('api/scene',{
+      method:'POST'
+      , body:JSON.stringify({action:'SCENES',id:editorID})
+    });
+    console.log(data);
+    if(data.error){
+      console.log('ERROR FETCH SCENES');
+    }
+    if(data.action){
+      if(data.action=='SCENES'){
+        setScenes(data.scenes);
       }
     }
   }
@@ -589,7 +621,8 @@ export default function EditorSection({editorid}){
 
       <ThemeSection></ThemeSection>
 
-      <label> Editor ID: {editorID} </label>
+      <label> Editor Name: {editorName} </label>
+      {/*<label> Editor ID: {editorID} </label>*/}
       
     </EditorTopSideBar>
 

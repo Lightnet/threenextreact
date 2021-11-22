@@ -11,6 +11,7 @@
 import { useState } from "react";
 
 import PropScene from "../scene/propscene";
+import PropScenes from "../scene/propscenes";
 import PropObject3Ds from "../object/propobject3ds";
 
 import PropObjectData from "../assets/propobjectdata";
@@ -30,10 +31,10 @@ export default function ViewPanel({ops}) {
   function renderView(){
 
     if(view=='scene'){
-      return <ViewScene ops={ops}></ViewScene>
+      return <PropScene ops={ops}></PropScene>
     }
     if(view=='scenes'){
-      return <PropScene ops={ops}></PropScene>
+      return <PropScenes ops={ops}></PropScenes>
     }
     if(view=='object3ds'){
       console.log("OBJECT3DS")

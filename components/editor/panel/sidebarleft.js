@@ -32,8 +32,12 @@ export default function SideBarLeft({isOpen,onRequestClose,children}) {
     <div className={styles.sidebar}
       style={{width:SBWidth+"px"}}
       >
-      <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
-      {children}
+      <div style={{height:'28px'}}>
+        <a href="#" className={styles.closebtn} onClick={()=>closeSideBar()}>×</a>
+      </div>
+      <div>
+        {children}
+      </div>
     </div>
   </>);
 }
