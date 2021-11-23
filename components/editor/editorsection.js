@@ -14,11 +14,12 @@ import useEvent from '../hook/useEvent';
 
 // THREE
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei';
+import { PerspectiveCamera, OrbitControls, PositionalAudio, GizmoHelper, GizmoViewport } from '@react-three/drei';
 
 //three object3d
+import { buildModel } from './buildmodel';
 import Box from '../entities/box';
-import Cube from '../entities/cube';
+//import Cube from '../entities/cube';
 import Foo from '../entities/foo';
 //import CameraTest from '../../entities/cameratest';
 import CameraCtrl from '../entities/cameractrl';
@@ -71,6 +72,8 @@ export default function EditorSection({editorid}){
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   const [notify,setNotify] = useState(); //notify call when detect change in state
+
+  const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   useEffect(()=>{
     const theme = localStorage.getItem('theme');
@@ -129,7 +132,6 @@ export default function EditorSection({editorid}){
     }
   },[object3Ds]);
 
-  
   function notitfyInfo(children, autoClose) {
     //console.log("info");
     return setNotify({
@@ -283,29 +285,6 @@ export default function EditorSection({editorid}){
     */
   }
 
-  //build model by type
-  function buildModel(item){
-    if(item.type=="cube"){
-      //console.log("FOUND CUBE");
-      return(<Cube
-        key={item.id}
-        visible={item.visible }
-        
-        //position={[0, 0, 0]}
-        position={[item.position[0],item.position[1],item.position[2]]}
-        rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-        scale={[item.scale[0],item.scale[1],item.scale[2]]}
-        //scale={[10,10,10]}
-      >
-      </Cube>)
-    }else{
-      return(<Cube
-        position={[0, 0, 0]}
-      >
-      </Cube>)
-    }
-  }
-
   async function apiSaveObject3D(obj){
     if(!sceneID){
       console.log('ERROR NULL SCENEID');
@@ -387,6 +366,76 @@ export default function EditorSection({editorid}){
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
+
+        if(args.action=="addcircle"){
+          let data = {
+            id: nanoid32()
+            , name:"circle"
+            , type:"circle"
+            , visible: true
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          };
+          apiSaveObject3D(data);
+
+          //objs.push(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+        if(args.action=="addcone"){
+          let data = {
+            id: nanoid32()
+            , name:"cone"
+            , type:"cone"
+            , visible: true
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          };
+          apiSaveObject3D(data);
+
+          //objs.push(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+        if(args.action=="addcamera"){
+          let data = {
+            id: nanoid32()
+            , name:"camera"
+            , type:"camera"
+            , visible: true
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          };
+          apiSaveObject3D(data);
+
+          //objs.push(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+        if(args.action=="addpointlight"){
+          let data = {
+            id: nanoid32()
+            , name:"pointlight"
+            , type:"pointlight"
+            , visible: true
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          };
+          apiSaveObject3D(data);
+
+          //objs.push(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+
 
         if(args.action=="select"){
           for(const obj3D of object3Ds){
@@ -534,6 +583,10 @@ export default function EditorSection({editorid}){
     //setIsOpenModal(true);
   //}
 
+  function toggleOrbitControl(){
+    setEnableOrbitControl(!enableOrbitControl);
+  }
+
   return(<>
     
     <Canvas>
@@ -547,8 +600,14 @@ export default function EditorSection({editorid}){
         return buildModel(_entity)
       })}
 
-      
-      <CameraCtrl />
+      {enableOrbitControl && <CameraCtrl />}
+
+      <GizmoHelper
+        alignment="bottom-right" // widget alignment within scene
+        margin={[80, 80]} // widget margins (X, Y)
+        >
+        <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
+      </GizmoHelper>
       
     </Canvas>
     {/*
@@ -570,7 +629,8 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Select" >
-        <a href="#" >Select Object</a>
+        <a href="#" >Select Object</a> <br />
+        <a href="#" onClick={toggleOrbitControl}> Orbit Control {enableOrbitControl?("on"):("off")} </a>
       </DropDownMenu>
 
       {/*
@@ -582,7 +642,7 @@ export default function EditorSection({editorid}){
       */}
 
       <DropDownMenu menuname="View" >
-        <a href="#" onClick={()=>showViewModal('assets')} >Assets</a><br/>
+        <a href="#" onClick={()=>showViewModal('assets')} >Assets</a> <br/>
         <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a>
         {/*
         <a href="#" onClick={()=>showViewModal('materials')} >Materials</a>
@@ -597,13 +657,17 @@ export default function EditorSection({editorid}){
 
       <DropDownMenu menuname="Scene" >
         
-        <a href="#" onClick={(e)=>callBackOPS({action:"addcube"})}>Add Cube</a>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcube"})}>Add Cube</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcircle"})}>Add Circle</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcone"})}>Add Cone</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addpointlight"})}>Add Point Light</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcamera"})}>Add Camera</a>
         {/*
         <a href="#" onClick={(e)=>callBackOPS({action:"addscene"})}>Add Scene</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addsphere"})}>Add Sphere</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a>
-        <a href="#" onClick={(e)=>callBackOPS({action:"addcamera"})}>Add Camera</a>
-        <a href="#" onClick={(e)=>callBackOPS({action:"addlight"})}>Add Light</a>
+        
+        
         */}
       </DropDownMenu>
 

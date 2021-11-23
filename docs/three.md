@@ -5,8 +5,10 @@ https://github.com/pmndrs/drei
 - others
 
 
-
-
+https://threejsfundamentals.org/threejs/lessons/threejs-primitives.html
+https://threejs.org/docs/#api/en/geometries/CircleGeometry
+https://docs.pmnd.rs/react-three-fiber/API/objects
+https://threejs.org/docs/index.html?q=light#api/en/helpers/PointLightHelper
 
 
 https://github.com/pmndrs/react-three-fiber
