@@ -60,14 +60,14 @@
     - database  (partly working)
   - load (added ) 
     - database (partly working)
-  - shape
-    - add cube (add)
-      - database (partly working)
-    - add plane (not build)
-    - add sphere (not build)
-    - add ... (not build)
-  - camera (not build)
-  - light (not build)
+  - shape / object type
+    - box (added)
+    - circle (added)
+    - cone (added)
+    - point light (added)
+    - camera (added)
+    - plane (not build)
+    - sphere (not build)
   - orbit camera ( added / work in progres )
 
   - prop view panel (work in progress)
