@@ -4,7 +4,7 @@
 */
 
 import { getSession } from "next-auth/react";
-import db,{ sessionTokenCheck } from "../../lib/database";
+import clientDB,{ sessionTokenCheck } from "../../lib/database";
 import { nanoid16 } from "../../lib/helper";
 import { log } from "../../lib/log";
 
@@ -20,6 +20,7 @@ export default async (req, res) => {
   if(error){
     return res.json({error:"FAIL"});
   }
+  const db = await clientDB();
   const Scene = db.model('Scene');
 
   //check for scene id from database current set

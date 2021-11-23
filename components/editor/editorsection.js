@@ -24,7 +24,7 @@ import Foo from '../entities/foo';
 import CameraCtrl from '../entities/cameractrl';
 
 // UI / PANEL
-import ThemeSection from "../system/themesection";
+//import ThemeSection from "../system/themesection";
 import DropDownMenu from "../ui/edropdown";
 import Modal from '../ui/emodal';
 import {NotificationsManager,Color} from "../notify";
@@ -72,8 +72,17 @@ export default function EditorSection({editorid}){
 
   const [notify,setNotify] = useState(); //notify call when detect change in state
 
-  //useEffect(()=>{
-  //},[]);
+  useEffect(()=>{
+    const theme = localStorage.getItem('theme');
+    if(theme){
+      document.documentElement.setAttribute('data-theme', theme);
+    }
+  },[]);
+
+  function changeTheme(name){
+    document.documentElement.setAttribute('data-theme', name);
+    localStorage.setItem('theme', name);
+  }
 
   useEvent('keydown',keydown);
   useEvent('keyup',keyup);
@@ -617,9 +626,10 @@ export default function EditorSection({editorid}){
         {/*<a href="#" >Plugins</a>*/}
       </DropDownMenu>
 
-      
-
-      <ThemeSection></ThemeSection>
+      <DropDownMenu menuname="Theme" >
+        <a href="#" onClick={()=>changeTheme('light')}> Light </a> <br/>
+        <a href="#" onClick={()=>changeTheme('dark')}> Dark </a>
+      </DropDownMenu>
 
       <label> Editor Name: {editorName} </label>
       {/*<label> Editor ID: {editorID} </label>*/}

@@ -4,7 +4,7 @@
 */
 
 import { getSession } from "next-auth/react";
-import db,{ sessionTokenCheck } from "../../lib/database";
+import clientDB,{ sessionTokenCheck } from "../../lib/database";
 import { log } from "../../lib/log";
 
 export default async (req, res) => {
@@ -19,7 +19,7 @@ export default async (req, res) => {
   if(error){
     return res.json({error:"FAIL"});
   }
-
+  const db = await clientDB();
   const Object3D = db.model('Object3D');
   //check for scene id from database current set
   //if(req.method == 'GET'){

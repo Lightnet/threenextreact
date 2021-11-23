@@ -10,43 +10,96 @@ import ObjectPosition from "../panel/objectposition";
 import RotationProp from "../panel/objectrotation";
 import ScaleProp from "../panel/objectscale";
 
+import { isEmpty } from "../../../lib/helper";
+
 export default function PropObject({ops}) {
   const [isObject3D, setIsObject3D] = useState(false);
-  const { selectObject,setSelectObject } = useEditor();
+  const { 
+    selectObject, setSelectObject,
+    object3Ds, setObject3Ds
+  
+  } = useEditor();
+
+  const [objectName, setObjectName] = useState('');
+  const [objectID, setObjectID] = useState('');
 
   useEffect(()=>{
+    if(selectObject){
+      setObjectName(selectObject.name)
+      setObjectID(selectObject.id)
+    }
+  },[selectObject])
 
-  },[])
+  function onChangeName(e){
+    setObjectName(e.target.value)
+  }
+
+  function onEnterName(e){
+    //setObjectName(e.target.value)
+    if(e.keyCode == 13){
+      if(isEmpty(e.target.value)){
+        return;
+      }
+      console.log("enter...")
+      if(typeof ops !== 'undefined'){
+        ops({
+          action:"rename",
+          id:objectID,
+          name:objectName
+        });
+      }
+    }
+  }
+
+  function onSelectObject3D(e){
+    console.log("onSelectObject3D: ", e.target.value);
+    for(const obj3d of object3Ds ){
+      if(obj3d.id ==  e.target.value){
+        setSelectObject(obj3d);
+        setObjectName(obj3d.name);
+        setObjectID(obj3d.id);
+        break;
+      }
+    }
+  }
 
   return (<>
     <div>
-      <div>
-        {selectObject && <label>Name:{selectObject?.name}</label>}
+      <div className="headerpanel">
+        <select onChange={onSelectObject3D} style={{width:'32px'}}>
+          {object3Ds.map(item=>{
+            return (<option key={item.id} value={item.id}> {item.name} </option>)
+          })}
+        </select>
+        <input value={objectName} onChange={onChangeName} onKeyUp={onEnterName} style={{width:'158px'}}></input>
       </div>
       <div>
-        {selectObject.position &&
+        {selectObject?.position &&
           <ObjectPosition
             ops={ops}
             selectObject={selectObject}
             />
         }
 
-        {selectObject.rotation &&
+        {selectObject?.rotation &&
           <RotationProp
             ops={ops}
             selectObject={selectObject}
             />
         }
 
-        {selectObject.scale &&
+        {selectObject?.scale &&
           <ScaleProp
             ops={ops}
             selectObject={selectObject}
             />
         }
 
-
       </div>
     </div>
   </>);
 }
+/*
+{selectObject && <label>Name:{selectObject?.name}</label>}
+
+*/

@@ -30,6 +30,14 @@
   - sign up (added / need work)
   - third partly sign token (not build)
 
+- ui
+  - button (work in progress)
+  - input (work in progress)
+  - window (work in progress)
+  - modal (work in progress)
+  - sidebar (work in progress)
+  - 
+
 - upload file type (work in progress)
   - save to database as base64 string
   - delete (not added)
@@ -61,6 +69,13 @@
   - camera (not build)
   - light (not build)
   - orbit camera ( added / work in progres )
+
+  - prop view panel (work in progress)
+    - scene (added)
+    - scenes (added)
+    - object props (added)
+    - object3ds (added)
+    - objectdatas (added)
 
   - object3d
     - database save and load (partly working)

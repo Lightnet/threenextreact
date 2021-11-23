@@ -31,10 +31,10 @@ export default function Component({selectObject,ops}) {
 
   return (<>
     <div>
-      <div>
+      <div className="headerpanel">
         <label>Position:</label>
       </div>
-      <div>
+      <div className="contentpanel">
         <label>X:
         <NumberProp 
             ops={ops}
@@ -46,7 +46,7 @@ export default function Component({selectObject,ops}) {
         </label>
       </div>
 
-      <div>
+      <div className="contentpanel">
         <label>Y:
         <NumberProp 
             ops={ops}
@@ -58,7 +58,7 @@ export default function Component({selectObject,ops}) {
         </label>
       </div>
 
-      <div>
+      <div className="contentpanel">
         <label>Z:
         <NumberProp 
             ops={ops}

@@ -31,11 +31,11 @@ export default function Component({selectObject,ops}) {
   });
 
   return (<>
-    <div>
+    <div className="headerpanel">
       <div>
         <label>Scale:</label>
       </div>
-      <div>
+      <div className="contentpanel">
         <label>X:
           <PropNumber 
             ops={ops}
@@ -47,7 +47,7 @@ export default function Component({selectObject,ops}) {
         </label>
       </div>
 
-      <div>
+      <div className="contentpanel">
         <label>Y:
           <PropNumber 
             ops={ops}
@@ -59,7 +59,7 @@ export default function Component({selectObject,ops}) {
         </label>
       </div>
 
-      <div>
+      <div className="contentpanel">
         <label>Z:
           <PropNumber 
             ops={ops}

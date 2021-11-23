@@ -21,7 +21,7 @@ export default function Component(props) {
   }, []);
   
   return (<>
-    <div className={styles.dropdown}>
+  <div className={styles.dropdown}>
     <button className={styles.dropbtn}>{menuName} 
       <i className="fa fa-caret-down"></i>
     </button>

@@ -17,7 +17,7 @@ import fs from "fs";
 import path from "path";
 
 import { getSession } from "next-auth/react";
-import db,{ sessionTokenCheck } from "../../lib/database";
+import clientDB,{ sessionTokenCheck } from "../../lib/database";
 
 export const config = {
   api: {
@@ -37,6 +37,7 @@ export default async function handler(req, res) {
   if(error){
     return res.json({error:"FAIL"});
   }
+  const db = await clientDB();
 
   /*
   if (req.method === 'POST') {

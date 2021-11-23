@@ -4,7 +4,7 @@
 */
 
 import { getSession } from "next-auth/react";
-import db,{ sessionTokenCheck } from "../../lib/database";
+import clientDB,{ sessionTokenCheck } from "../../lib/database";
 import {log} from "../../lib/log";
 import { nanoid32 } from "../../lib/helper";
 
@@ -20,6 +20,8 @@ export default async (req, res) => {
   if(error){
     return res.json({error:"FAIL"});
   }
+
+  const db = await clientDB();
   const Editor = db.model('Editor');
 
   if(req.method == 'GET'){
