@@ -7,7 +7,7 @@ import { useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
-export default function Circle(props) {
+export default function RCircle(props) {
   // This reference will give us direct access to the THREE.Mesh object
   const ref = useRef()
 

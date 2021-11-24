@@ -3,10 +3,13 @@
   Created by: Lightnet
 */
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getSession } from "next-auth/react";
 import GameMain from '../components/game/gamemain';
 import AuthAccess from '../components/system/authaccess';
+import { GameProvider } from '../components/game/gameprovider';
+import { useRouter } from 'next/router';
+
 
 export async function getServerSideProps(ctx) {
   return {
@@ -16,23 +19,32 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-export default function Game({session}){
+export default function GamePage({session}){
+
+  const router = useRouter();
+  const [gameID, setGameID] = useState('null');
 
   useEffect(()=>{
-    console.log(session);
-  },[session])
+    const {gameid } = router.query;
+    if(gameid){
+      //console.log("assign project id???")
+      setGameID(projectid);
+    }
+    
+  },[router])
 
-  if(!session){
-    return(<>
-      <label>Loading...</label>
-    </>);  
-  }
+  //if(!session){
+    //return(<>
+      //<label>Loading...</label>
+    //</>);  
+  //}
 
   return(<>
     <AuthAccess>
-      <GameMain>
-
-      </GameMain>
+      <GameProvider>
+        <GameMain gameid={gameID}>
+        </GameMain>
+      </GameProvider>
     </AuthAccess>
   </>);
 }

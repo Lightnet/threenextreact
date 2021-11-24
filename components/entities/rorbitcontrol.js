@@ -7,7 +7,7 @@ import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
-export default function CameraCtrl(props){
+export default function ROrbitControl(props){
   const ref = useRef();
 
   return (

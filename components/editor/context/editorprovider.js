@@ -1,3 +1,8 @@
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
+
 import React,{ createContext, useState, useMemo, useContext } from "react";
 
 export const EditorContext = createContext();
@@ -7,12 +12,6 @@ export function useEditor(){
   if (!context) {
     throw new Error(`useCount must be used within a UserContext`)
   }
-  //console.log(context);
-  //const {editorID, setEditorID} = context
-  //return {
-    //editorID, 
-    //setEditorID
-  //}
   return context;
 }
 
@@ -58,5 +57,4 @@ export function EditorProvider(props){
 
   return <EditorContext.Provider value={value} {...props} />
 }
-
 // https://flexiple.com/react/provider-pattern-with-react-context-api/

@@ -12,55 +12,57 @@
 // https://javascript.info/map-set
 // https://stackoverflow.com/questions/48131100/react-render-array-of-components
 
-import { useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+import { useEffect, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { useGame } from './gameprovider';
+import { GizmoHelper, GizmoViewport } from '@react-three/drei';
 
-function Box(props) {
-  // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
-  // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-  // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01))
-  // Return the view, these are regular Threejs elements expressed in JSX
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    </mesh>
-  )
-}
+export default function GameMain({gameid}){
+  //console.log(props);
 
-function Foo(props){
-  const ref = useRef();
-  console.log("test");
+  const [isLoading, setIsLoading] = useState(false); // loading content
 
-  return (
-    <mesh
-      {...props}
-      ref={ref}
-      >
-    </mesh>
-    )
-}
+  const {
+    gameID, setGameID,
+    isDebug, setIsDebug
+  } = useGame();
 
-export default function GameMain({
-  session
-}){
+  useEffect(()=>{
+    setIsDebug(true);  
+  },[])
+
+  //get game id if exist
+  useEffect(()=>{
+    if(gameid){
+      setGameID(gameid);
+    }
+  },[gameid])
+
+  //async function getGameID(){
+  //}
+
+  //function renderDebugAixes(){
+  //}
 
   return(<>
     <Canvas>
       <ambientLight />
       <pointLight position={[10, 10, 10]} />
-      <Box position={[1.2, 0, 0]} />
+
+      {(isDebug == true )&&
+        <GizmoHelper
+        alignment="bottom-right" // widget alignment within scene
+        margin={[80, 80]} // widget margins (X, Y)
+        >
+        <GizmoViewport
+          axisColors={['red', 'green', 'blue']} labelColor="black"
+        ></GizmoViewport>
+        </GizmoHelper>}
     </Canvas>
+    <div style={{position:'fixed',top:'0px',left:'0px'}}>
+      <label>ID:{gameID} </label>
+    </div>
+    
   </>);
 }
 /*

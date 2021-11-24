@@ -18,11 +18,7 @@ import { PerspectiveCamera, OrbitControls, PositionalAudio, GizmoHelper, GizmoVi
 
 //three object3d
 import { buildModel } from './buildmodel';
-import Box from '../entities/box';
-//import Cube from '../entities/cube';
-import Foo from '../entities/foo';
-//import CameraTest from '../../entities/cameratest';
-import CameraCtrl from '../entities/cameractrl';
+import ROrbitControl from '../entities/rorbitcontrol';
 
 // UI / PANEL
 //import ThemeSection from "../system/themesection";
@@ -361,8 +357,6 @@ export default function EditorSection({editorid}){
             , scale:[1,1,1]
           };
           apiSaveObject3D(data);
-
-          //objs.push(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
@@ -378,8 +372,6 @@ export default function EditorSection({editorid}){
             , scale:[1,1,1]
           };
           apiSaveObject3D(data);
-
-          //objs.push(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
@@ -395,8 +387,6 @@ export default function EditorSection({editorid}){
             , scale:[1,1,1]
           };
           apiSaveObject3D(data);
-
-          //objs.push(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
@@ -412,8 +402,6 @@ export default function EditorSection({editorid}){
             , scale:[1,1,1]
           };
           apiSaveObject3D(data);
-
-          //objs.push(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
@@ -429,13 +417,9 @@ export default function EditorSection({editorid}){
             , scale:[1,1,1]
           };
           apiSaveObject3D(data);
-
-          //objs.push(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
-
-
 
         if(args.action=="select"){
           for(const obj3D of object3Ds){
@@ -535,7 +519,6 @@ export default function EditorSection({editorid}){
                   setSelectObject(item);
                 }
               }
-
               return item;
             }else{
               return item;
@@ -590,17 +573,13 @@ export default function EditorSection({editorid}){
   return(<>
     
     <Canvas>
-      <Foo />
       <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <Box position={[1.2, 0, 0]} />
-      
       {/*objects3D*/}
       {object3Ds.map((_entity)=>{
         return buildModel(_entity)
       })}
 
-      {enableOrbitControl && <CameraCtrl />}
+      {enableOrbitControl && <ROrbitControl />}
 
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
@@ -612,7 +591,6 @@ export default function EditorSection({editorid}){
     </Canvas>
     {/*
     */}
-
     
     <EditorTopSideBar
       isOpen={isSideBarTop}

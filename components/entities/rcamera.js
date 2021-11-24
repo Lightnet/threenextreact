@@ -8,7 +8,7 @@ import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 import { PerspectiveCamera, OrbitControls, PositionalAudio, useHelper } from '@react-three/drei'
 import { CameraHelper } from 'three';
 
-export default function Camera(props){
+export default function RCamera(props){
   const ref = useRef();
 
   useHelper(ref, CameraHelper,1,'hotpink')

@@ -1,6 +1,7 @@
-/**
- * Blank Component
- */
+/*
+  LICENSE: MIT
+  Created by: Lightnet
+*/
 
 // bug in key value
 // testing array
@@ -57,12 +58,6 @@ export default function Component() {
             <label>Description</label>
           </th>
           <th>
-            <label>Authors</label>
-          </th>
-          <th>
-            <label>Access</label>
-          </th>
-          <th>
             <label>Game Modes</label>
           </th>
           <th>
@@ -79,12 +74,6 @@ export default function Component() {
             </th>
             <th>
               <label>{item.description}</label>
-            </th>
-            <th>
-              <label>{item.authors}</label>
-            </th>
-            <th>
-              <label>{item.access}</label>
             </th>
             <th>
               <label>{item.gamemodes}</label>
