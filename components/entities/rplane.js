@@ -7,12 +7,10 @@ import { useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
-export default function RBox(props) {
+export default function RPlane(props) {
   // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef();
-  const [hovered, setHover] = useState(false);
-
-  
+  const ref = useRef()
+  const [hovered, setHover] = useState(false)
   //const [active, setActive] = useState(false)
   //console.log("ref.current.position")
   //if(ref.current){
@@ -35,7 +33,7 @@ export default function RBox(props) {
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
+      <planeGeometry args={[10, 10]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )

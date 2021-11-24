@@ -51,7 +51,7 @@ export default function Component({object3ds,ops}) {
 
   function btnEdit(id){
     for(const obj3d of object3Ds){
-      if(obj3d.id == id){
+      if(obj3d.objectid == id){
         setObjectName(obj3d.name)
         break;
       }
@@ -89,17 +89,17 @@ export default function Component({object3ds,ops}) {
       //return <label>Found</label>
       return object3Ds?.map((_entity)=>{
         return (
-          <div key={_entity.id}>
-            {(isEdit==true && object3DID== _entity.id)? (
+          <div key={_entity.objectid}>
+            {(isEdit==true && object3DID== _entity.objectid)? (
               <input value={objectMame} onChange={onChangeObjectName} onKeyUp={inputKeyObject3DName}></input>
             ):(
               <label> Name:{_entity?.name} </label>
             )}
             
-            <img src="/icon/edit01.svg" className="imgicon" width="16" height="16" onClick={()=>btnEdit(_entity.id)} />
-            <img src="/icon/select01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"select",id:_entity.id})} />
-            <img src="/icon/visibleeye01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"visible",id:_entity.id})} />
-            <img src="/icon/delete01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"remove",id:_entity.id})} />
+            <img src="/icon/edit01.svg" className="imgicon" width="16" height="16" onClick={()=>btnEdit(_entity.objectid)} />
+            <img src="/icon/select01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"select",id:_entity.objectid})} />
+            <img src="/icon/visibleeye01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"visible",id:_entity.objectid})} />
+            <img src="/icon/delete01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"remove",id:_entity.objectid})} />
                         
           </div>
         )

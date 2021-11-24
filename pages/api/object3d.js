@@ -52,7 +52,7 @@ export default async (req, res) => {
         try{
           const newobject3d = await Object3D({
             sceneid: data.sceneid
-            , id : data.data.id
+            , id : data.data.objectid
             , data: data.data
           });
           const saveObject = await newobject3d.save();
@@ -70,7 +70,7 @@ export default async (req, res) => {
     let data = req.body;
     if(data.action == 'UPDATE'){
       let query={
-        id:data.data.id
+        id:data.data.objectid
       }
       let update={
         data:data.data

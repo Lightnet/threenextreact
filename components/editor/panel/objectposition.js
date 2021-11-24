@@ -14,8 +14,8 @@ export default function Component({selectObject,ops}) {
 
   useEffect(()=>{
     if(selectObject){
-      if(selectObject.id){
-        setObjID(selectObject.id);
+      if(selectObject.objectid){
+        setObjID(selectObject.objectid);
       }
       if(selectObject.position){
         setPosX(selectObject.position[0]);

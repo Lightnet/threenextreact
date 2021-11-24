@@ -18,7 +18,7 @@ export default function PropObject3Ds({ops}) {
 
   function btnEdit(id){
     for(const obj3d of object3Ds){
-      if(obj3d.id == id){
+      if(obj3d.objectid == id){
         setEditName(obj3d.name)
         break;
       }
@@ -49,15 +49,15 @@ export default function PropObject3Ds({ops}) {
     if(object3Ds){
       return object3Ds?.map((entity)=>{
         return (
-          <div key={entity.id}>
-            {(isEdit==true && editID== entity.id)? (
+          <div key={entity.objectid}>
+            {(isEdit==true && editID== entity.objectid)? (
               <input value={editName} onChange={onChangeEditName} onKeyUp={inputKeyEditName}></input>
             ):(
               <label> Name:{entity?.name} </label>
             )}
-            <img src="/icon/edit01.svg" className="imgicon" width="16" height="16" onClick={()=>btnEdit(entity.id)} />
-            <img src="/icon/select01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"select",id:entity.id})} />
-            <img src="/icon/visibleeye01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"visible",id:entity.id})} />
+            <img src="/icon/edit01.svg" className="imgicon" width="16" height="16" onClick={()=>btnEdit(entity.objectid)} />
+            <img src="/icon/select01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"select",id:entity.objectid})} />
+            <img src="/icon/visibleeye01.svg" className="imgicon" width="16" height="16" onClick={()=>ops({action:"visible",id:entity.objectid})} />
           </div>
         )
       })

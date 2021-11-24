@@ -13,7 +13,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree,render, events } from '@react-three/fiber';
-import { Physics,usePlane, useBox } from '@react-three/cannon'
+import { Physics, usePlane, useBox } from '@react-three/cannon'
 
 export async function getServerSideProps(ctx) {
 

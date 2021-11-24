@@ -8,7 +8,7 @@
 
 */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PropScene from "../scene/propscene";
 import PropScenes from "../scene/propscenes";
@@ -16,12 +16,18 @@ import PropObject3Ds from "../object/propobject3ds";
 
 import PropObjectData from "../assets/propobjectdata";
 import PropObject from "../object/propobject";
-import ViewScene from "../scene/viewscene";
+//import ViewScene from "../scene/viewscene";
 import PropNode from "../node/propnode";
 
-export default function ViewPanel({ops}) {
+export default function ViewPanel({currentView,ops}) {
 
   const [view, setView] = useState('');
+
+  useEffect(()=>{
+    if(currentView){
+      setView(currentView);
+    }
+  },[currentView])
 
   function onChangeView(e){
     console.log(e.target.value);

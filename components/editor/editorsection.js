@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // lib 
 import { nanoid32 } from "../../lib/helper";
 
@@ -38,6 +38,7 @@ import AssetsSection from './assets/assetssection';
 
 import { useEditor, useScene } from './context/editorprovider';
 import ViewPanel from './panel/viewpanel';
+import { Physics } from '@react-three/cannon';
 
 export default function EditorSection({editorid}){
 
@@ -346,12 +347,31 @@ export default function EditorSection({editorid}){
       if(args.action){
         console.log("args.action: ",args.action)
 
-        if(args.action=="addcube"){
+        if(args.action=="addbox"){
           let data = {
-            id: nanoid32()
-            , name:"cube"
-            , type:"cube"
+            objectid: nanoid32()
+            , name:"box"
+            , type:"box"
             , visible: true
+            , isPhysics: false
+            , mass: 1
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          };
+          apiSaveObject3D(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+        if(args.action=="addplane"){
+          let data = {
+            objectid: nanoid32()
+            , name:"plane"
+            , type:"plane"
+            , visible: true
+            , isPhysics: false
+            , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -363,10 +383,11 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addcircle"){
           let data = {
-            id: nanoid32()
+            objectid: nanoid32()
             , name:"circle"
             , type:"circle"
             , visible: true
+            , isPhysics: false
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -378,10 +399,11 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addcone"){
           let data = {
-            id: nanoid32()
+            objectid: nanoid32()
             , name:"cone"
             , type:"cone"
             , visible: true
+            , isPhysics: false
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -393,10 +415,11 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addcamera"){
           let data = {
-            id: nanoid32()
+            objectid: nanoid32()
             , name:"camera"
             , type:"camera"
             , visible: true
+            , isPhysics: false
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -408,10 +431,11 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addpointlight"){
           let data = {
-            id: nanoid32()
+            objectid: nanoid32()
             , name:"pointlight"
             , type:"pointlight"
             , visible: true
+            , isPhysics: false
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -423,7 +447,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="select"){
           for(const obj3D of object3Ds){
-            if(obj3D.id == args.id){
+            if(obj3D.objectid == args.id){
               setSelectObject(obj3D);
               break;
             }
@@ -433,7 +457,7 @@ export default function EditorSection({editorid}){
         if(args.action=="visible"){
           //console.log(args.visible);
           setObject3Ds(object3Ds.map(item=>{
-            if(item.id === args.id){
+            if(item.objectid === args.id){
               console.log(item.visible);
               //if(item.visible){
                 item.visible=!item.visible;
@@ -451,7 +475,7 @@ export default function EditorSection({editorid}){
         if(args.action=="rename"){
           console.log(args.name);
           setObject3Ds(object3Ds.map(item=>{
-            if(item.id === args.id){
+            if(item.objectid === args.id){
               item.name=args.name;
               apiUpdateObject3D(item);
               return {...item, name:args.name};
@@ -464,13 +488,13 @@ export default function EditorSection({editorid}){
 
         if(args.action=="remove"){
           console.log(args.name);
-          apiDeleteObject3D(args.id);
+          apiDeleteObject3D(args.objectid);
           for(const obj3d of object3Ds){
             if(selectObject == obj3d){
               setSelectObject(null);
             }
           }
-          setObject3Ds(object3Ds.filter(item=>item.id !== args.id ));
+          setObject3Ds(object3Ds.filter(item=>item.objectid !== args.id ));
           updateObjects();
         }
 
@@ -479,7 +503,8 @@ export default function EditorSection({editorid}){
           console.log(args);
 
           setObject3Ds(object3Ds.map(item=>{
-            if(item.id === args.id){
+            console.log(item.objectid);
+            if(item.objectid === args.id){
               //return {...item, name:args.name};
 
               if(args.objkey == "positionX"){
@@ -575,9 +600,14 @@ export default function EditorSection({editorid}){
     <Canvas>
       <ambientLight />
       {/*objects3D*/}
+
       {object3Ds.map((_entity)=>{
         return buildModel(_entity)
       })}
+
+      <Physics>
+
+      </Physics>
 
       {enableOrbitControl && <ROrbitControl />}
 
@@ -635,7 +665,8 @@ export default function EditorSection({editorid}){
 
       <DropDownMenu menuname="Scene" >
         
-        <a href="#" onClick={(e)=>callBackOPS({action:"addcube"})}>Add Cube</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addbox"})}>Add Box</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcircle"})}>Add Circle</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcone"})}>Add Cone</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addpointlight"})}>Add Point Light</a> <br/>
@@ -687,11 +718,19 @@ export default function EditorSection({editorid}){
         ops={callBackOPS}
         object3ds={object3Ds}
         ></EditorScene>
-      {/* */}
+
+      <ViewPanel 
+        currentView="props"
+        ops={callBackOPS}>          
+        </ViewPanel>
+
+
+      {/* 
       <EditorProps
         selectObject={selectObject}
         ops={callBackOPS}
       ></EditorProps>
+      */}
          
     </EditorRightSideBar>
 

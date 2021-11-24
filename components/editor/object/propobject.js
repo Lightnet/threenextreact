@@ -26,7 +26,7 @@ export default function PropObject({ops}) {
   useEffect(()=>{
     if(selectObject){
       setObjectName(selectObject.name)
-      setObjectID(selectObject.id)
+      setObjectID(selectObject.objectid)
     }
   },[selectObject])
 
@@ -54,10 +54,10 @@ export default function PropObject({ops}) {
   function onSelectObject3D(e){
     console.log("onSelectObject3D: ", e.target.value);
     for(const obj3d of object3Ds ){
-      if(obj3d.id ==  e.target.value){
+      if(obj3d.objectid ==  e.target.value){
         setSelectObject(obj3d);
         setObjectName(obj3d.name);
-        setObjectID(obj3d.id);
+        setObjectID(obj3d.objectid);
         break;
       }
     }
@@ -68,7 +68,7 @@ export default function PropObject({ops}) {
       <div className="headerpanel">
         <select onChange={onSelectObject3D} style={{width:'32px'}}>
           {object3Ds.map(item=>{
-            return (<option key={item.id} value={item.id}> {item.name} </option>)
+            return (<option key={item.objectid} value={item.objectid}> {item.name} </option>)
           })}
         </select>
         <input value={objectName} onChange={onChangeName} onKeyUp={onEnterName} style={{width:'158px'}}></input>

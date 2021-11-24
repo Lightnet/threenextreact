@@ -14,7 +14,7 @@ export default function PropNode({ }) {
         <label>Node:</label>
       </div>
       <div>
-        Node content
+        content
       </div>
     </div>
     </>);
