@@ -1,7 +1,6 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
-
 */
 
 import { useEffect, useState } from "react";
@@ -11,6 +10,7 @@ import RotationProp from "../panel/objectrotation";
 import ScaleProp from "../panel/objectscale";
 
 import { isEmpty } from "../../../lib/helper";
+import PropPhysics from "./propphysics";
 
 export default function PropObject({ops}) {
   const [isObject3D, setIsObject3D] = useState(false);
@@ -74,6 +74,13 @@ export default function PropObject({ops}) {
         <input value={objectName} onChange={onChangeName} onKeyUp={onEnterName} style={{width:'158px'}}></input>
       </div>
       <div>
+        {selectObject &&
+          <PropPhysics
+            ops={ops}
+            selectObject={selectObject}
+          ></PropPhysics>
+        }
+
         {selectObject?.position &&
           <ObjectPosition
             ops={ops}
@@ -94,6 +101,8 @@ export default function PropObject({ops}) {
             selectObject={selectObject}
             />
         }
+
+
 
       </div>
     </div>

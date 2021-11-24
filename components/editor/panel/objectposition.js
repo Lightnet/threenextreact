@@ -12,6 +12,8 @@ export default function Component({selectObject,ops}) {
   const [posY, setPosY] = useState(0);
   const [posZ, setPosZ] = useState(0);
 
+  const [showPanel, setShowPanel] = useState(true);
+
   useEffect(()=>{
     if(selectObject){
       if(selectObject.objectid){
@@ -29,46 +31,51 @@ export default function Component({selectObject,ops}) {
     }
   });
 
+  function togglePanel(){
+    setShowPanel(state=>!state);
+  }
+
   return (<>
     <div>
       <div className="headerpanel">
-        <label>Position:</label>
+      <button onClick={togglePanel}>{showPanel?("-"):("+")}</button><label>Position:</label>
       </div>
-      <div className="contentpanel">
-        <label>X:
-        <NumberProp 
-            ops={ops}
-            objid={objID}
-            objKey="positionX"
-            value={posX} 
-            objtype="object3d"
-            ></NumberProp>
-        </label>
-      </div>
-
-      <div className="contentpanel">
-        <label>Y:
-        <NumberProp 
-            ops={ops}
-            objid={objID}
-            objKey="positionY"
-            value={posY} 
-            objtype="object3d"
-            ></NumberProp>
-        </label>
-      </div>
-
-      <div className="contentpanel">
-        <label>Z:
-        <NumberProp 
-            ops={ops}
-            objid={objID}
-            objKey="positionZ"
-            value={posZ} 
-            objtype="object3d"
-            ></NumberProp>
-        </label>
-      </div>
+      {showPanel &&
+      <div>
+        <div className="contentpanel">
+          <label>X:
+          <NumberProp 
+              ops={ops}
+              objid={objID}
+              objKey="positionX"
+              value={posX}
+              objtype="object3d"
+              ></NumberProp>
+          </label>
+        </div>
+        <div className="contentpanel">
+          <label>Y:
+          <NumberProp 
+              ops={ops}
+              objid={objID}
+              objKey="positionY"
+              value={posY} 
+              objtype="object3d"
+              ></NumberProp>
+          </label>
+        </div>
+        <div className="contentpanel">
+          <label>Z:
+          <NumberProp 
+              ops={ops}
+              objid={objID}
+              objKey="positionZ"
+              value={posZ} 
+              objtype="object3d"
+              ></NumberProp>
+          </label>
+        </div>
+      </div>}
 
     </div>
   </>);

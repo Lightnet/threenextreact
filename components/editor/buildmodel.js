@@ -19,7 +19,7 @@ import RPointLight from "../entities/rpointlight";
 
 
 export function buildModel(item){
-  console.log(item)
+  //console.log(item)
   if(item.type=="box"){
     //console.log("FOUND CUBE");
     let value = {

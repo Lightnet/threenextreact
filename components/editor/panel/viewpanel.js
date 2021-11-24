@@ -43,7 +43,6 @@ export default function ViewPanel({currentView,ops}) {
       return <PropScenes ops={ops}></PropScenes>
     }
     if(view=='object3ds'){
-      console.log("OBJECT3DS")
       return <PropObject3Ds ops={ops}></PropObject3Ds>
     }
     if(view=='props'){

@@ -488,7 +488,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="remove"){
           console.log(args.name);
-          apiDeleteObject3D(args.objectid);
+          apiDeleteObject3D(args.id);
           for(const obj3d of object3Ds){
             if(selectObject == obj3d){
               setSelectObject(null);
@@ -503,7 +503,7 @@ export default function EditorSection({editorid}){
           console.log(args);
 
           setObject3Ds(object3Ds.map(item=>{
-            console.log(item.objectid);
+            //console.log(item.objectid);
             if(item.objectid === args.id){
               //return {...item, name:args.name};
 
@@ -537,11 +537,22 @@ export default function EditorSection({editorid}){
                 item.scale[2] = args.setValue;
               }
 
+              if(args.objkey == "isPhysics"){
+                item.isPhysics = args.setValue;
+              }
+
+              if(args.objkey == "mass"){
+                item.mass = args.setValue;
+              }
+
               apiUpdateObject3D(item);
               //check select object client
               for(const obj3d of object3Ds){
-                if(selectObject == obj3d){
+                if(selectObject.objectid == obj3d.objectid){
+                  console.log("select...")
+                  //setSelectObject(null);
                   setSelectObject(item);
+                  break;
                 }
               }
               return item;

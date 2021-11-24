@@ -3,18 +3,20 @@
   Created by: Lightnet
 */
 
-//https://stackoverflow.com/questions/9326653/javascript-for-float-and-integer-number-validation
+// https://stackoverflow.com/questions/9326653/javascript-for-float-and-integer-number-validation
+// https://www.w3resource.com/javascript-exercises/javascript-math-exercise-34.php
+// https://gist.github.com/evdokimovm/0e7163faf7c8fe24e41e6b68461e4feb
 
 import { useEffect, useState } from 'react';
 import { isEmpty,isNumber } from "../../../lib/helper";
 
-export default function PropNumber({ops,objid,value,objtype,objKey}) {
+export default function PropDegree({ops,objid,value,objtype,objKey}) {
 
   const [inputValue, setInputValue] = useState(0);
 
   useEffect(() => {
     if(value){
-      setInputValue(value);
+      setInputValue(value * 180 / Math.PI);
     }
     return ()=>{
       setInputValue(0);
@@ -46,7 +48,7 @@ export default function PropNumber({ops,objid,value,objtype,objKey}) {
         , id: objid
         , objtype: objtype
         , objkey: objKey
-        , setValue: parseFloat(event.target.value)
+        , setValue: (parseFloat(event.target.value) *  Math.PI / 180)
       });
     }
   }

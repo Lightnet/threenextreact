@@ -13,6 +13,8 @@ export default function Component({selectObject,ops}) {
   const [scaleY, setScaleY] = useState(0);
   const [scaleZ, setScaleZ] = useState(0);
 
+  const [showPanel, setShowPanel] = useState(true);
+
   useEffect(()=>{
     if(selectObject){
       if(selectObject.objectid){
@@ -30,47 +32,53 @@ export default function Component({selectObject,ops}) {
     }
   });
 
+  function togglePanel(){
+    setShowPanel(state=>!state);
+  }
+
   return (<>
     <div className="headerpanel">
       <div>
-        <label>Scale:</label>
+      <button onClick={togglePanel}>{showPanel?("-"):("+")}</button><label>Scale:</label>
       </div>
-      <div className="contentpanel">
-        <label>X:
-          <PropNumber 
-            ops={ops}
-            objid={objID}
-            objKey="scaleX"
-            value={scaleX} 
-            objtype="object3d"
-            ></PropNumber>
-        </label>
-      </div>
+      {showPanel &&
+      <div>
+        <div className="contentpanel">
+          <label>X:
+            <PropNumber 
+              ops={ops}
+              objid={objID}
+              objKey="scaleX"
+              value={scaleX} 
+              objtype="object3d"
+              ></PropNumber>
+          </label>
+        </div>
 
-      <div className="contentpanel">
-        <label>Y:
-          <PropNumber 
-            ops={ops}
-            objid={objID}
-            objKey="scaleY"
-            value={scaleY} 
-            objtype="object3d"
-            ></PropNumber>
-        </label>
-      </div>
+        <div className="contentpanel">
+          <label>Y:
+            <PropNumber 
+              ops={ops}
+              objid={objID}
+              objKey="scaleY"
+              value={scaleY} 
+              objtype="object3d"
+              ></PropNumber>
+          </label>
+        </div>
 
-      <div className="contentpanel">
-        <label>Z:
-          <PropNumber 
-            ops={ops}
-            objid={objID}
-            objKey="scaleZ"
-            value={scaleZ} 
-            objtype="object3d"
-            ></PropNumber>
-        </label>
-      </div>
-
+        <div className="contentpanel">
+          <label>Z:
+            <PropNumber 
+              ops={ops}
+              objid={objID}
+              objKey="scaleZ"
+              value={scaleZ} 
+              objtype="object3d"
+              ></PropNumber>
+          </label>
+        </div>
+      </div>}
     </div>
   </>);
 }

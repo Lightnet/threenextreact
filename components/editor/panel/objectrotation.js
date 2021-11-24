@@ -2,7 +2,11 @@
   LICENSE: MIT
   Created by: Lightnet
 */
+
+// https://discourse.threejs.org/t/degree-or-radian/21227/2
+
 import { useEffect, useState } from "react";
+import PropDegree from "../input/propdegree";
 import PropNumber from "../input/propnumber";
 
 export default function Component({selectObject,ops}) {
@@ -11,6 +15,9 @@ export default function Component({selectObject,ops}) {
   const [rotX, setRotX] = useState(0);
   const [rotY, setRotY] = useState(0);
   const [rotZ, setRotZ] = useState(0);
+
+  const [showPanel, setShowPanel] = useState(true);
+  const [isRadian, setRadian] = useState(true);
 
   useEffect(()=>{
     if(selectObject){
@@ -29,47 +36,88 @@ export default function Component({selectObject,ops}) {
     }
   });
 
+  function togglePanel(){
+    setShowPanel(state=>!state);
+  }
+
+  function toggleRadian(){
+    setRadian(state=>!state);
+  }
+
   return (<>
     <div>
       <div className="headerpanel">
-        <label>Rotation:</label>
+      <button onClick={togglePanel}>{showPanel?("-"):("+")}</button><label>Rotation:</label>
+      <button onClick={toggleRadian}>{isRadian?("Radian"):("Degree")}</button>
       </div>
-      <div className="contentpanel">
-        <label>X:
-        <PropNumber 
-            ops={ops}
-            objid={objID}
-            objKey="rotationX"
-            value={rotX} 
-            objtype="object3d"
-            ></PropNumber>
-        </label>
-      </div>
+      {showPanel &&
+      <div>
+        <div className="contentpanel">
+          <label>X:
+            {isRadian ? (
+              <PropNumber 
+                ops={ops}
+                objid={objID}
+                objKey="rotationX"
+                value={rotX} 
+                objtype="object3d"
+                />
+            ):(
+              <PropDegree 
+                ops={ops}
+                objid={objID}
+                objKey="rotationX"
+                value={rotX} 
+                objtype="object3d"
+              />
+            )}
+          </label>
+        </div>
 
-      <div className="contentpanel">
-        <label>Y:
-          <PropNumber 
-            ops={ops}
-            objid={objID}
-            objKey="rotationY"
-            value={rotY} 
-            objtype="object3d"
-            ></PropNumber>
-        </label>
-      </div>
+        <div className="contentpanel">
+          <label>Y:
+          {isRadian ? (
+            <PropNumber 
+              ops={ops}
+              objid={objID}
+              objKey="rotationY"
+              value={rotY} 
+              objtype="object3d"
+              />
+          ):(
+            <PropDegree 
+              ops={ops}
+              objid={objID}
+              objKey="rotationY"
+              value={rotY} 
+              objtype="object3d"
+            />
+          )}
+          </label>
+        </div>
 
-      <div className="contentpanel">
-        <label>Z:
-          <PropNumber 
-            ops={ops}
-            objid={objID}
-            objKey="rotationY"
-            value={rotZ} 
-            objtype="object3d"
-            ></PropNumber>
-        </label>
-      </div>
-
+        <div className="contentpanel">
+          <label>Z:
+          {isRadian ? (
+            <PropNumber 
+              ops={ops}
+              objid={objID}
+              objKey="rotationZ"
+              value={rotZ} 
+              objtype="object3d"
+              ></PropNumber>
+          ):(
+            <PropDegree 
+              ops={ops}
+              objid={objID}
+              objKey="rotationZ"
+              value={rotZ} 
+              objtype="object3d"
+            />
+          )}
+          </label>
+        </div>
+      </div>}
     </div>
   </>);
 }
