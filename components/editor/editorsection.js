@@ -612,12 +612,18 @@ export default function EditorSection({editorid}){
       <ambientLight />
       {/*objects3D*/}
 
-      {object3Ds.map((_entity)=>{
-        return buildModel(_entity)
+      {object3Ds.map((entity)=>{
+        if(entity.isPhysics == false){
+          return buildModel(entity)
+        }
       })}
 
       <Physics>
-
+        {object3Ds.map((entity)=>{
+          if(entity.isPhysics == true){
+            return buildModel(entity)
+          }
+        })}
       </Physics>
 
       {enableOrbitControl && <ROrbitControl />}

@@ -16,11 +16,16 @@ import { useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGame } from './gameprovider';
 import { GizmoHelper, GizmoViewport } from '@react-three/drei';
+import useFetch from '../hook/usefetch';
+import { buildModel } from '../editor/buildmodel';
 
-export default function GameMain({gameid}){
+export default function GameMain({gameid,sceneid}){
   //console.log(props);
 
   const [isLoading, setIsLoading] = useState(false); // loading content
+
+  const [sceneID, setSceneID] = useState(null); // loading content
+  const [object3Ds, setObject3Ds] = useState([]); // loading content
 
   const {
     gameID, setGameID,
@@ -38,16 +43,50 @@ export default function GameMain({gameid}){
     }
   },[gameid])
 
+  useEffect(()=>{
+    if(sceneid){
+      setSceneID(sceneid);
+      getSceneObject3D();
+    }
+  },[sceneid])
+
   //async function getGameID(){
   //}
 
   //function renderDebugAixes(){
   //}
 
+  async function getSceneObject3D(){
+    let data = await useFetch('api/',{
+      method:'POST',
+      body:JSON.stringify({
+        action:'OBJECT3DS'
+        , sceneid:sceneID
+      })
+    })
+    if(data.error){
+      console.log("FETCH ERROR OBJECT3DS")
+      msgWarn('Fetch Error Fail GET OBJECT3DS');
+      return;
+    }
+    //console.log("objects: ", data);
+    if(data.action){
+      if(data.action == 'UPDATE'){
+        //api server need fixed?
+        setObject3Ds(data.object3ds);
+      }
+      if(data.action == 'NOOBJECT3DS'){
+        console.log("NO object3ds")
+      }
+    }
+  }
+
   return(<>
     <Canvas>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+
+      {object3Ds.map((_entity)=>{
+        return buildModel(_entity)
+      })}
 
       {(isDebug == true )&&
         <GizmoHelper
@@ -66,5 +105,6 @@ export default function GameMain({gameid}){
   </>);
 }
 /*
-
+  <ambientLight />
+  <pointLight position={[10, 10, 10]} />
 */

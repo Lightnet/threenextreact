@@ -27,13 +27,25 @@ export function buildModel(item){
       isPhysics:item.isPhysics,
       mass:item.mass,
     };
+    if(item.isPhysics == true){
+      //value.isPhysics=item.isPhysics;
+      value.position=item.position;
+      value.rotation=item.rotation;
+      value.scale=item.scale;
+    }else{
+      value.position=[item.position[0],item.position[1],item.position[2]]
+      value.rotation=[item.rotation[0],item.rotation[1],item.rotation[2]]
+      value.scale=[item.scale[0],item.scale[1],item.scale[2]]
+    }
     return(<RBox
       key={item.objectid}
       //visible={item.visible }
       //position={item.position}
-      position={[item.position[0],item.position[1],item.position[2]]}
-      rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-      scale={[item.scale[0],item.scale[1],item.scale[2]]}
+      //{(item.isPhysics == false){
+        //position={[item.position[0],item.position[1],item.position[2]]}
+        //rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
+        //scale={[item.scale[0],item.scale[1],item.scale[2]]}
+      //}}
       //{...item}
       {... value}
     >

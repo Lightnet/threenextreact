@@ -5,11 +5,20 @@
 
 import { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
+//import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
+import { useBox } from '@react-three/cannon';
 
 export default function Box(props) {
   // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
+  let ref;
+  //if(props.isPhysics){
+    //let [_ref] = useBox(() => ({ position: [0, 5, 0], ...props }))
+    //const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
+    //ref = _ref;
+  //}else{
+    ref = useRef()
+  //}
+  
   // Set up state for the hovered and active state
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)

@@ -6,11 +6,24 @@
 import { useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
+import { usePlane } from '@react-three/cannon';
 
 export default function RPlane(props) {
   // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
+  //const ref = useRef()
+  let ref;
   const [hovered, setHover] = useState(false)
+
+  if(props.isPhysics){
+    //const [ref] = usePlane(() => ({ position: [0, 5, 0], ...props }))
+    //let [_ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }))
+    let [_ref] = usePlane(() => ({ ...props }))
+    ref = _ref;
+    //const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
+  }else{
+    ref = useRef()
+  }
+
   //const [active, setActive] = useState(false)
   //console.log("ref.current.position")
   //if(ref.current){
