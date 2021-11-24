@@ -103,6 +103,7 @@
   - props
     - position ( added )
     - rotation ( added )
+      - radian / degree (added)
     - scale ( added )
 
   - material  (not build)
@@ -142,24 +143,24 @@
   - config  (not build)
 
 ## Packages:
-- @react-three/fiber 7.0.19
-- @react-three/cannon 4.0.1
-- @react-three/drei 7.20.6
-- next 12.0.3
+- @react-three/fiber 
+- @react-three/cannon
+- @react-three/drei 
+- next 
 - next-auth 4.0.0-beta.26
-- react 17.0.3
+- react 
 - three 0.134.0
 - mongoose 6.0.12
-- jsonwebtoken 8.5.1
+- jsonwebtoken 
 ## 
 - webpack 5 (Next.js build in for dev)
 
 ### Not Used:
-- prisma 3.4.0
-- @prisma/client 3.4.0
-- react-dom 17.0.2
-- socket.io 4.3.1
-- socket.io-client 4.3.2
+- prisma 
+- @prisma/client 
+- react-dom 
+- socket.io 
+- socket.io-client 
 - sqlite 4.0.23
 
 ## Root:
@@ -180,9 +181,22 @@
 
   The network and database will handle some simple tests.
 
+# Setup:
+Command line:
+```
+$ npm install
+```
+- install packages
+
+```
+$ npm run dev
+```
+- run the server from npm package from package.json script
+
+
 ## Dev url testing:
-- http://localhost:5555/ web page
-- http://localhost:3000/ database (not in used)
+- http://localhost:5555/ database (not in used)
+- http://localhost:3000/ web page
 
 # .env
 ```
