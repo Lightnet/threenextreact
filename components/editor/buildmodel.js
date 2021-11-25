@@ -16,100 +16,77 @@ import RCircle from '../entities/rcircle';
 import RCone from '../entities/rcone';
 import RCamera from '../entities/rcamera';
 import RPointLight from "../entities/rpointlight";
+import RAmbientLight from "../entities/rambientlight";
 
 
 export function buildModel(item){
   //console.log(item)
+
+  let props = {
+    objectid:item.objectid,
+    isPhysics:item.isPhysics,
+    mass:item.mass,
+    visible:item.visible
+  };
+  if(item.isPhysics == true){
+    props.position=item.position;
+    props.rotation=item.rotation;
+    props.scale=item.scale;
+  }else{
+    //props.position=item.position;
+    props.position=[item.position[0],item.position[1],item.position[2]]
+    props.rotation=[item.rotation[0],item.rotation[1],item.rotation[2]]
+    props.scale=[item.scale[0],item.scale[1],item.scale[2]]
+  }
+
   if(item.type=="box"){
     //console.log("FOUND CUBE");
-    let value = {
-      objectid:item.objectid,
-      isPhysics:item.isPhysics,
-      mass:item.mass,
-    };
-    if(item.isPhysics == true){
-      //value.isPhysics=item.isPhysics;
-      value.position=item.position;
-      value.rotation=item.rotation;
-      value.scale=item.scale;
-    }else{
-      value.position=[item.position[0],item.position[1],item.position[2]]
-      value.rotation=[item.rotation[0],item.rotation[1],item.rotation[2]]
-      value.scale=[item.scale[0],item.scale[1],item.scale[2]]
-    }
+    
     return(<RBox
       key={item.objectid}
-      //visible={item.visible }
-      //position={item.position}
-      //{(item.isPhysics == false){
-        //position={[item.position[0],item.position[1],item.position[2]]}
-        //rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-        //scale={[item.scale[0],item.scale[1],item.scale[2]]}
-      //}}
-      //{...item}
-      {... value}
+      {... props}
     >
     </RBox>)
   }else if(item.type=="plane"){
-    let value = {
-      objectid:item.objectid,
-      isPhysics:item.isPhysics,
-      mass:item.mass,
-    };
-
     return(<RPlane
       key={item.objectid}
-      visible={item.visible }
-      
-      position={[item.position[0],item.position[1],item.position[2]]}
-      rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-      scale={[item.scale[0],item.scale[1],item.scale[2]]}
-      {... value}
+      {... props}
     >
     </RPlane>)
   }else if(item.type=="circle"){
     return(<RCircle
       key={item.objectid}
-      visible={item.visible }
-      
-      position={[item.position[0],item.position[1],item.position[2]]}
-      rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-      scale={[item.scale[0],item.scale[1],item.scale[2]]}
+      {... props}
     >
     </RCircle>)
   }else if(item.type=="cone"){
     return(<RCone
       key={item.objectid}
-      visible={item.visible }
-      position={[item.position[0],item.position[1],item.position[2]]}
-      rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-      scale={[item.scale[0],item.scale[1],item.scale[2]]}
-
+      {... props}
     >
     </RCone>)
   }else if(item.type=="camera"){
     return(<RCamera
       key={item.objectid}
-      visible={item.visible }
-      position={[item.position[0],item.position[1],item.position[2]]}
-      rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-      scale={[item.scale[0],item.scale[1],item.scale[2]]}
-
+      {... props}
     >
     </RCamera>)
   }else if(item.type=="pointlight"){
     return(<RPointLight
       key={item.objectid}
-      visible={item.visible }
-      position={[item.position[0],item.position[1],item.position[2]]}
-      rotation={[item.rotation[0],item.rotation[1],item.rotation[2]]}
-      scale={[item.scale[0],item.scale[1],item.scale[2]]}
+      {... props}
     >
     </RPointLight>)
+  }else if(item.type=="ambientlight"){
+    return(<RAmbientLight
+      key={item.objectid}
+      {... props}
+    >
+    </RAmbientLight>)
   }else{
     return(<Box
       key={item.objectid}
-      position={[item.position[0],item.position[1],item.position[2]]}
+      {... props}
     >
     </Box>)
   }

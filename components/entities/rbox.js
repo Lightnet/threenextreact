@@ -13,7 +13,7 @@ export default function RBox(props) {
   // This reference will give us direct access to the THREE.Mesh object
   // const ref = useRef();
   let ref;
-  if(props.isPhysics){
+  if(props.isPhysics == true){
     let [_ref] = useBox(() => ({ ...props }))
     //const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
     ref = _ref;
@@ -21,7 +21,6 @@ export default function RBox(props) {
     ref = useRef()
   }
 
-  
   const [hovered, setHover] = useState(false);
 
   //const [active, setActive] = useState(false)

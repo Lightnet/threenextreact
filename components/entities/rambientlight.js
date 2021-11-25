@@ -8,22 +8,20 @@ import { useRef, useEffect, useState } from 'react';
 import {  useHelper } from '@react-three/drei'
 import { PointLightHelper } from 'three';
 
-export default function RPointLight(props){
+export default function RAmbientLight(props){
+
+  
   const ref = useRef();
 
-  useHelper(ref, PointLightHelper,1,'hotpink')
+  useHelper(ref, PointLightHelper,1,'hotpink');
 
   return (
   <>
-    <pointLight
+    <ambientLight
       {...props}
       ref={ref}
       >
-    </pointLight>
+    </ambientLight>
   </>
   )
 }
-/*
-<shadowCameraHelper></shadowCameraHelper>
-<axesHelper></axesHelper>
-*/

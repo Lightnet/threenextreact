@@ -18,6 +18,8 @@ import { useGame } from './gameprovider';
 import { GizmoHelper, GizmoViewport } from '@react-three/drei';
 import useFetch from '../hook/usefetch';
 import { buildModel } from '../editor/buildmodel';
+import ROrbitControl from '../entities/rorbitcontrol';
+import { Physics } from '@react-three/cannon';
 
 export default function GameMain({gameid,sceneid}){
   //console.log(props);
@@ -50,6 +52,12 @@ export default function GameMain({gameid,sceneid}){
     }
   },[sceneid])
 
+  useEffect(()=>{
+    if(sceneID){
+      getSceneObject3D();
+    }
+  },[sceneID])
+
   //async function getGameID(){
   //}
 
@@ -57,7 +65,9 @@ export default function GameMain({gameid,sceneid}){
   //}
 
   async function getSceneObject3D(){
-    let data = await useFetch('api/',{
+    console.log("sceneID>>>>>>>>>>>>>>>>>>");
+    console.log(sceneID)
+    let data = await useFetch('api/object3d',{
       method:'POST',
       body:JSON.stringify({
         action:'OBJECT3DS'
@@ -66,7 +76,7 @@ export default function GameMain({gameid,sceneid}){
     })
     if(data.error){
       console.log("FETCH ERROR OBJECT3DS")
-      msgWarn('Fetch Error Fail GET OBJECT3DS');
+      //msgWarn('Fetch Error Fail GET OBJECT3DS');
       return;
     }
     //console.log("objects: ", data);
@@ -84,9 +94,23 @@ export default function GameMain({gameid,sceneid}){
   return(<>
     <Canvas>
 
-      {object3Ds.map((_entity)=>{
-        return buildModel(_entity)
+      <ambientLight />
+
+      {object3Ds.map((entity)=>{
+        if(entity.isPhysics == false){
+          return buildModel(entity)
+        }
       })}
+
+      <Physics>
+        {object3Ds.map((entity)=>{
+          if(entity.isPhysics == true){
+            return buildModel(entity)
+          }
+        })}
+      </Physics>
+
+      <ROrbitControl />
 
       {(isDebug == true )&&
         <GizmoHelper

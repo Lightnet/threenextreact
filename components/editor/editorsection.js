@@ -72,6 +72,25 @@ export default function EditorSection({editorid}){
 
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
+  const [enablePhysics, setEnablePhysics ] = useState(false);
+
+  const [urlDebug, setUrlDebug ] = useState('/game');
+
+
+  function togglePhysics(){
+    setEnablePhysics(state=>!state);
+  }
+
+  function resetPhysics(){
+    //setEnablePhysics(state=>!state);
+    console.log("reset");
+  }
+
+  function openDebugWindow(){
+    console.log("page tab?")
+    window.open(urlDebug, '_blank', 'width=400, height=400');
+  }
+
   useEffect(()=>{
     const theme = localStorage.getItem('theme');
     if(theme){
@@ -120,6 +139,7 @@ export default function EditorSection({editorid}){
           break;
         }
       }
+      setUrlDebug('/game?sceneid='+sceneID);
     }
   },[sceneID]);
 
@@ -388,6 +408,7 @@ export default function EditorSection({editorid}){
             , type:"circle"
             , visible: true
             , isPhysics: false
+            , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -404,6 +425,7 @@ export default function EditorSection({editorid}){
             , type:"cone"
             , visible: true
             , isPhysics: false
+            , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -420,6 +442,7 @@ export default function EditorSection({editorid}){
             , type:"camera"
             , visible: true
             , isPhysics: false
+            , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -436,6 +459,24 @@ export default function EditorSection({editorid}){
             , type:"pointlight"
             , visible: true
             , isPhysics: false
+            , mass: 0
+            , position:[0,0,0]
+            , rotation:[0,0,0]
+            , scale:[1,1,1]
+          };
+          apiSaveObject3D(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+        if(args.action=="addambientlight"){
+          let data = {
+            objectid: nanoid32()
+            , name:"ambientlight"
+            , type:"ambientlight"
+            , visible: true
+            , isPhysics: false
+            , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
@@ -609,8 +650,11 @@ export default function EditorSection({editorid}){
   return(<>
     
     <Canvas>
+      
+      {/*
       <ambientLight />
-      {/*objects3D*/}
+      objects3D
+      */}
 
       {object3Ds.map((entity)=>{
         if(entity.isPhysics == false){
@@ -687,12 +731,12 @@ export default function EditorSection({editorid}){
         <a href="#" onClick={(e)=>callBackOPS({action:"addcircle"})}>Add Circle</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcone"})}>Add Cone</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addpointlight"})}>Add Point Light</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addambientlight"})}>Add Ambient Light</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcamera"})}>Add Camera</a>
         {/*
         <a href="#" onClick={(e)=>callBackOPS({action:"addscene"})}>Add Scene</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addsphere"})}>Add Sphere</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a>
-        
         
         */}
       </DropDownMenu>
@@ -701,13 +745,22 @@ export default function EditorSection({editorid}){
         <a href="#" >User Custom</a>
       </DropDownMenu>
 
-      <DropDownMenu menuname="Build" >
-        {/*}
-        <a href="#" >Play</a>
-        <a href="#" >Debug Play</a>
-        <a href="#" >Publish</a>
-      */}
+      <DropDownMenu menuname="Physics" >
+        <a href="#" onClick={togglePhysics}>Enable {enablePhysics?("On"):("Off")} </a> <br />
+        <a href="#" onClick={resetPhysics}>Reset</a>
       </DropDownMenu>
+
+      <DropDownMenu menuname="Build" >
+        
+        <a href="#" >Play</a> <br />
+        <a href="#" onClick={()=>openDebugWindow()}>Debug </a> <br />
+        <a href="#" >Publish</a>
+      </DropDownMenu>
+      {/*
+      <Link href={urlDebug} >Debug </Link>
+      */}
+
+
 
       <DropDownMenu menuname="Help" >
         <a href="#" >About</a><br/>

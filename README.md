@@ -131,12 +131,16 @@
     - update
     - delete
   
-  - physics  (not build)
+  - physics (work in progress)
+    - plane (added)
+    - box (added)
     - create
     - update
     - delete
-    
-- game  (not build)
+- debug (work in progress)
+  -  simple physics test
+
+- game (not build)
   - delete  (not build)
   - load  (not build)
   - save  (not build)

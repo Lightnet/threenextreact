@@ -22,13 +22,19 @@ export async function getServerSideProps(ctx) {
 export default function GamePage({session}){
 
   const router = useRouter();
-  const [gameID, setGameID] = useState('null');
+  const [gameID, setGameID] = useState(null);
+  const [sceneID, setSceneID] = useState(null);
 
   useEffect(()=>{
-    const {gameid } = router.query;
+    const {gameid,sceneid } = router.query;
     if(gameid){
       //console.log("assign project id???")
       setGameID(projectid);
+    }
+
+    if(sceneid){
+      //console.log("assign project id???")
+      setSceneID(sceneid);
     }
     
   },[router])
@@ -42,7 +48,7 @@ export default function GamePage({session}){
   return(<>
     <AuthAccess>
       <GameProvider>
-        <GameMain gameid={gameID}>
+        <GameMain gameid={gameID} sceneid={sceneID} >
         </GameMain>
       </GameProvider>
     </AuthAccess>
