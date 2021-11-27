@@ -137,6 +137,7 @@
     - create
     - update
     - delete
+
 - debug (work in progress)
   -  simple physics test
 
@@ -145,6 +146,9 @@
   - load  (not build)
   - save  (not build)
   - config  (not build)
+
+# Physics:
+  After some testing for enable and disable physics react components. useref and usecontext has conflict change variable in render. Had to create two component that same but the varible is different. It possible to change some variable but need two check for isPhysics and enablePhysics. One is reason it build the world not enable physics to place holder and other is debug simulation.
 
 ## Packages:
 - @react-three/fiber 

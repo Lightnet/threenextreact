@@ -13,23 +13,25 @@ export default function RPlane(props) {
   //const ref = useRef()
   let ref;
   const [hovered, setHover] = useState(false)
-
-  if(props.isPhysics){
-    //const [ref] = usePlane(() => ({ position: [0, 5, 0], ...props }))
-    //let [_ref] = usePlane(() => ({ rotation: [-Math.PI / 2, 0, 0], ...props }))
+  /*
+  if((props.isPhysics == true)&&(props.enablePhysics == true)){
+    //if((props.isPhysics == true)){
+    //ref=null;
     let [_ref] = usePlane(() => ({ ...props }))
     ref = _ref;
-    //const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
   }else{
-    ref = useRef()
+    //if(!ref){
+    ref = useRef({ ...props })
+    //}
   }
+  */
+  ref = useRef({ ...props })
 
-  //const [active, setActive] = useState(false)
-  //console.log("ref.current.position")
-  //if(ref.current){
-    //console.log(ref.current.position)
-  //}
-  //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+  useEffect(()=>{
+    return ()=>{
+      ref=null;
+    }
+  },[])
 
   function clickObject(event){
     //console.log(event);

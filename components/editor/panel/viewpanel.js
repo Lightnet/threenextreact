@@ -67,14 +67,16 @@ export default function ViewPanel({currentView,ops}) {
         <label>View: </label>
         <select value={view} onChange={onChangeView}>
           <option disabled value=''> Select </option>
+          <option value="outliner"> outliner </option>
           <option value="scene"> Scene </option>
           <option value="scenes"> Scenes </option>
           <option value="object3ds"> Object3Ds </option>
           <option value="props"> Props </option>
           <option value="projects"> Projects </option>
           <option value="assets"> Assets </option>
-          <option value="objectdatas"> ObjectDatas </option>
+          <option value="objectdatas"> Object Datas </option>
           <option value="node"> node </option>
+          <option value="texteditor"> Text Editor </option>
         </select>
       </div>
       <div>

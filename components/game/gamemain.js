@@ -83,7 +83,14 @@ export default function GameMain({gameid,sceneid}){
     if(data.action){
       if(data.action == 'UPDATE'){
         //api server need fixed?
-        setObject3Ds(data.object3ds);
+        let obj3ds = data.object3ds;
+        obj3ds.map((item)=>{
+          item.enablePhysics=true;
+          return {...item};
+        })
+        //console.log(obj3ds);
+        setObject3Ds(obj3ds);
+        //setObject3Ds(data.object3ds);
       }
       if(data.action == 'NOOBJECT3DS'){
         console.log("NO object3ds")
@@ -94,19 +101,9 @@ export default function GameMain({gameid,sceneid}){
   return(<>
     <Canvas>
 
-      <ambientLight />
-
-      {object3Ds.map((entity)=>{
-        if(entity.isPhysics == false){
-          return buildModel(entity)
-        }
-      })}
-
       <Physics>
         {object3Ds.map((entity)=>{
-          if(entity.isPhysics == true){
-            return buildModel(entity)
-          }
+          return buildModel(entity)
         })}
       </Physics>
 

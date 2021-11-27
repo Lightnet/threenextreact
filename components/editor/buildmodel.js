@@ -17,16 +17,19 @@ import RCone from '../entities/rcone';
 import RCamera from '../entities/rcamera';
 import RPointLight from "../entities/rpointlight";
 import RAmbientLight from "../entities/rambientlight";
+import RBoxPhysics from "../entities/rboxphysics";
+import RPlanePhysics from "../entities/rplanephysics";
 
+// https://dev.to/andyrewlee/cheat-sheet-for-updating-objects-and-arrays-in-react-state-48np
 
 export function buildModel(item){
   //console.log(item)
-
   let props = {
     objectid:item.objectid,
     isPhysics:item.isPhysics,
     mass:item.mass,
-    visible:item.visible
+    visible:item.visible,
+    enablePhysics:item.enablePhysics
   };
   if(item.isPhysics == true){
     props.position=item.position;
@@ -41,18 +44,34 @@ export function buildModel(item){
 
   if(item.type=="box"){
     //console.log("FOUND CUBE");
-    
-    return(<RBox
-      key={item.objectid}
-      {... props}
-    >
-    </RBox>)
+    console.log("props.isPhysics: ",props.isPhysics)
+    console.log("props.enablePhysics: ",props.enablePhysics)
+
+    if((props.isPhysics==true)&&(props.enablePhysics==true)){
+      return(<RBoxPhysics
+        key={item.objectid}
+        {... props}
+      />)
+      
+    }else{
+      return(<RBox
+        key={item.objectid}
+        {... props}
+      />)
+    }
   }else if(item.type=="plane"){
-    return(<RPlane
-      key={item.objectid}
-      {... props}
-    >
-    </RPlane>)
+    if((props.isPhysics==true)&&(props.enablePhysics==true)){
+      return(<RPlanePhysics
+        key={item.objectid}
+        {... props}
+      />)
+    }else{
+      return(<RPlane
+        key={item.objectid}
+        {... props}
+      />)
+    }
+    
   }else if(item.type=="circle"){
     return(<RCircle
       key={item.objectid}

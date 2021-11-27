@@ -3,16 +3,27 @@
   Created by: Lightnet
 */
 
+// https://github.com/pmndrs/use-cannon
+
 import { useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 import { useBox } from '@react-three/cannon';
 
-export default function RBox(props) {
+export default function RBoxPhysics(props) {
   
   // This reference will give us direct access to the THREE.Mesh object
   // const ref = useRef();
-  const ref= useRef({ ...props })
+  let ref;
+  
+  let [_ref] = useBox(() => ({ ...props }))
+  //const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
+  ref = _ref;
+
+
+  if(!ref){
+    ref = useRef({ ...props })
+  }
 
   const [hovered, setHover] = useState(false);
 

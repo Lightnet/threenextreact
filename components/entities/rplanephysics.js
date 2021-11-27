@@ -6,22 +6,29 @@
 import { useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
-import { useBox } from '@react-three/cannon';
+import { usePlane } from '@react-three/cannon';
 
-export default function RBox(props) {
-  
+export default function RPlanePhysics(props) {
   // This reference will give us direct access to the THREE.Mesh object
-  // const ref = useRef();
-  const ref= useRef({ ...props })
-
-  const [hovered, setHover] = useState(false);
-
-  //const [active, setActive] = useState(false)
-  //console.log("ref.current.position")
-  //if(ref.current){
-    //console.log(ref.current.position)
+  //const ref = useRef()
+  //let ref;
+  const [hovered, setHover] = useState(false)
+  //if((props.isPhysics == true)&&(props.enablePhysics == true)){
+    //ref=null;
+    //let [_ref] = usePlane(() => ({ ...props }))
+    //ref = _ref;
+  const [ref] = usePlane(() => ({ ...props }))
+  //}else{
+    //if(!ref){
+    //ref = useRef({ ...props })
+    //}
   //}
-  //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+
+  useEffect(()=>{
+    return ()=>{
+      ref=null;
+    }
+  },[])
 
   function clickObject(event){
     //console.log(event);
@@ -38,7 +45,7 @@ export default function RBox(props) {
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
+      <planeGeometry args={[10, 10]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )

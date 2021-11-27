@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 // lib 
 import { nanoid32 } from "../../lib/helper";
 
@@ -73,14 +73,37 @@ export default function EditorSection({editorid}){
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const [enablePhysics, setEnablePhysics ] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const [urlDebug, setUrlDebug ] = useState('/game');
 
 
-  function togglePhysics(){
-    setEnablePhysics(state=>!state);
-  }
 
+  const togglePhysics = useCallback(()=>{
+    setEnablePhysics(state=>!state);
+    /*
+    setObject3Ds(object3Ds.map(item=>{
+      if(item.isPhysics == true){
+        item.enablePhysics = enablePhysics;
+        //item.isPhysics = false;
+      }
+      //return {...item,enablePhysics:true};
+      return {...item}
+    }))
+    */
+  },[enablePhysics])
+
+  function statePhysics(){
+    setObject3Ds(object3Ds.map(item=>{
+      if(item.isPhysics == true){
+        item.enablePhysics = enablePhysics;
+        //item.isPhysics = false;
+      }
+      //return {...item,enablePhysics:true};
+      return item
+    }))
+  }
+  
   function resetPhysics(){
     //setEnablePhysics(state=>!state);
     console.log("reset");
@@ -144,10 +167,9 @@ export default function EditorSection({editorid}){
   },[sceneID]);
 
   useEffect(()=>{
-    if(object3Ds){
-      updateObjects();//update scene object3ds
-    }
-  },[object3Ds]);
+    statePhysics();
+  },[enablePhysics]);
+  
 
   function notitfyInfo(children, autoClose) {
     //console.log("info");
@@ -262,7 +284,13 @@ export default function EditorSection({editorid}){
     if(data.action){
       if(data.action == 'UPDATE'){
         //api server need fixed?
-        setObject3Ds(data.object3ds);
+        let obj3ds = data.object3ds;
+        obj3ds.map((item)=>{
+          item.enablePhysics=enablePhysics;
+          return {...item};
+        })
+        //console.log(obj3ds);
+        setObject3Ds(obj3ds);
       }
       if(data.action == 'NOOBJECT3DS'){
         console.log("NO object3ds")
@@ -290,6 +318,8 @@ export default function EditorSection({editorid}){
   //update model for render {objects3D}
   function updateObjects(){
     /*
+    console.log("enablePhysics:",enablePhysics)
+    
     if(object3Ds){
       let obj = object3Ds;
       //console.log(obj);
@@ -374,6 +404,7 @@ export default function EditorSection({editorid}){
             , type:"box"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 1
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -391,6 +422,7 @@ export default function EditorSection({editorid}){
             , type:"plane"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -408,6 +440,7 @@ export default function EditorSection({editorid}){
             , type:"circle"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -425,6 +458,7 @@ export default function EditorSection({editorid}){
             , type:"cone"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -442,6 +476,7 @@ export default function EditorSection({editorid}){
             , type:"camera"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -459,6 +494,7 @@ export default function EditorSection({editorid}){
             , type:"pointlight"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -476,6 +512,7 @@ export default function EditorSection({editorid}){
             , type:"ambientlight"
             , visible: true
             , isPhysics: false
+            , enablePhysics: false
             , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
@@ -601,6 +638,9 @@ export default function EditorSection({editorid}){
               return item;
             }
           }));
+
+          //useCallback(()=>{setObject3Ds(object3Ds)},[object3Ds])
+
           updateObjects();
 
         }
@@ -655,19 +695,23 @@ export default function EditorSection({editorid}){
       <ambientLight />
       objects3D
       */}
-
-      {object3Ds.map((entity)=>{
+      {/*object3Ds.map((entity)=>{
         if(entity.isPhysics == false){
           return buildModel(entity)
         }
-      })}
-
+      })*/}
+      
       <Physics>
         {object3Ds.map((entity)=>{
-          if(entity.isPhysics == true){
+          //if(entity.isPhysics == true){
             return buildModel(entity)
-          }
+          //}
         })}
+
+        {/*
+        {objects3D}
+        */}
+        
       </Physics>
 
       {enableOrbitControl && <ROrbitControl />}
@@ -746,8 +790,7 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Physics" >
-        <a href="#" onClick={togglePhysics}>Enable {enablePhysics?("On"):("Off")} </a> <br />
-        <a href="#" onClick={resetPhysics}>Reset</a>
+        <a href="#" onClick={togglePhysics}>Enable {enablePhysics?("On"):("Off")} </a>
       </DropDownMenu>
 
       <DropDownMenu menuname="Build" >
@@ -759,8 +802,6 @@ export default function EditorSection({editorid}){
       {/*
       <Link href={urlDebug} >Debug </Link>
       */}
-
-
 
       <DropDownMenu menuname="Help" >
         <a href="#" >About</a><br/>
