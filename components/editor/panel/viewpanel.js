@@ -18,6 +18,7 @@ import PropObjectData from "../assets/propobjectdata";
 import PropObject from "../object/propobject";
 //import ViewScene from "../scene/viewscene";
 import PropNode from "../node/propnode";
+import PropOutliner from "../props/propoutliner";
 
 export default function ViewPanel({currentView,ops}) {
 
@@ -35,7 +36,9 @@ export default function ViewPanel({currentView,ops}) {
   }
 
   function renderView(){
-
+    if(view=='outliner'){
+      return <PropOutliner ops={ops} />
+    }
     if(view=='scene'){
       return <PropScene ops={ops}></PropScene>
     }
@@ -67,7 +70,7 @@ export default function ViewPanel({currentView,ops}) {
         <label>View: </label>
         <select value={view} onChange={onChangeView}>
           <option disabled value=''> Select </option>
-          <option value="outliner"> outliner </option>
+          <option value="outliner"> Outliner </option>
           <option value="scene"> Scene </option>
           <option value="scenes"> Scenes </option>
           <option value="object3ds"> Object3Ds </option>

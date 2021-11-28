@@ -11,21 +11,8 @@ import { usePlane } from '@react-three/cannon';
 export default function RPlane(props) {
   // This reference will give us direct access to the THREE.Mesh object
   //const ref = useRef()
-  let ref;
+  const ref = useRef({ ...props })
   const [hovered, setHover] = useState(false)
-  /*
-  if((props.isPhysics == true)&&(props.enablePhysics == true)){
-    //if((props.isPhysics == true)){
-    //ref=null;
-    let [_ref] = usePlane(() => ({ ...props }))
-    ref = _ref;
-  }else{
-    //if(!ref){
-    ref = useRef({ ...props })
-    //}
-  }
-  */
-  ref = useRef({ ...props })
 
   useEffect(()=>{
     return ()=>{

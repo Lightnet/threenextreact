@@ -106,8 +106,7 @@ export function buildModel(item){
     return(<Box
       key={item.objectid}
       {... props}
-    >
-    </Box>)
+    />)
   }
 
 }

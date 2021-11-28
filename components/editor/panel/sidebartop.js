@@ -10,15 +10,18 @@
 import React, {useState, useEffect} from "react";
 import styles from "./sidebartop.module.css";
 
-export default function Component({isOpen,onRequestClose,children}) {
+export default function SideBarTop({isOpen,onRequestClose,children}) {
   const [SBHeight, setSBHeight] = useState(32);
+  const [display, setDisplay] = useState("block");
 
   useEffect(() => { 
-    //console.log("Top Side Bar is open?");
+    console.log("Top Side Bar is open?", isOpen);
     if(isOpen){
       setSBHeight(32);
+      setDisplay('block');
     }else{
       setSBHeight(0);
+      setDisplay('none');
     }
     return ()=>{
       //console.log("clean Side bar?");
@@ -34,9 +37,12 @@ export default function Component({isOpen,onRequestClose,children}) {
   return (<>
     <div 
       className={styles.sidebar}
-      style={{height:SBHeight+"px"}} >
+      style={{height:SBHeight+"px",display:display}} >
       <a href="#" className={styles.closebtn} onClick={(e)=>closeSideBar(e)}>×</a>
       {children}
     </div>
   </>);
 }
+/*
+
+*/

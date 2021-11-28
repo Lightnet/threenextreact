@@ -53,8 +53,8 @@ export default function EditorSection({editorid}){
   //const [object3Ds, setObject3Ds] = useState([]); // scene objects array json
   const {object3Ds, setObject3Ds} = useEditor();
 
-  const [objects3D, setObjects3D] = useState([]); // scene objects render react
-  const [physics3D, setPhysics3D] = useState([]); //physic objects
+  //const [objects3D, setObjects3D] = useState([]); // scene objects render react
+  //const [physics3D, setPhysics3D] = useState([]); //physic objects
 
   //const [editorID, setEditorID] = useState(null);
   const {editorID, setEditorID} = useEditor();
@@ -77,20 +77,8 @@ export default function EditorSection({editorid}){
 
   const [urlDebug, setUrlDebug ] = useState('/game');
 
-
-
   const togglePhysics = useCallback(()=>{
     setEnablePhysics(state=>!state);
-    /*
-    setObject3Ds(object3Ds.map(item=>{
-      if(item.isPhysics == true){
-        item.enablePhysics = enablePhysics;
-        //item.isPhysics = false;
-      }
-      //return {...item,enablePhysics:true};
-      return {...item}
-    }))
-    */
   },[enablePhysics])
 
   function statePhysics(){
@@ -130,11 +118,15 @@ export default function EditorSection({editorid}){
   useEvent('keyup',keyup);
 
   function keydown(e){
-    console.log("press....");
+    //console.log("press....");
   }
 
   function keyup(e){
-    console.log("press....");
+    //console.log("press....");
+    console.log(e.keyCode)
+    if(e.keyCode == 9){//tab
+      setIsSideBarTop(true);
+    }
   }
 
   useEffect(() => {
@@ -170,7 +162,6 @@ export default function EditorSection({editorid}){
     statePhysics();
   },[enablePhysics]);
   
-
   function notitfyInfo(children, autoClose) {
     //console.log("info");
     return setNotify({
@@ -179,7 +170,6 @@ export default function EditorSection({editorid}){
       autoClose,
     });
   }
-
   function notitfySuccess(children, autoClose) {
     return setNotify({
       color: Color.success,
@@ -187,7 +177,6 @@ export default function EditorSection({editorid}){
       autoClose,
     });
   }
-  
   function notitfyWarning(children, autoClose) {
     return setNotify({
       color: Color.warning,
@@ -195,7 +184,6 @@ export default function EditorSection({editorid}){
       autoClose,
     });
   }
-  
   function notitfyError(children, autoClose) {
     return setNotify({
       color: Color.error,
@@ -203,18 +191,15 @@ export default function EditorSection({editorid}){
       autoClose,
     });
   }
-
   function createInfo(msg){
     notitfyInfo(<label>{msg}</label>,true);
   }
-
   function msgSuccess(msg){
     notitfySuccess(<label>{msg}</label>,true);
   }
   function msgError(msg){
     notitfyError(<label>{msg}</label>,true);
   }
-
   function msgWarn(msg){
     notitfyWarning(<label>{msg}</label>,true);
   }
@@ -303,23 +288,19 @@ export default function EditorSection({editorid}){
     //console.log("seteditorTSB");
     setIsSideBarTop(!isSideBarTop);
   }
-
   //side bar
   function ToggleSBRight(){
     //console.log("seteditorTSB");
     setIsSideBarRight(!isSideBarRight);
   }
-
   function ToggleSBLeft(){
     //console.log("seteditorTSB");
     setIsSideBarLeft(!isSideBarLeft);
   }
-
   //update model for render {objects3D}
   function updateObjects(){
     /*
     console.log("enablePhysics:",enablePhysics)
-    
     if(object3Ds){
       let obj = object3Ds;
       //console.log(obj);
@@ -369,7 +350,6 @@ export default function EditorSection({editorid}){
       return;
     }
   }
-
   async function apiDeleteObject3D(id){
     if(!sceneID){
       console.log('ERROR NULL SCENEID');
@@ -647,7 +627,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=='loadscene'){
           setObject3Ds([]);
-          setObjects3D([]);
+          //setObjects3D([]);
           setSelectObject(null);
           setSceneID(args.id);
         }
@@ -669,7 +649,6 @@ export default function EditorSection({editorid}){
       return <AssetsSection editorid={editorID}></AssetsSection>
     }
     return (<>
-    
     </>)
   }
 
@@ -678,11 +657,6 @@ export default function EditorSection({editorid}){
     setIsOpenModal(true);
   }
 
-  //function showScenes(){
-    //setViewModal('scenes')
-    //setIsOpenModal(true);
-  //}
-
   function toggleOrbitControl(){
     setEnableOrbitControl(!enableOrbitControl);
   }
@@ -690,28 +664,13 @@ export default function EditorSection({editorid}){
   return(<>
     
     <Canvas>
-      
-      {/*
-      <ambientLight />
-      objects3D
-      */}
-      {/*object3Ds.map((entity)=>{
-        if(entity.isPhysics == false){
-          return buildModel(entity)
-        }
-      })*/}
-      
+
       <Physics>
         {object3Ds.map((entity)=>{
           //if(entity.isPhysics == true){
             return buildModel(entity)
           //}
         })}
-
-        {/*
-        {objects3D}
-        */}
-        
       </Physics>
 
       {enableOrbitControl && <ROrbitControl />}
@@ -756,7 +715,12 @@ export default function EditorSection({editorid}){
 
       <DropDownMenu menuname="View" >
         <a href="#" onClick={()=>showViewModal('assets')} >Assets</a> <br/>
-        <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a>
+        <a href="#" onClick={()=>showViewModal('scenes')} >Scenes</a> <br/>
+
+        <a href="#" onClick={ToggleSBTop} >Top SideBar</a> <br/>
+        <a href="#" onClick={ToggleSBRight} >Right SideBar</a> <br/>
+        <a href="#" onClick={ToggleSBLeft} >Left SideBar</a> <br/>
+
         {/*
         <a href="#" onClick={()=>showViewModal('materials')} >Materials</a>
         <a href="#" onClick={()=>showViewModal('textures')} >Textures</a>
@@ -780,8 +744,6 @@ export default function EditorSection({editorid}){
         {/*
         <a href="#" onClick={(e)=>callBackOPS({action:"addscene"})}>Add Scene</a>
         <a href="#" onClick={(e)=>callBackOPS({action:"addsphere"})}>Add Sphere</a>
-        <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a>
-        
         */}
       </DropDownMenu>
 
@@ -815,7 +777,8 @@ export default function EditorSection({editorid}){
         <a href="#" onClick={()=>changeTheme('dark')}> Dark </a>
       </DropDownMenu>
 
-      <label> Editor Name: {editorName} </label>
+      <label>[Editor Name:] {editorName} </label>
+      <label>[Scene Name:] {sceneName} </label>
       {/*<label> Editor ID: {editorID} </label>*/}
       
     </EditorTopSideBar>
@@ -835,14 +798,6 @@ export default function EditorSection({editorid}){
         ops={callBackOPS}>          
         </ViewPanel>
 
-
-      {/* 
-      <EditorProps
-        selectObject={selectObject}
-        ops={callBackOPS}
-      ></EditorProps>
-      */}
-         
     </EditorRightSideBar>
 
     <EditorLeftSideBar
@@ -852,17 +807,6 @@ export default function EditorSection({editorid}){
       <ViewPanel ops={callBackOPS}></ViewPanel>
 
     </EditorLeftSideBar>
-
-    <div style={{position:'fixed',top:'28px',left:100}}>
-      <label>Side Bars:</label>
-      <button  onClick={ToggleSBTop}>Top</button>
-      <button  onClick={ToggleSBRight}>Right</button>
-      <button  onClick={ToggleSBLeft}>Left</button>
-      {/*
-      <button  onClick={ToggleRightSB}>Bottom</button>
-      <button  onClick={ToggleRightSB}>Left</button>
-       */}
-    </div>
 
     <Modal 
       isOpen={isOpenModal}

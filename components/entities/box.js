@@ -10,20 +10,13 @@ import { useBox } from '@react-three/cannon';
 
 export default function Box(props) {
   // This reference will give us direct access to the THREE.Mesh object
-  let ref;
-  //if(props.isPhysics){
-    //let [_ref] = useBox(() => ({ position: [0, 5, 0], ...props }))
-    //const [ref] = useBox(() => ({ mass: 1, position: [0, 5, 0], ...props }))
-    //ref = _ref;
-  //}else{
-    ref = useRef()
-  //}
+  const ref = useRef();
   
   // Set up state for the hovered and active state
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
   // Subscribe this component to the render-loop, rotate the mesh every frame
-  useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+  useFrame((state, delta) => (ref.current.rotation.x += 0.01));
   //console.log("Box");
   // Return the view, these are regular Threejs elements expressed in JSX
   return (
