@@ -29,7 +29,7 @@ export default function Editor(){
     }
 
     return () => {
-      console.log('PAGE EDITOR CLEAN UP');
+      //console.log('PAGE EDITOR CLEAN UP');
     }
   }, [router]);
 

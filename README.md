@@ -38,7 +38,7 @@
   - sidebar (work in progress)
   - 
 
-- upload file type (work in progress)
+- upload file types (work in progress)
   - save to database as base64 string
   - delete (not added)
   - file limit size check? (not added)
@@ -66,7 +66,7 @@
     - cone (added)
     - point light (added)
     - camera (added)
-    - plane (not build)
+    - plane (added)
     - sphere (not build)
   - orbit camera ( added / work in progres )
 
@@ -134,9 +134,8 @@
   - physics (work in progress)
     - plane (added)
     - box (added)
-    - create
-    - update
-    - delete
+    - sphere (not added)
+    - cylinder (not added)
 
 - debug (work in progress)
   -  simple physics test

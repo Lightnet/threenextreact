@@ -15,7 +15,7 @@ export default function SideBarTop({isOpen,onRequestClose,children}) {
   const [display, setDisplay] = useState("block");
 
   useEffect(() => { 
-    console.log("Top Side Bar is open?", isOpen);
+    //console.log("Top Side Bar is open?", isOpen);
     if(isOpen){
       setSBHeight(32);
       setDisplay('block');

@@ -40,6 +40,22 @@ import { useEditor, useScene } from './context/editorprovider';
 import ViewPanel from './panel/viewpanel';
 import { Physics } from '@react-three/cannon';
 
+// https://stackoverflow.com/questions/1789945/how-to-check-whether-a-string-contains-a-substring-in-javascript
+if (!String.prototype.includes) {
+  String.prototype.includes = function(search, start) {
+    'use strict';
+    if (typeof start !== 'number') {
+      start = 0;
+    }
+
+    if (start + search.length > this.length) {
+      return false;
+    } else {
+      return this.indexOf(search, start) !== -1;
+    }
+  };
+}
+
 export default function EditorSection({editorid}){
 
   const [isSideBarTop, setIsSideBarTop] = useState(true);
@@ -132,16 +148,15 @@ export default function EditorSection({editorid}){
   useEffect(() => {
     //console.log("INIT SET MOUNT!");
     if(editorid){
-      console.log("EDITOR ID FOUND")
+      //console.log("EDITOR ID FOUND")
       setEditorID(editorid);
       initEditorDefaultScene();
       getScenes();
     }else{
-      console.log("NOT FOUND")
+      //console.log("NOT FOUND")
     }
-
     return ()=>{
-      console.log('EDITOR CLEAN UP!');
+      //console.log('EDITOR CLEAN UP!');
     };
   }, [editorid,editorID]);
 
@@ -205,7 +220,7 @@ export default function EditorSection({editorid}){
   }
 
   async function initEditorDefaultScene(){
-    console.log("INIT... EDITOR ID:", editorID);
+    //console.log("INIT... EDITOR ID:", editorID);
     if(!editorID){
       return;
     }
@@ -234,14 +249,14 @@ export default function EditorSection({editorid}){
 
   async function getScenes(){
     if(!editorID){
-      console.log('editorid NULL');
+      //console.log('editorid NULL');
       return;
     }
     let data = await useFetch('api/scene',{
       method:'POST'
       , body:JSON.stringify({action:'SCENES',id:editorID})
     });
-    console.log(data);
+    //console.log(data);
     if(data.error){
       console.log('ERROR FETCH SCENES');
     }
@@ -376,128 +391,94 @@ export default function EditorSection({editorid}){
     if(args){
       if(args.action){
         console.log("args.action: ",args.action)
+        let data;
+        if(args.action.includes('add')){
+          console.log("KEYWORD DETECT ADD");
 
-        if(args.action=="addbox"){
-          let data = {
+          data = {
             objectid: nanoid32()
-            , name:"box"
-            , type:"box"
+            , name:""
+            , type:""
             , visible: true
             , isPhysics: false
             , enablePhysics: false
-            , mass: 1
+            , shapePhysics: 'box'
+            , mass: 0
             , position:[0,0,0]
             , rotation:[0,0,0]
             , scale:[1,1,1]
           };
+        }
+
+        if(args.action=="addbox"){
+          data.name="box";
+          data.type="box";
+          data.shapePhysics='box';
+          data.mass=1;
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="addplane"){
-          let data = {
-            objectid: nanoid32()
-            , name:"plane"
-            , type:"plane"
-            , visible: true
-            , isPhysics: false
-            , enablePhysics: false
-            , mass: 0
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          };
+          data.name="plane";
+          data.type="plane";
+          data.shapePhysics='plane';
+          data.mass=0;
+          
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="addcircle"){
-          let data = {
-            objectid: nanoid32()
-            , name:"circle"
-            , type:"circle"
-            , visible: true
-            , isPhysics: false
-            , enablePhysics: false
-            , mass: 0
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          };
+          data.name="circle";
+          data.type="circle";
+          data.shapePhysics='plane';
+          data.mass=0;
+
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="addcone"){
-          let data = {
-            objectid: nanoid32()
-            , name:"cone"
-            , type:"cone"
-            , visible: true
-            , isPhysics: false
-            , enablePhysics: false
-            , mass: 0
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          };
+          data.name="circle";
+          data.type="circle";
+          data.shapePhysics='plane';
+          data.mass=0;
+          
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="addcamera"){
-          let data = {
-            objectid: nanoid32()
-            , name:"camera"
-            , type:"camera"
-            , visible: true
-            , isPhysics: false
-            , enablePhysics: false
-            , mass: 0
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          };
+          data.name="camera";
+          data.type="camera";
+          data.shapePhysics='box';
+          data.mass=0;
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="addpointlight"){
-          let data = {
-            objectid: nanoid32()
-            , name:"pointlight"
-            , type:"pointlight"
-            , visible: true
-            , isPhysics: false
-            , enablePhysics: false
-            , mass: 0
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          };
+          data.name="pointlight";
+          data.type="pointlight";
+          data.shapePhysics='box';
+          data.mass=0;
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
         }
 
         if(args.action=="addambientlight"){
-          let data = {
-            objectid: nanoid32()
-            , name:"ambientlight"
-            , type:"ambientlight"
-            , visible: true
-            , isPhysics: false
-            , enablePhysics: false
-            , mass: 0
-            , position:[0,0,0]
-            , rotation:[0,0,0]
-            , scale:[1,1,1]
-          };
+          data.name="ambientlight";
+          data.type="ambientlight";
+          data.shapePhysics='box';
+          data.mass=0;
+
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();

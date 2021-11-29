@@ -3,22 +3,16 @@
   Created by: Lightnet
 */
 
-import { useRef, useEffect, useState } from 'react';
+import React,{ useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
-import { usePlane } from '@react-three/cannon';
+//import { useBox } from '@react-three/cannon';
 
-export default function RPlane(props) {
-  // This reference will give us direct access to the THREE.Mesh object
-  //const ref = useRef()
-  const ref = useRef({ ...props })
-  const [hovered, setHover] = useState(false)
 
-  useEffect(()=>{
-    return ()=>{
-      ref=null;
-    }
-  },[])
+const GBox = React.forwardRef((props, ref) => {
+//export default function GBox({ref,props}) {
+  
+  const [hovered, setHover] = useState(false);
 
   function clickObject(event){
     //console.log(event);
@@ -28,15 +22,20 @@ export default function RPlane(props) {
 
   return (
     <mesh
-      {...props}
       ref={ref}
-      //scale={active ? 1.5 : 1}
+      {...props}
+      position={[props.position[0],props.position[1],props.position[2]]}
+      rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
+      scale={[props.scale[0],props.scale[1],props.scale[2]]}
+      
       onClick={clickObject}
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <planeGeometry args={[10, 10]} />
+      <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
-}
+//}
+});
+export default GBox;

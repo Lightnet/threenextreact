@@ -3,31 +3,14 @@
   Created by: Lightnet
 */
 
-import { useRef, useEffect, useState } from 'react';
+import React,{ useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
-import { usePlane } from '@react-three/cannon';
+//import { usePlane } from '@react-three/cannon';
 
-export default function RPlanePhysics(props) {
-  // This reference will give us direct access to the THREE.Mesh object
-  //const ref = useRef()
+const GPlane = React.forwardRef((props, ref) => {
+
   const [hovered, setHover] = useState(false)
-  //if((props.isPhysics == true)&&(props.enablePhysics == true)){
-    //ref=null;
-    //let [_ref] = usePlane(() => ({ ...props }))
-    //ref = _ref;
-  const [ref] = usePlane(() => ({ ...props }))
-  //}else{
-    //if(!ref){
-    //ref = useRef({ ...props })
-    //}
-  //}
-
-  useEffect(()=>{
-    return ()=>{
-      ref=null;
-    }
-  },[])
 
   function clickObject(event){
     //console.log(event);
@@ -37,9 +20,13 @@ export default function RPlanePhysics(props) {
 
   return (
     <mesh
-      {...props}
       ref={ref}
+      {...props}
       //scale={active ? 1.5 : 1}
+      position={[props.position[0],props.position[1],props.position[2]]}
+      rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
+      scale={[props.scale[0],props.scale[1],props.scale[2]]}
+
       onClick={clickObject}
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
@@ -48,4 +35,6 @@ export default function RPlanePhysics(props) {
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
-}
+//}
+});
+export default GPlane;

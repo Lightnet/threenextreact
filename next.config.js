@@ -12,16 +12,15 @@ const path = require('path');
 module.exports = {
   webpack: (config, { isServer }) => {
     if (!isServer) {
-      console.log("__dirname");
-      console.log(__dirname);
-      console.log(path.resolve(__dirname, './node_modules/gun/gun.js'));
-
+      //console.log("__dirname");
+      //console.log(__dirname);
+      //console.log(path.resolve(__dirname, './node_modules/gun/gun.js'));
       // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
       config.resolve.fallback = {
         fs: false//
         //gun:'./node_modules/gun/gun'
         //,gun$: path.resolve(__dirname, './node_modules/gun/gun.js'),
-        ,_: path.resolve(__dirname, './node_modules/gun/gun.js'),
+        //,_: path.resolve(__dirname, './node_modules/gun/gun.js'),
       }
       //config.resolve.alias.gun$=path.resolve(__dirname, './node_modules/gun/gun');
       //config.resolve.alias={//nextjs have override

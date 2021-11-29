@@ -3,6 +3,8 @@
   Created by: Lightnet
 */
 
+// https://www.tabnine.com/code/javascript/classes/react-three-fiber/pointLight
+
 import { useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 import {  useHelper } from '@react-three/drei'
@@ -13,10 +15,22 @@ export default function RPointLight(props){
 
   useHelper(ref, PointLightHelper,1,'hotpink')
 
+  //props.color="white";
+  //console.log("RPointLight")
+  //console.log(props)
+
+  let sprops={
+    position: props.position,
+    objectid:props.objectid,
+    isPhysics:props.isPhysics,
+    mass:props.mass,
+    visible:props.visible,
+  }
+
   return (
   <>
     <pointLight
-      {...props}
+      {...sprops}
       ref={ref}
       >
     </pointLight>
