@@ -10,8 +10,6 @@ import Box from "../entities/box";
 //import CameraTest from '../../entities/cameratest';
 import ROrbitControl from '../entities/rorbitcontrol';
 
-import RCircle from '../entities/rcircle';
-import RCone from '../entities/rcone';
 import RCamera from '../entities/rcamera';
 import RPointLight from "../entities/rpointlight";
 import RAmbientLight from "../entities/rambientlight";
@@ -43,9 +41,13 @@ export function buildModel(item){
     mass:item.mass,
     visible:item.visible,
     enablePhysics:item.enablePhysics,
-    type:item.type,
-    shapePhysics:item.shapePhysics
+    datatype:item.datatype,
+    shapePhysics:item.shapePhysics//,
+    //parameters:item.parameters
   };
+  if(item.parameters){
+    props.parameters=item.parameters
+  }
   if(item.isPhysics == true){
     props.position=item.position;
     props.rotation=item.rotation;
@@ -56,10 +58,10 @@ export function buildModel(item){
     props.rotation=[item.rotation[0],item.rotation[1],item.rotation[2]]
     props.scale=[item.scale[0],item.scale[1],item.scale[2]]
   }
+  
   //console.log(props);
-  if(checkShape(item.type)){
+  if(checkShape(item.datatype)){
     //console.log("FOUND!", item.type);
-
     if((props.isPhysics==true)&&(props.enablePhysics==true)){
       return(<REntityPhysics
         key={item.objectid}
@@ -73,27 +75,28 @@ export function buildModel(item){
     }
   }
 
-  if(item.type=="camera"){
+  if(item.datatype=="camera"){
     return(<RCamera
       key={item.objectid}
       {... props}
-    >
-    </RCamera>)
-  }else if(item.type=="pointlight"){
+    />)
+  }else if(item.datatype=="pointlight"){
     //props.color="white";
     //console.log(props);
-
     return(<RPointLight
       key={item.objectid}
       {... props}
-    >
-    </RPointLight>)
-  }else if(item.type=="ambientlight"){
+    />)
+  }else if(item.datatype=="ambientlight"){
     return(<RAmbientLight
       key={item.objectid}
       {... props}
-    >
-    </RAmbientLight>)
+    />)
+  }else if(item.datatype=="orbitcontrol"){
+    return(<ROrbitControl
+      key={item.objectid}
+      {... props}
+    />)
   }
 
   //if there object is not found add it.

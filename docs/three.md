@@ -37,3 +37,7 @@ https://stackoverflow.com/questions/63691965/how-to-know-all-attributes-of-canva
 https://github.com/pmndrs/react-three-fiber
 
 https://threejs.org/docs/#api/en/core/Object3D.visible
+
+
+
+https://examples.bradwoods.io/react-three-fiber/material-wireframe

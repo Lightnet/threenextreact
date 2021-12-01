@@ -11,6 +11,9 @@ import ScaleProp from "../panel/objectscale";
 
 import { isEmpty } from "../../../lib/helper";
 import PropPhysics from "./propphysics";
+import PropBox from "../props/propbox";
+import PropPlane from "../props/propplane";
+import PropMaterial from "../props/propmaterial";
 
 export default function PropObject({ops}) {
   const [isObject3D, setIsObject3D] = useState(false);
@@ -63,6 +66,27 @@ export default function PropObject({ops}) {
     }
   }
 
+  function renderPropShape(){
+    if(selectObject?.datatype=='box'){
+      return <PropBox ops={ops}/>
+    }
+    if(selectObject?.datatype=='plane'){
+      return <PropPlane ops={ops}/>
+    }
+    return <></>
+  }
+
+  function renderMaterial(){
+    if(selectObject?.datatype=='box'){
+      return <PropMaterial ops={ops}/>
+    }
+    if(selectObject?.datatype=='plane'){
+      return <PropMaterial ops={ops}/>
+    }
+
+    return <></>
+  }
+
   return (<>
     <div>
       <div className="headerpanel">
@@ -74,6 +98,12 @@ export default function PropObject({ops}) {
         <input value={objectName} onChange={onChangeName} onKeyUp={onEnterName} style={{width:'158px'}}></input>
       </div>
       <div>
+
+        {renderPropShape()}
+        {renderMaterial()}
+
+
+
         {selectObject &&
           <PropPhysics
             ops={ops}

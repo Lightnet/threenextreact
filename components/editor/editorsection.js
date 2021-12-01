@@ -398,7 +398,7 @@ export default function EditorSection({editorid}){
           data = {
             objectid: nanoid32()
             , name:""
-            , type:""
+            , datatype:""
             , visible: true
             , isPhysics: false
             , enablePhysics: false
@@ -412,8 +412,16 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addbox"){
           data.name="box";
-          data.type="box";
+          data.datatype="box";
           data.shapePhysics='box';
+          data.parameters={
+            width:1,
+            height:1,
+            depth:1,
+            widthSegments :1,
+            heightSegments :1,
+            depthSegments :1
+          };
           data.mass=1;
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
@@ -422,7 +430,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addplane"){
           data.name="plane";
-          data.type="plane";
+          data.datatype="plane";
           data.shapePhysics='plane';
           data.mass=0;
           
@@ -433,7 +441,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addcircle"){
           data.name="circle";
-          data.type="circle";
+          data.datatype="circle";
           data.shapePhysics='plane';
           data.mass=0;
 
@@ -444,7 +452,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addcone"){
           data.name="circle";
-          data.type="circle";
+          data.datatype="circle";
           data.shapePhysics='plane';
           data.mass=0;
           
@@ -455,7 +463,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addcamera"){
           data.name="camera";
-          data.type="camera";
+          data.datatype="camera";
           data.shapePhysics='box';
           data.mass=0;
           apiSaveObject3D(data);
@@ -465,7 +473,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addpointlight"){
           data.name="pointlight";
-          data.type="pointlight";
+          data.datatype="pointlight";
           data.shapePhysics='box';
           data.mass=0;
           apiSaveObject3D(data);
@@ -475,7 +483,7 @@ export default function EditorSection({editorid}){
 
         if(args.action=="addambientlight"){
           data.name="ambientlight";
-          data.type="ambientlight";
+          data.datatype="ambientlight";
           data.shapePhysics='box';
           data.mass=0;
 
@@ -575,13 +583,27 @@ export default function EditorSection({editorid}){
               if(args.objkey == "scaleZ"){
                 item.scale[2] = args.setValue;
               }
-
+              
               if(args.objkey == "isPhysics"){
                 item.isPhysics = args.setValue;
               }
 
               if(args.objkey == "mass"){
                 item.mass = args.setValue;
+              }
+
+
+              if(args.objkey == "parameters"){
+                console.log("parameters")
+                console.log(args.parameters)
+                item.parameters = args.setValue;
+              }
+
+              if(args.objkey == "material"){
+                console.log("material")
+                console.log(args.material)
+                item.material=[];
+                item.material[0] = args.setValue;
               }
 
               apiUpdateObject3D(item);

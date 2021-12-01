@@ -20,6 +20,15 @@ const GBox = React.forwardRef((props, ref) => {
     console.log(props);
   }
 
+  function renderMaterial(){
+    if(props.material){
+
+    }else{
+      return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
+    }
+    return <></>
+  }
+
   return (
     <mesh
       ref={ref}
@@ -32,10 +41,23 @@ const GBox = React.forwardRef((props, ref) => {
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <boxGeometry args={[
+        props.parameters.width, 
+        props.parameters.height, 
+        props.parameters.depth,
+        props.parameters.widthSegments,
+        props.parameters.heightSegments,
+        props.parameters.depthSegments
+        ]} />
+        {renderMaterial()}
     </mesh>
   )
 //}
 });
 export default GBox;
+
+/*
+<lineBasicMaterial wireframe attach="material" color={'#9c88ff'} linewidth={10} linecap={'round'} linejoin={'round'} />
+<boxGeometry args={[1, 1, 1]} />
+<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+*/

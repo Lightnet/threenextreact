@@ -21,7 +21,7 @@ export default function REntityGeometry(props) {
   //const ref= useRef()
   //const [hovered, setHover] = useState(false);
 
-  if(props.type=='box'){
+  if(props.datatype=='box'){
     return (
       <GBox 
         ref={ref}
@@ -30,7 +30,7 @@ export default function REntityGeometry(props) {
     )
   }
 
-  if(props.type=='plane'){
+  if(props.datatype=='plane'){
     return (
       <GPlane 
         ref={ref}

@@ -25,7 +25,7 @@ export default function REntityPhysics(props) {
     [ref] = usePlane(() => ({ ...props }));
   }
 
-  if(props.type=='box'){
+  if(props.datatype=='box'){
     return (
       <GBox 
         ref={ref}
@@ -35,7 +35,7 @@ export default function REntityPhysics(props) {
     )
   }
 
-  if(props.type=='plane'){
+  if(props.datatype=='plane'){
     return (
       <GPlane
         ref={ref}
