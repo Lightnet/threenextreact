@@ -45,6 +45,9 @@ export function buildModel(item){
     shapePhysics:item.shapePhysics//,
     //parameters:item.parameters
   };
+  if(item.material){
+    props.material=item.material
+  }
   if(item.parameters){
     props.parameters=item.parameters
   }

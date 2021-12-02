@@ -602,6 +602,8 @@ export default function EditorSection({editorid}){
               if(args.objkey == "material"){
                 console.log("material")
                 console.log(args.material)
+
+                //need to check material id and layer later...
                 item.material=[];
                 item.material[0] = args.setValue;
               }

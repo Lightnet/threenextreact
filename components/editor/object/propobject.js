@@ -102,8 +102,6 @@ export default function PropObject({ops}) {
         {renderPropShape()}
         {renderMaterial()}
 
-
-
         {selectObject &&
           <PropPhysics
             ops={ops}

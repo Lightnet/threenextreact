@@ -22,7 +22,15 @@ const GBox = React.forwardRef((props, ref) => {
 
   function renderMaterial(){
     if(props.material){
-
+      //need work later for material id for layers....
+      return (<>
+      {props.material.map((item,index)=>{
+        if(item.datatype == 'meshStandardMaterial'){
+          return <meshStandardMaterial key={index} wireframe={item.wireframe} color={hovered ? 'hotpink' : item.color} />
+        }
+      })}
+      </>)
+      //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     }else{
       return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
     }

@@ -23,6 +23,11 @@ export default function PropMaterial({ops}) {
     setMaterialName(e.target.value)
   }
 
+  //need update and fix?
+  function updateOPS(args){
+    ops(args)
+  }
+
   function renderMaterial(){
     if(selectObject){
       if(selectObject.material){
@@ -31,7 +36,7 @@ export default function PropMaterial({ops}) {
         {selectObject.material.map((item,index)=>{
           console.log("sadfsdfsdfsdf");
           console.log(item);
-          return <PropMeshStandardMaterial key={index} item={item}  ops={ops}/>
+          return <PropMeshStandardMaterial key={index} item={item} ops={updateOPS}/>
           //return (<div key={index}><label>Type:{item.datatype} </label><label>Name:{item.name} </label></div>);
         })}
         </>)
