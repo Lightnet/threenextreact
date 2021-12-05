@@ -18,7 +18,7 @@ import { PerspectiveCamera, OrbitControls, PositionalAudio, GizmoHelper, GizmoVi
 
 //three object3d
 import { buildModel } from './buildmodel';
-import ROrbitControl from '../entities/rorbitcontrol';
+import ROrbitControl from '../entity/rorbitcontrol';
 
 // UI / PANEL
 //import ThemeSection from "../system/themesection";
@@ -439,6 +439,28 @@ export default function EditorSection({editorid}){
           updateObjects();
         }
 
+        if(args.action=="addsphere"){
+          data.name="sphere";
+          data.datatype="sphere";
+          data.shapePhysics='sphere';
+          data.mass=0;
+          
+          apiSaveObject3D(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
+        if(args.action=="addcylinder"){
+          data.name="cylinder";
+          data.datatype="cylinder";
+          data.shapePhysics='cylinder';
+          data.mass=0;
+          
+          apiSaveObject3D(data);
+          setObject3Ds([...object3Ds,data]);
+          updateObjects();
+        }
+
         if(args.action=="addcircle"){
           data.name="circle";
           data.datatype="circle";
@@ -741,6 +763,8 @@ export default function EditorSection({editorid}){
         
         <a href="#" onClick={(e)=>callBackOPS({action:"addplane"})}>Add Plane</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addbox"})}>Add Box</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addcylinder"})}>Add Cylinder</a> <br/>
+        <a href="#" onClick={(e)=>callBackOPS({action:"addsphere"})}>Add Sphere</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcircle"})}>Add Circle</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addcone"})}>Add Cone</a> <br/>
         <a href="#" onClick={(e)=>callBackOPS({action:"addpointlight"})}>Add Point Light</a> <br/>

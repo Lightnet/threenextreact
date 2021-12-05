@@ -8,7 +8,9 @@
 
 import { useRef, useEffect, useState } from 'react';
 import GBox from './gbox';
+import GCylinder from './gcylinder';
 import GPlane from './gplane';
+import GSphere from './gsphere';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 //import { useBox } from '@react-three/cannon';
@@ -33,6 +35,24 @@ export default function REntityGeometry(props) {
   if(props.datatype=='plane'){
     return (
       <GPlane 
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+
+  if(props.datatype=='sphere'){
+    return (
+      <GSphere
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+
+  if(props.datatype=='cylinder'){
+    return (
+      <GCylinder
         ref={ref}
         {...props}
       />

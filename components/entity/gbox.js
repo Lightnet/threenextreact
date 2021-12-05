@@ -4,7 +4,7 @@
 */
 
 import React,{ useRef, useEffect, useState } from 'react';
-//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 //import { useBox } from '@react-three/cannon';
 
@@ -13,6 +13,8 @@ const GBox = React.forwardRef((props, ref) => {
 //export default function GBox({ref,props}) {
   
   const [hovered, setHover] = useState(false);
+
+  //useFrame((state, delta) => (ref.current.rotation.x += 0.01));
 
   function clickObject(event){
     //console.log(event);

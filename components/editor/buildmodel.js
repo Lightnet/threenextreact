@@ -5,22 +5,24 @@
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-primitives.html
 
-import Box from "../entities/box";
+import Box from "../entity/box";
 //import Foo from '../entities/foo';
 //import CameraTest from '../../entities/cameratest';
-import ROrbitControl from '../entities/rorbitcontrol';
+import ROrbitControl from '../entity/rorbitcontrol';
 
-import RCamera from '../entities/rcamera';
-import RPointLight from "../entities/rpointlight";
-import RAmbientLight from "../entities/rambientlight";
-import REntityPhysics from "../entities/rentityphysics";
-import REntityGeometry from "../entities/rentitygeometry";
+import RCamera from '../entity/rcamera';
+import RPointLight from "../entity/rpointlight";
+import RAmbientLight from "../entity/rambientlight";
+import REntityPhysics from "../entity/rentityphysics";
+import REntityGeometry from "../entity/rentitygeometry";
 
 // https://dev.to/andyrewlee/cheat-sheet-for-updating-objects-and-arrays-in-react-state-48np
 
 var shapes = [
-  'box',
-  'plane'
+  'box'
+  , 'plane'
+  , 'sphere'
+  , 'cylinder'
 ]
 
 function checkShape(name){
