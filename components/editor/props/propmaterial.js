@@ -16,7 +16,7 @@ export default function PropMaterial({ops}) {
 
   const {selectObject} = useEditor();
 
-  const [materialName, setMaterialName] = useState('');
+  const [materialName, setMaterialName] = useState('meshStandardMaterial');
 
   function onChangeMaterial(e){
     console.log(e.target.value)
@@ -34,8 +34,8 @@ export default function PropMaterial({ops}) {
         //console.log(selectObject.material)
         return (<>
         {selectObject.material.map((item,index)=>{
-          console.log("sadfsdfsdfsdf");
-          console.log(item);
+          //console.log("sadfsdfsdfsdf");
+          //console.log(item);
           return <PropMeshStandardMaterial key={index} item={item} ops={updateOPS}/>
           //return (<div key={index}><label>Type:{item.datatype} </label><label>Name:{item.name} </label></div>);
         })}
@@ -59,6 +59,7 @@ export default function PropMaterial({ops}) {
 
   function createMaterial(){
     console.log('CREATE MATERIAL');
+    console.log(materialName)
     let material = {
       datatype:materialName
       , name: materialName

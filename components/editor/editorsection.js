@@ -433,6 +433,12 @@ export default function EditorSection({editorid}){
           data.datatype="plane";
           data.shapePhysics='plane';
           data.mass=0;
+          data.parameters={
+            width:1,
+            height:1,
+            widthSegments :1,
+            heightSegments :1
+          };
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
@@ -444,6 +450,15 @@ export default function EditorSection({editorid}){
           data.datatype="sphere";
           data.shapePhysics='sphere';
           data.mass=0;
+          data.parameters={
+            radius:1,
+            widthSegments :8,
+            heightSegments :8,
+            phiStart :0,
+            phiLength :6.2,
+            thetaStart :0,
+            thetaLength :3.1,
+          };
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
@@ -455,6 +470,16 @@ export default function EditorSection({editorid}){
           data.datatype="cylinder";
           data.shapePhysics='cylinder';
           data.mass=0;
+          data.parameters={
+            radiusTop:1,
+            radiusBottom :1,
+            height :1,
+            radialSegments :8,
+            heightSegments :1,
+            openEnded :false,
+            thetaStart :0,
+            thetaLength: 6.2
+          };
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
@@ -488,6 +513,12 @@ export default function EditorSection({editorid}){
           data.datatype="camera";
           data.shapePhysics='box';
           data.mass=0;
+          data.parameters={
+            fov:45,
+            aspect:0.8823,
+            near:1,
+            far:100
+          };
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();
@@ -498,6 +529,12 @@ export default function EditorSection({editorid}){
           data.datatype="pointlight";
           data.shapePhysics='box';
           data.mass=0;
+          data.parameters={
+            color:45,
+            intensity:1,
+            distance:1000,
+            decay:1
+          };
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
           updateObjects();

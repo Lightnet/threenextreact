@@ -14,6 +14,8 @@ import PropPhysics from "./propphysics";
 import PropBox from "../props/propbox";
 import PropPlane from "../props/propplane";
 import PropMaterial from "../props/propmaterial";
+import PropSphere from "../props/propsphere";
+import PropCylinder from "../props/propscylinder";
 
 export default function PropObject({ops}) {
   const [isObject3D, setIsObject3D] = useState(false);
@@ -73,6 +75,12 @@ export default function PropObject({ops}) {
     if(selectObject?.datatype=='plane'){
       return <PropPlane ops={ops}/>
     }
+    if(selectObject?.datatype=='sphere'){
+      return <PropSphere ops={ops}/>
+    }
+    if(selectObject?.datatype=='cylinder'){
+      return <PropCylinder ops={ops}/>
+    }
     return <></>
   }
 
@@ -81,6 +89,14 @@ export default function PropObject({ops}) {
       return <PropMaterial ops={ops}/>
     }
     if(selectObject?.datatype=='plane'){
+      return <PropMaterial ops={ops}/>
+    }
+
+    if(selectObject?.datatype=='sphere'){
+      return <PropMaterial ops={ops}/>
+    }
+
+    if(selectObject?.datatype=='cylinder'){
       return <PropMaterial ops={ops}/>
     }
 

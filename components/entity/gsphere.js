@@ -18,6 +18,24 @@ const GSphere = React.forwardRef((props, ref) => {
     console.log(props);
   }
 
+  function renderMaterial(){
+    if(props.material){
+      //need work later for material id for layers....
+      return (<>
+      {props.material.map((item,index)=>{
+        if(item.datatype == 'meshStandardMaterial'){
+          return <meshStandardMaterial key={index} wireframe={item.wireframe} color={hovered ? 'hotpink' : item.color} />
+        }
+      })}
+      </>)
+      //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    }else{
+      return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      //return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
+    }
+    return <></>
+  }
+
   return (
     <mesh
       ref={ref}
@@ -31,10 +49,22 @@ const GSphere = React.forwardRef((props, ref) => {
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <sphereGeometry args={[1, 16, 16]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <sphereGeometry args={[ //1, 16, 16
+        props.parameters.radius, 
+        props.parameters.widthSegments, 
+        props.parameters.heightSegments, 
+        props.parameters.phiStart, 
+        props.parameters.phiLength, 
+        props.parameters.thetaStart, 
+        props.parameters.thetaLength,
+      ]} />
+      {renderMaterial()}
     </mesh>
   )
 //}
 });
 export default GSphere;
+/*
+
+<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+*/

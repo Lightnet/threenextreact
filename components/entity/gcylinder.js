@@ -18,6 +18,24 @@ const GCylinder = React.forwardRef((props, ref) => {
     console.log(props);
   }
 
+  function renderMaterial(){
+    if(props.material){
+      //need work later for material id for layers....
+      return (<>
+      {props.material.map((item,index)=>{
+        if(item.datatype == 'meshStandardMaterial'){
+          return <meshStandardMaterial key={index} wireframe={item.wireframe} color={hovered ? 'hotpink' : item.color} />
+        }
+      })}
+      </>)
+      //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    }else{
+      return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      //return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
+    }
+    return <></>
+  }
+
   return (
     <mesh
       ref={ref}
@@ -31,10 +49,23 @@ const GCylinder = React.forwardRef((props, ref) => {
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <cylinderGeometry args={[1, 1, 1, 8]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <cylinderGeometry args={[// 1, 1, 1, 8
+        props.parameters.radiusTop, 
+        props.parameters.radiusBottom, 
+        props.parameters.height, 
+        props.parameters.radialSegments, 
+        props.parameters.heightSegments, 
+        props.parameters.openEnded, 
+        props.parameters.thetaStart, 
+        props.parameters.thetaLength        
+      ]} />
+      {renderMaterial()}
+      
     </mesh>
   )
 //}
 });
 export default GCylinder;
+/*
+<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+*/

@@ -13,7 +13,6 @@ const GBox = React.forwardRef((props, ref) => {
 //export default function GBox({ref,props}) {
   
   const [hovered, setHover] = useState(false);
-
   //useFrame((state, delta) => (ref.current.rotation.x += 0.01));
 
   function clickObject(event){

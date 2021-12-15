@@ -18,6 +18,24 @@ const GPlane = React.forwardRef((props, ref) => {
     console.log(props);
   }
 
+  function renderMaterial(){
+    if(props.material){
+      //need work later for material id for layers....
+      return (<>
+      {props.material.map((item,index)=>{
+        if(item.datatype == 'meshStandardMaterial'){
+          return <meshStandardMaterial key={index} wireframe={item.wireframe} color={hovered ? 'hotpink' : item.color} />
+        }
+      })}
+      </>)
+      //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+    }else{
+      return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      //return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
+    }
+    return <></>
+  }
+
   return (
     <mesh
       ref={ref}
@@ -31,10 +49,18 @@ const GPlane = React.forwardRef((props, ref) => {
       //onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <planeGeometry args={[10, 10]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <planeGeometry args={[
+        props.parameters.width, 
+        props.parameters.height, 
+        props.parameters.widthSegments,
+        props.parameters.heightSegments,
+        ]} />
+      {renderMaterial()}
     </mesh>
   )
 //}
 });
 export default GPlane;
+/*
+<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+*/
