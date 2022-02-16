@@ -17,7 +17,7 @@ export default NextAuth({
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        alias: { label: "Alias", type: "text", placeholder: "User Name" },
+        alias: { label: "Alias", type: "text", placeholder: "John Doe" },
         passphrase: {  label: "Passphrase", type: "password", placeholder:"PASSWORD" }
       },
       async authorize(credentials, req) {
@@ -27,9 +27,9 @@ export default NextAuth({
         
         let hosturl;
         if(process.env.NODE_ENV == 'development'){
-          hosturl=process.env.NEXTAUTH_URL + '/api/signin';
+          hosturl=process.env.HOST + '/api/signin';
         }else{
-          hosturl=process.env.NEXTAUTH_URL +'/api/signin';
+          hosturl=process.env.HOST +'/api/signin';
         }
         //console.log(hosturl);
         let user;
@@ -65,7 +65,6 @@ export default NextAuth({
             return user;
           }
         }
-        
         // Return null if user data could not be retrieved
         return null;
       }
@@ -73,6 +72,16 @@ export default NextAuth({
   ],
   // https://next-auth.js.org/configuration/callbacks
   // https://next-auth.js.org/getting-started/client
+  /*
+  {
+  user: {
+    name: string
+    email: string
+    image: string
+    },
+    expires: Date // This is the expiry of the session, not any of the tokens within the session
+  }
+  */
   callbacks: {
     //first process user login
     async jwt({ token, user, account, profile, isNewUser }) {
@@ -81,16 +90,13 @@ export default NextAuth({
       //console.log(user);
       //console.log(account);
       //console.log(profile);
-      //console.log(isNewUser);
+      //console.log("isNewUser: ",isNewUser);
 
-      if (user) {//once the user login it will progress
+      if (user) {//once the user login it will progress data
         token.id = user.id;
         token.name = user.name;
         token.role = user.role;
         token.token = user.token;
-      }
-      if(profile){
-        token.type=profile.type;
       }
 
       return token; 
@@ -102,22 +108,21 @@ export default NextAuth({
       //console.log(user);
       //console.log(token);
 
-      if(token){//ok?
+      if(token){
         session.user={
           name:token.name,
           email:token.email,
           rote:token.role,
           id:token.id,
-          token:token.token
+          token:token.token,
         }
         //session.user=token.name;
       }
       return session;
     }
-    
   },
   //database: process.env.DATABASE_URL,
-  secret: process.env.SECRET,
+  //secret: process.env.SECRET,
   // https://next-auth.js.org/configuration/options
   session: {
     jwt: true,
@@ -126,7 +131,8 @@ export default NextAuth({
     updateAge: 24 * 60 * 60 // 24 hours
   },
   jwt: {
-    secret: process.env.SECRET
+    secret: process.env.SECRET || "secret"
+    //secret: 'INp8IvdIyeMcoGAgFGoA61DdBglwwSqnXJZkgz8PSnw'
     //signingKey: {
       //kty: "oct",
       //kid: "Dl893BEV-iVE-x9EC52TDmlJUgGm9oZ99_ZL025Hc5Q",
@@ -138,11 +144,12 @@ export default NextAuth({
   // https://github.com/nextauthjs/next-auth/discussions/791
   // https://next-auth.js.org/configuration/pages
   pages: {
-    // signIn: '/auth/signin',  // Displays signin buttons
+    //signIn: '/auth/signin',  // Displays signin buttons
     // signOut: '/auth/signout', // Displays form with sign out button
     error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: '/auth/new-user' // If set, new users will be directed here on first sign in
+    //newUser: '/auth/signup' // If set, new users will be directed here on first sign in
   },
   theme: 'light',
   debug: true

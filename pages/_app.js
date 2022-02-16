@@ -7,19 +7,17 @@
 
 // https://stackoverflow.com/questions/61184591/how-to-implement-loading-screen-in-next-js
 
+import "../styles/global.css";
+//import './styles.css';
 import React, { useState, useEffect } from "react";
 import { SessionProvider } from 'next-auth/react';
 import { useRouter } from "next/router";
 //import getConfig from 'next/config';
-import "../styles/global.css";
-//import './styles.css';
 import Loading from "../components/system/loading";
+import { NotifyProvider } from "../components/notify/notifyprovider";
 
-// Only holds serverRuntimeConfig and publicRuntimeConfig
-//const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
-//console.log(serverRuntimeConfig);
-//console.log(publicRuntimeConfig);
-
+import NotifyManager from "../components/notify/notifymanager";
+import {ThemeProvider} from "../components/theme/themeprovider"
 export default function App({Component, pageProps}){
   //console.log("[[[=== _app.js ===]]]");
   //console.log("session: ",session);
@@ -56,14 +54,38 @@ export default function App({Component, pageProps}){
     return (<></>);
   }
   
-  return (    
+  return (<>
     <SessionProvider 
       session={pageProps.session}
       // Re-fetch session every 5 minutes
       refetchInterval={5 * 60}
       >
-      {isRenderLoading()}
-      <Component {...pageProps} />
+        <ThemeProvider>
+          <NotifyProvider>
+            {isRenderLoading()}
+            <Component {...pageProps} />
+            <NotifyManager />
+          </NotifyProvider>
+        </ThemeProvider>
     </SessionProvider>
-  );
+  </>);
 }
+/*
+
+        
+        
+        
+        
+
+<SessionProvider 
+      session={pageProps.session}
+      // Re-fetch session every 5 minutes
+      refetchInterval={5 * 60}
+      >  
+      <NotifyProvider>
+        {isRenderLoading()}
+        <Component {...pageProps} />
+        <NotifyManager />
+      </NotifyProvider>
+    </SessionProvider>
+*/

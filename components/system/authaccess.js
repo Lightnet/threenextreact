@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 import Sign from "./sign";
 
 export default function AuthAccess({children}) {
+  
   const {data: session, status } = useSession();
 
   // session check while loading
@@ -24,5 +25,9 @@ export default function AuthAccess({children}) {
 
   return (<>
     <Sign></Sign>
+  </>)
+  
+  return (<>
+    {children}
   </>)
 }

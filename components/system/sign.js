@@ -8,6 +8,7 @@ import { useSession, signOut, signIn } from "next-auth/react";
 import Link from 'next/link';
 
 export default function Sign() {
+  
   const {data: session, status} = useSession();
   //console.log(session);
 
@@ -26,4 +27,6 @@ export default function Sign() {
   return (<>
     <button onClick={() => signIn()}>Sign in</button> <Link href="/auth/signup">Sign Up</Link>
   </>);
+
+  //return (<></>);
 }

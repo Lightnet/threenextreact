@@ -6,13 +6,10 @@
 // https://docs.pmnd.rs/react-three-fiber/API/hooks
 // https://dmitripavlutin.com/react-useref-guide/
 
-//import React, { useRef, useState, useEffect } from 'react';
 import { useRef, useState, useEffect } from 'react';
-import ThemeSection from "../../components/system/themesection";
-
 import EWindow from "../../components/ui/ewindow";
-
 import Modal from "../../components/ui/emodal";
+import ThemeLink from '../../components/theme/themelink';
 
 export default function Page(props) {
   const [ isOPen, setisOpen ]=useState('block');
@@ -35,7 +32,7 @@ export default function Page(props) {
   console.log('I rendered!');
 
   return (<>
-    <ThemeSection></ThemeSection>
+    <ThemeLink />
     <button onClick={handle}>Click me</button>
     <EWindow>      
     </EWindow>

@@ -13,25 +13,24 @@ import Link from 'next/link';
 import useEvent from '../hook/useEvent';
 
 // THREE
-import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, PositionalAudio, GizmoHelper, GizmoViewport } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { GizmoHelper, GizmoViewport } from '@react-three/drei';
 
 //three object3d
 import { buildModel } from './buildmodel';
 import ROrbitControl from '../entity/rorbitcontrol';
 
 // UI / PANEL
-//import ThemeSection from "../system/themesection";
 import DropDownMenu from "../ui/edropdown";
 import Modal from '../ui/emodal';
-import {NotificationsManager,Color} from "../notify";
+import {useNotifty, Color} from "../notify/notifyprovider";
 
 import EditorTopSideBar from "./panel/sidebartop";
 import EditorRightSideBar from "./panel/sidebarright";
 import EditorLeftSideBar from "./panel/sidebarleft";
 
 import EditorScene from "./panel/objectscene";
-import EditorProps from "./panel/objectprops";
+//import EditorProps from "./panel/objectprops";
 
 import SceneSection from './scene/scenesection';
 import AssetsSection from './assets/assetssection';
@@ -39,6 +38,7 @@ import AssetsSection from './assets/assetssection';
 import { useEditor, useScene } from './context/editorprovider';
 import ViewPanel from './panel/viewpanel';
 import { Physics } from '@react-three/cannon';
+import ThemeLink from '../theme/themelink';
 
 // https://stackoverflow.com/questions/1789945/how-to-check-whether-a-string-contains-a-substring-in-javascript
 if (!String.prototype.includes) {
@@ -58,8 +58,10 @@ if (!String.prototype.includes) {
 
 export default function EditorSection({editorid}){
 
+  const {dispatchNotify} = useNotifty();
+
   const [isSideBarTop, setIsSideBarTop] = useState(true);
-  const [isSideBarBottom, setIsSideBarBottom] = useState(true);
+  const [isSideBarBottom, setIsSideBarBottom] = useState(false);
   const [isSideBarLeft, setIsSideBarLeft] = useState(true);
   const [isSideBarRight, setIsSideBarRight] = useState(true);
 
@@ -84,8 +86,6 @@ export default function EditorSection({editorid}){
   const [viewModal, setViewModal] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const [notify,setNotify] = useState(); //notify call when detect change in state
-
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const [enablePhysics, setEnablePhysics ] = useState(false);
@@ -107,27 +107,10 @@ export default function EditorSection({editorid}){
       return item
     }))
   }
-  
-  function resetPhysics(){
-    //setEnablePhysics(state=>!state);
-    console.log("reset");
-  }
 
   function openDebugWindow(){
     console.log("page tab?")
     window.open(urlDebug, '_blank', 'width=400, height=400');
-  }
-
-  useEffect(()=>{
-    const theme = localStorage.getItem('theme');
-    if(theme){
-      document.documentElement.setAttribute('data-theme', theme);
-    }
-  },[]);
-
-  function changeTheme(name){
-    document.documentElement.setAttribute('data-theme', name);
-    localStorage.setItem('theme', name);
   }
 
   useEvent('keydown',keydown);
@@ -178,33 +161,36 @@ export default function EditorSection({editorid}){
   },[enablePhysics]);
   
   function notitfyInfo(children, autoClose) {
-    //console.log("info");
-    return setNotify({
-      color: Color.info,
-      children,
-      autoClose,
-    });
+    dispatchNotify({
+      type: 'add'
+      , color:Color.info
+      , children: children
+      , autoClose: autoClose
+    })
   }
   function notitfySuccess(children, autoClose) {
-    return setNotify({
-      color: Color.success,
-      children,
-      autoClose,
-    });
+    dispatchNotify({
+      type: 'add'
+      , color:Color.success
+      , children: children
+      , autoClose: autoClose
+    })
   }
   function notitfyWarning(children, autoClose) {
-    return setNotify({
-      color: Color.warning,
-      children,
-      autoClose,
-    });
+    dispatchNotify({
+      type: 'add'
+      , color:Color.warning
+      , children: children
+      , autoClose: autoClose
+    })
   }
   function notitfyError(children, autoClose) {
-    return setNotify({
-      color: Color.error,
-      children,
-      autoClose,
-    });
+    dispatchNotify({
+      type: 'add'
+      , color:Color.error
+      , children: children
+      , autoClose: autoClose
+    })
   }
   function createInfo(msg){
     notitfyInfo(<label>{msg}</label>,true);
@@ -219,6 +205,7 @@ export default function EditorSection({editorid}){
     notitfyWarning(<label>{msg}</label>,true);
   }
 
+  //load editor settings?
   async function initEditorDefaultScene(){
     //console.log("INIT... EDITOR ID:", editorID);
     if(!editorID){
@@ -247,6 +234,7 @@ export default function EditorSection({editorid}){
     }
   }
 
+  //editor check and load scene check
   async function getScenes(){
     if(!editorID){
       //console.log('editorid NULL');
@@ -712,8 +700,7 @@ export default function EditorSection({editorid}){
     }else if(viewModal == 'assets'){
       return <AssetsSection editorid={editorID}></AssetsSection>
     }
-    return (<>
-    </>)
+    return (<></>)
   }
 
   function showViewModal(name){
@@ -738,14 +725,16 @@ export default function EditorSection({editorid}){
       </Physics>
 
       {enableOrbitControl && <ROrbitControl />}
-
+      
+    
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
         margin={[80, 80]} // widget margins (X, Y)
         >
         <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
       </GizmoHelper>
-      
+      {/*
+      */}
     </Canvas>
     {/*
     */}
@@ -839,8 +828,7 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Theme" >
-        <a href="#" onClick={()=>changeTheme('light')}> Light </a> <br/>
-        <a href="#" onClick={()=>changeTheme('dark')}> Dark </a>
+        <ThemeLink />
       </DropDownMenu>
 
       <label>[Editor Name:] {editorName} </label>
@@ -874,17 +862,10 @@ export default function EditorSection({editorid}){
 
     </EditorLeftSideBar>
 
-    <Modal 
-      isOpen={isOpenModal}
-      closeModal={closeModal}
-    >
+    <Modal isOpen={isOpenModal} closeModal={closeModal} >
       {renderModal()}
     </Modal>
 
-    <NotificationsManager
-      setNotify={notify}
-    />
-    
   </>);
 }
 /*

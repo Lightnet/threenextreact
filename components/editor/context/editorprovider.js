@@ -10,7 +10,7 @@ export const EditorContext = createContext();
 export function useEditor(){
   const context = useContext(EditorContext);
   if (!context) {
-    throw new Error(`useCount must be used within a UserContext`)
+    throw new Error(`useCount must be used within a useEditor`)
   }
   return context;
 }
@@ -18,7 +18,7 @@ export function useEditor(){
 export function useScene(){
   const context = useContext(EditorContext);
   if (!context) {
-    throw new Error(`useCount must be used within a UserContext`)
+    throw new Error(`useCount must be used within a useEditor`)
   }
   const {sceneID, setSceneID} = context
   return {

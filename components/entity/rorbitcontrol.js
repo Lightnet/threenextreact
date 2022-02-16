@@ -3,15 +3,20 @@
   Created by: Lightnet
 */
 
-import { useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
+import { useRef } from 'react';
+//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+import { 
+  PerspectiveCamera
+  , OrbitControls
+  //, PositionalAudio 
+} from '@react-three/drei'
 
 export default function ROrbitControl(props){
   const ref = useRef();
 
   return (
     <>
+      
       <PerspectiveCamera
         makeDefault // Registers it as the default camera system-wide (default=false)
         {...props}
@@ -26,6 +31,8 @@ export default function ROrbitControl(props){
         enableDamping={false}
         camera={ref.current} 
         />
+        {/*
+        */}
     </>
     )
 }

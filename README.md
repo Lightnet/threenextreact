@@ -18,11 +18,12 @@
 
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
 
-## urls:
+## Dev urls:
 - http://localhost:3000/editor ( main / work in progress )
 - http://localhost:3000/examples (tests)
 - http://localhost:3000/app (tests / not added any feature yet.)
 - http://localhost:3000/ (entry point home page)
+- http://localhost:5555/ database (not in used)
 
 ## TO DO LIST:
 - account / auth (added / partly working)
@@ -149,7 +150,7 @@
 # Physics:
   After some testing for enable and disable physics react components. useref and usecontext has conflict change variable in render. Had to create two component that same but the varible is different. It possible to change some variable but need two check for isPhysics and enablePhysics. One is reason it build the world not enable physics to place holder and other is debug simulation.
 
-## plane:
+## 3D Plane:
   There is no args that x and y is infinite. Used box shape for better collision.
 - https://github.com/pmndrs/use-cannon/blob/master/src/propsToBody.js#L41
 
@@ -204,10 +205,28 @@ $ npm run dev
 ```
 - run the server from npm package from package.json script
 
+# Configs:
 
-## Dev url testing:
-- http://localhost:5555/ database (not in used)
-- http://localhost:3000/ web page
+
+Note before sure how to add into the config or you might override the next.js configs.
+
+There are two type one is [] and other is {}.
+
+next.config.js
+```js
+module.exports = {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      //add into the array
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false
+      }
+    }
+    return config;
+  }
+}
+```
 
 # .env
 ```
@@ -241,7 +260,6 @@ $ npm install -g npm-check-updates
 $ ncu // check package to updates
 ```
 
-
 # DESIGN:THREE (work in progress)
 - there are main and sub component to handle editor.
 - main where the editor handle call from sub childrens.
@@ -249,7 +267,7 @@ $ ncu // check package to updates
 - sub compoent are out side of the editor like window tabs. It would required some web socket events.
 - 
 
-# DESIGN:API (work in progress)
+# DESIGN: API (work in progress)
 - server to client
 - client to server
 - to handle json object format.
@@ -264,9 +282,6 @@ $ ncu // check package to updates
 # DESIGN:REACT (work in progress)
 - to handle custom or script ui to fix the editor signal event for ease of access variables.
 - 
-
-
-
 
 # Credits:
 ## svgrepo:

@@ -11,8 +11,9 @@
 // https://gist.github.com/agmm/da47a027f3d73870020a5102388dd820
 // https://morioh.com/p/c7ad109c8fd4
 // https://stackoverflow.com/questions/60465564/create-upload-files-api-in-next-js
+// https://www.section.io/engineering-education/uploading-files-using-formidable-nodejs/
 
-import formidable from "formidable-serverless";
+import formidable from 'formidable';
 import fs from "fs";
 import path from "path";
 
@@ -58,6 +59,23 @@ export default async function handler(req, res) {
   // parse form with a Promise wrapper
   //const data = await new Promise(async (resolve, reject) => {
   return new Promise(async (resolve, reject) => {
+    const form = formidable.IncomingForm();
+    /*
+    form.parse(req, (err, fields, files) => {
+      if (err) {
+        //next(err);
+        reject(res.status(500).send('Aborted'));
+        return;
+      }
+      console.log(fields);
+      console.log(files);
+      //res.json({ fields, files });
+      resolve(res.status(200).send('done'));
+    });
+    */
+
+
+    /*
     const form = new formidable.IncomingForm({
       multiples: true,
       keepExtensions: true
@@ -91,13 +109,6 @@ export default async function handler(req, res) {
         }else{
           console.log("NOT FOUND EXT.")
         }
-
-        //if(name=='file'){
-          //reject(res.status(500).send('Aborted'));
-          //return;
-        //}
-        //need create folder else it error out dir fail create.
-        //fs.writeFileSync(`public/upload/${file.name}`, data);
         fs.unlinkSync(file.path);
       })
       .on("aborted", () => {
@@ -110,22 +121,8 @@ export default async function handler(req, res) {
       });
     
     await form.parse(req);
+    */
   });
-    //console.log("data")
-    //console.log(data);
-
-  //console.log(data.fields.file);
-
-  //const contents = await fs.readFile(data?.fields?.file, {
-    //encoding: 'utf8',
-  //})
-  //console.log(contents);
-
-  // read file from the temporary path
-  //const contents = await fs.readFile(data?.files?.nameOfTheInput.path, {
-    //encoding: 'utf8',
-  //})
-  //console.log(contents);
 
   res.status(200).json({ name: 'John Doe' })
 }
