@@ -14,27 +14,24 @@ import {
 export default function ROrbitControl(props){
   const ref = useRef();
 
-  return (
-    <>
-      
-      <PerspectiveCamera
-        makeDefault // Registers it as the default camera system-wide (default=false)
-        {...props}
-        ref={ref}
-        position={[0, 5, 5]} 
-        >
-      </PerspectiveCamera>
-      <OrbitControls 
-        enablePan={true}
-        enableZoom={true} 
-        enableRotate={true}
-        enableDamping={false}
-        camera={ref.current} 
-        />
-        {/*
-        */}
-    </>
-    )
+  return (<>
+    <PerspectiveCamera
+      makeDefault // Registers it as the default camera system-wide (default=false)
+      {...props}
+      ref={ref}
+      position={[0, 5, 5]} 
+      >
+    </PerspectiveCamera>
+    <OrbitControls 
+      enablePan={true}
+      enableZoom={true} 
+      enableRotate={true}
+      enableDamping={false}
+      camera={ref.current} 
+      />
+      {/*
+      */}
+  </>)
 }
 /*
 

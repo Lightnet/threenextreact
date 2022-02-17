@@ -144,12 +144,12 @@ export default NextAuth({
   // https://github.com/nextauthjs/next-auth/discussions/791
   // https://next-auth.js.org/configuration/pages
   pages: {
-    //signIn: '/auth/signin',  // Displays signin buttons
+    signIn: '/auth/signin',  // Displays signin buttons
     // signOut: '/auth/signout', // Displays form with sign out button
     error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: '/auth/new-user' // If set, new users will be directed here on first sign in
-    //newUser: '/auth/signup' // If set, new users will be directed here on first sign in
+    newUser: '/auth/signup' // If set, new users will be directed here on first sign in
   },
   theme: 'light',
   debug: true

@@ -3,9 +3,9 @@
   Created by: Lightnet
 */
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // lib 
-import { nanoid32 } from "../../lib/helper";
+import { isEmpty, nanoid32 } from "../../lib/helper";
 
 // event / use
 import useFetch from "../hook/usefetch";
@@ -64,38 +64,29 @@ export default function EditorSection({editorid}){
   const [isSideBarBottom, setIsSideBarBottom] = useState(false);
   const [isSideBarLeft, setIsSideBarLeft] = useState(true);
   const [isSideBarRight, setIsSideBarRight] = useState(true);
-
   //const [selectObject, setSelectObject] = useState(null); //select object for props div
   const {selectObject, setSelectObject} = useEditor();
-
   //const [object3Ds, setObject3Ds] = useState([]); // scene objects array json
   const {object3Ds, setObject3Ds} = useEditor();
-
   //const [objects3D, setObjects3D] = useState([]); // scene objects render react
   //const [physics3D, setPhysics3D] = useState([]); //physic objects
-
   //const [editorID, setEditorID] = useState(null);
   const {editorID, setEditorID} = useEditor();
   const {editorName, setEditorName} = useEditor();
-
   //const [sceneID, setSceneID] = useState(null);
   const {sceneID, setSceneID} = useScene();
   const {scenes, setScenes} = useEditor();
   const {sceneName, setSceneName} = useEditor();
-
   const [viewModal, setViewModal] = useState(null);
   const [isOpenModal, setIsOpenModal] = useState(false);
-
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
-
   const [enablePhysics, setEnablePhysics ] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
-
   const [urlDebug, setUrlDebug ] = useState('/game');
 
-  const togglePhysics = useCallback(()=>{
-    setEnablePhysics(state=>!state);
-  },[enablePhysics])
+  const togglePhysics = (e)=>{
+    e.preventDefault();
+    setEnablePhysics(state=>!state)
+  }
 
   function statePhysics(){
     setObject3Ds(object3Ds.map(item=>{
@@ -128,38 +119,57 @@ export default function EditorSection({editorid}){
     }
   }
 
+  // check if the passing editor id for init checks.
   useEffect(() => {
-    //console.log("INIT SET MOUNT!");
-    if(editorid){
-      //console.log("EDITOR ID FOUND")
-      setEditorID(editorid);
-      initEditorDefaultScene();
-      getScenes();
-    }else{
-      //console.log("NOT FOUND")
+    console.log("INIT SET MOUNT!");
+    if(typeof editorid == 'undefined'){
+      createInfo("No Editor ID is Assign to project.")
+      return;
     }
-    return ()=>{
-      //console.log('EDITOR CLEAN UP!');
-    };
-  }, [editorid,editorID]);
+    if(!isEmpty(editorid)){
+      console.log("EDITOR ID FOUND")
+      createInfo("Found and Checking Editor ID:" + editorid)
+      setEditorID(editorid);
+    }
+  }, [editorid]);
 
+  // check editor id
+  useEffect(() => {
+    if(!isEmpty(editorID)){
+      //console.log("EDITOR ID FOUND")
+      initEditorDefaultScene(); // fetch project data
+    }
+  }, [editorID]);
+
+  // check for scene load
   useEffect(()=>{
-    if(sceneID){
-      loadSceneObjects();
-      for(let scene of scenes){
-        if(scene.id == sceneID){
-          setSceneName(scene.name);
-          break;
-        }
-      }
+    if(!isEmpty(sceneID)){
+      getScenes();// fetch scene list
+      loadSceneObjects(); // fetch scene object3ds
       setUrlDebug('/game?sceneid='+sceneID);
     }
   },[sceneID]);
 
+  // get the scene name
+  useEffect(()=>{
+    for(let scene of scenes){
+      console.log(scene);
+      if(scene.id == sceneID){
+        setSceneName(scene.name);
+        break;
+      }
+    }
+  },[scenes]);
+
+  //check for object for Physics
   useEffect(()=>{
     statePhysics();
   },[enablePhysics]);
+
   
+  //======
+  // NOTIFY MESSAGES
+  //======
   function notitfyInfo(children, autoClose) {
     dispatchNotify({
       type: 'add'
@@ -193,22 +203,24 @@ export default function EditorSection({editorid}){
     })
   }
   function createInfo(msg){
-    notitfyInfo(<label>{msg}</label>,true);
+    notitfyInfo(msg,true);
   }
   function msgSuccess(msg){
-    notitfySuccess(<label>{msg}</label>,true);
+    notitfySuccess(msg,true);
   }
   function msgError(msg){
-    notitfyError(<label>{msg}</label>,true);
+    notitfyError(msg,true);
   }
   function msgWarn(msg){
-    notitfyWarning(<label>{msg}</label>,true);
+    notitfyWarning(msg,true);
   }
 
-  //load editor settings?
+  //load editor settings? 
   async function initEditorDefaultScene(){
     //console.log("INIT... EDITOR ID:", editorID);
-    if(!editorID){
+    if(isEmpty(editorID)){
+      console.log("EDITOR ID NULL");
+      createInfo("EDITOR ID NULL");
       return;
     }
     let data = await useFetch('api/editor',{
@@ -236,7 +248,7 @@ export default function EditorSection({editorid}){
 
   //editor check and load scene check
   async function getScenes(){
-    if(!editorID){
+    if(isEmpty(editorID)){
       //console.log('editorid NULL');
       return;
     }
@@ -255,7 +267,13 @@ export default function EditorSection({editorid}){
     }
   }
 
+  //load scene objects list
   async function loadSceneObjects(){
+
+    if(isEmpty(sceneID)){
+      console.log("Scene ID EMPTY");
+      return;
+    }
     let data = await useFetch('api/object3d',{
       method:'POST',
       body:JSON.stringify({
@@ -287,38 +305,27 @@ export default function EditorSection({editorid}){
   }
 
   //side bar
-  function ToggleSBTop(){
+  function ToggleSBTop(e){
+    e.preventDefault()
     //console.log("seteditorTSB");
     setIsSideBarTop(!isSideBarTop);
   }
   //side bar
-  function ToggleSBRight(){
+  function ToggleSBRight(e){
+    e.preventDefault()
     //console.log("seteditorTSB");
     setIsSideBarRight(!isSideBarRight);
   }
-  function ToggleSBLeft(){
+  function ToggleSBLeft(e){
+    e.preventDefault()
     //console.log("seteditorTSB");
     setIsSideBarLeft(!isSideBarLeft);
   }
-  //update model for render {objects3D}
-  function updateObjects(){
-    /*
-    console.log("enablePhysics:",enablePhysics)
-    if(object3Ds){
-      let obj = object3Ds;
-      //console.log(obj);
-      let objmap = obj.map((_entity)=>{
-        return buildModel(_entity)
-      })
-      //console.log(objmap);
-      setObjects3D(objmap);
-    }
-    */
-  }
 
   async function apiSaveObject3D(obj){
-    if(!sceneID){
+    if(isEmpty(sceneID)){
       console.log('ERROR NULL SCENEID');
+      return;
     }
     let data = await useFetch('api/object3d',{
       method:'POST'
@@ -336,8 +343,9 @@ export default function EditorSection({editorid}){
     msgSuccess('Success! Save Object3D');
   }
   async function apiUpdateObject3D(obj){
-    if(!sceneID){
+    if(isEmpty(sceneID)){
       console.log('ERROR NULL SCENEID');
+      return;
     }
     let data = await useFetch('api/object3d',{
       method:'PATCH'
@@ -354,9 +362,10 @@ export default function EditorSection({editorid}){
     }
   }
   async function apiDeleteObject3D(id){
-    if(!sceneID){
+    if(isEmpty(sceneID)){
       console.log('ERROR NULL SCENEID');
       msgWarn('Error Fail Null SceneID');
+      return;
     }
     let data = await useFetch('api/object3d',{
       method:'DELETE'
@@ -413,7 +422,6 @@ export default function EditorSection({editorid}){
           data.mass=1;
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addplane"){
@@ -430,7 +438,6 @@ export default function EditorSection({editorid}){
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addsphere"){
@@ -450,7 +457,6 @@ export default function EditorSection({editorid}){
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addcylinder"){
@@ -471,7 +477,6 @@ export default function EditorSection({editorid}){
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addcircle"){
@@ -482,7 +487,6 @@ export default function EditorSection({editorid}){
 
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addcone"){
@@ -493,7 +497,6 @@ export default function EditorSection({editorid}){
           
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addcamera"){
@@ -509,7 +512,6 @@ export default function EditorSection({editorid}){
           };
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addpointlight"){
@@ -525,7 +527,6 @@ export default function EditorSection({editorid}){
           };
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="addambientlight"){
@@ -536,7 +537,6 @@ export default function EditorSection({editorid}){
 
           apiSaveObject3D(data);
           setObject3Ds([...object3Ds,data]);
-          updateObjects();
         }
 
         if(args.action=="select"){
@@ -563,7 +563,6 @@ export default function EditorSection({editorid}){
               return item
             }
           }));
-          updateObjects();
         }
 
         if(args.action=="rename"){
@@ -577,7 +576,6 @@ export default function EditorSection({editorid}){
               return item
             }
           }));
-          updateObjects();
         }
 
         if(args.action=="remove"){
@@ -589,7 +587,6 @@ export default function EditorSection({editorid}){
             }
           }
           setObject3Ds(object3Ds.filter(item=>item.objectid !== args.id ));
-          updateObjects();
         }
 
         if(args.action=="update"){
@@ -672,9 +669,6 @@ export default function EditorSection({editorid}){
           }));
 
           //useCallback(()=>{setObject3Ds(object3Ds)},[object3Ds])
-
-          updateObjects();
-
         }
 
         if(args.action=='loadscene'){
@@ -683,7 +677,6 @@ export default function EditorSection({editorid}){
           setSelectObject(null);
           setSceneID(args.id);
         }
-
         //END ACTION STRING
       }
     }
@@ -708,8 +701,13 @@ export default function EditorSection({editorid}){
     setIsOpenModal(true);
   }
 
-  function toggleOrbitControl(){
+  function toggleOrbitControl(e){
+    e.preventDefault()
     setEnableOrbitControl(!enableOrbitControl);
+  }
+
+  function clickPreventD(e){
+    e.preventDefault()
   }
 
   return(<>
@@ -754,7 +752,7 @@ export default function EditorSection({editorid}){
       </DropDownMenu>
 
       <DropDownMenu menuname="Select" >
-        <a href="#" >Select Object</a> <br />
+        <a href="#" onClick={clickPreventD}>Select Object</a> <br />
         <a href="#" onClick={toggleOrbitControl}> Orbit Control {enableOrbitControl?("on"):("off")} </a>
       </DropDownMenu>
 

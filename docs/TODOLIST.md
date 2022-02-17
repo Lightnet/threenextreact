@@ -1,4 +1,11 @@
 # TO DO LIST:
+
+## Top List:
+-Editor rework start up
+  - in case of new project.
+  - load on project id
+  - load scene id
+
 -account setup
 --database
 ---user
@@ -19,22 +26,20 @@
 --game
 --serverlist
 
-# ui:
+# UI:
 -modal
 -window
 -panel
 -button
 
-
-
-# entery point:
+# Entry point:
 - project load list
 - game list
 - settings
 - docs
 - threejs examples?
 
-# editor:
+# Editor:
 - scene
 - script
 - assets
@@ -49,16 +54,10 @@
 --material
 --t4exture
 --need check for add, update, delete editor text
--
-
 -projectlist
 -
 
-
-
-
-
-## information:
+## Information:
   Required some connection to commication or handle events.
 
   To have dock system which will be tricky to set up since it need to async to main editor.
@@ -70,7 +69,5 @@
 
 ## Information:
   Simple test upload file.
-
-
 
 https://github.com/npm/rfcs/blob/main/implemented/0025-install-peer-deps.md

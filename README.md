@@ -31,7 +31,7 @@
   - sign up (added / need work)
   - third partly sign token (not build)
 
-- ui
+- UI
   - button (work in progress)
   - input (work in progress)
   - window (work in progress)
@@ -164,7 +164,6 @@
 - three 0.134.0
 - mongoose 6.0.12
 - jsonwebtoken 
-## 
 - webpack 5 (Next.js build in for dev)
 
 ### Not Used:
@@ -194,6 +193,10 @@
   The network and database will handle some simple tests.
 
 # Setup:
+
+  Need to install nodejs, mongodb and other IDE editor of your choice.
+
+
 Command line:
 ```
 $ npm install
@@ -206,7 +209,6 @@ $ npm run dev
 - run the server from npm package from package.json script
 
 # Configs:
-
 
 Note before sure how to add into the config or you might override the next.js configs.
 

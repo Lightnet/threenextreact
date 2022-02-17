@@ -18,7 +18,7 @@ import { useGame } from './gameprovider';
 import { GizmoHelper, GizmoViewport } from '@react-three/drei';
 import useFetch from '../hook/usefetch';
 import { buildModel } from '../editor/buildmodel';
-import ROrbitControl from '../entities/rorbitcontrol';
+import ROrbitControl from '../entity/rorbitcontrol';
 import { Physics } from '@react-three/cannon';
 
 export default function GameMain({gameid,sceneid}){
