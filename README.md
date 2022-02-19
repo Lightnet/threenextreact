@@ -9,12 +9,24 @@
 - Prototyping
 - Unstable builds.
 
+# Packages:
+- three ( 3D/2D render )
+- @react-three/fiber ( react for three handle components )  https://github.com/pmndrs/react-three-fiber 
+- jsonwebtoken (secure check token)
+- mongoose ( database )
+- next-auth ( auth check user login )
+- next (react server pre-render)
+- dayjs (time stampe)
+- nanoid (random id gen)
+- react (web browser)
+- socket.io ( for user co-op editing. not build)
+
 ## Information:
   Work in progress builds and testing ideas.
 
-  To develop 3D editor and game with Next.js, React.js and Three.js to create browser client game or application. Used Next.js with built in server, api and React.js to prerender browser client page render. Three.js does have other third party packages to handle React.js components in modules design. The database will be used is MongoDB to able save and load data for editing and game to manage them in json format. Note that nextjs (https://nextjs.org/) server run differently that reduce route coding and config.
+  To develop 3D editor and game with Next.js, React.js, Three.js and three/fiber to create browser client game or application. Used Next.js with built in server, api and React.js to prerender browser client page render. Three.js does have other third party packages to handle React.js components in modules design. The database will be used is MongoDB to able save and load data for editing and game to manage them in json format. Note that nextjs (https://nextjs.org/) server run differently that reduce route coding and config.
 
-  By using the Three.js with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game current set. Required creating components and api calls.
+  By using the three/fiber with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game current set. Required creating components and api calls.
 
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
 
