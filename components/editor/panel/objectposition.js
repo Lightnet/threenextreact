@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import NumberProp from "../input/propnumber";
 
 export default function Component({selectObject,ops}) {

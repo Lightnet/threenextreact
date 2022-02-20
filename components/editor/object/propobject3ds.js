@@ -5,7 +5,7 @@
 */
 
 import { useEditor } from "../context/editorprovider";
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper";
 
 export default function PropObject3Ds({ops}) {

@@ -4,7 +4,7 @@
 */
 
 import PropNumber from "../input/propnumber";
-import { useEditor } from "../context/editorprovider";
+import React,{ useEditor } from "../context/editorprovider";
 import { useState, useEffect } from "react";
 
 export default function PropSphere({ops}) {

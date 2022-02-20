@@ -5,6 +5,7 @@
 
 // https://next-auth.js.org/getting-started/client
 
+import React from "react";
 import { useSession, signOut, signIn } from "next-auth/react"
 import Link from 'next/link';
 import ThemeLink from "../theme/themelink";

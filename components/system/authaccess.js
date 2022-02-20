@@ -2,7 +2,7 @@
 # License: MIT
 # Created By: Lightnet
 */
-
+import React from "react";
 import { useSession } from "next-auth/react";
 import Sign from "./sign";
 

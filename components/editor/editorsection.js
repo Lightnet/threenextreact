@@ -3,13 +3,13 @@
   Created by: Lightnet
 */
 
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 // lib 
 import { isEmpty, nanoid32 } from "../../lib/helper";
 
 // event / use
 import useFetch from "../hook/usefetch";
-import Link from 'next/link';
+//import Link from 'next/link';
 import useEvent from '../hook/useEvent';
 
 // THREE
@@ -306,18 +306,18 @@ export default function EditorSection({editorid}){
 
   //side bar
   function ToggleSBTop(e){
-    e.preventDefault()
+    //e.preventDefault()
     //console.log("seteditorTSB");
     setIsSideBarTop(!isSideBarTop);
   }
   //side bar
   function ToggleSBRight(e){
-    e.preventDefault()
+    //e.preventDefault()
     //console.log("seteditorTSB");
     setIsSideBarRight(!isSideBarRight);
   }
   function ToggleSBLeft(e){
-    e.preventDefault()
+    //e.preventDefault()
     //console.log("seteditorTSB");
     setIsSideBarLeft(!isSideBarLeft);
   }
@@ -741,8 +741,9 @@ export default function EditorSection({editorid}){
       isOpen={isSideBarTop}
       onRequestClose={ToggleSBTop}
     >
-      <Link href="/">Home</Link>
-
+      {
+      //<Link href="/">Home</Link>
+      }
       <DropDownMenu menuname="File" >
         {/*
         <a href="#" >Project List</a>

@@ -9,6 +9,11 @@
 - Prototyping
 - Unstable builds.
 
+## Server types:
+- next.js (current testing / api )
+- express.js ( work in progress / no api )
+  - rework to have stand alone
+
 # Packages:
 - three ( 3D/2D render )
 - @react-three/fiber ( react for three handle components )  https://github.com/pmndrs/react-three-fiber 
@@ -173,6 +178,7 @@
 - next 
 - next-auth 4.0.0-beta.26
 - react 
+- react-dom 
 - three 0.134.0
 - mongoose 6.0.12
 - jsonwebtoken 
@@ -181,7 +187,6 @@
 ### Not Used:
 - prisma 
 - @prisma/client 
-- react-dom 
 - socket.io 
 - socket.io-client 
 - sqlite 4.0.23
@@ -207,7 +212,6 @@
 # Setup:
 
   Need to install nodejs, mongodb and other IDE editor of your choice.
-
 
 Command line:
 ```

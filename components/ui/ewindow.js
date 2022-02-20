@@ -5,7 +5,7 @@
 
 // https://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
 
-import { useRef, useEffect, useState, Children } from 'react';
+import React,{ useRef, useEffect, useState, Children } from 'react';
 
 import styles from "./ewindow.module.css";
 

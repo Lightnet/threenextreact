@@ -6,7 +6,7 @@
 // https://threejs.org/docs/index.html#api/en/helpers/PolarGridHelper
 // https://stackoverflow.com/questions/66664209/how-can-i-use-forwardref-in-react
 
-import { useRef, useEffect, useState } from 'react';
+import React,{ useRef, useEffect, useState } from 'react';
 import GBox from './gbox';
 import GCylinder from './gcylinder';
 import GPlane from './gplane';

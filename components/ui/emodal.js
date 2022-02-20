@@ -4,7 +4,7 @@
 */
 
 import styles from "./modal.module.css";
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 
 export default function Modal({isOpen,closeModal,children}) {
   const [ sDisplay, setsDisplay ]=useState('none');

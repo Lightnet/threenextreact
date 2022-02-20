@@ -7,7 +7,7 @@
 // https://www.w3resource.com/javascript-exercises/javascript-math-exercise-34.php
 // https://gist.github.com/evdokimovm/0e7163faf7c8fe24e41e6b68461e4feb
 
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { isEmpty,isNumber } from "../../../lib/helper";
 
 export default function PropDegree({ops,objid,value,objtype,objKey}) {

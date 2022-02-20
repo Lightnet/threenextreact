@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useEditor } from "../context/editorprovider";
 
 var colors=[

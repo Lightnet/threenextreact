@@ -4,7 +4,7 @@
 */
 
 // https://threejsfundamentals.org/threejs/lessons/threejs-primitives.html
-
+import React from "react";
 import Box from "../entity/box";
 //import Foo from '../entities/foo';
 //import CameraTest from '../../entities/cameratest';

@@ -12,7 +12,7 @@
 // https://javascript.info/map-set
 // https://stackoverflow.com/questions/48131100/react-render-array-of-components
 
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useGame } from './gameprovider';
 import { GizmoHelper, GizmoViewport } from '@react-three/drei';

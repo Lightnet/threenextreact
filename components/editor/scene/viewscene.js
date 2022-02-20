@@ -5,11 +5,11 @@
   view port for scene?
 
 */
+
+import React from "react";
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 
 export default function ViewScene() {
-
-  
 
   return (<>
     <Canvas>

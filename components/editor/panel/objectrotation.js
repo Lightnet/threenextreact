@@ -5,7 +5,7 @@
 
 // https://discourse.threejs.org/t/degree-or-radian/21227/2
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import PropDegree from "../input/propdegree";
 import PropNumber from "../input/propnumber";
 

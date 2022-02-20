@@ -5,7 +5,7 @@
 
 // https://github.com/pmndrs/use-cannon
 
-import { useRef, useEffect, useState } from 'react';
+import React,{ useRef, useEffect, useState } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 import { useBox, useCylinder, usePlane, useSphere } from '@react-three/cannon';

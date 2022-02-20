@@ -5,7 +5,7 @@
 
 // https://stackoverflow.com/questions/1042138/how-to-check-if-function-exists-in-javascript
 
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import { isEmpty } from "../../lib/helper";
 
 export default function EInput({isEnterKey=true, value, updateValue}) {

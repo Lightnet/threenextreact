@@ -5,7 +5,7 @@
 
 //https://stackoverflow.com/questions/9326653/javascript-for-float-and-integer-number-validation
 
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { isEmpty,isNumber } from "../../../lib/helper";
 
 export default function PropNumber({ops,objid,value,objtype,objKey}) {

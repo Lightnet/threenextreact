@@ -6,7 +6,7 @@
 
 */
 
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import { useEditor, useScene } from "../context/editorprovider";
 import useFetch from "../../hook/usefetch";
 import { isEmpty } from "../../../lib/helper";

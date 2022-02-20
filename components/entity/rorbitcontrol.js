@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import { useRef } from 'react';
+import React,{ useRef } from 'react';
 //import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 import { 
   PerspectiveCamera

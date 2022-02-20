@@ -1,6 +1,6 @@
 
 
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import useFetch from '../../hook/usefetch';
 
 export default function ProjectEdit({editor,ops}) {

@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import { useEffect, useState } from "react";
+import React,{ useEffect, useState } from "react";
 import { useEditor } from "../context/editorprovider";
 import ObjectPosition from "../panel/objectposition";
 import RotationProp from "../panel/objectrotation";

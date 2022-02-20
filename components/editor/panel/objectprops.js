@@ -5,9 +5,8 @@
 
 //import { getSession } from "next-auth/react";
 //import prisma from './client';
-//import React, {useState, useEffect} from "react";
 //import InputProp from "../editor/inputProp";
-//import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import ObjectPosition from "./objectposition";
 import RotationProp from "./objectrotation";
 import ScaleProp from "./objectscale";

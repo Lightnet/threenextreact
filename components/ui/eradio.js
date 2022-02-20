@@ -5,7 +5,7 @@
 
 // https://www.w3schools.com/tags/att_input_type_radio.asp
 
-import { useState, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 
 export default function ERadio() {
   

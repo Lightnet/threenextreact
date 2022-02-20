@@ -13,7 +13,7 @@
  *  }
  */
 
-import { useRef, useState, useEffect } from 'react';
+import React,{ useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
 
 function Box(props) {

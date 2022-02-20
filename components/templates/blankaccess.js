@@ -5,6 +5,7 @@
 
 //page
 
+import React, { useState, useEffect } from "react";
 import AuthAccess from "../../components/system/authaccess";
 
 export default function Page() {

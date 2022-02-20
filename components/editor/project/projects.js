@@ -6,7 +6,7 @@
 // bug in key value
 // testing array
 
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import Modal from '../../ui/emodal';
 import ProjectDelete from './projectdelete';
 import ProjectEdit from './projectedit';
