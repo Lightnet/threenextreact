@@ -10,20 +10,19 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 import express from 'express';
 const router = express.Router();
 import route_test from './routes/route_test.mjs';
+import route_three from './routes/route_three.mjs';
 //import route_download from './routes/route_download.js';
 //import route_upload from './routes/route_upload.js';
-//
-//import auth from './routes/auth.js';
-//import game from './routes/game/game.js';
+
+import auth from './routes/auth.mjs';
 
 //router.use(route_upload);
 //router.use(route_download);
+
+router.use(auth);
+router.use("/api",route_three);
 router.use(route_test);
-
-
-//router.use(auth);
-//router.use(game);
-
+// added last for error or url does not exist
 router.get('*', (req, res) => {
   //res.send(
     //'<script src="/bundle.js"></script>'

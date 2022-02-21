@@ -4,9 +4,9 @@
 */
 
 import { getSession } from "next-auth/react";
-import clientDB,{ sessionTokenCheck } from "../../lib/database";
+import clientDB,{ sessionTokenCheck } from "../../lib/database.mjs";
 import {log} from "../../lib/log";
-import { nanoid32 } from "../../lib/helper";
+import { nanoid32 } from "../../lib/helper.mjs";
 
 export default async (req, res) => {
 

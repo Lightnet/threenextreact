@@ -5,15 +5,42 @@
   Note: for express js
 */
 import React from "react";
-import { EditorProvider } from "./editor/context/editorprovider";
-import EditorSection from "./editor/editorsection";
+import { Route, Routes } from "react-router-dom";
+import { useAuth } from "./auth/auth";
+import Sign from "./auth/sign";
+import { SignInPage } from "./auth/signin";
+import { SignOutPage } from "./auth/signout";
+import { SignUpPage } from "./auth/signup";
+import ErrorPage from "./system/errorpage";
+import ThreePage from "./three/ThreePage";
 
 export default function IndexPage(){
 
+
+  const { user } = useAuth();
+
+
+  if(!user){
+    return <>
+    <Sign></Sign><br/>
+    <Routes>
+      <Route path="/" element={<ThreePage />} />
+      <Route path="signin" element={<SignInPage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="signout" element={<SignOutPage />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
+    </>
+  }
+
   return (<>
-    <EditorProvider>
-      <EditorSection />    
-    </EditorProvider>
+    <Routes>
+      <Route path="/" element={<ThreePage />} />
+      <Route path="signin" element={<SignInPage />} />
+      <Route path="signup" element={<SignUpPage />} />
+      <Route path="signout" element={<SignOutPage />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
   </>)
 }
 /*

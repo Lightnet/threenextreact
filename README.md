@@ -248,7 +248,8 @@ module.exports = {
 
 # .env
 ```
-HOST="http://localhost:3000"
+PORT=3000
+HOST="localhost"
 NEXTAUTH_URL="http://localhost:3000"
 DATABASE_URL="mongodb://127.0.0.1/reactthree"
 SECRET=""

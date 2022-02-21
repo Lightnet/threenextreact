@@ -5,12 +5,14 @@
 
 // https://www.npmjs.com/package/connect-mongo
 // https://expressjs.com/en/resources/middleware/session.html
-// 
+// https://expressjs.com/en/5x/api.html
+
+
 import chalk from 'chalk';
 import http from 'http';
 import express from "express";
 //import dotEnv from 'dotenv';
-import bodyParser from 'body-parser';
+//import bodyParser from 'body-parser';
 import session  from 'express-session';
 import routes from './routes.mjs';
 import cors from "cors";
@@ -64,17 +66,26 @@ var corsOptions = {
 export function main(){
   //console.log("main ???")
   const app = express();
+
+  //console.log(process.env.PORT)
+  //console.log(process.env.HOST) 
+  //console.log(process.env.SECRET) 
+
   const PORT =  process.env.PORT || 3000;
-  const HOST = process.env.HOST ||"0.0.0.0";
+  const HOST =  process.env.HOST || "0.0.0.0";
 
   //let db = await clientDB();
   //app.use(cors(corsOptions))
   app.use(cors())
-  console.log(__dirname);
+  //console.log(__dirname);
   //public | dist > folder
   app.use(express.static('dist'));
 
   //app.set('trust proxy', 1) // trust first proxy
+
+  console.log('env.PORT', process.env.PORT)
+  console.log('env.HOST', process.env.HOST)
+
   app.set('PORT', PORT)
   app.set('HOST', HOST)
 
@@ -86,9 +97,10 @@ export function main(){
   }))
 
   // parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: false }))
+  //app.use(bodyParser.urlencoded({ extended: false }))
   // parse application/json
-  app.use(bodyParser.json())
+  //app.use(bodyParser.json())
+  app.use(express.json())
 
   // Access the session as req.session
   app.get('/', (req, res) => {
@@ -103,12 +115,19 @@ export function main(){
     //console.log(`Server app listening at http://localhost:${PORT}`)
   //})
   const server = http.createServer(app);
+  console.log("PORT: ", app.get('PORT'))
+  console.log("HOST: ", app.get('HOST'))
 
-  //server.listen(app.get('PORT'),()=>{
-  server.listen(app.get('PORT'),app.get('HOST'),()=>{
-    console.log('Init Server listen...')
-  });
-
+  if(app.get('HOST')){
+    server.listen(app.get('PORT'),app.get('HOST'),()=>{
+      console.log('Init Server listen...')
+    });
+  }else{
+    server.listen(app.get('PORT'),()=>{
+      console.log('Init Server listen...')
+    });
+  }
+  
   server.on('listening', function() {
     //let localhost = getIPAddress();
     //console.log(`IP address 0 on http://${localhost}:${PORT} <- Local host IP address machine`);
@@ -124,7 +143,7 @@ export function main(){
   });
 
   // https://stackoverflow.com/questions/14031763/doing-a-cleanup-action-just-before-node-js-exits
-
+  /*
   process.on('exit',()=>{
     console.log("exit CLOSE?")
     server.close();
@@ -146,7 +165,8 @@ export function main(){
     console.log("uncaughtException CLOSE?")
     server.close();
   })
-  console.log("end server set up?")
+  */
+  //console.log("end server set up?")
 }
 
 //main();

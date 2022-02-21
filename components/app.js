@@ -12,6 +12,8 @@ import NotifyManager from "./notify/notifymanager";
 import { NotifyProvider } from "./notify/notifyprovider";
 import { ThemeProvider } from "./theme/themeprovider";
 import IndexPage from "./indexpage";
+import { AuthProvider } from "./auth/auth";
+import { BrowserRouter } from "react-router-dom";
 
 export default function App(props){
   console.log("props:", props);
@@ -19,8 +21,12 @@ export default function App(props){
 
     <ThemeProvider>
       <NotifyProvider>
-        <IndexPage  />        
-        <NotifyManager />
+        <BrowserRouter>
+          <AuthProvider>
+            <IndexPage  />        
+            <NotifyManager />
+          </AuthProvider>
+        </BrowserRouter>
       </NotifyProvider>
     </ThemeProvider>
   </>);

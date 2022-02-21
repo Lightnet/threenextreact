@@ -1,0 +1,19 @@
+.model {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  /*background-color: var(--content-color);*/
+  text-align: left;
+  border: 1px solid #d3d3d3;
+  /*color:var(--content-font);*/
+}
+
+.header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  /*background-color: var(--header-color);*/
+  /*color: #fff;*/
+  color:var(--header-font);
+}

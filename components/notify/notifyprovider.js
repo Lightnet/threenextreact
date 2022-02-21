@@ -36,7 +36,7 @@
 // https://daveceddia.com/usereducer-hook-examples/
 
 import React,{ createContext, useContext, useMemo, useReducer } from "react";
-import { nanoid16 } from "../../lib/helper.js";
+import { nanoid16 } from "../../lib/helper.mjs";
 
 export const nottifyContext = createContext();
 
