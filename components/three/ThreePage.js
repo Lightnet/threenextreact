@@ -3,7 +3,8 @@
   Created by: Lightnet
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/usefetch.js";
 import Editor from "./EditorPage.js";
 import GamesPage from "./GamesPage.js";
@@ -13,6 +14,7 @@ export default function ThreePage(){
 
   const [view, setView] = useState('default');//default, project ,editor, games
   const [editorID, setEditorID] = useState('');
+  const [projectID, setProjectID] = useState('');
   const [gameID, setGameID] = useState('');
 
   function onSelectView(name){
@@ -54,8 +56,16 @@ export default function ThreePage(){
 
   function onEditorID(event){
     console.log(event.target.value);
-    //setEditorID()
+    setView("editor");
+    setProjectID(event.target.value);
   }
+
+  //useEffect(()=>{
+    //if(!isEmpty(projectID)){
+      //console.log(projectID);
+      //setView("editor");
+    //}
+  //},[projectID])
 
   function renderView(){
     if(view=="default"){
@@ -65,8 +75,8 @@ export default function ThreePage(){
       </div>)
     }
 
-    if(view=="projects"){return (<ProjectsPage/>)}
-    if(view=="editor"){return (<Editor editorid={editorID} />)}
+    if(view=="projects"){return (<ProjectsPage onLoadEditor={onEditorID}/>)}
+    if(view=="editor"){return (<Editor projectid={projectID} />)}
     if(view=="projects"){return (<GamesPage/>)}
     return <></>
   }

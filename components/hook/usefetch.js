@@ -21,7 +21,7 @@ export default async function useFetch(url, options){
     if(!options){
       options={};
     }
-    console.log(options)
+    //console.log(options)
     let response = await fetch(url, options);
     if (!response.ok) {
       //const message = 'Error with Status Code: ' + response.status;

@@ -23,7 +23,6 @@ export function EditorProvider(props){
 
   const [selectObject, setSelectObject] = useState(null);
 
-
   const value = useMemo(()=>({
     editorID, setEditorID,
     editorName, setEditorName,

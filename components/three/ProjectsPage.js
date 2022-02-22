@@ -4,10 +4,11 @@
 */
 
 import React, { useEffect, useState } from "react";
+import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/usefetch.js";
 import Modal from "../modal/modal.js"
 
-export default function ProjectsPage(){
+export default function ProjectsPage({onLoadEditor}){
 
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
@@ -25,8 +26,8 @@ export default function ProjectsPage(){
       return;
     }
     //console.log(data);
-    if(data.action=='LIST'){
-      setEditorProjects(data.editors);
+    if(data.api=='LIST'){
+      setProjects(data.projects);
     }
   }
 
@@ -38,11 +39,16 @@ export default function ProjectsPage(){
   function typingProjectDescription(e){setProjectDescription(e.target.value);}
   function closeModal(){setIsOpenModal(false)}
 
-  async function createEditorProject(e){
+  async function createProject(e){
+    if((isEmpty(projectName))||isEmpty(projectDescription)){
+      console.log("Empty fields!");
+      return;
+    }
     let data = await useFetch('api/project',{
-      method:'POST',
-      body: JSON.stringify({ 
-        action:'CREATE',
+      method:'POST'
+      , headers: {"Content-Type": "application/json"}
+      , body: JSON.stringify({ 
+        api:'CREATE',
         name:projectName,
         description:projectDescription
       })
@@ -52,14 +58,116 @@ export default function ProjectsPage(){
       return;
     }
     console.log(data);
-    if(data.action=='CREATE'){
-      console.log('API CREATE???');
-      //console.log(projects)
-      //projects.push(data.editor);
-      //odd bug not update?
-      //setProjects([]);
-      //setProjects(projects);
+    if(data.api=='CREATE'){
+      console.log('API created Project!');
+      setProjects(state=>[...state,data.project])
+      setIsOpenModal(false);
     }
+  }
+
+  function clickLoadEditor(){
+    if(onLoadEditor){
+      onLoadEditor({
+        target:{
+          value:projectID
+        }
+      })
+    }
+  }
+
+  async function updateProject(e){
+    if((isEmpty(projectName))||isEmpty(projectDescription)){
+      console.log("Empty fields!");
+      return;
+    }
+    let data = await useFetch('api/project',{
+      method:'PUT'
+      , headers: {"Content-Type": "application/json"}
+      , body: JSON.stringify({ 
+          api:'UPDATE'
+        , id:projectID
+        , name:projectName
+        , description:projectDescription
+      })
+    });
+    if(data.error){
+      console.log("ERROR FETCH CREATE PROJECT");
+      return;
+    }
+    console.log(data);
+    if(data.api=='UPDATE'){
+      console.log('API created Project!');
+      setProjects(projects.map(item=> item.id == data.project.id ? {...item, name:data.project.name,description:data.project.description   }: item ))
+      setIsOpenModal(false);
+    }
+  }
+
+  async function deleteProject(){
+    if(isEmpty(projectID)){
+      console.log("Empty projectID!");
+      return;
+    }
+    let data = await useFetch('api/project',{
+      method:'DELETE'
+      , headers: {"Content-Type": "application/json"}
+      , body: JSON.stringify({ 
+          api:'DELETE'
+        , id:projectID
+      })
+    });
+    if(data.error){
+      console.log("ERROR FETCH DELETE PROJECT");
+      return;
+    }
+    console.log(data);
+    if(data.api=='DELETE'){
+      console.log('API created Project!');
+      setProjects(projects.filter(item=> item.id != data.projectid ))
+      setIsOpenModal(false);
+    }
+  }
+
+  function clickEditID(id){
+    console.log("edit id:",id)
+    setProjectID(id)
+    setDataType('edit');
+    for (let idx in projects){
+      console.log(projects[idx]);
+      if(projects[idx].id == id){
+        setProjectName(projects[idx].name);
+        setProjectDescription(projects[idx].description);
+        break;
+      }
+    }
+    setIsOpenModal(true);
+  }
+
+  function clickLoadID(id){
+    setProjectID(id)
+    for (let idx in projects){
+      console.log(projects[idx]);
+      if(projects[idx].id == id){
+        setProjectName(projects[idx].name);
+        setProjectDescription(projects[idx].description);
+        break;
+      }
+    }
+    setDataType('load');
+    setIsOpenModal(true);
+  }
+
+  function clickDeleteID(id){
+    setProjectID(id)
+    for (let idx in projects){
+      console.log(projects[idx]);
+      if(projects[idx].id == id){
+        setProjectName(projects[idx].name);
+        setProjectDescription(projects[idx].description);
+        break;
+      }
+    }
+    setDataType('delete');
+    setIsOpenModal(true);
   }
 
   function renderProjectList(){
@@ -67,23 +175,17 @@ export default function ProjectsPage(){
       <table>
       <thead>
         <tr>
-          <th>
-            <label>Name</label>
+        <th>
+            <label>[ ID ]</label>
           </th>
           <th>
-            <label>Description</label>
+            <label>[ Name ]</label>
           </th>
           <th>
-            <label>Authors</label>
+            <label>[ Description ]</label>
           </th>
           <th>
-            <label>Access</label>
-          </th>
-          <th>
-            <label>Game Modes</label>
-          </th>
-          <th>
-            <label>Actions:</label>
+            <label>[ Actions: ]</label>
           </th>
         </tr>
       </thead>
@@ -93,26 +195,20 @@ export default function ProjectsPage(){
           return(
             <tr key={item.id}>
               <th>
+                <label>{item.id}</label>
+              </th>
+              <th>
                 <label>{item.name}</label>
               </th>
               <th>
                 <label>{item.description}</label>
               </th>
               <th>
-                <label>{item.authors}</label>
-              </th>
-              <th>
-                <label>{item.access}</label>
-              </th>
-              <th>
-                <label>{item.gamemodes}</label>
-              </th>
-              <th>
-                <a href="#" onClick={(e)=>callBackOPS({action:'edit',id:item.id})}>Edit</a>
+                <button onClick={(e)=>clickEditID(item.id)}>Edit</button>
                 <span> | </span>
-                <a href="#" onClick={(e)=>callBackOPS({action:'load',id:item.id})}>Load</a>
+                <button onClick={(e)=>clickLoadID(item.id)}>Load</button>
                 <span> | </span>
-                <a href="#" onClick={(e)=>callBackOPS({action:'delete',id:item.id})}>Remove</a>
+                <button onClick={(e)=>clickDeleteID(item.id)}>Remove</button>
               </th>
             </tr>
             )
@@ -125,33 +221,66 @@ export default function ProjectsPage(){
 
   function renderModalMessage(){
     if(dataType == 'create'){
-
+      return <>
+        <label> Name: </label><br/>
+        <input value={projectName} onChange={typingProjectName}/><br/>
+        <label> Description: </label><br/>
+        <input value={projectDescription} onChange={typingProjectDescription}/><br/><br/>
+        <button onClick={createProject}> Create Project </button>
+      </>
     }else if(dataType == 'edit'){
-
-
+      return <>
+        <label> ID: </label><br/>
+        <label> {projectID} </label><br/>
+        <label> Name: </label><br/>
+        <input value={projectName} onChange={typingProjectName}/><br/>
+        <label> Description: </label><br/>
+        <input value={projectDescription} onChange={typingProjectDescription}/><br/><br/>
+        <button onClick={updateProject}> Update Project </button>
+      </>
+    }else if(dataType == 'load'){
+      return <>
+        <label> ID: </label><br/>
+        <label> {projectID} </label><br/>
+        <label> Name: </label><br/>
+        <label> {projectName} </label> <br/>
+        <label> Description: </label><br/>
+        <label>{projectDescription}</label> <br/><br/>
+        <button onClick={clickLoadEditor}> Load Project? </button>
+      </>
     }else if(dataType == 'delete'){
-
-
-    }else if(dataType == 'delete'){
-
-
+      return <>
+        <label> ID: </label><br/>
+        <label> {projectID} </label><br/>
+        <label> Name: </label><br/>
+        <label> {projectName} </label> <br/>
+        <label> Description: </label><br/>
+        <label>{projectDescription}</label> <br/><br/>
+        <button onClick={deleteProject}> Delete Project? </button>
+      </>
     }else if(dataType == 'updateproject'){
       return <label> Editor Project Update </label>
     }else if(dataType == 'deleteproject'){
       return <label> Editor Project [ID] {editorID} Delete! </label>
+    }else{
+      return <label> loading... </label>
     }
+  }
 
-
+  function clickCreateProject(){
+    setIsOpenModal(true);
+    setDataType('create');
   }
 
   return(<>
     <label> Projects </label>
-    <button> Create Project </button>
+    <button onClick={clickCreateProject}> Create Project </button>
     {renderProjectList()}
 
     <Modal 
       isOpen={isOpenModal}
-      closeModal={closeModal}
+      closeWindow={closeModal}
+      pwidth={300}
     >
       {
         renderModalMessage()

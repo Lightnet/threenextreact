@@ -3,8 +3,8 @@
   Created by: Lightnet
 */
 
-import React,{ useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
+import React,{ useRef, useState } from 'react';
+import { useFrame, useThree, render, events } from '@react-three/fiber';
 //import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 import { useBox } from '@react-three/cannon';
 

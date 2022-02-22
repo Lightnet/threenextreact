@@ -94,6 +94,7 @@ body{
 button{
   background-color: var(--primary-color);
   color: var(--font-color);
+  border: none;
 }
 
 button:hover{

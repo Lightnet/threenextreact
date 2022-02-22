@@ -8,10 +8,11 @@
 - Idea
 - Prototyping
 - Unstable builds.
+- Reworking the builds.
 
 ## Server types:
-- next.js (current testing / api )
-- express.js ( work in progress / no api )
+- next.js (on hold / api )
+- express.js ( revamping the code layout / work in progress / no api )
   - rework to have stand alone
 
 # Packages:
@@ -220,7 +221,12 @@ $ npm install
 - install packages
 
 ```
-$ npm run dev
+$ npm run dev (not being used)
+```
+- run the server from npm package from package.json script
+
+```
+$ npm run devn (current testing)
 ```
 - run the server from npm package from package.json script
 

@@ -175,9 +175,15 @@ useEffect(()=>{
   }
 });
 ```
-
+https://stackoverflow.com/questions/55987953/how-do-i-update-states-onchange-in-an-array-of-object-in-react-hooks
 
 ```js
+setDatas(
+    datas.map(item => 
+        item.id === index 
+        ? {...item, someProp : "changed"} 
+        : item 
+))
 ```
 
 

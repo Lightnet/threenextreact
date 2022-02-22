@@ -30,7 +30,7 @@ router.post('/signin', async function (req, res) {
   const user = await User.findOne({ username: data.userName }).exec();
 
   //console.log("users");
-  console.log(user);
+  //console.log(user);
   if(!user){
     return res.send({action:'NONEXIST'});
   }else{
@@ -40,17 +40,17 @@ router.post('/signin', async function (req, res) {
       let AuthUser=null;
       try{
         AuthUser = user.toAuthJSON()
-        console.log("AuthUser:", AuthUser)
+        //console.log("AuthUser:", AuthUser)
         req.session.user = AuthUser.name;
         req.session.token = AuthUser.token;
       }catch(e){
-        console.log(e);
+        //console.log(e);
         return res.send({error:'LOGIN toAuthJSON ERROR'});
       }
       //console.log(req.session);
       return res.send({action:'LOGIN',user:AuthUser.name,token:AuthUser.token});
     }else{
-      console.log("[login] password fail!");
+      //console.log("[login] password fail!");
       return res.send({error:"PASSWORDFAIL"});
     }
     //return res.send({action:'EXIST'});

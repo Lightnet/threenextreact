@@ -8,7 +8,7 @@ const router = express.Router();
 
 import route_project from './three/route_project.mjs';
 import route_scene from './three/route_scene.mjs';
-import route_object3d from './three/route_object3d.mjs';
+import route_entity from './three/route_entity.mjs';
 
 router.get('/', (req, res) => {
   //res.json({ error: 'Not found' });
@@ -17,6 +17,6 @@ router.get('/', (req, res) => {
 
 router.use(route_project);
 router.use(route_scene);
-router.use(route_object3d);
+router.use(route_entity);
 
 export default router;
