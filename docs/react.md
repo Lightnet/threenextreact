@@ -188,4 +188,39 @@ setDatas(
 
 
 ```js
+// position = [0,0,0]
+function inputPosition(event){
+    console.log(event.target.type)
+    console.log(event.target.name)
+    console.log(event.target.value)
+    let pos = selectObject.position;
+    pos[event.target.name]=Number(event.target.value);
+    setSelectObject(state=>({...state, position: pos}))
+  }
+
+  function renderPosition(){
+    return <>
+      <input type="number" name="0" value={selectObject.position[0]} onChange={inputPosition} />
+      <input type="number" name="1" value={selectObject.position[1]} onChange={inputPosition} />
+      <input type="number" name="2" value={selectObject.position[2]} onChange={inputPosition} />
+    </>
+  }
+```
+
+https://bobbyhadz.com/blog/javascript-update-property-of-object-in-array
+```js
+// Updating properties in multiple objects
+const arr1 = [
+  {id: 1, name: 'Alice'},
+  {id: 1, name: 'Bob'},
+  {id: 3, name: 'Charlie'},
+];
+const newArr = arr1.map(obj => {
+  if (obj.id === 1) {
+    return {...obj, name: 'Alfred'};
+  }
+
+  return obj;
+});
+
 ```

@@ -82,13 +82,20 @@ router.put('/entity', async (req, res) => {
     try{
       let data = req.body;
       const Entity = db.model('Entity');
-      let entity = null;
-
-
-      return res.json({
-        api:'UPDATE'
-        , data:entity
-      });
+      let query={
+        id:data.data.id
+      }
+      //console.log(query)
+      let update={
+        data:data.data
+      }
+      //console.log(update)
+      try{
+        let doc = await Entity.findOneAndUpdate(query,update,{new:true});
+        return res.json({api:"UPDATE",entity:doc});
+      }catch(e){
+        return res.json({error:"FAILUPDATE"});
+      }
     }catch(e){
       console.log(e);
       return res.json({error:"Delete Entity Fail!"});

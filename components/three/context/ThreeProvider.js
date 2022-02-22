@@ -126,6 +126,23 @@ function reducerEntity(state, action) {
       apiSaveEntity(action.projectid, action.sceneid ,item);
 
       return [...state,item];
+
+    case 'update':
+      
+      // keep every item except the one we want to remove
+      return state.map((item) => {
+        if(item.id == action.id){
+          if(action.keyType=="position"){
+            item.position=action.value
+          }
+          apiUpdateEntity(item)
+          return item;
+          //return {...item, position: action.value};
+        }
+        return item;
+        }
+      );
+
     case 'remove':
       apiDeleteEntity(action.id)
       // keep every item except the one we want to remove

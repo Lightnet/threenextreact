@@ -24,6 +24,7 @@ import { GizmoHelper, GizmoViewport } from '@react-three/drei';
 import { Physics } from '@react-three/cannon';
 import EntityRenderModel from "./EntityRenderModel.js";
 import EntityOrbitControl from "./entity/EntityOrbitControl.js";
+import EntitySelectUpdate from "./property/EntitySelectUpdate.js";
 
 export default function Editor({projectid}){
 
@@ -138,8 +139,10 @@ export default function Editor({projectid}){
     <div style={{
       position:'absolute'
       ,top:'0px'
-      ,left:'0px'
-      ,width:'100%'
+      //,left:'0px'
+      ,left:'300px'
+      //,width:'100%'
+      ,width:'calc(100% - 600px)'
       ,height:'100%'
     }}>
     
@@ -177,6 +180,19 @@ export default function Editor({projectid}){
       <EntityCreate/>
       <EntityList/>
 
+    </div>
+
+    <div style={{
+      position:'absolute'
+      ,top:'0px'
+      ,right:'0px'
+      ,width:'300px'
+      ,height:'100%'
+      ,backgroundColor:'#fff'
+    }}>
+      {/* over lap can used mouse event */}
+      <label> Editor </label><br/>
+      <EntitySelectUpdate/>
     </div>
 
     

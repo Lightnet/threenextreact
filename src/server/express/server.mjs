@@ -23,7 +23,6 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-//import clientDB from '../lib/database.js';
 //import { networkInterfaces } from 'os';
 
 const log = console.log;
@@ -34,7 +33,7 @@ const log = console.log;
 //const SECRET = process.env.SECRET;
 //console.log(SECRET)
 
-//var DATABASE_URL = process.env.DATABASE_URL;
+const DATABASE_URL = process.env.DATABASE_URL;
 //console.log("DATABASE_URL: ",DATABASE_URL)
 /*
 function getIPAddress() {
