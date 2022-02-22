@@ -65,11 +65,21 @@ export default function ProjectsPage({onLoadEditor}){
     }
   }
 
-  function clickLoadEditor(){
+  function clickLoadProjectModel(){
     if(onLoadEditor){
       onLoadEditor({
         target:{
           value:projectID
+        }
+      })
+    }
+  }
+
+  function clickLoadProject(id){
+    if(onLoadEditor){
+      onLoadEditor({
+        target:{
+          value:id
         }
       })
     }
@@ -208,6 +218,8 @@ export default function ProjectsPage({onLoadEditor}){
                 <span> | </span>
                 <button onClick={(e)=>clickLoadID(item.id)}>Load</button>
                 <span> | </span>
+                <button onClick={(e)=>clickLoadProject(item.id)}>Load 2</button>
+                <span> | </span>
                 <button onClick={(e)=>clickDeleteID(item.id)}>Remove</button>
               </th>
             </tr>
@@ -246,7 +258,7 @@ export default function ProjectsPage({onLoadEditor}){
         <label> {projectName} </label> <br/>
         <label> Description: </label><br/>
         <label>{projectDescription}</label> <br/><br/>
-        <button onClick={clickLoadEditor}> Load Project? </button>
+        <button onClick={clickLoadProjectModel}> Load Project? </button>
       </>
     }else if(dataType == 'delete'){
       return <>

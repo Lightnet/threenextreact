@@ -17,6 +17,8 @@ import session  from 'express-session';
 import routes from './routes.mjs';
 import cors from "cors";
 
+import MongoStore from 'connect-mongo';
+
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -91,6 +93,7 @@ export function main(){
 
   app.use(session({
     secret: 'keyboard cat',
+    store: MongoStore.create({ mongoUrl: DATABASE_URL }),
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false }

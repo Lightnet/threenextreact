@@ -5,7 +5,7 @@
 
 import React,{ useRef, useState } from 'react';
 
-export default function ShapeBox(props) {
+export default function DefaultBox(props) {
   // This reference will give us direct access to the THREE.Mesh object
   const ref = useRef();
 
@@ -20,7 +20,7 @@ export default function ShapeBox(props) {
   const [active, setActive] = useState(false);
 
   return (
-    <mesh
+    <mesh key={props.objectid}
       {...props}
       ref={ref}
       position={[props.position[0],props.position[1],props.position[2]]}
@@ -33,12 +33,9 @@ export default function ShapeBox(props) {
       >
 
       <boxGeometry args={[
-        props.parameters.width, 
-        props.parameters.height, 
-        props.parameters.depth,
-        props.parameters.widthSegments,
-        props.parameters.heightSegments,
-        props.parameters.depthSegments
+        1, 
+        1, 
+        1
         ]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
@@ -47,3 +44,4 @@ export default function ShapeBox(props) {
 /*
 
 */
+

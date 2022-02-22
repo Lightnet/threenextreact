@@ -1,9 +1,14 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
+  over lap divs can't used mouse event 
+
 */
 
 import React, { useEffect, useState } from "react";
+
+// Dev
 import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/usefetch.js";
 import { useEditor } from "./context/EditorProvider.js";
@@ -12,7 +17,17 @@ import { useThree } from "./context/ThreeProvider.js";
 import EntityCreate from "./create/EntityCreate.js";
 import EntityList from "./ui/EntityList.js";
 
+// THREE
+import { Canvas } from '@react-three/fiber';
+import { GizmoHelper, GizmoViewport } from '@react-three/drei';
+// Physics
+import { Physics } from '@react-three/cannon';
+import EntityRenderModel from "./EntityRenderModel.js";
+import EntityOrbitControl from "./entity/EntityOrbitControl.js";
+
 export default function Editor({projectid}){
+
+  const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const {
       settings
@@ -119,9 +134,51 @@ export default function Editor({projectid}){
   }
 
   return(<>
-    <label> Editor </label><br/>
+    
+    <div style={{
+      position:'absolute'
+      ,top:'0px'
+      ,left:'0px'
+      ,width:'100%'
+      ,height:'100%'
+    }}>
+    
+    <Canvas>
+      <Physics>
+        {entities.map((entity)=>{
+          //if(entity.isPhysics == true){
+            return EntityRenderModel(entity); //return buildModel(entity)
+          //}
+        })}
+      </Physics>
+      {
+      enableOrbitControl && <EntityOrbitControl />
+      }
+      <GizmoHelper
+        alignment="bottom-right" // widget alignment within scene
+        margin={[80, 80]} // widget margins (X, Y)
+        >
+        <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
+      </GizmoHelper>
+      {/*
+      */}
+    </Canvas>
+    </div>
 
-    <EntityCreate/>
-    <EntityList/>
+    <div style={{
+      position:'absolute'
+      ,top:'0px'
+      ,left:'0px'
+      ,width:'300px'
+      ,height:'100%'
+    }}>
+      {/* over lap can used mouse event */}
+      <label> Editor </label><br/>
+      <EntityCreate/>
+      <EntityList/>
+
+    </div>
+
+    
   </>)
 }
