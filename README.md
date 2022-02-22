@@ -12,12 +12,16 @@
 
 ## Server types:
 - next.js (on hold / api )
-- express.js ( revamping the code layout / work in progress / no api )
+- express.js ( revamping the code layout / work in progress )
   - rework to have stand alone
 
 # Packages:
 - three ( 3D/2D render )
+- react 
+- react-dom 
 - @react-three/fiber ( react for three handle components )  https://github.com/pmndrs/react-three-fiber 
+- @react-three/cannon
+- @react-three/drei 
 - jsonwebtoken (secure check token)
 - mongoose ( database )
 - next-auth ( auth check user login )
@@ -25,6 +29,7 @@
 - dayjs (time stampe)
 - nanoid (random id gen)
 - react (web browser)
+- webpack 5 (Next.js build in for dev)
 - socket.io ( for user co-op editing. not build)
 
 ## Information:
@@ -36,134 +41,11 @@
 
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
 
-## Dev urls:
-- http://localhost:3000/editor ( main / work in progress )
-- http://localhost:3000/examples (tests)
-- http://localhost:3000/app (tests / not added any feature yet.)
-- http://localhost:3000/ (entry point home page)
-- http://localhost:5555/ database (not in used)
+# Next Three ToDoList:
+  [Next Three Doc To Do List](/docs/nextthree.md)
 
-## TO DO LIST:
-- account / auth (added / partly working)
-  - auth (simple user and password)
-  - sign up (added / need work)
-  - third partly sign token (not build)
-
-- UI
-  - button (work in progress)
-  - input (work in progress)
-  - window (work in progress)
-  - modal (work in progress)
-  - sidebar (work in progress)
-  - 
-
-- upload file types (work in progress)
-  - save to database as base64 string
-  - delete (not added)
-  - file limit size check? (not added)
-  - check file type (not added)
-  - update ?
-  
-- load image (testing)
-  - png (tested)
-
-- project work space
-  - list (added)
-  - update/edit (added)
-  - delete (added)
-    - sub folders (not build)
-
-- editor
-  - auto save and load when user interact with the object3D  
-  - save (added) 
-    - database  (partly working)
-  - load (added ) 
-    - database (partly working)
-  - shape / object type
-    - box (added)
-    - circle (added)
-    - cone (added)
-    - point light (added)
-    - camera (added)
-    - plane (added)
-    - sphere (not build)
-  - orbit camera ( added / work in progres )
-
-  - prop view panel (work in progress)
-    - scene (added)
-    - scenes (added)
-    - object props (added)
-    - object3ds (added)
-    - objectdatas (added)
-
-  - object3d
-    - database save and load (partly working)
-    - create object (add base secene id)
-    - delete object (add base secene id)
-    - update object (add base secene id)
-    - move another scene  (not build)
-    - prefab (not added / need parent code script id and tags)
-    - delete save object3d if accident remove from scene.
-
-  - scene panel
-    - database save and load (partly working)
-    - object3d list (added )
-    - object3d delete (added)
-    - object3d rename (not added / random name)
-    - object3d select ( added )
-    - object3d list update (added)
-    - object3d visiable ( added )
-    
-  - (view/scenes)
-    - create (added)
-    - edit (added)
-    - delete (added)
-    
-  - props
-    - position ( added )
-    - rotation ( added )
-      - radian / degree (added)
-    - scale ( added )
-
-  - material  (not build)
-    - create
-    - update
-    - delete
-
-  - texture  (not build)
-    - create
-    - update
-    - delete
-
-  - model  (not build)
-    - create
-    - update
-    - delete
-
-  - animation  (not build)
-    - create
-    - update
-    - delete
-
-  - prefab entity  (not build)
-    - create
-    - update
-    - delete
-  
-  - physics (work in progress)
-    - plane (added)
-    - box (added)
-    - sphere (not added)
-    - cylinder (not added)
-
-- debug (work in progress)
-  -  simple physics test
-
-- game (not build)
-  - delete  (not build)
-  - load  (not build)
-  - save  (not build)
-  - config  (not build)
+# Express Three ToDoList:
+  [Express Three Doc To Do List](/docs/nextthree.md)
 
 # Physics:
   After some testing for enable and disable physics react components. useref and usecontext has conflict change variable in render. Had to create two component that same but the varible is different. It possible to change some variable but need two check for isPhysics and enablePhysics. One is reason it build the world not enable physics to place holder and other is debug simulation.
@@ -172,27 +54,9 @@
   There is no args that x and y is infinite. Used box shape for better collision.
 - https://github.com/pmndrs/use-cannon/blob/master/src/propsToBody.js#L41
 
-## Packages:
-- @react-three/fiber 
-- @react-three/cannon
-- @react-three/drei 
-- next 
-- next-auth 4.0.0-beta.26
-- react 
-- react-dom 
-- three 0.134.0
-- mongoose 6.0.12
-- jsonwebtoken 
-- webpack 5 (Next.js build in for dev)
-
-### Not Used:
-- prisma 
-- @prisma/client 
-- socket.io 
-- socket.io-client 
-- sqlite 4.0.23
-
-## Root:
+## Root dir project:
+ - src ( server files )
+ - app.mjs ( express server )
  - components ( react components )
  - lib (helper / database / server /client)
  - pages (url page / folder)
@@ -202,8 +66,10 @@
     - _document.js ( default config nextjs )
     - index.js (main entry user custom code)
     - filename.js (testing)
- - prisma ( folder and database)
  - next.config.js (server config / webpack)
+ - client.js (web browser client js)
+ - webpack.config.cjs ( webpack compiler react babel)
+ - .babelrc ( config compiler react babel)
 
 ## Layout:
   By using the react to create components and entities components. To develop logic, network and other things.
@@ -221,7 +87,7 @@ $ npm install
 - install packages
 
 ```
-$ npm run dev (not being used)
+$ npm run dev (not being used might break some changes.)
 ```
 - run the server from npm package from package.json script
 
