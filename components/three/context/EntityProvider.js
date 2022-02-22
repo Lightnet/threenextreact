@@ -7,18 +7,18 @@ import React,{ createContext, useState, useMemo, useContext, useReducer } from "
 import { isEmpty, nanoid32 } from "../../../lib/helper.mjs";
 import useFetch from "../../hook/usefetch.js";
 
-export const ThreeContext = createContext();
+export const EntityContext = createContext();
 
-export function useThree(){
-  const context = useContext(ThreeContext);
+export function useEntity(){
+  const context = useContext(EntityContext);
   if (!context) {
-    throw new Error(`useThree must be used within a ThreeContext`)
+    throw new Error(`useThree must be used within a EntityContext`)
   }
   return context;
 }
 
-export function useEntity(){
-  const context = useContext(ThreeContext);
+export function useEntities(){
+  const context = useContext(EntityContext);
   if (!context) {
     throw new Error(`useEntity must be used within a ThreeContext`)
   }
@@ -62,7 +62,7 @@ async function apiDeleteEntity(id){
     , headers: {"Content-Type": "application/json"}
     , body:JSON.stringify({ 
         api:'DELETE'
-      , id: id
+      , objectid: id
     })
   });
   //console.log(data);
@@ -108,12 +108,13 @@ function reducerEntity(state, action) {
 
       console.log(action)
       let item = {};
-      item.id = action.id || nanoid32();
+      item.objectid = action.id || nanoid32();
       item.name = action.name || nanoid32();
       item.children = action.children || [];
       item.position = action.position || [0,0,0];
       item.rotation = action.rotation || [0,0,0];
       item.scale = action.scale || [1,1,1];
+      item.visible = action.visible || true;
 
       if(action.dataType){item.dataType = action.dataType;}
       if(action.parmeters){item.parmeters = action.parmeters;}
@@ -131,22 +132,27 @@ function reducerEntity(state, action) {
       
       // keep every item except the one we want to remove
       return state.map((item) => {
-        if(item.id == action.id){
+        if(item.objectid == action.id){
           if(action.keyType=="position"){
             item.position=action.value
+          }
+          if(action.keyType=="rotation"){
+            item.rotation=action.value
+          }
+          if(action.keyType=="scale"){
+            item.scale=action.value
           }
           apiUpdateEntity(item)
           return item;
           //return {...item, position: action.value};
         }
         return item;
-        }
-      );
+      });
 
     case 'remove':
       apiDeleteEntity(action.id)
       // keep every item except the one we want to remove
-      return state.filter((item) => item.id != action.id);
+      return state.filter((item) => item.objectid != action.id);
     case 'array':
       console.log("Entities len:", action.entities.length)
       // array for loading from fetch
@@ -161,7 +167,7 @@ function reducerEntity(state, action) {
   }
 }
 
-export function ThreeProvider(props){
+export function EntityProvider(props){
   
   const [sceneID, setSceneID] = useState('');
   const [sceneName, setSceneName] = useState('');
@@ -180,5 +186,5 @@ export function ThreeProvider(props){
     entities
   ])
 
-  return <ThreeContext.Provider value={value} {...props} />
+  return <EntityContext.Provider value={value} {...props} />
 }

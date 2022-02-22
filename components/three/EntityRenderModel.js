@@ -5,8 +5,8 @@
 
 import React from "react";
 import DefaultBox from "./entity/DefaultBox";
-import ShapeBox from "./entity/ShapeBox";
 
+/*
 var shapes = [
   'box'
   , 'plane'
@@ -23,12 +23,16 @@ function checkShape(name){
   });
   return bfound;
 }
+*/
 
-export default function EntityRenderModel(item){
+export default function EntityRenderModel(entity){
 
+  let props = entity;
+
+  /*
   let props = {
-    objectid:item.id,
-    key:item.id,//needed for key react error fixed
+    //objectid:item.id,
+    key:item.objectid,//needed for key react error fixed
     isPhysics:item.isPhysics || false,
     mass:item.mass,
     visible:item.visible || true,
@@ -53,7 +57,8 @@ export default function EntityRenderModel(item){
     props.rotation=[item.rotation[0],item.rotation[1],item.rotation[2]]
     props.scale=[item.scale[0],item.scale[1],item.scale[2]]
   }
+  */
 
   //if there object is not found add it.
-  return(<DefaultBox key={item.objectid} {...props} />)
+  return(<DefaultBox key={entity.objectid} {...props} />)
 }

@@ -53,7 +53,7 @@ router.post('/entity', async (req, res) => {
       const newEntity = await Entity({
           projectid: data.projectid
         , sceneid: data.sceneid
-        , id : data.data.id
+        , objectid : data.data.objectid
         , data: data.data
       });
 
@@ -83,7 +83,7 @@ router.put('/entity', async (req, res) => {
       let data = req.body;
       const Entity = db.model('Entity');
       let query={
-        id:data.data.id
+        objectid:data.data.objectid
       }
       //console.log(query)
       let update={
@@ -120,7 +120,7 @@ router.delete('/entity', async (req, res) => {
     try{
       let data = req.body;
       const Entity = db.model('Entity');
-      await Entity.findOneAndDelete({id:data.id});
+      await Entity.findOneAndDelete({objectid:data.objectid});
       //let doc = await Entity.findOneAndDelete({id:data.id});
       //console.log("DOC//////////////////////");
       //console.log(doc);

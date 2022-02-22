@@ -16,8 +16,8 @@ router.use(express.json());
 
 router.post('/signin', async function (req, res) {
   var contentType = req.headers['content-type'];
-  console.log(contentType);
-  console.log(req.body); // your JSON
+  //console.log(contentType);
+  //console.log(req.body); // your JSON
   let data = req.body;
   if(isObjEmpty(data)){
     return res.json({error:"body empty?" });
@@ -26,7 +26,7 @@ router.post('/signin', async function (req, res) {
   
   const db = await clientDB();
   const User = db.model('User');
-  console.log("USER...?")
+  //console.log("USER...?")
   const user = await User.findOne({ username: data.userName }).exec();
 
   //console.log("users");
@@ -61,7 +61,7 @@ router.post('/signin', async function (req, res) {
 });
 
 router.post('/signup',async function (req, res) {
-  console.log(req.body); // your JSON
+  //console.log(req.body); // your JSON
   let data = req.body;
   let db = await clientDB();
   let User = db.model('User');
@@ -85,7 +85,7 @@ router.post('/signup',async function (req, res) {
 });
 
 router.post('/signout',async function (req, res) {
-  console.log(req.session)
+  //console.log(req.session)
   //req.session.user = null;
   //req.session.token = null;
   req.session.destroy(function(err) {

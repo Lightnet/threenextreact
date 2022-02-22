@@ -7,13 +7,12 @@
 
 import React, { useEffect, useState } from "react";
 import { useProject } from "../context/ProjectProvider.js";
-import { useEntity, useThree } from "../context/ThreeProvider.js";
+import { useEntity } from "../context/EntityProvider.js";
 
 export default function CreateShape({name,datatype,shape,parms,mass}){
   const {projectID} = useProject();
-  const {sceneID} = useThree();
 
-  const [, dispatchEntity] = useEntity();
+  const {sceneID, dispatchEntity} = useEntity();
   const [_name, setName] = useState("box");
   const [dataType, setDataType] = useState("box")
   const [shapePhysics, setShapePhysics] = useState("box")

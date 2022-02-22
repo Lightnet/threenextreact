@@ -4,17 +4,17 @@
 */
 
 import React from "react";
-import { useEntity } from "../context/ThreeProvider.js";
+import { useEntity } from "../context/EntityProvider.js";
 
 export default function EntityList(){
 
-  const [entities, dispatchEntity] = useEntity()
+  const {entities, dispatchEntity} = useEntity()
 
   function renderObject3DList(){
     return entities.map((item)=>{
-      return <div key={item.id}>
-        <button onClick={()=>clickInfo(item)} > {item.id}  </button>
-        <button onClick={()=>clickDelete(item.id)} > Delete </button>
+      return <div key={item.objectid}>
+        <button onClick={()=>clickInfo(item)} > {item.objectid}  </button>
+        <button onClick={()=>clickDelete(item.objectid)} > Delete </button>
       </div>
     })
   }

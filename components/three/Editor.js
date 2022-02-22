@@ -13,7 +13,7 @@ import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/usefetch.js";
 import { useEditor } from "./context/EditorProvider.js";
 import { useProject } from "./context/ProjectProvider.js";
-import { useThree } from "./context/ThreeProvider.js";
+import { useEntity } from "./context/EntityProvider.js";
 import EntityCreate from "./create/EntityCreate.js";
 import EntityList from "./ui/EntityList.js";
 
@@ -42,7 +42,7 @@ export default function Editor({projectid}){
     , setSceneID
     , entities
     , dispatchEntity
-  } = useThree()
+  } = useEntity()
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const {
@@ -55,7 +55,7 @@ export default function Editor({projectid}){
 
   useEffect(()=>{
     //console.log("projectid")
-    console.log(projectid)
+    //console.log(projectid)
     if(!isEmpty(projectid)){
       //console.log("found project ID")
       setProjectID(projectid);
@@ -65,13 +65,13 @@ export default function Editor({projectid}){
   },[projectid])
 
   useEffect(()=>{
-    console.log("projectID")
-    console.log(projectID)
+    //console.log("projectID")
+    //console.log(projectID)
     if(!isEmpty(projectID)){
-      console.log("found project ID")
+      //console.log("found project ID")
       getProjectData();
     }else{
-      console.log("None project ID")
+      //console.log("None project ID")
     }
   },[projectID])
 
@@ -100,7 +100,7 @@ export default function Editor({projectid}){
     }
     console.log(data);
     if(data.api=='PROJECT'){
-      console.log('API get Project!');
+      //console.log('API get Project!');
       setSceneID(data.sceneid);
       setProjectName(data.name);
     }
