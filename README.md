@@ -8,12 +8,32 @@
 - Idea
 - Prototyping
 - Unstable builds.
-- Reworking the builds.
+- Reworking the React Three Editor setup.
 
-## Server types:
-- next.js (on hold / api )
+## Information:
+  Work in progress builds and testing ideas.
+
+  To develop Three.js editor, game and other applications with React and React-Three-Fiber. 
+  
+  As well other packages to help create editor module design.
+
+  By using the three/fiber with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game current set. Required creating components and api calls.
+
+  Network co-op is just idea but not work on it yet for to deal with editor co-op.
+  
+### Next.js:
+  Server React and pre-render react.js is on hold.
+
+- next.js (on hold / broken api )
+  
+### Express.js:
+  Server with simple react webpack stand with simple request api.
+
 - express.js ( revamping the code layout / work in progress )
   - rework to have stand alone
+  
+### Database:
+ The database will be used is MongoDB to able save and load data for editing and game to manage them in json format. 
 
 # Packages:
 - three ( 3D/2D render )
@@ -31,15 +51,7 @@
 - react (web browser)
 - webpack 5 (Next.js build in for dev)
 - socket.io ( for user co-op editing. not build)
-
-## Information:
-  Work in progress builds and testing ideas.
-
-  To develop 3D editor and game with Next.js, React.js, Three.js and three/fiber to create browser client game or application. Used Next.js with built in server, api and React.js to prerender browser client page render. Three.js does have other third party packages to handle React.js components in modules design. The database will be used is MongoDB to able save and load data for editing and game to manage them in json format. Note that nextjs (https://nextjs.org/) server run differently that reduce route coding and config.
-
-  By using the three/fiber with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game current set. Required creating components and api calls.
-
-  Network co-op is just idea but not work on it yet for to deal with editor co-op.
+- express
 
 # Next Three ToDoList:
   [Next Three Doc To Do List](/docs/nextthree.md)
@@ -56,10 +68,12 @@
 
 ## Root dir project:
  - src ( server files )
+    - editor (old build)
+    - three (new build / work in progress)
  - app.mjs ( express server )
  - components ( react components )
  - lib (helper / database / server /client)
- - pages (url page / folder)
+ - pages (url page / folder / next.js server /api )
     - api (server request, respone / folder)
       - auth ( next-auth )
     - _app.js ( default config nextjs )
@@ -152,17 +166,16 @@ $ ncu // check package to updates
 ```
 
 # DESIGN:THREE (work in progress)
+- editor modular component
 - there are main and sub component to handle editor.
 - main where the editor handle call from sub childrens.
   - compoent rely on call backs and event to handle 
 - sub compoent are out side of the editor like window tabs. It would required some web socket events.
-- 
 
 # DESIGN: API (work in progress)
-- server to client
-- client to server
+- fetch and query
 - to handle json object format.
-- database save and load on server
+- database save, load, edit and delete on server
 - need auth and access key between layers
 
 # DESIGN:UI: (work in progress)
