@@ -45,7 +45,7 @@
   [Next Three Doc To Do List](/docs/nextthree.md)
 
 # Express Three ToDoList:
-  [Express Three Doc To Do List](/docs/nextthree.md)
+  [Express Three Doc To Do List](/docs/expressthree.md)
 
 # Physics:
   After some testing for enable and disable physics react components. useref and usecontext has conflict change variable in render. Had to create two component that same but the varible is different. It possible to change some variable but need two check for isPhysics and enablePhysics. One is reason it build the world not enable physics to place holder and other is debug simulation.
