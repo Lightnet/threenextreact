@@ -9,7 +9,7 @@ import React,{ useRef, useEffect, useState } from 'react';
 
 import styles from "./modal.module.css";
 
-export default function Modal({children,title,isOpen,pos,pheight,pwidth,closeWindow,updatePos,resize}) {
+export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,updatePos,resize}) {
 
   const [isModal, setIsModal] = useState(false)
 
@@ -102,11 +102,11 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,closeWin
 
   function closeEWindow(){
     console.log('close');
-    if(typeof closeWindow !== 'undefined'){
+    if(typeof onClose !== 'undefined'){
       if(typeof updatePos !== 'undefined'){
         updatePos([posX,posY]);
       }
-      closeWindow();
+      onClose();
     }
   }
 
@@ -129,7 +129,7 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,closeWin
     style.overflow="visible";
   }
   
-  if(!isModal){
+  if(isModal==false){
     return <></>
   }
 

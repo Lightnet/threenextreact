@@ -29,12 +29,15 @@ export default function EditorPage({projectid}){
     }else{
       console.log("props.projectid NULL!")
     }
+  },[projectid])
+
+  useEffect(()=>{
     const currentParams = Object.fromEntries([...searchParams]);
     //console.log(currentParams);
     if(currentParams?.projectid){
       setProjectID(currentParams.projectid)
     }
-  },[projectid])
+  },[searchParams])
 
   //if(isEmpty(projectID)){
     //return <label> Project ID NULL </label>

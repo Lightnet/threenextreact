@@ -297,7 +297,7 @@ export default function ProjectsPage({onLoadEditor}){
 
     <Modal 
       isOpen={isOpenModal}
-      closeWindow={closeModal}
+      onClose={closeModal}
       pwidth={300}
     >
       {

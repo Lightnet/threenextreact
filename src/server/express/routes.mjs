@@ -11,17 +11,17 @@ import express from 'express';
 const router = express.Router();
 import route_test from './routes/route_test.mjs';
 import route_three from './routes/route_three.mjs';
+import route_upload from './routes/route_upload.mjs';
+
 //import route_download from './routes/route_download.js';
-//import route_upload from './routes/route_upload.js';
 
 import auth from './routes/auth.mjs';
-
-//router.use(route_upload);
 //router.use(route_download);
 
 router.use(auth);
 router.use("/api",route_three);
 router.use(route_test);
+router.use(route_upload);
 // added last for error or url does not exist
 router.get('*', (req, res) => {
   //res.send(

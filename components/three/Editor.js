@@ -2,7 +2,7 @@
   LICENSE: MIT
   Created by: Lightnet
 
-  over lap divs can't used mouse event 
+  over lap divs can't used mouse event
 
 */
 
@@ -14,27 +14,24 @@ import useFetch from "../hook/usefetch.js";
 import { useEditor } from "./context/EditorProvider.js";
 import { useProject } from "./context/ProjectProvider.js";
 import { useEntity } from "./context/EntityProvider.js";
-import EntityCreate from "./create/EntityCreate.js";
-import EntityList from "./ui/EntityList.js";
 
-// THREE
-import { Canvas } from '@react-three/fiber';
-import { GizmoHelper, GizmoViewport } from '@react-three/drei';
-// Physics
-import { Physics } from '@react-three/cannon';
-import EntityRenderModel from "./EntityRenderModel.js";
-import EntityOrbitControl from "./entity/EntityOrbitControl.js";
-import EntitySelectUpdate from "./property/EntitySelectUpdate.js";
+import Viewport3D from "./ui/Viewport3D.js";
+import EditorHeaderMain from "./ui/EditorHeaderMain.js";
+import EditorSidebarMainRight from "./ui/EditorSidebarMainRight.js";
+import EditorSidebarMainBottom from "./ui/EditorSidebarMainBottom.js";
+import EditorSidebarMainLeft from "./ui/EditorSidebarMainLeft.js";
 
 export default function Editor({projectid}){
 
-  const [enableOrbitControl, setEnableOrbitControl] = useState(true);
+  //const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const {
       settings
     , setSettings
     , selectObject
     , setSelectObject
+    , enableOrbitControl
+    , setEnableOrbitControl
   }= useEditor();
 
   const {
@@ -140,97 +137,15 @@ export default function Editor({projectid}){
 
   return(<>
     
-    <div style={{ //threejs canvas
-      position:'absolute'
-      ,top:'0px'
-      //,left:'0px'
-      ,left:'300px'
-      //,width:'100%'
-      ,width:'calc(100% - 600px)'
-      ,height:'calc(100% - 56px)'
-    }}>
+    <Viewport3D/>
+
+    <EditorSidebarMainLeft/>
+
+    <EditorSidebarMainRight/>
+
+    <EditorHeaderMain/>
     
-    <Canvas>
-      <Physics>
-        {entities.map((entity)=>{
-          //if(entity.isPhysics == true){
-            return EntityRenderModel(entity); //return buildModel(entity)
-          //}
-        })}
-      </Physics>
-      {
-      enableOrbitControl && <EntityOrbitControl />
-      }
-      <GizmoHelper
-        alignment="bottom-right" // widget alignment within scene
-        margin={[80, 80]} // widget margins (X, Y)
-        >
-        <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
-      </GizmoHelper>
-      {/*
-      */}
-    </Canvas>
-    </div>
-
-    <div style={{//left bar
-      position:'absolute'
-      ,top:'28px'
-      ,left:'0px'
-      ,width:'300px'
-      ,height:'calc(100% - 56px)'
-      ,background:'#778899'
-    }}>
-      {/* over lap can used mouse event */}
-      <label> Editor </label><br/>
-      <EntityCreate/>
-      <EntityList/>
-
-    </div>
-
-    <div style={{//right bar
-      position:'absolute'
-      ,top:'28px'
-      ,right:'0px'
-      ,width:'300px'
-      ,height:'calc(100% - 56px)'
-      ,background:'#778899'
-      ,overflow: "scroll"
-    }}>
-      {/* over lap can used mouse event */}
-      <label> Editor </label><br/>
-      <EntitySelectUpdate/>
-    </div>
-
-
-    <div style={{ //top
-      position:'absolute'
-      ,top:'0px'
-      //,left:'0px'
-      ,left:'0px'
-      //,width:'100%'
-      ,width:'100%'
-      ,height:'28px'
-      ,background:'gray'
-    }}>
-      <button> Test </button>
-
-    </div>
-
-
-    <div style={{ //top
-      position:'absolute'
-      ,bottom:'0px'
-      //,left:'0px'
-      ,left:'0px'
-      //,width:'100%'
-      ,width:'100%'
-      ,height:'28px'
-      ,background:'gray'
-    }}>
-
-
-    </div>
-
+    <EditorSidebarMainBottom/>
     
   </>)
 }

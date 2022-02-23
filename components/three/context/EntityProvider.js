@@ -164,7 +164,7 @@ function reducerEntity(state, action) {
       console.log("Fetch Entities len:", action.entities.length)
       // array for loading from fetch
       if(action.entities.length ==0){
-        return state;  
+        return [];  
       }
       return action.entities;
     case 'clear':
