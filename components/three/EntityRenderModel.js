@@ -5,25 +5,10 @@
 
 import React from "react";
 import DefaultBox from "./entity/DefaultBox";
-
-/*
-var shapes = [
-  'box'
-  , 'plane'
-  , 'sphere'
-  , 'cylinder'
-]
-
-function checkShape(name){
-  let bfound = false;
-  shapes.forEach(str => {
-    if(str == name){
-      bfound = true;
-    }
-  });
-  return bfound;
-}
-*/
+import EntityGroup from "./entity/EntityGroup";
+import EntityObject3D from "./entity/EntityObject3D";
+import EntityPlane from "./entity/EntityPlane";
+import EntityScene from "./entity/EntityScene";
 
 export default function EntityRenderModel(entity){
 
@@ -31,21 +16,11 @@ export default function EntityRenderModel(entity){
 
   /*
   let props = {
-    //objectid:item.id,
-    key:item.objectid,//needed for key react error fixed
     isPhysics:item.isPhysics || false,
-    mass:item.mass,
-    visible:item.visible || true,
     enablePhysics:item.enablePhysics || false,
-    datatype:item.datatype,
-    shapePhysics:item.shapePhysics//,
-    //parameters:item.parameters
   };
   if(item.material){
     props.material=item.material
-  }
-  if(item.parameters){
-    props.parameters=item.parameters
   }
   if(item.isPhysics == true){
     props.position=item.position;
@@ -58,6 +33,34 @@ export default function EntityRenderModel(entity){
     props.scale=[item.scale[0],item.scale[1],item.scale[2]]
   }
   */
+  //console.log("entity.dataType////////////////");
+  //console.log(entity.dataType);
+  //console.log(entity.objectid);
+  //console.log(entity);
+
+  if(entity.dataType=="object3d"){
+    //console.log("entity.datatype////////////////");
+    //console.log(entity.dataType);
+    return(<EntityObject3D
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="group"){
+    return(<EntityGroup
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="scene"){
+    return(<EntityScene
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="plane"){
+    return(<EntityPlane
+      key={entity.objectid}
+      {...props}
+    />)
+  }
 
   //if there object is not found add it.
   return(<DefaultBox key={entity.objectid} {...props} />)

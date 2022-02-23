@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
 import { useEntity } from "../context/EntityProvider.js";
-import EntityAddComponent from "./EntityAddComponent.js";
+import EntityComponentAdd from "./EntityComponentAdd.js";
 
 export default function EntitySelectUpdate(){
 
@@ -145,7 +145,9 @@ export default function EntitySelectUpdate(){
         {selectObject && isDisplayTransform && renderScale()}
       </div>
       <div>
-        {selectObject &&<EntityAddComponent/>}
+        {
+        selectObject &&<EntityComponentAdd/>
+        }
       </div>
     </div>
 

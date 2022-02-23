@@ -42,7 +42,7 @@ export default function Editor({projectid}){
     , setSceneID
     , entities
     , dispatchEntity
-  } = useEntity()
+  } = useEntity();
 
   const [isOpenModal, setIsOpenModal] = useState(false);
   const {
@@ -50,9 +50,9 @@ export default function Editor({projectid}){
     , setProjectID
     , projectName
     , setProjectName
-
   } = useProject();
 
+  //check for project id load from props
   useEffect(()=>{
     //console.log("projectid")
     //console.log(projectid)
@@ -64,6 +64,7 @@ export default function Editor({projectid}){
     }
   },[projectid])
 
+  //check for project id from assign set<name>
   useEffect(()=>{
     //console.log("projectID")
     //console.log(projectID)
@@ -75,12 +76,14 @@ export default function Editor({projectid}){
     }
   },[projectID])
 
+  //check sceneid to load entity objects
   useEffect(()=>{
     if(!isEmpty(sceneID)){
       getSceneEntities();
     }
   },[sceneID])
 
+  //get project data from fetch
   async function getProjectData(){
     if(isEmpty(projectID)){
       console.log("Empty projectID!");
@@ -106,6 +109,7 @@ export default function Editor({projectid}){
     }
   }
 
+  //get entity objects data from fetch
   async function getSceneEntities(){
     if(isEmpty(sceneID)){
       console.log("Empty sceneID!");
@@ -136,14 +140,14 @@ export default function Editor({projectid}){
 
   return(<>
     
-    <div style={{
+    <div style={{ //threejs canvas
       position:'absolute'
       ,top:'0px'
       //,left:'0px'
       ,left:'300px'
       //,width:'100%'
       ,width:'calc(100% - 600px)'
-      ,height:'100%'
+      ,height:'calc(100% - 56px)'
     }}>
     
     <Canvas>
@@ -168,12 +172,13 @@ export default function Editor({projectid}){
     </Canvas>
     </div>
 
-    <div style={{
+    <div style={{//left bar
       position:'absolute'
-      ,top:'0px'
+      ,top:'28px'
       ,left:'0px'
       ,width:'300px'
-      ,height:'100%'
+      ,height:'calc(100% - 56px)'
+      ,background:'#778899'
     }}>
       {/* over lap can used mouse event */}
       <label> Editor </label><br/>
@@ -182,17 +187,47 @@ export default function Editor({projectid}){
 
     </div>
 
-    <div style={{
+    <div style={{//right bar
       position:'absolute'
-      ,top:'0px'
+      ,top:'28px'
       ,right:'0px'
       ,width:'300px'
-      ,height:'100%'
-      ,backgroundColor:'#fff'
+      ,height:'calc(100% - 56px)'
+      ,background:'#778899'
     }}>
       {/* over lap can used mouse event */}
       <label> Editor </label><br/>
       <EntitySelectUpdate/>
+    </div>
+
+
+    <div style={{ //top
+      position:'absolute'
+      ,top:'0px'
+      //,left:'0px'
+      ,left:'0px'
+      //,width:'100%'
+      ,width:'100%'
+      ,height:'28px'
+      ,background:'gray'
+    }}>
+      <button> Test </button>
+
+    </div>
+
+
+    <div style={{ //top
+      position:'absolute'
+      ,bottom:'0px'
+      //,left:'0px'
+      ,left:'0px'
+      //,width:'100%'
+      ,width:'100%'
+      ,height:'28px'
+      ,background:'gray'
+    }}>
+
+
     </div>
 
     

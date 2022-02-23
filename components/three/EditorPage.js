@@ -11,10 +11,7 @@ import { ProjectProvider } from "./context/ProjectProvider.js";
 import { EntityProvider } from "./context/EntityProvider.js";
 import Editor from "./Editor.js";
 import {
-    useLocation
-  , matchPath
-  , useParams
-  , useSearchParams
+  useSearchParams
   
 } from "react-router-dom";
 import { isEmpty } from "../../lib/helper.mjs";
@@ -28,7 +25,7 @@ export default function EditorPage({projectid}){
   //check for url params
   useEffect(()=>{
     //console.log(projectid);
-    if(projectid){
+    if(!isEmpty(projectid)){
       setProjectID(projectID)
     }else{
       console.log("props.projectid NULL!")

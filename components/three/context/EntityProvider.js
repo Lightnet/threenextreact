@@ -117,7 +117,7 @@ function reducerEntity(state, action) {
       item.visible = action.visible || true;
 
       if(action.dataType){item.dataType = action.dataType;}
-      if(action.parmeters){item.parmeters = action.parmeters;}
+      if(action.parameters){item.parameters = action.parameters;}
 
       if(action.shapePhysics){
         item.shapePhysics = action.shapePhysics;

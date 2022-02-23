@@ -17,29 +17,22 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
   const [dataType, setDataType] = useState("box")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [_mass, setMass] = useState(1)
-  const [parmeters, setParameters] = useState({
-    width:1,
-    height:1,
-    depth:1,
-    widthSegments :1,
-    heightSegments :1,
-    depthSegments :1
-  })
+  const [parameters, setParameters] = useState(null)
   useEffect(()=>{
     if(name){
       setName(name);
-    }
-    if(datatype){
-      setName(datatype);
     }
     if(parms){
       setParameters(parms);
     }
     if(datatype){
-      setDataType(shape);
+      setDataType(datatype);
     }
     if(shape){
       setShapePhysics(shape);
+    }
+    if(typeof mass != 'undefined'){
+      setMass(mass);
     }
   },[name,datatype,parms,shape])
 
@@ -53,9 +46,9 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
       , projectid: projectID
       , name: _name
       , dataType: dataType
-      , parmeters: parmeters
+      , parameters: parameters
       , shapePhysics: shapePhysics
-      , mass: mass
+      , mass: _mass
     })
   }
 
@@ -67,11 +60,14 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
   }
 
   function renderParams(){
+    if(!parameters){
+      return <></>
+    }
     //reduce is added if needed else return to current arrya
-    return Object.keys(parmeters).reduce(function(result, key) {
+    return Object.keys(parameters).reduce(function(result, key) {
       let item = <tr key={key}>
         <td><label> {key} </label> </td>
-        <td><input name={key} type="number" value={parmeters[key]} onChange={handleChange}/></td>
+        <td><input name={key} type="number" value={parameters[key]} onChange={handleChange}/></td>
         </tr>
 
       return [ ...result,item]

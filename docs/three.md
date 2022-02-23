@@ -38,6 +38,33 @@ https://github.com/pmndrs/react-three-fiber
 
 https://threejs.org/docs/#api/en/core/Object3D.visible
 
-
-
 https://examples.bradwoods.io/react-three-fiber/material-wireframe
+
+
+```js
+<group>
+  <mesh />
+</group>
+```
+https://github.com/pmndrs/react-three-fiber/blob/master/docs/tutorials/typescript.mdx
+
+Object3DNode
+https://github.com/pmndrs/react-three-fiber/blob/master/docs/API/objects.mdx
+
+https://stackoverflow.com/questions/67767844/how-to-get-all-object3ds-from-a-canvas-in-three-react-fiber
+
+
+https://bestofreactjs.com/repo/react-spring-react-three-fiber-react-react-integration
+
+https://reactjsexample.com/react-fiber-renderer-for-three-js/
+
+
+
+
+
+
+
+
+
+
+
