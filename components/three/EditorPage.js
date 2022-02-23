@@ -12,7 +12,6 @@ import { EntityProvider } from "./context/EntityProvider.js";
 import Editor from "./Editor.js";
 import {
   useSearchParams
-  
 } from "react-router-dom";
 import { isEmpty } from "../../lib/helper.mjs";
 
@@ -31,7 +30,7 @@ export default function EditorPage({projectid}){
       console.log("props.projectid NULL!")
     }
     const currentParams = Object.fromEntries([...searchParams]);
-    console.log(currentParams);
+    //console.log(currentParams);
     if(currentParams?.projectid){
       setProjectID(currentParams.projectid)
     }

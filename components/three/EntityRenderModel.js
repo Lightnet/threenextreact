@@ -5,6 +5,7 @@
 
 import React from "react";
 import DefaultBox from "./entity/DefaultBox";
+import EntityBox from "./entity/EntityBox";
 import EntityGroup from "./entity/EntityGroup";
 import EntityObject3D from "./entity/EntityObject3D";
 import EntityPlane from "./entity/EntityPlane";
@@ -57,6 +58,11 @@ export default function EntityRenderModel(entity){
     />)
   }else if(entity.dataType=="plane"){
     return(<EntityPlane
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="box"){
+    return(<EntityBox
       key={entity.objectid}
       {...props}
     />)

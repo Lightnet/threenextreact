@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
 import { useEntity } from "../context/EntityProvider.js";
 import EntityComponentAdd from "./EntityComponentAdd.js";
+import EntityShapePararmeter from "./EntityShapePararmeter.js";
 
 export default function EntitySelectUpdate(){
 
@@ -143,6 +144,11 @@ export default function EntitySelectUpdate(){
         {selectObject && isDisplayTransform && renderPosition()}
         {selectObject && isDisplayTransform && renderRotation()}
         {selectObject && isDisplayTransform && renderScale()}
+      </div>
+      <div>
+        {
+        selectObject &&<EntityShapePararmeter selectid={onSelectID}/>
+        }
       </div>
       <div>
         {

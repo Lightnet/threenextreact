@@ -22,7 +22,7 @@ export default function ProjectsPage({onLoadEditor}){
 
   async function getProejctList(){
     let data = await useFetch("/api/project");
-    console.log(data);
+    //console.log(data);
     if(data.error){
       console.log("ERROR FETCH PROJECT LIST")
       return;

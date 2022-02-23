@@ -101,7 +101,7 @@ export default function Editor({projectid}){
       console.log("ERROR FETCH GET PROJECT");
       return;
     }
-    console.log(data);
+    //console.log(data);
     if(data.api=='PROJECT'){
       //console.log('API get Project!');
       setSceneID(data.sceneid);
@@ -128,7 +128,7 @@ export default function Editor({projectid}){
       console.log("ERROR FETCH GET ENTITIES");
       return;
     }
-    console.log(data);
+    //console.log(data);
     if(data.api=='ENTITIES'){
       console.log('API get entities!');
       dispatchEntity({

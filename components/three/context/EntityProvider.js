@@ -105,8 +105,7 @@ function reducerEntity(state, action) {
     case 'add':
       // do checks arg or params
       //need to do check for object, material, models
-
-      console.log(action)
+      //console.log(action)
       let item = {};
       item.objectid = action.id || nanoid32();
       item.name = action.name || nanoid32();
@@ -132,6 +131,8 @@ function reducerEntity(state, action) {
       
       // keep every item except the one we want to remove
       return state.map((item) => {
+        //console.log(item)
+        //console.log(action)
         if(item.objectid == action.id){
           if(action.keyType=="position"){
             item.position=action.value
@@ -142,7 +143,13 @@ function reducerEntity(state, action) {
           if(action.keyType=="scale"){
             item.scale=action.value
           }
+          if(action.keyType=="parameters"){
+            item.parameters=action.value
+          }
+
+
           apiUpdateEntity(item)
+
           return item;
           //return {...item, position: action.value};
         }
@@ -154,7 +161,7 @@ function reducerEntity(state, action) {
       // keep every item except the one we want to remove
       return state.filter((item) => item.objectid != action.id);
     case 'array':
-      console.log("Entities len:", action.entities.length)
+      console.log("Fetch Entities len:", action.entities.length)
       // array for loading from fetch
       if(action.entities.length ==0){
         return state;  
