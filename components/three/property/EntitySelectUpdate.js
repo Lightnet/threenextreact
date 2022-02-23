@@ -5,13 +5,16 @@
 
 import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
-import { useEntity } from "../context/EntityProvider";
+import { useEntity } from "../context/EntityProvider.js";
+import EntityAddComponent from "./EntityAddComponent.js";
 
 export default function EntitySelectUpdate(){
 
   const [onSelectID, setOnSelectID] = useState("");
   const [selectObject, setSelectObject] = useState(null);
   const [isRadian, setIsRadian] = useState(true);
+
+  const [isDisplayTransform, setIsDisplayTransform] = useState(false);
 
   const {
     sceneID
@@ -117,6 +120,10 @@ export default function EntitySelectUpdate(){
     </div>
   }
 
+  function toggleTransform(){
+    setIsDisplayTransform(state=>!state);
+  }
+
   return <>
     <div>
       <div>
@@ -132,9 +139,13 @@ export default function EntitySelectUpdate(){
         {onSelectID}
       </div>
       <div>
-        {selectObject && renderPosition()}
-        {selectObject && renderRotation()}
-        {selectObject && renderScale()}
+        {selectObject && <div> <button onClick={toggleTransform}> Transform </button> </div>}
+        {selectObject && isDisplayTransform && renderPosition()}
+        {selectObject && isDisplayTransform && renderRotation()}
+        {selectObject && isDisplayTransform && renderScale()}
+      </div>
+      <div>
+        {selectObject &&<EntityAddComponent/>}
       </div>
     </div>
 

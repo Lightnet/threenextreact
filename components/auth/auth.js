@@ -45,7 +45,7 @@ export function AuthProvider(props){
 
   useEffect(()=>{
     if(!isEmpty(token)){
-      console.log("TOKEN")
+      //console.log("TOKEN")
       setStatus('auth')
     }else{
       setStatus('unauth')

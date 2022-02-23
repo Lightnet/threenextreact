@@ -9,6 +9,7 @@ import useFetch from "../hook/usefetch.js";
 import Editor from "./EditorPage.js";
 import GamesPage from "./GamesPage.js";
 import ProjectsPage from "./ProjectsPage.js";
+import { useNavigate } from "react-router-dom";
 
 export default function ThreePage(){
 
@@ -16,9 +17,11 @@ export default function ThreePage(){
   const [editorID, setEditorID] = useState('');
   const [projectID, setProjectID] = useState('');
   const [gameID, setGameID] = useState('');
+  const navigate = useNavigate();
 
   function onSelectView(name){
-    setView(name);
+    //setView(name);
+    //navigate("/editor");
   }
 
   async function clickFetchTest(){

@@ -4,6 +4,7 @@
 */
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/usefetch.js";
 import Modal from "../modal/modal.js"
@@ -17,6 +18,7 @@ export default function ProjectsPage({onLoadEditor}){
 
   const [projects, setProjects] = useState([]);
   const [dataType, setDataType] = useState(null);
+  const navigate = useNavigate();
 
   async function getProejctList(){
     let data = await useFetch("/api/project");
@@ -72,7 +74,9 @@ export default function ProjectsPage({onLoadEditor}){
           value:projectID
         }
       })
+      return;
     }
+    navigate("/editor?projectid="+projectID);
   }
 
   function clickLoadProject(id){
@@ -82,7 +86,9 @@ export default function ProjectsPage({onLoadEditor}){
           value:id
         }
       })
+      return;
     }
+    navigate("/editor?projectid="+id);
   }
 
   async function updateProject(e){
