@@ -11,7 +11,7 @@ export default function CreateCamera(){
   const [dataType, setDataType] = useState("camera")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(0)
-  const [parmeters, setParameters] = useState({
+  const [parameters, setParameters] = useState({
       fov:45
     , aspect:0.8823
     , near:1
@@ -23,6 +23,6 @@ export default function CreateCamera(){
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

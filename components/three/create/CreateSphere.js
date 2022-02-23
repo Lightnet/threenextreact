@@ -11,14 +11,14 @@ export default function CreateSphere(){
   const [dataType, setDataType] = useState("sphere")
   const [shapePhysics, setShapePhysics] = useState("sphere")
   const [mass, setMass] = useState(1)
-  const [parmeters, setParameters] = useState({
+  const [parameters, setParameters] = useState({
     radius:1
-    ,widthSegments:8
-    ,heightSegments:8
+    ,widthSegments:32
+    ,heightSegments:16
     ,phiStart :0
-    ,phiLength :6.2
+    ,phiLength :Math.PI * 2
     ,thetaStart :0
-    ,thetaLength :3.1
+    ,thetaLength :Math.PI
   })
 
   return <CreateShape 
@@ -26,6 +26,6 @@ export default function CreateSphere(){
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

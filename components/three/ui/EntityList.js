@@ -31,6 +31,18 @@ export default function EntityList(){
   }
 
   return <>
-  {renderObject3DList()}
+    <div style={{//right bar
+      width:'100%'
+      //,height:'100%'
+      ,height:'50%'
+      //,height:'calc(100% - 56px)'
+      //,background:'#778899'
+      ,overflow: "scroll"
+    }}>
+      <div>
+        <label> Entity List: </label>
+      </div>
+      {renderObject3DList()}
+    </div>
   </>
 }

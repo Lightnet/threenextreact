@@ -13,13 +13,13 @@ export default function CreateObject3D(){
   const [dataType, setDataType] = useState("object3d")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(1)
-  const [parmeters, setParameters] = useState(null)
+  const [parameters, setParameters] = useState(null)
 
   return <CreateShape 
     name={name}
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

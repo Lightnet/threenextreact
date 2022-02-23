@@ -194,6 +194,7 @@ export default function Editor({projectid}){
       ,width:'300px'
       ,height:'calc(100% - 56px)'
       ,background:'#778899'
+      ,overflow: "scroll"
     }}>
       {/* over lap can used mouse event */}
       <label> Editor </label><br/>

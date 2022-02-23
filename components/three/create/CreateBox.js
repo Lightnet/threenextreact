@@ -13,7 +13,7 @@ export default function CreateBox(){
   const [dataType, setDataType] = useState("box")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(1)
-  const [parmeters, setParameters] = useState({
+  const [parameters, setParameters] = useState({
     width:1,
     height:1,
     depth:1,
@@ -27,6 +27,6 @@ export default function CreateBox(){
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

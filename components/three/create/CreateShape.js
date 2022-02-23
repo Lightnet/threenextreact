@@ -54,9 +54,20 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
 
   function handleChange(evt) {
     const value = evt.target.value;
-    console.log(evt.target.type)
+    //console.log(evt.target.type)
     //const name = evt.target.name;
-    setParameters(state => ({...state, [evt.target.name]: Number(value)}));
+    if(evt.target.type=="number"){
+      setParameters(state => ({...state, [evt.target.name]: Number(value)}));
+    }
+    if(evt.target.type=="checkbox"){
+      console.log("evt.target.checked");
+      console.log(evt.target.checked);
+      setParameters(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
+    }
+    if(evt.target.type=="color"){
+      console.log(value);
+      setParameters(state => ({...state, [evt.target.name]: value}));
+    }
   }
 
   function renderParams(){
@@ -65,9 +76,25 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
     }
     //reduce is added if needed else return to current arrya
     return Object.keys(parameters).reduce(function(result, key) {
+      //console.log("Type:", typeof parameters[key], key)
+      let type="text";
+      if(typeof parameters[key] == "number"){
+        //console.log("number////////")
+        type="number";
+      }else if(typeof parameters[key] == "boolean"){
+        //console.log("boolean////////")
+        type="checkbox";
+      }
+      //added last as it didn't detect as color unit
+      if(key=="color"){
+        //console.log("color////////")
+        type="color";
+      }
+
+
       let item = <tr key={key}>
         <td><label> {key} </label> </td>
-        <td><input name={key} type="number" value={parameters[key]} onChange={handleChange}/></td>
+        <td><input name={key} type={type} value={parameters[key]} onChange={handleChange}/></td>
         </tr>
 
       return [ ...result,item]

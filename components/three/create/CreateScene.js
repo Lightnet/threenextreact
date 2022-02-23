@@ -13,13 +13,13 @@ export default function CreateScene(){
   const [dataType, setDataType] = useState("scene")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(1)
-  const [parmeters, setParameters] = useState(null)
+  const [parameters, setParameters] = useState(null)
 
   return <CreateShape 
     name={name}
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

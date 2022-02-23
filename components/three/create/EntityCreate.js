@@ -4,10 +4,12 @@
 */
 
 import React, { useState } from "react";
-//import { useEntity, useThree } from "../context/ThreeProvider.js";
+import CreateAmbientLight from "./CreateAmbientLight.js";
 import CreateBox from "./CreateBox.js";
 import CreateCamera from "./CreateCamera.js";
+import CreateCone from "./CreateCone.js";
 import CreateGroup from "./CreateGroup.js";
+import CreateLight from "./CreateLight.js";
 import CreateObject3D from "./CreateObject3D.js";
 import CreatePlane from "./CreatePlane.js";
 import CreatePointLight from "./CreatePointLight.js";
@@ -23,7 +25,10 @@ export default function EntityCreate(){
     , "box"
     , "sphere"
     , "plane"
+    , "cone"
+    , "light"
     , "pointlight"
+    , "ambientlight"
     , "camera"
   ])
   const [selectCreate, setSelectCreate] = useState("box");
@@ -56,6 +61,12 @@ export default function EntityCreate(){
       return <CreateCamera/>
     }else if (selectCreate=="pointlight"){
       return <CreatePointLight/>
+    }else if (selectCreate=="ambientlight"){
+      return <CreateAmbientLight/>
+    }else if (selectCreate=="light"){
+      return <CreateLight/>
+    }else if (selectCreate=="cone"){
+      return <CreateCone/>
     }
     return <></>
   }

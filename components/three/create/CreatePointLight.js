@@ -11,8 +11,8 @@ export default function CreatePointLight(){
   const [dataType, setDataType] = useState("pointlight")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(0)
-  const [parmeters, setParameters] = useState({
-      color:45
+  const [parameters, setParameters] = useState({
+      color:0xff0000
     , intensity:1
     , distance:1000
     , decay:1
@@ -23,6 +23,6 @@ export default function CreatePointLight(){
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

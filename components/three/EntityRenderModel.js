@@ -10,6 +10,11 @@ import EntityGroup from "./entity/EntityGroup";
 import EntityObject3D from "./entity/EntityObject3D";
 import EntityPlane from "./entity/EntityPlane";
 import EntityScene from "./entity/EntityScene";
+import EntityCone from "./entity/EntityCone";
+import EntityLight from "./entity/EntityLight";
+import EntityPointLight from "./entity/EntityPointLight";
+import EntityAmbientLight from "./entity/EntityAmbientLight";
+import EntitySphere from "./entity/EntitySphere";
 
 export default function EntityRenderModel(entity){
 
@@ -63,6 +68,31 @@ export default function EntityRenderModel(entity){
     />)
   }else if(entity.dataType=="box"){
     return(<EntityBox
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="cone"){
+    return(<EntityCone
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="light"){
+    return(<EntityLight
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="pointlight"){
+    return(<EntityPointLight
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="ambientlight"){
+    return(<EntityAmbientLight
+      key={entity.objectid}
+      {...props}
+    />)
+  }else if(entity.dataType=="sphere"){
+    return(<EntitySphere
       key={entity.objectid}
       {...props}
     />)

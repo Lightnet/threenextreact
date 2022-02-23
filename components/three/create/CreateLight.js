@@ -6,16 +6,14 @@
 import React, { useState } from "react";
 import CreateShape from "./CreateShape.js";
 
-export default function CreatePlane(){
-  const [name, setName] = useState("plane");
-  const [dataType, setDataType] = useState("plane")
-  const [shapePhysics, setShapePhysics] = useState("plane")
+export default function CreateLight(){
+  const [name, setName] = useState("pointlight");
+  const [dataType, setDataType] = useState("pointlight")
+  const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(0)
   const [parameters, setParameters] = useState({
-    width:1,
-    height:1,
-    widthSegments :1,
-    heightSegments :1,
+      color:0xff0000
+    , intensity:1
   })
 
   return <CreateShape 

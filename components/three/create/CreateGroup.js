@@ -13,13 +13,13 @@ export default function CreateGroup(){
   const [dataType, setDataType] = useState("group")
   const [shapePhysics, setShapePhysics] = useState("box")
   const [mass, setMass] = useState(1)
-  const [parmeters, setParameters] = useState(null)
+  const [parameters, setParameters] = useState(null)
 
   return <CreateShape 
     name={name}
     datatype={dataType}
     shape={shapePhysics}
     mass={mass}
-    parms={parmeters}
+    parms={parameters}
   />
 }

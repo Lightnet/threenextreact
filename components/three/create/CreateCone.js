@@ -6,16 +6,19 @@
 import React, { useState } from "react";
 import CreateShape from "./CreateShape.js";
 
-export default function CreatePlane(){
-  const [name, setName] = useState("plane");
-  const [dataType, setDataType] = useState("plane")
+export default function CreateCone(){
+  const [name, setName] = useState("cone");
+  const [dataType, setDataType] = useState("cone")
   const [shapePhysics, setShapePhysics] = useState("plane")
   const [mass, setMass] = useState(0)
   const [parameters, setParameters] = useState({
-    width:1,
-    height:1,
-    widthSegments :1,
-    heightSegments :1,
+      radius :1
+    , height:1
+    , radialSegments:8
+    , heightSegments:1
+    , openEnded:false
+    , thetaStart:0
+    , thetaLength:2*Math.PI
   })
 
   return <CreateShape 
