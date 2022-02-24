@@ -9,6 +9,7 @@ import useFetch from "../../hook/usefetch.js";
 
 export const EntityContext = createContext();
 
+//get variables and dispatch event
 export function useEntity(){
   const context = useContext(EntityContext);
   if (!context) {
@@ -17,6 +18,7 @@ export function useEntity(){
   return context;
 }
 
+//get array entities and dispatch
 export function useEntities(){
   const context = useContext(EntityContext);
   if (!context) {
@@ -174,6 +176,7 @@ function reducerEntity(state, action) {
   }
 }
 
+// context Provider for variable access and events
 export function EntityProvider(props){
   
   const [sceneID, setSceneID] = useState('');

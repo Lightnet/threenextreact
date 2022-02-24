@@ -5,10 +5,14 @@
 
 import React, { useState } from "react"
 import Modal from "../../modal/modal";
+import ThemeLink from "../../theme/themelink";
+import { useProject } from "../context/ProjectProvider";
 import ProjectsPage from "../ProjectsPage";
 import AssetsPage from "./AssetsPage";
 
 export default function EditorHeaderMain(){
+
+  const{ projectName } = useProject();
 
   const [isOpenProject, setIsOpenProject] = useState(false);
   const [isOpenAssets, setIsOpenAssets] = useState(false);
@@ -20,7 +24,6 @@ export default function EditorHeaderMain(){
     console.log("close???")
     setIsOpenProject(false);
   }
-
 
   function clickOpenAssets(){
     setIsOpenAssets(true)
@@ -43,9 +46,10 @@ export default function EditorHeaderMain(){
     }}>
       <button onClick={clickOpenProject}> Projects </button>
       <button> Project </button>
-      <button> Scenes </button>
       <button> Scene </button>
       <button onClick={clickOpenAssets}> Assets </button>
+      <ThemeLink></ThemeLink>
+      <label>[ Project: {projectName} ]</label>
     </div>
 
     <Modal title="Projects" pwidth="800" pheight="300" isOpen={isOpenProject} onClose={onCloseProject}>

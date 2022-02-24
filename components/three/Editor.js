@@ -45,7 +45,6 @@ export default function Editor({projectid}){
   const {
       projectID
     , setProjectID
-    , projectName
     , setProjectName
   } = useProject();
 
@@ -54,7 +53,7 @@ export default function Editor({projectid}){
     //console.log("projectid")
     //console.log(projectid)
     if(!isEmpty(projectid)){
-      //console.log("found project ID")
+      console.log("found project ID:" + projectid)
       setProjectID(projectid);
     }else{
       console.log("None project ID from props")

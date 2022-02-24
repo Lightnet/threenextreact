@@ -4,7 +4,8 @@
 */
 
 import React from "react"
-import EntitySelectUpdate from "../property/EntitySelectUpdate"
+//import EntitySelectUpdate from "../property/EntitySelectUpdate"
+import EntityViewProperty from "../property/EntityViewProperty"
 
 export default function EditorSidebarMainRight(){
   
@@ -19,8 +20,12 @@ export default function EditorSidebarMainRight(){
       ,overflow: "scroll"
     }}>
       {/* over lap can used mouse event */}
-      <label> Editor </label><br/>
-      <EntitySelectUpdate/>
+      <EntityViewProperty view={"Scenes"} />
+      <EntityViewProperty view={"Entity Object"} />
+      
     </div>
   </>
 }
+/*
+<EntitySelectUpdate/>
+*/

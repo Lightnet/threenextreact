@@ -97,12 +97,18 @@ export default function EntityShapePararmeter({selectid}){
     return <></>
   } 
 
-
   return <>
-    <table>
-      <tbody>
-        {renderParams()}
-      </tbody>
-    </table>
+    <div>
+      <div>
+        <label> Params: </label>
+      </div>
+      <div>
+        <table>
+          <tbody>
+            {renderParams()}
+          </tbody>
+        </table>
+      </div>
+    </div>
   </>
 }

@@ -9,7 +9,7 @@ import React,{ useRef, useEffect, useState } from 'react';
 
 import styles from "./modal.module.css";
 
-export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,updatePos,resize}) {
+export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,updatePos,resize,isdrag}) {
 
   const [isModal, setIsModal] = useState(false)
 
@@ -22,6 +22,7 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   //const [isDrag, setIsDrag] = useState(true)
   const [isAutoSize, setIsAutoSize] = useState(false)
   const [reSize, setReSize] = useState(false)
+  const [isDrag, setIsDrag] = useState(true)
 
   const [height, setHeight] = useState(200)
   const [width, setWidth] = useState(250)
@@ -62,11 +63,17 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
     }
   }, [title,pos,pheight,pwidth]);
 
+  useEffect(()=>{
+    if(typeof isdrag != "undefined"){
+      setIsDrag(isdrag)
+    }
+  },[isdrag])
+
   
   function dragMouseDown(e) {
-    //if(!isDrag){
-      //return;
-    //}
+    if(!isDrag){
+      return;
+    }
     if(!isPress){
       e = e || window.event;
       e.preventDefault();
@@ -80,9 +87,9 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   }
   
   function OnMouseMove(e) {
-    //if(!isDrag){
-      //return;
-    //}
+    if(!isDrag){
+      return;
+    }
     if (isPress) {
       //console.log("move?");
       e = e || window.event;
@@ -93,9 +100,9 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   }
 
   function OnMouseUp() {
-    //if(!isDrag){
-      //return;
-    //}
+    if(!isDrag){
+      return;
+    }
     // stop moving when mouse button is released:
     setIsPress(false);
   }

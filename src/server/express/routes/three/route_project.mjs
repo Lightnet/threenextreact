@@ -8,6 +8,7 @@ const router = express.Router();
 
 import { isEmpty, nanoid32 } from "../../../../../lib/helper.mjs"
 import clientDB,{expressSessionTokenCheck} from "../../../../../lib/database.mjs"
+import API from '../../../../../components/three/context/API.mjs';
 
 router.get('/project', async(req, res) => {
   //res.json({ error: 'Not found' });
@@ -49,16 +50,16 @@ router.post('/project', async(req, res) => {
   const db = await clientDB();
   //const {api} = req.body;
 
-  if(api=="PROJECT"){
+  if(api==API.PROJECT){
     let data = req.body;
     const Project = db.model('Project');
     try{
       let project = await Project.findOne({id: data.projectid}).exec();
       return res.json({
-        api:'PROJECT'
-        , project:project
-        , sceneid:project.defaultsceneid
-        , name:project.name
+        api:API.PROJECT
+        , project: project
+        , sceneid: project.defaultsceneid
+        , name: project.name
       });
     }catch(e){
       console.log(e);
@@ -66,7 +67,7 @@ router.post('/project', async(req, res) => {
     }
   }
 
-  if(api=="CREATE"){
+  if(api== API.CREATE){
     let data = req.body;
     const Project = db.model('Project');
     try{
@@ -86,8 +87,7 @@ router.post('/project', async(req, res) => {
       const Scene = db.model('Scene');
       let newScene = new Scene({
           projectid:projectID
-        , name: nanoid32()
-        , id:sceneID
+        , objectid:sceneID
         , userid: userid
         , username: username
       })
@@ -128,7 +128,7 @@ router.put('/project', async(req, res) => {
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
-  if(api=="UPDATE"){
+  if(api==API.UPDATE){
     let data = req.body;
     const Project = db.model('Project');
     try{
@@ -164,7 +164,7 @@ router.delete('/project', async(req, res) => {
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
-  if(api=="DELETE"){
+  if(api==API.DELETE){
     let data = req.body;
     const Project = db.model('Project');
     const Scene = db.model('Scene');
@@ -175,7 +175,7 @@ router.delete('/project', async(req, res) => {
       const deleteScene = await Scene.deleteMany({projectid:data.id}).exec();
       console.log(deleteScene);
 
-      return res.json({api:'DELETE',projectid:data.id});
+      return res.json({api:API.DELETE,projectid:data.id});
     }catch(e){
       console.log(e);
       return res.json({error:"DELTE PROJECT FAIL"});

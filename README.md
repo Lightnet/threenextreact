@@ -50,9 +50,11 @@
     - List ( added )
   - Scene:
     - Create ( Added )
-    - Delete ( not added )
-    - Update ( not added )
-    - List ( not added )
+    - Delete ( added / wip )
+    - Update ( added )
+    - List ( added )
+    - default ( added ) project sceneid load default
+    - load scene ( added )
 
 - Projects:
   - Create ( added )
@@ -69,7 +71,7 @@
   - delete ( added )
   - file limit size check ( 5 MB) ( added)
   - check file type ( added / work in progress)
-  - update ?
+  - update ? (data store in database or local file ?)
 
 - Three Objects: (work in progress)
   - Scene ( not added )
