@@ -48,6 +48,8 @@
     - Update ( added / position / rotation / scale )
     - Delete ( added )
     - List ( added )
+    - physics ( not added)
+    - add component ( not added)
   - Scene:
     - Create ( Added )
     - Delete ( added / wip )
