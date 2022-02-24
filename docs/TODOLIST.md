@@ -2,16 +2,12 @@
 
 ## Top List:
 -Editor rework start up
-  - in case of new project.
   - load on project id
   - load scene id
 
 -account setup
 --database
 ---user
----item
----map
---
 
 - index page
 - login area
@@ -27,23 +23,21 @@
 --serverlist
 
 # UI:
--modal
--window
--panel
--button
+-modal (work in progress)
+-panel 
+-button 
 
 # Entry point:
-- project load list
+- project list (work in progress)
+- editor (work in progress)
 - game list
-- settings
-- docs
-- threejs examples?
+- game
 
 # Editor:
-- scene
-- script
-- assets
-- scene
+- scene (work in progress)
+- script 
+- assets (work in progress)
+- scene (work in progress)
 - props
 - logs
 - blueprint

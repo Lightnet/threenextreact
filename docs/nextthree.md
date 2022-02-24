@@ -23,7 +23,8 @@
   - sidebar (work in progress)
   - 
 
-- upload file types (work in progress)
+- Assets:
+  - upload file types (work in progress)
   - save to database as base64 string
   - delete (not added)
   - file limit size check? (not added)

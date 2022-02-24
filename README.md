@@ -13,11 +13,13 @@
 ## Information:
   Work in progress builds and testing ideas.
 
-  To develop Three.js editor, game and other applications with React and React-Three-Fiber. 
+  To develop Three.js editor with React and React-Three-Fiber. 
+
+  For game and other applications that is on hold a bit.
   
   As well other packages to help create editor module design.
 
-  By using the three/fiber with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game current set. Required creating components and api calls.
+  By using the three/fiber with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game, visual art and other things. Required creating components and api calls.
 
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
   
@@ -33,7 +35,63 @@
   - rework to have stand alone
   
 ### Database:
- The database will be used is MongoDB to able save and load data for editing and game to manage them in json format. 
+ The database will be used is MongoDB to able save and load data for editing and game to manage them in json format.
+
+## React Three Editor:
+- Server package:
+  - Next.js ( broken )
+  - Express.js ( tested, work in progress )
+
+- Editor:
+  - Entity:
+    - Save ( added )
+    - Update ( added / position / rotation / scale )
+    - Delete ( added )
+    - List ( added )
+  - Scene:
+    - Create ( Added )
+    - Delete ( not added )
+    - Update ( not added )
+    - List ( not added )
+
+- Projects:
+  - Create ( added )
+  - Delete ( added )
+  - Update ( added )
+  - List ( added )
+
+- Assets:
+  - upload file types ( added / work in progress)
+  - download ( not added )
+  - save to database 
+    - as base64 string ( Not Added )
+    - save file name and path ( added )
+  - delete ( added )
+  - file limit size check ( 5 MB) ( added)
+  - check file type ( added / work in progress)
+  - update ?
+
+- Three Objects: (work in progress)
+  - Scene ( not added )
+  - Group ( added )
+  - Box ( added )
+  - Sphere ( added )
+  - Plane ( added )
+  - Cone ( added )
+  
+  - Camera ( work in progress)
+  - Light ( added 
+  - PointLight ( added )
+  - AmbientLight ( added )
+  - OrbitControl ( added )
+  
+
+Notes:
+- They do not have parent or children yet.
+
+- UI:
+  - Modal ( added )
+  - Sidebar ( work in progress )
 
 # Packages:
 - three ( 3D/2D render )
