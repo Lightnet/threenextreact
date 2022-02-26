@@ -13,7 +13,7 @@ import AssetsPage from "./AssetsPage";
 
 export default function EditorHeaderMain(){
 
-  const{ projectName } = useProject();
+  const{ projectID, projectName } = useProject();
   const{ enablePhysics, setEnablePhysics } = useEntity();
 
   const [isOpenProject, setIsOpenProject] = useState(false);
@@ -39,6 +39,10 @@ export default function EditorHeaderMain(){
     setEnablePhysics(state=>!state)
   }
 
+  function clickDebug(){
+    window.open(("/game?gameid="+projectID), "debugapp");
+  }
+
   return <>
     <div style={{ //top
       position:'absolute'
@@ -56,6 +60,8 @@ export default function EditorHeaderMain(){
       <button onClick={clickOpenAssets}> Assets </button>
       <ThemeLink></ThemeLink>
       <button onClick={togglePhysics}>[ enablePhysics: {enablePhysics ? ("true"):("false")} ]</button>
+      <button onClick={clickDebug}> Debug </button>
+
       <label>[ Project: {projectName} ]</label>
     </div>
 

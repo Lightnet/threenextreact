@@ -72,6 +72,5 @@ export default function Viewport3D(){
     </Canvas>
     </div>
   
-  
   </>
 }

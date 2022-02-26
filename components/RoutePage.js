@@ -47,7 +47,7 @@ export default function RoutePage(){
       <Route path="projects" element={<ProjectsPage />} />
       <Route path="editor/*" element={<EditorPage />} />
       <Route path="games" element={<GamesPage />} />
-      <Route path="game" element={<GamePage />} />
+      <Route path="game/*" element={<GamePage />} />
       <Route path="signin" element={<SignInPage />} />
       <Route path="signup" element={<SignUpPage />} />
       <Route path="signout" element={<SignOutPage />} />
