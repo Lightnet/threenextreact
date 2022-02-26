@@ -5,9 +5,11 @@
 
 import React from 'react';
 import { useBox, useCylinder, usePlane, useSphere } from '@react-three/cannon';
-import DefaultBox,{DefaultBoxRef} from './DefaultBox';
+import {DefaultBoxRef} from '../entity/DefaultBox';
+import { EntityPlaneRef } from '../entity/EntityPlane';
+import { EntityBoxRef } from '../entity/EntityBox';
 
-export default function EntityPhysics(props) {
+export default function EntityPhysicsTypes(props) {
   let ref;
 
   if(props.shapePhysics=='box'){
@@ -28,9 +30,21 @@ export default function EntityPhysics(props) {
     [ref] = useCylinder(() => ({ ...props }));
   }
 
+  if(props.datatype=='box'){
+    return (
+      <EntityBoxRef
+        ref={ref}
+        //key={props.objectid}
+        {...props}
+      />
+    )
+  }else if(props.dataType=="plane"){
+    return(<EntityPlaneRef
+      //key={props.objectid}
+      {...props}
+    />)
+  }
 
-
-  
   return (
     <DefaultBoxRef
       ref={ref}

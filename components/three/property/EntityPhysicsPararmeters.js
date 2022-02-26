@@ -8,7 +8,7 @@ import { isEmpty } from "../../../lib/helper.mjs";
 
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityShapePararmeter({selectid}){
+export default function EntityPhysicsPararmeters({selectid}){
 
   const {
       sceneID
@@ -18,7 +18,7 @@ export default function EntityShapePararmeter({selectid}){
   } = useEntity()
 
   const [selectObject, setSelectObject] = useState(null);
-  const [parameters, setParameters] = useState(null)
+  const [parameters, setParameters] = useState(null);
 
   useEffect(()=>{
     if(isEmpty(selectid)){
@@ -28,7 +28,12 @@ export default function EntityShapePararmeter({selectid}){
       if(entities[idx].objectid == selectid){
         //console.log(entities[idx]);
         setSelectObject(entities[idx]);
-        setParameters(entities[idx].parameters);
+        //setParameters(null);
+        setParameters({
+            shapePhysics: entities[idx].shapePhysics
+          , isPhysics: entities[idx].isPhysics
+          , mass: entities[idx].mass
+        })
         break;
       }
     }
@@ -39,14 +44,16 @@ export default function EntityShapePararmeter({selectid}){
       dispatchEntity({
           type:"update"
         , id: selectObject.objectid
-        , keyType: "parameters"
+        , keyType: "physics"
         , value: parameters
       })
     }
   },[parameters])
 
   function handleChange(evt) {
+
     const value = evt.target.value;
+    
     //console.log(evt.target.type)
     //const name = evt.target.name;
     if(evt.target.type=="number"){
@@ -61,6 +68,7 @@ export default function EntityShapePararmeter({selectid}){
       //console.log(value);
       setParameters(state => ({...state, [evt.target.name]: value}));
     }
+    
   }
 
   function renderParams(){
@@ -100,7 +108,7 @@ export default function EntityShapePararmeter({selectid}){
   return <>
     <div>
       <div>
-        <label> Params: </label>
+        <label> Physics: </label>
       </div>
       <div>
         <table>

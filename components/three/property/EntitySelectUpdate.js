@@ -7,7 +7,8 @@ import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
 import { useEntity } from "../context/EntityProvider.js";
 import EntityComponentAdd from "./EntityComponentAdd.js";
-import EntityShapePararmeter from "./EntityShapePararmeter.js";
+import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.js";
+import EntityShapePararmeters from "./EntityPararmeters.js";
 
 export default function EntitySelectUpdate(){
 
@@ -147,9 +148,16 @@ export default function EntitySelectUpdate(){
       </div>
       <div>
         {
-        selectObject &&<EntityShapePararmeter selectid={onSelectID}/>
+        selectObject &&<EntityShapePararmeters selectid={onSelectID}/>
         }
       </div>
+
+      <div>
+        {
+        selectObject &&<EntityPhysicsPararmeters selectid={onSelectID}/>
+        }
+      </div>
+
       <div>
         {
         selectObject &&<EntityComponentAdd/>

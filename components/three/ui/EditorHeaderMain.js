@@ -6,6 +6,7 @@
 import React, { useState } from "react"
 import Modal from "../../modal/modal";
 import ThemeLink from "../../theme/themelink";
+import { useEntity } from "../context/EntityProvider";
 import { useProject } from "../context/ProjectProvider";
 import ProjectsPage from "../ProjectsPage";
 import AssetsPage from "./AssetsPage";
@@ -13,6 +14,7 @@ import AssetsPage from "./AssetsPage";
 export default function EditorHeaderMain(){
 
   const{ projectName } = useProject();
+  const{ enablePhysics, setEnablePhysics } = useEntity();
 
   const [isOpenProject, setIsOpenProject] = useState(false);
   const [isOpenAssets, setIsOpenAssets] = useState(false);
@@ -33,6 +35,10 @@ export default function EditorHeaderMain(){
     setIsOpenAssets(false);
   }
 
+  function togglePhysics(){
+    setEnablePhysics(state=>!state)
+  }
+
   return <>
     <div style={{ //top
       position:'absolute'
@@ -49,6 +55,7 @@ export default function EditorHeaderMain(){
       <button> Scene </button>
       <button onClick={clickOpenAssets}> Assets </button>
       <ThemeLink></ThemeLink>
+      <button onClick={togglePhysics}>[ enablePhysics: {enablePhysics ? ("true"):("false")} ]</button>
       <label>[ Project: {projectName} ]</label>
     </div>
 

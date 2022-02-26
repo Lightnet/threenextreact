@@ -15,30 +15,13 @@ import EntityLight from "./entity/EntityLight";
 import EntityPointLight from "./entity/EntityPointLight";
 import EntityAmbientLight from "./entity/EntityAmbientLight";
 import EntitySphere from "./entity/EntitySphere";
+//import { useEntity } from "./context/EntityProvider";
 
 export default function EntityRenderModel(entity){
 
-  let props = entity;
+  //const{ enablePhysics, setEnablePhysics } = useEntity();
 
-  /*
-  let props = {
-    isPhysics:item.isPhysics || false,
-    enablePhysics:item.enablePhysics || false,
-  };
-  if(item.material){
-    props.material=item.material
-  }
-  if(item.isPhysics == true){
-    props.position=item.position;
-    props.rotation=item.rotation;
-    props.scale=item.scale;
-  }else{
-    //props.position=item.position;
-    props.position=[item.position[0],item.position[1],item.position[2]]
-    props.rotation=[item.rotation[0],item.rotation[1],item.rotation[2]]
-    props.scale=[item.scale[0],item.scale[1],item.scale[2]]
-  }
-  */
+  let props = entity;
   //console.log("entity.dataType////////////////");
   //console.log(entity.dataType);
   //console.log(entity.objectid);

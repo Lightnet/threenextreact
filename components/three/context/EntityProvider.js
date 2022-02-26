@@ -116,6 +116,7 @@ function reducerEntity(state, action) {
       item.rotation = action.rotation || [0,0,0];
       item.scale = action.scale || [1,1,1];
       item.visible = action.visible || true;
+      item.isPhysics = action.isPhysics || false;
 
       if(action.dataType){item.dataType = action.dataType;}
       if(action.parameters){item.parameters = action.parameters;}
@@ -148,7 +149,13 @@ function reducerEntity(state, action) {
           if(action.keyType=="parameters"){
             item.parameters=action.value
           }
-
+          if(action.keyType=="physics"){
+            console.log(action.value)
+            item.isPhysics = action.value.isPhysics;
+            item.mass = action.value.mass;
+            item.shapePhysics = action.value.shapePhysics;
+            //item.parameters=action.value
+          }
 
           apiUpdateEntity(item)
 
@@ -184,16 +191,22 @@ export function EntityProvider(props){
   const [entities, dispatchEntity] = useReducer(reducerEntity, []);
   const [scenes, setScenes] = useState([]);
 
+  const [enablePhysics, setEnablePhysics ] = useState(false);
+
+  const {selectObject, setSelectObject} = useState();
+
   const value = useMemo(()=>({
     sceneID, setSceneID,
     sceneName, setSceneName,
     scenes, setScenes,
-    entities, dispatchEntity
+    entities, dispatchEntity,
+    enablePhysics, setEnablePhysics 
   }),[
     sceneID,
     sceneName,
     scenes,
-    entities
+    entities,
+    enablePhysics
   ])
 
   return <EntityContext.Provider value={value} {...props} />

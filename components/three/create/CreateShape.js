@@ -48,6 +48,7 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
       , dataType: dataType
       , parameters: parameters
       , shapePhysics: shapePhysics
+      , isPhysics: false
       , mass: _mass
     })
   }

@@ -12,8 +12,11 @@ import { GizmoHelper, GizmoViewport } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useEntity } from "../context/EntityProvider";
 import EntityOrbitControl from "../entity/EntityOrbitControl";
-import EntityRenderModel from "../EntityRenderModel";
 import { useEditor } from "../context/EditorProvider";
+import EntityObjectTypes from "../helpers/EntityObjectTypes";
+import EntityPhysicsTypes from "../helpers/EntityPhysicsTypes";
+
+//import EntityRenderModel from "../EntityRenderModel";
 
 export default function Viewport3D(){
 
@@ -24,6 +27,7 @@ export default function Viewport3D(){
   const {
       entities
     , dispatchEntity
+    , enablePhysics
   } = useEntity();
 
   return <>
@@ -41,14 +45,22 @@ export default function Viewport3D(){
     <Canvas>
       <Physics>
         {entities.map((entity)=>{
-          //if(entity.isPhysics == true){
-            return EntityRenderModel(entity); //return buildModel(entity)
-          //}
+          //if(entity.isPhysics == true)
+          //return EntityRenderModel(entity); //return buildModel(entity)
+          // check if the object3d and Physics are enable.
+          //entity.key= entity.objectid;
+          if((entity?.isPhysics == true)&&(enablePhysics==true)){
+            // cannon ref
+            // const [ref] = useBox(() => ({ ...props }));
+            return <EntityPhysicsTypes key={entity.objectid} {...entity}/>
+          }else{// normal model or object
+            // default ref
+            // const ref= useRef()
+            return <EntityObjectTypes key={entity.objectid} {...entity}/>
+          }
         })}
       </Physics>
-      {
-      enableOrbitControl && <EntityOrbitControl />
-      }
+      { enableOrbitControl && <EntityOrbitControl /> }
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
         margin={[80, 80]} // widget margins (X, Y)

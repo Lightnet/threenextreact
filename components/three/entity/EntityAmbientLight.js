@@ -26,3 +26,23 @@ export default function EntityAmbientLight(props){
   </>
   )
 }
+
+export const EntityAmbientLightRef = React.forwardRef((props, ref) => {
+
+  //const ref = useRef();
+  
+  useHelper(ref, PointLightHelper,1,'hotpink');
+
+  return (
+  <>
+    <ambientLight
+      ref={ref}
+      color={props.parameters.color}
+      intensity={props.parameters.intensity}
+      {...props}
+      >
+    </ambientLight>
+  </>
+  )
+
+});

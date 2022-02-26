@@ -5,10 +5,14 @@
 ## Created By: Lightnet
 
 ## Stage Dev:
-- Idea
-- Prototyping
-- Unstable builds.
-- Reworking the React Three Editor setup.
+- Idea / Prototyping
+- Work in progress
+- Stable build.
+- Reworked the React Three Editor.
+- A lot of files changes that still need work on.
+- components/three <- stable (three editor)
+- components/editor <- will be remove later. (three editor)
+- Tested simple Physics box and plane.
 
 ## Information:
   Work in progress builds and testing ideas.
@@ -88,9 +92,12 @@
   - PointLight ( added )
   - AmbientLight ( added )
   - OrbitControl ( added )
-  
-
-Notes:
+- Physics: ( work in progress )
+  - toggle physics on and off ( added )
+  - add entity enable physics ( added )
+  - needs rework later on layout in json
+  - Simple test cube and plane. ( Tested )
+### Notes:
 - They do not have parent or children yet.
 
 - UI:
@@ -106,13 +113,15 @@ Notes:
 - @react-three/drei 
 - jsonwebtoken (secure check token)
 - mongoose ( database )
-- next-auth ( auth check user login )
-- next (react server pre-render)
 - dayjs (time stampe)
 - nanoid (random id gen)
 - react (web browser)
 - webpack 5 (Next.js build in for dev)
 - socket.io ( for user co-op editing. not build)
+## next.js:
+- next-auth ( auth check user login )
+- next (react server pre-render)
+## express.js:
 - express
 
 # Next Three ToDoList:
@@ -122,7 +131,15 @@ Notes:
   [Express Three Doc To Do List](/docs/expressthree.md)
 
 # Physics:
-  After some testing for enable and disable physics react components. useref and usecontext has conflict change variable in render. Had to create two component that same but the varible is different. It possible to change some variable but need two check for isPhysics and enablePhysics. One is reason it build the world not enable physics to place holder and other is debug simulation.
+  After some testing for enable and disable physics react components. 
+  
+```js
+const ref = useref()
+// for physics
+const [ref, api] = useBox()
+```
+  
+  The use of the useref() and useBox() has conflict change variable in render. Had to create two components that same but the varible is different. There are two call from entity object3D isPhysics and enablePhysics global varaible. One is reason it build the world not enable physics to place holder and other is debug simulation.
 
 ## 3D Plane:
   There is no args that x and y is infinite. Used box shape for better collision.
