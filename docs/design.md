@@ -18,10 +18,6 @@ data.current // "text"
 -
 
 
-
-
-
-
 ```js
 const numbers = [1, 2, 3, 4, 5];
 const listItems = numbers.map((number) =>
@@ -61,6 +57,25 @@ return (<>
 
 ```
 
+# DESIGN:THREE (work in progress)
+- editor modular component
+- there are main and sub component to handle editor.
+- main where the editor handle call from sub childrens.
+  - compoent rely on call backs and event to handle 
+- sub compoent are out side of the editor like window tabs. It would required some web socket events.
 
+# DESIGN: API (work in progress)
+- fetch and query
+- to handle json object format.
+- database save, load, edit and delete on server
+- need auth and access key between layers
 
+# DESIGN:UI: (work in progress)
+- three.js ui or html ui for game or editor.
+- game entity components predefine.
+- 
+
+# DESIGN:REACT (work in progress)
+- to handle custom or script ui to fix the editor signal event for ease of access variables.
+- 
 

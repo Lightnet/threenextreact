@@ -26,6 +26,72 @@
   By using the three/fiber with React.js components to handle user input and query api to develop sandbox game world or application. To do visual editing on local development build a simple game, visual art and other things. Required creating components and api calls.
 
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
+
+### Entity and object3D:
+  To handle the object in form of Entity prefixed as it to have modular design. Since the name is take from the react three fiber.
+
+  The idea base on the graph save database with json file format.
+
+```js
+var entityObject3D1={
+    objectid:"012345678901234567890012"
+  , datatype:"object3d"
+  , name:"1"
+  , position:[0,0,0]
+  , rotation:[0,0,0]
+  , scale:[0,0,0]
+}
+
+var entityObject3D2={
+    objectid:"012345678901234567890012"
+  , datatype:"object3d"
+  , name:"2"
+  , position:[0,0,0]
+  , rotation:[0,0,0]
+  , scale:[0,0,0]
+  , physics:{
+    isPhysics:false
+    , shapetype:"box"
+    , mass:0
+  }
+}
+```
+  Note some code might conflict with the props base on passing with the variable like the position.
+
+  This could be used as component add to the entity like material.
+
+```js
+var entityObject3D2={
+    objectid:"012345678901234567890012"
+  , datatype:"object3d"
+  , name:"2"
+  , position:[0,0,0]
+  , rotation:[0,0,0]
+  , scale:[0,0,0]
+  , physics:{
+    isPhysics:false
+    , shapetype:"box"
+    , mass:0
+  },
+  material:{
+    idx:0
+    , name:""
+  }
+}
+```
+
+```js
+export default function EntityObjectRender(props){
+//...
+  <EntityBox position={props.position} //this set up
+   />
+//...
+<EntityBox {...props} /> // pass that match varaibles
+//...
+```
+  There are two methods to pass position.
+
+
   
 ### Next.js:
   Server React and pre-render react.js is on hold.
@@ -231,8 +297,6 @@ SECRET=""
 # Notes: 
 - PrismaClient setup is tricky when dealing with react, server and client code.
 - div id __next css for threejs resize full screen config.
-- gun.js tests
-- Reworking the array format for easy build. To handle react component update call.
 
 # npm command:
 ```
@@ -243,28 +307,6 @@ $ npm install -g npm-check-updates
 
 $ ncu // check package to updates
 ```
-
-# DESIGN:THREE (work in progress)
-- editor modular component
-- there are main and sub component to handle editor.
-- main where the editor handle call from sub childrens.
-  - compoent rely on call backs and event to handle 
-- sub compoent are out side of the editor like window tabs. It would required some web socket events.
-
-# DESIGN: API (work in progress)
-- fetch and query
-- to handle json object format.
-- database save, load, edit and delete on server
-- need auth and access key between layers
-
-# DESIGN:UI: (work in progress)
-- three.js ui or html ui for game or editor.
-- game entity components predefine.
-- 
-
-# DESIGN:REACT (work in progress)
-- to handle custom or script ui to fix the editor signal event for ease of access variables.
-- 
 
 # Credits:
 ## svgrepo:
