@@ -1,6 +1,21 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
+three objects:
+object3d
+group
+scene
+plane
+box
+cone
+light
+pointlight
+ambientlight
+sphere
+
+
+
 */
 
 import React,{ useRef } from 'react';
