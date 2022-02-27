@@ -12,6 +12,8 @@ functions as these will not be cloned.
 
 import React, { useEffect, useState } from "react";
 import { nanoid16 } from "../../../lib/helper.mjs";
+import CreateMaterial from "../create/CreateMaterial.js";
+import CreateScript from "../scriptmodule/CreateScript.js";
 
 export default function EntityComponentAdd(){
 
@@ -23,6 +25,7 @@ export default function EntityComponentAdd(){
       "mesh"
     , "model"
     , "material"
+    , "script"
     , "userData" // threejs default name data someone
   ]);
 
@@ -33,6 +36,16 @@ export default function EntityComponentAdd(){
   function onSelectComp(e){
     setSelectComponent(e.target.value);
   } 
+
+  function renderViewComponent(){
+    console.log(selectComponent);
+    if(selectComponent=="material"){
+      return <CreateMaterial />
+    }else if(selectComponent=="script"){
+      return <CreateScript />
+    }
+    return <></>
+  }
 
   return <>
   <div key={keySelect} >
@@ -45,7 +58,9 @@ export default function EntityComponentAdd(){
       </select>
       <label>Add</label>
     </div>
-    <div></div>
+    <div>
+      {renderViewComponent()}
+    </div>
     </div>
   </>
 }

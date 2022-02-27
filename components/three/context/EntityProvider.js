@@ -157,6 +157,18 @@ function reducerEntity(state, action) {
             //item.parameters=action.value
           }
 
+          if(action.keyType=="material"){
+            console.log(action.value)
+            item.material[0] = {
+              index: action.value.index
+              , objectid: nanoid32()
+              , name: action.value.name
+              , color: action.value.color
+              , wireframe: action.value.wireframe
+            }
+            //item.parameters=action.value
+          }
+
           apiUpdateEntity(item)
 
           return item;

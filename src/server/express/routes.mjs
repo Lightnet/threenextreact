@@ -32,7 +32,19 @@ router.get('*', (req, res) => {
   if (req.accepts('html')) {
     //res.redirect(301, '/');
     //res.sendFile(path.join(__dirname, '../index.html'));
-    res.send('<script src="/bundle.js"></script>');
+    res.send(`
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REACT App</title>
+  </head>
+  <body>
+    <div id="app"><!--app-html--></div>
+    <script src="/bundle.js"></script>
+  </body>
+</html>`);
     return;
   }
 

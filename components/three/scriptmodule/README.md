@@ -1,0 +1,1 @@
+design for script module for game logic and user content scripts.

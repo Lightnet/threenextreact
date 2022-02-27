@@ -40,7 +40,7 @@ export default function EditorHeaderMain(){
   }
 
   function clickDebug(){
-    window.open(("/game?gameid="+projectID), "debugapp");
+    window.open(("/game?gameid="+projectID), "_ThreeDebug");
   }
 
   return <>
