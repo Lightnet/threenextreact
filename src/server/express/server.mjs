@@ -7,7 +7,6 @@
 // https://expressjs.com/en/resources/middleware/session.html
 // https://expressjs.com/en/5x/api.html
 
-
 import chalk from 'chalk';
 import http from 'http';
 import express from "express";
@@ -16,6 +15,7 @@ import express from "express";
 import session  from 'express-session';
 import routes from './routes.mjs';
 import cors from "cors";
+import fs from "fs";
 
 import MongoStore from 'connect-mongo';
 
@@ -68,6 +68,11 @@ export function main(){
   //console.log("main ???")
   const app = express();
 
+  //console.log(__dirname);
+  //public | dist > folder
+  //app.use(express.static('public'))
+  app.use(express.static('dist'));
+
   //console.log(process.env.PORT)
   //console.log(process.env.HOST) 
   //console.log(process.env.SECRET) 
@@ -78,12 +83,8 @@ export function main(){
   //let db = await clientDB();
   //app.use(cors(corsOptions))
   app.use(cors())
-  //console.log(__dirname);
-  //public | dist > folder
-  app.use(express.static('dist'));
-
+  
   //app.set('trust proxy', 1) // trust first proxy
-
   console.log('env.PORT', process.env.PORT)
   console.log('env.HOST', process.env.HOST)
 
@@ -104,8 +105,22 @@ export function main(){
   //app.use(bodyParser.json())
   app.use(express.json())
 
+  let filecss = path.join(__dirname,"../../../styles/global.css")
+  const cssdata = fs.readFileSync(filecss,{encoding:'utf8', flag:'r'});
+
+  app.get('/global.css', (req, res) => {
+    //res.contentType('text/css');
+    //res.setHeader("Content-Type", 'text/css');
+    //res.sendFile(filecss);
+    res.writeHeader(200, {'Content-Type': 'text/css'});
+    res.end(cssdata)
+  })
+
   // Access the session as req.session
   app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,"../../../index.html"))
+  })
+/*
     res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -119,8 +134,7 @@ export function main(){
     <script src="/bundle.js"></script>
   </body>
 </html>`)
-  })
-
+*/
   //Routes
   app.use(routes); 
   //const server = app.listen(app.get('PORT'), () => {

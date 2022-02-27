@@ -32,6 +32,8 @@ router.get('*', (req, res) => {
   if (req.accepts('html')) {
     //res.redirect(301, '/');
     //res.sendFile(path.join(__dirname, '../index.html'));
+    res.sendFile(path.join(__dirname,"../../../index.html"))
+    /*
     res.send(`
 <!DOCTYPE html>
 <html lang="en">
@@ -45,6 +47,7 @@ router.get('*', (req, res) => {
     <script src="/bundle.js"></script>
   </body>
 </html>`);
+*/
     return;
   }
 
