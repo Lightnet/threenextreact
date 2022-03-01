@@ -4,6 +4,7 @@
 */
 
 import React,{ useState } from "react";
+import { useEditor } from "../context/EditorProvider";
 import { useEntity } from "../context/EntityProvider";
 
 var materialtypes=[
@@ -12,6 +13,8 @@ var materialtypes=[
 ];
 
 export default function CreateMaterial(){
+
+  const {selectObjectID} = useEditor();
 
   const {sceneID, dispatchEntity} = useEntity();
 
@@ -48,7 +51,7 @@ export default function CreateMaterial(){
     console.log('CREATE MATERIAL');
     //console.log(materialName)
     let material = {
-      datatype:materialName
+      dataType:materialName
       , index: 0
       , name: materialName
       , color: color
@@ -57,6 +60,7 @@ export default function CreateMaterial(){
     console.log(material)
     dispatchEntity({
       type:'update'
+      , id:selectObjectID
       , keyType:"material"
       , value:material
     })

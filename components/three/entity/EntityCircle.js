@@ -4,21 +4,26 @@
 */
 
 import React,{ useRef, useEffect, useState } from 'react';
-//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-//import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
-export default function EntityCircle(props) {
-  // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
+export default function EntityCircle(props, ref) {
+
+  //const ref = useRef()
+  if(!ref){
+    ref = useRef();
+  }
+
+  const [params, setParams] = useState([])
 
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
 
-  //console.log("ref.current.position")
-  //if(ref.current){
-    //console.log(ref.current.position)
-  //}
-  //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+  useEffect(()=>{
+    setParams(Object.keys(props.parameters).reduce((previousValue, idx)=>{
+      console.log(idx)
+      console.log(props.parameters[idx])
+      return [...previousValue, props.parameters[idx]]
+    } ,[]))
+  },[props.parameters])
 
   return (
     <mesh
@@ -28,8 +33,10 @@ export default function EntityCircle(props) {
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <circleGeometry args={[1, 12]} />
+      <circleGeometry args={params} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 }
+
+export const EntityCircleRef = React.forwardRef(EntityCircle);

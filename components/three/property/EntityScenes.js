@@ -44,7 +44,7 @@ export default function EntityScenes(){
 
   // get scenes data
   async function getScenes(){
-    console.log(projectID);
+    //console.log(projectID);
     let data = await useFetch("/api/scene",{
         method:'POST'
       , headers: {"Content-Type": "application/json"}
@@ -57,7 +57,7 @@ export default function EntityScenes(){
       console.log("ERROR FETCH GET ASSETS");
       return;
     }
-    console.log(data);
+    //console.log(data);
     if(data.api=="SCENES"){
       setScenes(data.scenes)
     }

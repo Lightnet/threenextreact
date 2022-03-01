@@ -4,21 +4,26 @@
 */
 
 import React,{ useRef, useEffect, useState } from 'react';
-//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-//import { PerspectiveCamera, OrbitControls, PositionalAudio } from '@react-three/drei'
 
-export default function EntityCone(props) {
+export default function EntityCone(props,ref) {
   // This reference will give us direct access to the THREE.Mesh object
-  const ref = useRef()
+  //const ref = useRef()
+  if(!ref){
+    ref = useRef();
+  }
+  
+  const [params, setParams] = useState([])
 
   const [hovered, setHover] = useState(false)
   const [active, setActive] = useState(false)
 
-  //console.log("ref.current.position")
-  //if(ref.current){
-    //console.log(ref.current.position)
-  //}
-  //useFrame((state, delta) => (ref.current.rotation.x += 0.01))
+  useEffect(()=>{
+    setParams(Object.keys(props.parameters).reduce((previousValue, idx)=>{
+      //console.log(idx)
+      //console.log(props.parameters[idx])
+      return [...previousValue, props.parameters[idx]]
+    } ,[]))
+  },[props.parameters])
 
   return (
     <mesh
@@ -28,19 +33,10 @@ export default function EntityCone(props) {
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <coneGeometry args={[
-        props.parameters.radius
-        ,props.parameters.height
-        ,props.parameters.radialSegments
-        ,props.parameters.heightSegments
-        ,props.parameters.openEnded
-        ,props.parameters.thetaStart
-        ,props.parameters.thetaLength
-        ]} />
+      <coneGeometry args={params} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 }
-/*
-<coneGeometry args={[1, 1, 6]} />
-*/
+
+export const EntityConeRef = React.forwardRef(EntityCone);

@@ -27,7 +27,7 @@ export default function EditorPage({projectid}){
     if(!isEmpty(projectid)){
       setProjectID(projectID)
     }else{
-      console.log("props.projectid NULL!")
+      //console.log("props.projectid NULL!")
     }
   },[projectid])
 

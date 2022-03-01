@@ -8,9 +8,12 @@ import React,{ useRef} from 'react';
 import {  useHelper } from '@react-three/drei'
 import { PointLightHelper } from 'three';
 
-export default function EntityAmbientLight(props){
+export default function EntityAmbientLight(props, ref){
 
-  const ref = useRef();
+  //const ref = useRef();
+  if(!ref){
+    ref = useRef();
+  }
 
   useHelper(ref, PointLightHelper,1,'hotpink');
 
@@ -27,22 +30,4 @@ export default function EntityAmbientLight(props){
   )
 }
 
-export const EntityAmbientLightRef = React.forwardRef((props, ref) => {
-
-  //const ref = useRef();
-  
-  useHelper(ref, PointLightHelper,1,'hotpink');
-
-  return (
-  <>
-    <ambientLight
-      ref={ref}
-      color={props.parameters.color}
-      intensity={props.parameters.intensity}
-      {...props}
-      >
-    </ambientLight>
-  </>
-  )
-
-});
+export const EntityAmbientLightRef = React.forwardRef(EntityAmbientLight);

@@ -9,8 +9,11 @@ import { useEntity } from "../context/EntityProvider.js";
 import EntityComponentAdd from "./EntityComponentAdd.js";
 import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.js";
 import EntityShapePararmeters from "./EntityPararmeters.js";
+import { useEditor } from "../context/EditorProvider.js";
 
 export default function EntitySelectUpdate(){
+
+  const {setSelectObjectID} = useEditor();
 
   const [onSelectID, setOnSelectID] = useState("");
   const [selectObject, setSelectObject] = useState(null);
@@ -25,7 +28,10 @@ export default function EntitySelectUpdate(){
   , dispatchEntity
 } = useEntity()
 
-  const onSelectEntity = e=>setOnSelectID(e.target.value);
+  const onSelectEntity = e=>{
+    setOnSelectID(e.target.value)
+    setSelectObjectID(e.target.value)
+  };
 
   useEffect(()=>{
     if(isEmpty(onSelectID)){

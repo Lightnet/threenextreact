@@ -4,7 +4,7 @@
 */
 
 import React,{ useEffect, useState } from 'react';
-import EntityCreate from '../create/EntityCreate';
+import CreateEntityObject from '../create/CreateEntityObject';
 import EntityList from '../ui/EntityList';
 import EntityScenes from './EntityScenes';
 import EntitySelectUpdate from './EntitySelectUpdate';
@@ -15,6 +15,7 @@ export default function EntityViewProperty({view}){
   const [views, setViews] = useState([
       "Scenes"
     , "Create Entity"
+    , "Create Entity Object"
     , "Entity Object"
     , "Entity List"
   ])
@@ -28,8 +29,8 @@ export default function EntityViewProperty({view}){
   function renderView(){
     //console.log("viewType:", viewType)
     //console.log(typeof viewType)
-    if(viewType == "Create Entity"){
-      return <EntityCreate/>
+    if(viewType == "Create Entity Object"){
+      return <CreateEntityObject/>
     }else if(viewType == "Entity List"){
       return <EntityList/>
     }else if(viewType == "Entity Object"){

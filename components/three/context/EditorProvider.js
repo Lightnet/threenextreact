@@ -22,6 +22,7 @@ export function EditorProvider(props){
   const [settings, setSettings] = useState({});
 
   const [selectObject, setSelectObject] = useState(null);
+  const [selectObjectID, setSelectObjectID] = useState("");
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const value = useMemo(()=>({
@@ -29,12 +30,14 @@ export function EditorProvider(props){
     editorName, setEditorName,
     settings, setSettings,
     selectObject, setSelectObject,
-    enableOrbitControl, setEnableOrbitControl
+    enableOrbitControl, setEnableOrbitControl,
+    selectObjectID, setSelectObjectID
   }),[
     editorID,
     editorName,
     settings,
     selectObject,
+    selectObjectID,
     enableOrbitControl
   ])
 

@@ -10,14 +10,14 @@ module.exports = {
     path: path.resolve('dist')
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.js','.mjs']
+    extensions: ['.ts', '.tsx', '.js','.mjs','.jsx']
   },
   module: {
     //rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }]
     //noParse:/gun\.js$|sea\.js$/,
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.(mjs|js|jsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
@@ -31,7 +31,7 @@ module.exports = {
       {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
-      },
+      }
     ]
   }
 }

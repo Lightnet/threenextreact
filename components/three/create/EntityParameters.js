@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useProject } from "../context/ProjectProvider.js";
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function CreateShape({name,datatype,shape,parms,mass}){
+export default function EntityParameters({name,datatype,shape,parms,mass}){
   const {projectID} = useProject();
 
   const {sceneID, dispatchEntity} = useEntity();
@@ -18,12 +18,25 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
   const [shapePhysics, setShapePhysics] = useState("box")
   const [_mass, setMass] = useState(1)
   const [parameters, setParameters] = useState(null)
+  const [_parameters, _setParameters] = useState(null)
+
+  const [isParameters, setIsParameters] = useState(false)
+  const [selectParameters, setSelectParameters] = useState(0)
+
   useEffect(()=>{
     if(name){
       setName(name);
     }
     if(parms){
-      setParameters(parms);
+      //console.log(parms)
+      _setParameters(parms)
+      if(parms.length>=2){
+        setIsParameters(true);
+        setParameters(parms[0]);
+      }else{
+        setParameters(parms[0]);
+      }
+      
     }
     if(datatype){
       setDataType(datatype);
@@ -61,13 +74,29 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
       setParameters(state => ({...state, [evt.target.name]: Number(value)}));
     }
     if(evt.target.type=="checkbox"){
-      console.log("evt.target.checked");
-      console.log(evt.target.checked);
+      //console.log("evt.target.checked");
+      //console.log(evt.target.checked);
       setParameters(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
     }
     if(evt.target.type=="color"){
-      console.log(value);
+      //console.log(value);
       setParameters(state => ({...state, [evt.target.name]: value}));
+    }
+  }
+
+  function onSelectParameters(e){
+    setSelectParameters(e.target.value);
+    setParameters(_parameters[e.target.value])
+  }
+
+  function checkVal(val){
+    //console.log(typeof val)
+    if(typeof val == "undefined"){
+      return "";
+    }if(typeof val == 'object'){
+      return "null";
+    }else{
+      return val;
     }
   }
 
@@ -86,16 +115,23 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
         //console.log("boolean////////")
         type="checkbox";
       }
-      //added last as it didn't detect as color unit
-      if(key=="color"){
+      
+      if(key=="color"){ //added last as it didn't detect as color unit
         //console.log("color////////")
         type="color";
       }
-
-
+      //console.log(typeof parameters[key])
+      //console.log(typeof parameters[key])
+      if(typeof parameters[key] == "undefined"){
+        type="text";
+      }
+      if(typeof parameters[key] == "object"){
+        type="text";
+      }
+      
       let item = <tr key={key}>
         <td><label> {key} </label> </td>
-        <td><input name={key} type={type} value={parameters[key]} onChange={handleChange}/></td>
+        <td><input name={key} type={type} value={checkVal(parameters[key])} onChange={handleChange}/></td>
         </tr>
 
       return [ ...result,item]
@@ -121,7 +157,30 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
           <input value={_name} onChange={typeName} />
         </td>
       </tr>
+      {isParameters &&
+      <tr>
+        <td>
+          <label> ParamTypes: </label>
+        </td>
+        <td>
+          <select value={selectParameters} onChange={onSelectParameters}>
+            {
+              _parameters.map((item,index)=>{
+                return <option key={index} value={index}> Parm {index} </option>
+              })
+            }
+          </select>
+        </td>
+      </tr>}
       {renderParams()}
+      <tr>
+        <td>
+        <label> Physics: </label>
+        </td>
+        <td>
+        
+        </td>
+      </tr>
       <tr>
         <td>
         <label> Mass: </label>
@@ -141,10 +200,5 @@ export default function CreateShape({name,datatype,shape,parms,mass}){
       </tr>
     </tbody>
   </table>
-  
-  
-
-  
-  
   </>
 }

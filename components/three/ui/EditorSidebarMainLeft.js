@@ -4,8 +4,6 @@
 */
 
 import React from "react"
-//import EntityCreate from "../create/EntityCreate"
-//import EntityList from "./EntityList"
 import EntityViewProperty from "../property/EntityViewProperty"
 
 export default function EditorSidebarMainLeft(){
@@ -20,14 +18,8 @@ export default function EditorSidebarMainLeft(){
       ,background:'#778899'
     }}>
       {/* over lap can used mouse event */}
-      <EntityViewProperty view={"Create Entity"} />
+      <EntityViewProperty view={"Create Entity Object"} />
       <EntityViewProperty view={"Entity List"} />
-
     </div>
   </>
 }
-/*
-<EntityCreate/>
-<EntityList/>
-
-*/

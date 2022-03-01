@@ -4,14 +4,10 @@
 */
 
 import React,{ useRef } from 'react';
-//import { Canvas, useFrame, useThree, render, events } from '@react-three/fiber';
-import { 
-  PerspectiveCamera
-  , OrbitControls
-  //, PositionalAudio 
-} from '@react-three/drei'
+import { PerspectiveCamera, OrbitControls} from '@react-three/drei';
 
 export default function EntityOrbitControl(props){
+
   const ref = useRef();
 
   return (<>
@@ -29,10 +25,5 @@ export default function EntityOrbitControl(props){
       enableDamping={false}
       camera={ref.current} 
       />
-      {/*
-      */}
   </>)
 }
-/*
-
-*/

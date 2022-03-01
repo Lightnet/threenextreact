@@ -17,8 +17,6 @@ export default function DefaultBox(props) {
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
 
-  let size = [1,1,1];
-
   return (
     <mesh key={props.objectid}
       {...props}
@@ -30,17 +28,12 @@ export default function DefaultBox(props) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
       >
-      <boxGeometry 
-        //args={[1, 1, 1]} 
-        args={size} 
-      />
+      <boxGeometry args={[1,1,1]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 }
-/*
 
-*/
 export const DefaultBoxRef = React.forwardRef((props, ref) => {
   // This reference will give us direct access to the THREE.Mesh object
   //const ref = useRef();
@@ -64,14 +57,8 @@ export const DefaultBoxRef = React.forwardRef((props, ref) => {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
       >
-      <boxGeometry args={[
-        1, 
-        1, 
-        1
-        ]} />
+      <boxGeometry args={[1, 1, 1]} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 });
-// DefaultBoxRef;
-

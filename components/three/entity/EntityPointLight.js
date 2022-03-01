@@ -10,34 +10,30 @@ import React,{ useRef } from 'react';
 import {  useHelper } from '@react-three/drei'
 import { PointLightHelper } from 'three';
 
-export default function EntityPointLight(props){
-  const ref = useRef();
+export default function EntityPointLight(props, ref){
+  //const ref = useRef();
+  if(!ref){
+    ref = useRef();
+  }
 
   useHelper(ref, PointLightHelper,1,'hotpink')
-
-  //props.color="white";
-  //console.log("RPointLight")
-  //console.log(props)
-
-  //let sprops={
-    //position: props.position,
-    //objectid:props.objectid,
-    //isPhysics:props.isPhysics,
-    //mass:props.mass,
-    //visible:props.visible,
-  //}
 
   return (<>
     <pointLight
       ref={ref}
+      {...props}
       color={props.parameters.color}
       intensity={props.parameters.intensity}
-      {...props}
+      position={[props.position[0],props.position[1],props.position[2]]}
+      rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
+      scale={[props.scale[0],props.scale[1],props.scale[2]]}
+      
       >
     </pointLight>
   </>)
 }
+
+export const EntityPointLightRef = React.forwardRef(EntityPointLight);
 /*
-<shadowCameraHelper></shadowCameraHelper>
 <axesHelper></axesHelper>
 */

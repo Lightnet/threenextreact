@@ -53,10 +53,10 @@ export default function Editor({projectid}){
     //console.log("projectid")
     //console.log(projectid)
     if(!isEmpty(projectid)){
-      console.log("found project ID:" + projectid)
+      //console.log("found project ID:" + projectid)
       setProjectID(projectid);
     }else{
-      console.log("None project ID from props")
+      //console.log("None project ID from props")
     }
   },[projectid])
 
@@ -126,7 +126,7 @@ export default function Editor({projectid}){
     }
     //console.log(data);
     if(data.api=='ENTITIES'){
-      console.log('API get entities!');
+      //console.log('API get entities!');
       dispatchEntity({
           type:"array"
         , entities: data.entities

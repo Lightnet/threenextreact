@@ -158,10 +158,15 @@ function reducerEntity(state, action) {
           }
 
           if(action.keyType=="material"){
+            console.log("MATERIAL???")
             console.log(action.value)
+            if(!item.material){
+              item.material=[];
+            }
             item.material[0] = {
               index: action.value.index
               , objectid: nanoid32()
+              , dataType: action.value.dataType
               , name: action.value.name
               , color: action.value.color
               , wireframe: action.value.wireframe
