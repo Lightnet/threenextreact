@@ -10,6 +10,7 @@ import EntityComponentAdd from "./EntityComponentAdd.js";
 import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.js";
 import EntityShapePararmeters from "./EntityPararmeters.js";
 import { useEditor } from "../context/EditorProvider.js";
+import EntityMaterials from "./EntityMaterials.js";
 
 export default function EntitySelectUpdate(){
 
@@ -161,6 +162,12 @@ export default function EntitySelectUpdate(){
       <div>
         {
         selectObject &&<EntityPhysicsPararmeters selectid={onSelectID}/>
+        }
+      </div>
+
+      <div>
+        {
+        selectObject &&<EntityMaterials selectid={onSelectID}/>
         }
       </div>
 

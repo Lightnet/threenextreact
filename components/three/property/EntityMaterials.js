@@ -5,18 +5,20 @@
 
 import React, { useEffect, useState } from "react"
 import { isEmpty } from "../../../lib/helper.mjs";
-
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityPhysicsPararmeters({selectid}){
+export default function EntityMaterials({selectid}){
 
   const {
-      entities
-    , dispatchEntity
-  } = useEntity()
+    sceneID
+  , setSceneID
+  , entities
+  , dispatchEntity
+} = useEntity()
 
   const [selectObject, setSelectObject] = useState(null);
-  const [parameters, setParameters] = useState(null);
+  const [materials, setMaterials] = useState([]);
+  const [material, setMaterial] = useState(null);
 
   useEffect(()=>{
     if(isEmpty(selectid)){
@@ -27,60 +29,57 @@ export default function EntityPhysicsPararmeters({selectid}){
         //console.log(entities[idx]);
         setSelectObject(entities[idx]);
         //setParameters(null);
-        setParameters({
-            shapePhysics: entities[idx].shapePhysics
-          , isPhysics: entities[idx].isPhysics
-          , mass: entities[idx].mass
-        })
+        setMaterials(entities[idx].material)
+        setMaterial(entities[idx].material[0])
         break;
       }
     }
   },[selectid])
 
   useEffect(()=>{
-    if(parameters){
+    if(material){
       dispatchEntity({
           type:"update"
         , id: selectObject.objectid
-        , keyType: "physics"
-        , value: parameters
+        , keyType: "material"
+        , value: material
       })
     }
-  },[parameters])
+  },[material])
 
   function handleChange(evt) {
     const value = evt.target.value;
     //console.log(evt.target.type)
     //const name = evt.target.name;
     if(evt.target.type=="number"){
-      setParameters(state => ({...state, [evt.target.name]: Number(value)}));
+      setMaterial(state => ({...state, [evt.target.name]: Number(value)}));
     }
     if(evt.target.type=="checkbox"){
       //console.log("evt.target.checked");
       //console.log(evt.target.checked);
-      setParameters(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
+      setMaterial(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
     }
     if(evt.target.type=="color"){
       //console.log(value);
-      setParameters(state => ({...state, [evt.target.name]: value}));
+      setMaterial(state => ({...state, [evt.target.name]: value}));
     }
   }
 
-  function renderParams(){
-    if(parameters){
-      return Object.keys(parameters).reduce(function(result, key) {
+  function renderMaterials(){
+    if(material){
+      return Object.keys(material).reduce(function(result, key) {
         //console.log("Type:", typeof parameters[key], key)
         let type="text";
         let item;
-        if(typeof parameters[key] == "number"){
+        if(typeof material[key] == "number"){
           //console.log("number////////")
           type="number";
-        }else if(typeof parameters[key] == "boolean"){
+        }else if(typeof material[key] == "boolean"){
           //console.log("boolean////////")
           type="checkbox";
           item = <tr key={key}>
           <td><label> {key} </label> </td>
-          <td><input name={key} type={type} value={parameters[key]} checked={parameters[key]}  onChange={handleChange}/></td>
+          <td><input name={key} type={type} value={material[key]} checked={material[key]}  onChange={handleChange}/></td>
           </tr>
           return [ ...result,item]
         }
@@ -91,27 +90,28 @@ export default function EntityPhysicsPararmeters({selectid}){
         }
         item = <tr key={key}>
           <td><label> {key} </label> </td>
-          <td><input name={key} type={type} value={parameters[key]} onChange={handleChange}/></td>
+          <td><input name={key} type={type} value={material[key]} onChange={handleChange}/></td>
           </tr>
   
         return [ ...result,item]
       }, [])
     }
     return <></>
-  } 
+  }
 
   return <>
-    <div>
+     <div>
       <div>
-        <label> Physics: </label>
+        <label> Materials: </label>
       </div>
       <div>
         <table>
           <tbody>
-            {renderParams()}
+            {renderMaterials()}
           </tbody>
         </table>
       </div>
     </div>
+  
   </>
 }
