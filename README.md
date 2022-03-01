@@ -234,12 +234,12 @@ $ npm install
 - install packages
 
 ```
-$ npm run dev (not being used might break some changes.)
+$ npm run dev (working for next.js)
 ```
 - run the server from npm package from package.json script
 
 ```
-$ npm run devn (current testing)
+$ npm run devn (working for express.js / current )
 ```
 - run the server from npm package from package.json script
 
