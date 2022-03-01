@@ -19,21 +19,21 @@ export default function CreateMaterial(){
   const {sceneID, dispatchEntity} = useEntity();
 
   const [materialName, setMaterialName] = useState('meshStandardMaterial');
-  const [color, setColor] = useState('green');
+  const [color, setColor] = useState('#000000');
   const [wireframe, setWireFrame] = useState(false);
 
   function onMaterial(e){
-    console.log(e.target.value)
+    //console.log(e.target.value)
     setMaterialName(e.target.value)
   }
 
   function onWireFrame(e){
-    console.log(e.target.checked)
+    //console.log(e.target.checked)
     setWireFrame(e.target.checked)
   }
 
   function onColor(e){
-    console.log(e.target.value)
+    //console.log(e.target.value)
     setColor(e.target.value)
   }
 
@@ -48,7 +48,7 @@ export default function CreateMaterial(){
   }
 
   function clickCreateMaterial(){
-    console.log('CREATE MATERIAL');
+    //console.log('CREATE MATERIAL');
     //console.log(materialName)
     let material = {
       dataType:materialName
@@ -57,7 +57,12 @@ export default function CreateMaterial(){
       , color: color
       , wireframe: wireframe
     }
-    console.log(material)
+    //console.log(material)
+    dispatchEntity({
+        type:'addMaterial'
+      , id:selectObjectID
+    })
+
     dispatchEntity({
       type:'update'
       , id:selectObjectID

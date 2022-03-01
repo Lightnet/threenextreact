@@ -85,8 +85,8 @@ export function main(){
   app.use(cors())
   
   //app.set('trust proxy', 1) // trust first proxy
-  console.log('env.PORT', process.env.PORT)
-  console.log('env.HOST', process.env.HOST)
+  //console.log('env.PORT', process.env.PORT)
+  //console.log('env.HOST', process.env.HOST)
 
   app.set('PORT', PORT)
   app.set('HOST', HOST)
@@ -146,11 +146,11 @@ export function main(){
 
   if(app.get('HOST')){
     server.listen(app.get('PORT'),app.get('HOST'),()=>{
-      console.log('Init Server listen...')
+      //console.log('Init Server HOST PORT listen...')
     });
   }else{
     server.listen(app.get('PORT'),()=>{
-      console.log('Init Server listen...')
+      //console.log('Init Server PORT listen...')
     });
   }
   

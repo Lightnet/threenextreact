@@ -251,3 +251,15 @@ const newArr = arr1.map(obj => {
     }
   }
 ```
+
+
+```js
+const [state, setState] = ({})
+setState({...state})
+```
+
+
+```js
+const [state, setState] = ([])
+setState([...state])
+```

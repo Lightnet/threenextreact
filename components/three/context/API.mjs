@@ -51,6 +51,7 @@
     , AMBIENTLIGHT:"AMBIENTLIGHT"
     , CAMERA:"CAMERA"
     , PERSPECTIVECAMERA:"PERSPECTIVECAMERA"
+    , ORTHOGRAPHICCAMERA:"ORTHOGRAPHICCAMERA"
     , ORBITCONTROLS:"ORBITCONTROLS"
   },
 
@@ -69,6 +70,14 @@
           , overrideMaterial:null
         }
       ]
+    },
+
+    {
+      name:"group"
+    , dataType:"GROUP"
+    , shape:"BOX"
+    , mass:1
+    , parameters:[]
     },
 
     {
@@ -138,7 +147,7 @@
     {
       name:"cylinder"
     , dataType:"CYLINDER"
-    , shape:"BOX"
+    , shape:"CYLINDER"
     , mass:1
     , parameters:[
       {
@@ -222,7 +231,7 @@
     , mass:1
     , parameters:[
         {
-          color:0xff0000
+          color:"#FFFFFF"
         , intensity:1
         , distance:1000
         , decay:1
@@ -240,6 +249,20 @@
           , aspect:0.8823
           , near:1
           , far:100
+        }
+      ]
+    },
+
+    {
+      name:"orthographiccamera"
+    , dataType:"ORTHOGRAPHICCAMERA"
+    , shape:"BOX"
+    , mass:1
+    , parameters:[
+        {
+          far:2000
+          , near:0.1
+          , zoom:1
         }
       ]
     }

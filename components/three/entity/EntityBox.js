@@ -46,13 +46,16 @@ export default function EntityBox(props,ref) {
       >
 
       <boxGeometry args={params} />
-      {props?.material ? (
-        <EntityMaterialParse {...props} />
-      ):(
-        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-      )}
+      {props.material && <EntityMaterialParse {...props} />}
     </mesh>
   )
 }
 
 export const EntityBoxRef = React.forwardRef(EntityBox);
+/*
+{props.material ? (
+        <EntityMaterialParse {...props} />
+      ):(
+        <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      )}
+*/

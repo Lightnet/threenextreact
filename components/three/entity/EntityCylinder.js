@@ -5,7 +5,7 @@
 
 import React,{ useRef, useEffect, useState } from 'react';
 
-export default function EntityCircle(props, ref) {
+export default function EntityCylinder(props, ref) {
 
   //const ref = useRef()
   if(!ref){
@@ -32,10 +32,10 @@ export default function EntityCircle(props, ref) {
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <circleGeometry args={params} />
+      <cylinderGeometry args={params} />
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )
 }
 
-export const EntityCircleRef = React.forwardRef(EntityCircle);
+export const EntityCylinderRef = React.forwardRef(EntityCylinder);

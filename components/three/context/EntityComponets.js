@@ -13,7 +13,10 @@ import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbie
 import EntityBox, { EntityBoxRef } from "../entity/EntityBox";
 import EntityCircle, { EntityCircleRef } from "../entity/EntityCircle";
 import EntityCone, { EntityConeRef } from "../entity/EntityCone";
+import EntityCylinder, { EntityCylinderRef } from "../entity/EntityCylinder";
 import EntityGroup, { EntityGroupRef } from "../entity/EntityGroup";
+import EntityOrthographicCamera, { EntityOrthographicCameraRef } from "../entity/EntityOrthographicCamera";
+import EntityPerspectiveCamera, { EntityPerspectiveCameraRef } from "../entity/EntityPerspectiveCamera";
 import EntityPlane, { EntityPlaneRef } from "../entity/EntityPlane";
 import EntityPointLight, { EntityPointLightRef } from "../entity/EntityPointLight";
 import EntityScene, { EntitySceneRef } from "../entity/EntityScene";
@@ -46,6 +49,12 @@ var ENTITIES=[
     , compRef:EntityConeRef
   },
   {
+    name:"cylinder"
+    , dataType:API.ENTITYTYPES.CYLINDER
+    , comp:EntityCylinder
+    , compRef:EntityCylinderRef
+  },
+  {
     name:"sphere"
     , dataType:API.ENTITYTYPES.SPHERE
     , comp:EntitySphere
@@ -74,7 +83,20 @@ var ENTITIES=[
     , dataType:API.ENTITYTYPES.SCENE
     , comp:EntityScene
     , compRef:EntitySceneRef
+  },
+  {
+    name:"perspectivecamera"
+    , dataType:API.ENTITYTYPES.PERSPECTIVECAMERA
+    , comp:EntityPerspectiveCamera
+    , compRef:EntityPerspectiveCameraRef
+  },
+  {
+    name:"orthographiccamera"
+    , dataType:API.ENTITYTYPES.ORTHOGRAPHICCAMERA
+    , comp:EntityOrthographicCamera
+    , compRef:EntityOrthographicCameraRef
   }
+
 ]
 
 export default {

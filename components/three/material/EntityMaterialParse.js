@@ -6,8 +6,11 @@ import React from "react"
 
 export default function EntityMaterialParse(props){
   
+  //console.log(props.material);
   if(props.material){
     //need work later for material id for layers....
+
+    //return <meshStandardMaterial color={'orange'} />
     return (<>
     {props.material.map((item,index)=>{
       if(item.dataType == 'meshStandardMaterial'){
@@ -17,7 +20,7 @@ export default function EntityMaterialParse(props){
     </>)
     //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
   }else{//default
-    //return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
+    return <meshStandardMaterial color={'orange'} />
     return <></>
   }
 }

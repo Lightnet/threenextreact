@@ -134,6 +134,7 @@ function reducerEntity(state, action) {
       
       // keep every item except the one we want to remove
       return state.map((item) => {
+      //let data = state.map((item) => {
         //console.log(item)
         //console.log(action)
         if(item.objectid == action.id){
@@ -158,20 +159,46 @@ function reducerEntity(state, action) {
           }
 
           if(action.keyType=="material"){
-            console.log("MATERIAL???")
-            console.log(action.value)
-            if(!item.material){
+            //console.log("MATERIAL???")
+            //console.log(action.value)
+            if(item.material){
+              //console.log("other?")
+              if(item.material.length==0){
+                let material = item.material;
+                item.material = [...material, {
+                  index: action.value.index
+                  , objectid: action.value.objectid || nanoid32()
+                  , dataType: action.value.dataType
+                  , name: action.value.name
+                  , color: action.value.color
+                  , wireframe: action.value.wireframe
+                }]
+              }else{
+                item.material = item.material.map(obj=>{
+                  //console.log(obj)
+                  if(obj.objectid == action.value.objectid){
+                    //console.log(obj)
+                    obj.name = action.value.name
+                    obj.dataType = action.value.dataType
+                    obj.color = action.value.color
+                    obj.wireframe = action.value.wireframe
+                    return obj;
+                  }
+                  return obj;
+                })
+              }
+            }else{
               item.material=[];
+              let material = item.material;
+              item.material = [...material, {
+                index: action.value.index
+                , objectid: action.value.objectid || nanoid32()
+                , dataType: action.value.dataType
+                , name: action.value.name
+                , color: action.value.color
+                , wireframe: action.value.wireframe
+              }]
             }
-            item.material[0] = {
-              index: action.value.index
-              , objectid: nanoid32()
-              , dataType: action.value.dataType
-              , name: action.value.name
-              , color: action.value.color
-              , wireframe: action.value.wireframe
-            }
-            //item.parameters=action.value
           }
 
           apiUpdateEntity(item)
@@ -181,6 +208,8 @@ function reducerEntity(state, action) {
         }
         return item;
       });
+
+      //return data;
 
     case 'remove':
       apiDeleteEntity(action.id)
@@ -195,6 +224,31 @@ function reducerEntity(state, action) {
       return action.entities;
     case 'clear':
       return [];
+    case 'addMaterial':
+      console.log("render??");
+      return state.map((item) => {
+        if(item.objectid == action.id){
+          if(item.material){
+
+          }else{
+            console.log("Add Material")
+            item.material=[];
+          }
+          return item;
+        }
+        return item;
+      });
+    case 'render':
+      console.log("render??");
+      return state.map((item) => {
+        if(item.objectid == action.id){
+          if(action.keyType=="material"){
+
+          }
+          return item;
+        }
+        return item;
+      });
     default:
       return state;
   }

@@ -7,12 +7,10 @@ import React, { useEffect, useState } from "react"
 import { isEmpty } from "../../../lib/helper.mjs";
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityMaterials({selectid}){
+export default function EntityMaterials({selectobject}){
 
   const {
-    sceneID
-  , setSceneID
-  , entities
+  entities
   , dispatchEntity
 } = useEntity()
 
@@ -21,20 +19,23 @@ export default function EntityMaterials({selectid}){
   const [material, setMaterial] = useState(null);
 
   useEffect(()=>{
-    if(isEmpty(selectid)){
+    console.log("material check...")
+    if(!selectobject){
+      setMaterials([])
+      setMaterial({})
       return;
     }
-    for(let idx in entities){
-      if(entities[idx].objectid == selectid){
-        //console.log(entities[idx]);
-        setSelectObject(entities[idx]);
-        //setParameters(null);
-        setMaterials(entities[idx].material)
-        setMaterial(entities[idx].material[0])
-        break;
-      }
+    if(!selectobject.material){
+      setMaterials([])
+      setMaterial(null)
+      return;
     }
-  },[selectid])
+    setSelectObject(selectobject);
+    if(selectobject.material){
+      setMaterials(selectobject.material)
+      setMaterial(selectobject.material[0])
+    }
+  },[selectobject])
 
   useEffect(()=>{
     if(material){

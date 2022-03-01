@@ -36,6 +36,7 @@ export default function EntitySelectUpdate(){
 
   useEffect(()=>{
     if(isEmpty(onSelectID)){
+      setSelectObject(null)
       return;
     }
     for(let idx in entities){
@@ -167,7 +168,7 @@ export default function EntitySelectUpdate(){
 
       <div>
         {
-        selectObject &&<EntityMaterials selectid={onSelectID}/>
+        selectObject &&<EntityMaterials selectobject={selectObject}/>
         }
       </div>
 
