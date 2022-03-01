@@ -5,19 +5,19 @@
 
 import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../lib/helper.mjs";
-import useFetch from "../hook/usefetch.js";
+import useFetch from "../hook/useFetch.mjs";
 import Editor from "./EditorPage.js";
 import GamesPage from "./GamesPage.js";
 import ProjectsPage from "./ProjectsPage.js";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export default function ThreePage(){
 
   const [view, setView] = useState('default');//default, project ,editor, games
-  const [editorID, setEditorID] = useState('');
+  //const [editorID, setEditorID] = useState('');
   const [projectID, setProjectID] = useState('');
-  const [gameID, setGameID] = useState('');
-  const navigate = useNavigate();
+  //const [gameID, setGameID] = useState('');
+  //const navigate = useNavigate();
 
   function onSelectView(name){
     //setView(name);

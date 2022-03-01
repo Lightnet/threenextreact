@@ -8,7 +8,7 @@ import { GizmoHelper, GizmoViewport } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
-import useFetch from "../../hook/usefetch.js";
+import useFetch from "../../hook/useFetch.mjs";
 import { useEntity } from "../context/EntityProvider";
 import EntityOrbitControl from "../entity/EntityOrbitControl";
 import EntityObjectTypes from "../helpers/EntityObjectTypes";

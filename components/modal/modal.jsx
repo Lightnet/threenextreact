@@ -6,7 +6,6 @@
 // https://stackoverflow.com/questions/20926551/recommended-way-of-making-react-component-div-draggable
 
 import React,{ useRef, useEffect, useState } from 'react';
-
 import styles from "./modal.module.css";
 
 export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,updatePos,resize,isdrag}) {
@@ -19,7 +18,6 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   const [posX, setPosX] = useState(10)
   const [posY, setPosY] = useState(0)
   const [isPress, setIsPress] = useState(false)
-  //const [isDrag, setIsDrag] = useState(true)
   const [isAutoSize, setIsAutoSize] = useState(false)
   const [reSize, setReSize] = useState(false)
   const [isDrag, setIsDrag] = useState(true)
@@ -107,7 +105,8 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
     setIsPress(false);
   }
 
-  function closeEWindow(){
+  function closeEWindow(e){
+    e.preventDefault();
     console.log('close');
     if(typeof onClose !== 'undefined'){
       if(typeof updatePos !== 'undefined'){
@@ -131,7 +130,8 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
     style.resize="both";
     style.overflow="auto";
   }else{
-    style.border="initial";
+    //style.border="initial";
+    style.border="1px solid";
     style.resize="none";
     style.overflow="visible";
   }
@@ -141,9 +141,9 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   }
 
   return (<>
-    <div ref={ref} className={styles.model} style={style}>
+    <div ref={ref} className={styles.modal} style={style}>
       <div 
-        className={styles.header} 
+        className={styles.modalHeader} 
         onMouseDown={dragMouseDown}
         onMouseMove={OnMouseMove}
         onMouseUp={OnMouseUp}
@@ -158,5 +158,5 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   </>);
 }
 /*
-
+<Button> Test</Button>
 */

@@ -5,7 +5,7 @@
 
 import React,{ createContext, useState, useMemo, useContext, useReducer } from "react";
 import { isEmpty, nanoid32 } from "../../../lib/helper.mjs";
-import useFetch from "../../hook/usefetch.js";
+import useFetch from "../../hook/useFetch.mjs";
 
 export const EntityContext = createContext();
 

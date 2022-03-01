@@ -5,7 +5,7 @@
 
 import axios from "axios";
 import React, {useState, useEffect} from "react";
-import useFetch from "../../hook/usefetch";
+import useFetch from "../../hook/useFetch.mjs";
 import { useProject } from "../context/ProjectProvider";
 
 export default function AssetsPage(){

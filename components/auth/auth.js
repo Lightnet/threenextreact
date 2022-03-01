@@ -4,7 +4,7 @@
 */
 
 import React,{ createContext, useState, useMemo, useContext, useEffect } from "react";
-import useFetch from "../hook/usefetch.js";
+import useFetch from "../hook/useFetch.mjs";
 import { isEmpty } from "../../lib/helper.mjs";
 
 export const AuthContext = createContext();

@@ -1,141 +1,243 @@
 /*
-https://nextjs.org/learn/basics/assets-metadata-css/global-styles
-Global CSS
-import '../styles/global.css'
+https://www.csscolorpalettes.com/palettes/1652#palette
+
 */
 
-html,
-body,
-#root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 #__next {
-  height: 100%;
   width: 100%;
-  margin: 0;
-  padding: 0;
-  position:fixed;
-  top: 0;
-  right: 0;
+  height: 100%;
 }
 
-/* ========================================== */
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
+#root{
+  height:100%;
+  width: 100%;
 }
-/* ========================================== */
+
+#app{
+  height:100%;
+  width: 100%;
+}
 
 :root {
-  --main-bg-color: brown;
-  --bg-color: #fff;  
-  --primary-color: #888888;
-  --secondary-color: #536390;
-  --font-color: #424242;
-  --heading-color: #292922;
+  --backgroundColor: #f2f2f2;
+  --textColor: #121416d8;
+  --linkColor: #543fd7;
+  /* MODAL */
+  --header-color:#374148;
+  --header-text:#f2f2f2;
+  --modal-content:#f2f2f2;
+  --modal-text:#374148;
+  /* BUTTON */
+  --primary-color:#52616b;
+  --primary-hover:#6f8390;
+  --secondary-color:#c9d6df; 
+  --secondary-hover:#9fb6c6;
+  --tertiary-color:#f0f5f9; 
+  --tertiary-hover:#b6cee2; 
+  --positive-color:#82b74b;
+  --positive-hover:#67923a;
+  --negtive-color:#ff0000;
+  --negtive-hover:#DC143C;
+/* event color change  */
+/* message color */
+  --infoColor:#87bdd8;
+  --successColor:#96ceb4;
+  --errorColor:#ffcc5c;
+  --warnColor:#ff6f69;
+/* SELECT */
+  --select-color:DodgerBlue;
 
-  --header-color:#999999;
-  --header-font:black;
-  --content-color:#e6e6e6;
-  --content-font:black;
-  --footer-color:#cccccc;
-  --footer-font:black;
+  --switch-color:DodgerBlue;
+  --switch-bg:#ccc;
+  --switch-default:white;
 
-  --icon-color:gray;
-  --icon-hover:white;
-
-  --button-hover:black;
-  --button-color:white;
-}
-
-[data-theme="dark"] {
-  --primary-color: #9A97F3;
-  --bg-color: #161625;
-  --secondary-color: #818cab;
-  --font-color: #e1e1ff;
-  --heading-color: #818cab;
-
-  --header-color:black;
-  --header-font:#999999;
-  --content-color:#333333;
-  --content-font:#cccccc;
-  --footer-color:#4d4d4d;
-  --footer-font:#cccccc;
-
-  --button-hover:black;
-  --button-color:white;
+/* test  */
 
 }
 
-body{
-  background-color: var(--bg-color); 
+html[data-theme='light'] {
+  --backgroundColor: #f2f2f2;
+  --textColor: #121416d8;
+  --linkColor: #543fd7;
+
+  --header-color:#374148;
+  --header-text:#f2f2f2;
+  --modal-content:#f2f2f2;
+  --modal-text:#374148;
+
+  --primary-color:#52616b;
+  --primary-hover:#6f8390;
+  --secondary-color:#c9d6df; 
+  --secondary-hover:#9fb6c6;
+  --tertiary-color:#f0f5f9; 
+  --tertiary-hover:#b6cee2; 
+  --positive-color:#82b74b;
+  --positive-hover:#67923a;
+  --negtive-color:#ff0000;
+  --negtive-hover:#DC143C;
+  --infoColor:#87bdd8;
+  --successColor:#96ceb4;
+  --errorColor:#ffcc5c;
+  --warnColor:#ff6f69;
+
+  --select-color:DodgerBlue;
+  --switch-color:DodgerBlue;
+  --switch-bg:#ccc;
+  --switch-default:white;
 }
 
-.headerpanel{
-  background-color: var(--header-color);
-  color:var(--header-font);
+html[data-theme='dark'] {
+  --backgroundColor: #212a2e;
+  --textColor: #F7F8F8;
+  --linkColor: #828fff;
+
+  --header-color:#52616b;
+  --header-text:#f2f2f2;
+  --modal-content:#374148;
+  --modal-text: #f2f2f2;
+
+
+  --primary-color:#4d4d4d;
+  --primary-hover:#666666;
+  --secondary-color:#808080; 
+  --secondary-hover:#999999;
+  --tertiary-color:#b3b3b3; 
+  --tertiary-hover:#cccccc; 
+  --positive-color:#006600;
+  --positive-hover:#009900;
+
+  --negtive-color:#660000;
+  --negtive-hover:#990000;
+
+  --infoColor:#87bdd8;
+  --successColor:#96ceb4;
+  --errorColor:#ffcc5c;
+  --warnColor:#ff6f69;
+
+  --select-color:#000066;
+
+  --switch-color:#000066;
+  --switch-bg:#ccc;
+  --switch-default:gray;
 }
 
-.contentpanel{
-  background-color: var(--content-color);
-  color:var(--content-font);
+body {
+  margin: 0%;
+  background: var(--backgroundColor);
+  color: var(--textColor);
 }
 
-.footerpanel{
-  background-color: var(--footer-color);
-  color:var(--footer-font);
-}
-
-button{
-  background-color: var(--primary-color);
-  color: var(--font-color);
-  border: none;
-}
-
-button:hover{
-  background-color: var(--button-hover);
-  color: var(--button-color);
-}
-
-a{
-  color: var(--font-color);
+a {
+  color: var(--linkColor);
 }
 
 label{
-  color: var(--font-color);
+  color: var(--textColor);
 }
 
-.imgicon {
-  background-color: var(--icon-color);
+p{
+  color: var(--textColor);
 }
 
-.imgicon:hover {
-  background-color: var(--icon-hover);
+a:hover {
+  text-decoration: underline;
+  filter: brightness(80%);
 }
 
-.loader {
-  border: 8px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 8px solid #3498db;
-  width: 64px;
-  height: 64px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+/* UI MESSAGE */
+.info{
+  background-color: var(--infoColor);
 }
 
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+.success{
+  background-color: var(--successColor);
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.error{
+  background-color: var(--errorColor);
 }
 
+.warn{
+  background-color: var(--warnColor);
+}
+/* BUTTON */
+.btn_pri
+,.btn_sec
+,.btn_ter
+,.btn_pos
+,.btn_neg {
+  display:inline-block;
+	cursor:pointer;
+  text-decoration:none;
+  border: 0;
+  color: var(--textColor);
+}
+
+.btn_pri:active,
+.btn_sec:active,
+.btn_ter:active,
+.btn_pos:active,
+.btn_neg:active {
+	position:relative;
+	top:1px;
+}
+
+.btn_pri{
+  background-color: var(--primary-color);
+}
+.btn_pri:hover {
+	background-color: var(--primary-hover);
+}
+.btn_sec{
+  background-color: var(--secondary-color);
+}
+.btn_sec:hover {
+	background-color:var(--secondary-hover);
+}
+
+.btn_ter{
+  background-color: var(--tertiary-color);
+}
+.btn_ter:hover {
+	background-color: var(--tertiary-hover);
+}
+
+.btn_pos{
+  background-color: var(--positive-color);
+}
+.btn_pos:hover {
+	background-color:var(--positive-hover);
+}
+
+.btn_neg{
+  background-color: var(--negtive-color);
+}
+.btn_neg:hover {
+	background-color:var(--negtive-hover);
+}
+
+/*  SELECT  */
+.Select {
+  background-color: var(--select-color);
+  /*text-decoration:none;*/
+  border: 0;
+  color: var(--textColor);
+}
+
+/*  CHECKBOX  */
+.CheckBox{
+  position: relative;
+  top:2px;
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.4); /* IE */
+  -moz-transform: scale(1.4); /* FF */
+  -webkit-transform: scale(1.4); /* Safari and Chrome */
+  -o-transform: scale(1.4); /* Opera */
+  transform: scale(1.4);
+  /*padding: 10px;*/
+}
+
+/*  TEST  */
+.blank{
+  background: gray;
+}

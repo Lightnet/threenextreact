@@ -21,5 +21,5 @@ window.addEventListener('load', (event) => {
   ReactDOM.render(<App />, document.getElementById('root'));
 });
 window.addEventListener("beforeunload", function(event) {
-  fetch('/exit');
+  //fetch('/exit');
 });

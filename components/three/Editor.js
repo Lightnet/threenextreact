@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 
 // Dev
 import { isEmpty } from "../../lib/helper.mjs";
-import useFetch from "../hook/usefetch.js";
+import useFetch from "../hook/useFetch.mjs";
 import { useEditor } from "./context/EditorProvider.js";
 import { useProject } from "./context/ProjectProvider.js";
 import { useEntity } from "./context/EntityProvider.js";

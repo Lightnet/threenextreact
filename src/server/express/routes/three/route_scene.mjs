@@ -24,7 +24,7 @@ router.post('/scene', async (req, res) => {
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
 
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
 
@@ -46,12 +46,12 @@ router.post('/scene', async (req, res) => {
       })
 
       let saveScene = await newScene.save();
-      console.log(saveScene);
+      //console.log(saveScene);
 
       return res.json({api:'CREATE',scene:saveScene});
 
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"CREATE SCENE FAIL"});
     }
   }
@@ -62,13 +62,13 @@ router.post('/scene', async (req, res) => {
       let scenes = await Scene.find({projectid: data.projectid})
         .select('projectid id objectid  name description')
         .exec();
-        console.log(scenes);
+        //console.log(scenes);
       return res.json({
         api:API.SCENES
         , scenes:scenes
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"GET Scenes FAIL"});
     }
   }
@@ -84,7 +84,7 @@ router.put('/scene', async (req, res) => {
   }
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -106,14 +106,14 @@ router.put('/scene', async (req, res) => {
       const updateProject = await Project.findOneAndUpdate(query,update,{new:true})
         .select('projectid id objectid  name description')
         .exec();
-      console.log(updateProject);
+      //console.log(updateProject);
 
       return res.json({
         api:API.UPDATE
         , project:updateProject
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"UPDATE Project FAIL"});
     }
   }
@@ -135,14 +135,14 @@ router.put('/scene', async (req, res) => {
       const updateScene = await Scene.findOneAndUpdate(query,update,{new:true})
         .select('projectid id objectid  name description')
         .exec();
-      console.log(updateScene);
+      //console.log(updateScene);
 
       return res.json({
         api:API.UPDATE
         , scene:updateScene
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"UPDATE Scenes FAIL"});
     }
   }
@@ -160,7 +160,7 @@ router.delete('/scene', async (req, res) => {
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
 
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
 
@@ -171,13 +171,13 @@ router.delete('/scene', async (req, res) => {
     let data = req.body;
     try{
       let deleteScene = await Scene.deleteOne({objectid: data.id}).exec();
-        console.log(deleteScene);
+        //console.log(deleteScene);
       return res.json({
         api:API.DELETE
         , id:data.id
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"GET Scenes FAIL"});
     }
   }

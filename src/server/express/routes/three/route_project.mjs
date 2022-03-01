@@ -18,7 +18,7 @@ router.get('/project', async(req, res) => {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -44,7 +44,7 @@ router.post('/project', async(req, res) => {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -62,7 +62,7 @@ router.post('/project', async(req, res) => {
         , name: project.name
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"GET PROJECT FAIL"});
     }
   }
@@ -95,8 +95,8 @@ router.post('/project', async(req, res) => {
       let saveProject = await newProject.save();
       //if (err) return handleError(err);
       // saved!
-      console.log("saveProject");
-      console.log(saveProject);
+      //console.log("saveProject");
+      //console.log(saveProject);
 
       let saveScene = await newScene.save();
       console.log(saveScene);
@@ -104,7 +104,7 @@ router.post('/project', async(req, res) => {
       return res.json({api:'CREATE',project:saveProject});
 
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"CREATE PROJECT FAIL"});
     }
   }
@@ -124,7 +124,7 @@ router.put('/project', async(req, res) => {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -142,7 +142,7 @@ router.put('/project', async(req, res) => {
       const updateProject = await Project.findOneAndUpdate(query,update,{new:true}).exec();
       return res.json({api:'UPDATE',project:updateProject});
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"UPDATE PROJECT FAIL"});
     }
   }
@@ -160,7 +160,7 @@ router.delete('/project', async(req, res) => {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -170,14 +170,14 @@ router.delete('/project', async(req, res) => {
     const Scene = db.model('Scene');
     try{
       const deleteProject = await Project.deleteOne({id:data.id}).exec();
-      console.log(deleteProject);
+      //console.log(deleteProject);
       //need to delete scene, object3d
       const deleteScene = await Scene.deleteMany({projectid:data.id}).exec();
-      console.log(deleteScene);
+      //console.log(deleteScene);
 
       return res.json({api:API.DELETE,projectid:data.id});
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"DELTE PROJECT FAIL"});
     }
   }

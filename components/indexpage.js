@@ -23,6 +23,3 @@ export default function IndexPage(){
     <Sign/><br/>
   </>)
 }
-/*
-
-*/

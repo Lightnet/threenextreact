@@ -5,8 +5,8 @@
 
 import React,{ useEffect, useRef, useState } from 'react';
 import { isEmpty, nanoid16 } from '../../../lib/helper.mjs';
-import useFetch from '../../hook/usefetch';
-import Modal from '../../modal/modal.js';
+import useFetch from '../../hook/useFetch.mjs';
+import Modal from '../../modal/modal.jsx';
 import API from '../context/API.mjs';
 import { useEntity } from '../context/EntityProvider';
 import { useProject } from '../context/ProjectProvider';

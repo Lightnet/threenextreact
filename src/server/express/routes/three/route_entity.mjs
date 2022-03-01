@@ -21,7 +21,7 @@ router.post('/entity', async (req, res) => {
   }
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -42,7 +42,7 @@ router.post('/entity', async (req, res) => {
         , entities:_entities
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"GET PROJECT FAIL"});
     }
   }
@@ -74,7 +74,7 @@ router.put('/entity', async (req, res) => {
   }
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -97,7 +97,7 @@ router.put('/entity', async (req, res) => {
         return res.json({error:"FAILUPDATE"});
       }
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"Delete Entity Fail!"});
     }
   }
@@ -112,7 +112,7 @@ router.delete('/entity', async (req, res) => {
   }
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -129,7 +129,7 @@ router.delete('/entity', async (req, res) => {
         , id:data.id
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"Delete Entity Fail!"});
     }
   }

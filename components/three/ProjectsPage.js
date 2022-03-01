@@ -6,8 +6,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmpty } from "../../lib/helper.mjs";
-import useFetch from "../hook/usefetch.js";
-import Modal from "../modal/modal.js"
+import useFetch from "../hook/useFetch.mjs";
+import Modal from "../modal/modal.jsx"
 
 export default function ProjectsPage({onLoadEditor}){
 
@@ -293,8 +293,9 @@ export default function ProjectsPage({onLoadEditor}){
   return(<>
     <label> Projects </label>
     <button onClick={clickCreateProject}> Create Project </button>
-    {renderProjectList()}
-
+    {
+      renderProjectList()
+    }
     <Modal 
       isOpen={isOpenModal}
       onClose={closeModal}
@@ -304,6 +305,8 @@ export default function ProjectsPage({onLoadEditor}){
         renderModalMessage()
       }
     </Modal>
-
   </>)
 }
+/*
+
+*/

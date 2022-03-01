@@ -21,7 +21,7 @@ router.get('/assets', async function (req, res) {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -43,7 +43,7 @@ router.post('/assets', async function (req, res) {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -60,7 +60,7 @@ router.post('/assets', async function (req, res) {
         , assets:assets
       });
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"FAIL! Get Assets!"});
     }
   return res.json(assets)
@@ -80,7 +80,7 @@ router.delete('/assets', async function (req, res) {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -92,16 +92,12 @@ router.delete('/assets', async function (req, res) {
       let assets = await Asset.findOne({id:data.id})
         .select('id projectid filename filetype filepath')
         .exec();
-      console.log(assets)
+      //console.log(assets)
       if(assets){
-
         await Asset.deleteOne({id:data.id}).exec();
-
         //need to delete file data either on server database or local...
-
         // delete public filed > name < path c:/path/project/public/files
         fs.unlinkSync( assets.filepath )
-
         return res.json({
           api:'DELETE'
           , id:data.id
@@ -110,7 +106,7 @@ router.delete('/assets', async function (req, res) {
         return res.json({error:"FAIL! Empty Asset!"});
       }
     }catch(e){
-      console.log(e);
+      //console.log(e);
       return res.json({error:"FAIL! Get Assets!"});
     }
   }else{
@@ -126,13 +122,13 @@ router.get('/assets/:filename', async function (req, res) {
   //console.log(userid)
   //console.log(username)
   if(error){
-    console.log("Error! session check...");
+    //console.log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
   const Asset = db.model('Asset');
 
-  console.log("KEY?", req.params.filename)
+  //console.log("KEY?", req.params.filename)
   let filename = req.params.filename;
 
   if(isEmpty(filename)){
@@ -142,7 +138,7 @@ router.get('/assets/:filename', async function (req, res) {
   let asset = await Asset.findOne({filename: filename})
     .select('id projectid filename filetype filepath')
     .exec();
-  console.log(asset);
+  //console.log(asset);
   
   if(asset){
     // https://nodejs.org/api/fs.html#fsreadfilesyncpath-options
