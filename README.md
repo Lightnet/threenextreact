@@ -113,8 +113,9 @@ export default function EntityObjectRender(props){
     - Update ( added / position / rotation / scale )
     - Delete ( added )
     - List ( added )
-    - physics ( not added)
-    - add component ( not added)
+    - physics ( added / work in progress)
+    - add component ( added / work in progress )
+    - parent / child ( not added )
   - Scene:
     - Create ( Added )
     - Delete ( added / wip )
@@ -122,6 +123,12 @@ export default function EntityObjectRender(props){
     - List ( added )
     - default ( added ) project sceneid load default
     - load scene ( added )
+  - Material:
+    - UI (work in progress)
+    - List ( not added )
+    - Add (work in progress)
+    - Delete ( not added )
+    - Box ( Testing )
 
 - Projects:
   - Create ( added )
@@ -147,7 +154,10 @@ export default function EntityObjectRender(props){
   - Sphere ( added )
   - Plane ( added )
   - Cone ( added )
+  - Cylinder ( added )
   
+  - OrthographicCamera ( added / placeholder )
+  - PerspectiveCamera ( added / placeholder )
   - Camera ( work in progress)
   - Light ( added )
   - PointLight ( added )
