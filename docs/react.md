@@ -224,3 +224,30 @@ const newArr = arr1.map(obj => {
 });
 
 ```
+
+
+```js
+//this will handle user press enter to update
+  function inputKey(event){
+    //setInputValue(event.target.value);
+    if (event.keyCode === 13) {
+      if(!isNumber(event.target.value)){
+        console.log("NOT NUMBER!");
+        return;
+      }
+      if(isEmpty(event.target.value)){
+        console.log("Empty!");
+        return;
+      }
+      //console.log("NUMBER: ", event.target.value);
+      //updateValue(parseFloat(event.target.value));
+      ops({
+        action:"update"
+        , id: objid
+        , objtype: objtype
+        , objkey: objKey
+        , setValue: (parseFloat(event.target.value) *  Math.PI / 180)
+      });
+    }
+  }
+```
