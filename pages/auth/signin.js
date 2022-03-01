@@ -4,7 +4,7 @@
 */
 
 // https://next-auth.js.org/configuration/pages
-
+import React from "react";
 import { getCsrfToken } from "next-auth/react";
 import Link from 'next/link';
 

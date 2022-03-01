@@ -10,13 +10,8 @@ import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import clientDB, { expressSessionTokenCheck } from '../../../../../lib/database.mjs';
 import { isEmpty } from '../../../../../lib/helper.mjs';
-//import mine from "mine";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const uploadFolder = path.join(__dirname, "../../../../public", "files");
-//console.log(uploadFolder);
-//const mime = require('mime');
-
-
 const router = express.Router();
 
 router.get('/assets', async function (req, res) {

@@ -4,8 +4,9 @@
 */
 
 import { getSession } from "next-auth/react";
+import API from "../../components/three/context/API.mjs";
 import clientDB,{ sessionTokenCheck } from "../../lib/database";
-import { nanoid16 } from "../../lib/helper";
+import { isEmpty } from "../../lib/helper.mjs";
 import { log } from "../../lib/log";
 
 export default async (req, res) => {
@@ -26,70 +27,138 @@ export default async (req, res) => {
   //check for scene id from database current set
   if(req.method == 'GET'){
     //get scenes but need editor id
+    res.json({ error: 'not found!' });
   }
 
   if(req.method == 'POST'){
-    let data = req.body;
-    if(data.action){
-
-      if(data.action=='SCENES'){
-        try{
-          let scenes = await Scene.find({editorid:data.id}).exec();
-          //console.log(scenes)
-          return res.json({action:"SCENES",scenes:scenes});
-        }catch(e){
-          return res.json({error:"FAILSCENES"});
-        }
-      }
-
-      if(data.action=='CREATE'){
+    const {api} = req.body;
+    if(isEmpty(api)){
+      return res.json({error:"FAIL Scene Post"});
+    }
+    if(api==API.CREATE){
+      let data = req.body;
+  
+      try{
+  
+        const Scene = db.model('Scene');
         let newScene = new Scene({
-          editorid:data.id,
-          name:nanoid16()
+            projectid:data.projectid
+          , userid: userid
+          , username: username
+          , name: data.name
+          , description: data.description
+        })
+  
+        let saveScene = await newScene.save();
+        console.log(saveScene);
+  
+        return res.json({api:'CREATE',scene:saveScene});
+  
+      }catch(e){
+        console.log(e);
+        return res.json({error:"CREATE SCENE FAIL"});
+      }
+    }
+  
+    if(api==API.SCENES){
+      let data = req.body;
+      try{
+        let scenes = await Scene.find({projectid: data.projectid})
+          .select('projectid id objectid  name description')
+          .exec();
+          console.log(scenes);
+        return res.json({
+          api:API.SCENES
+          , scenes:scenes
         });
-        try{
-          let saveScene = await newScene.save();
-
-          return res.json({action:'CREATE',scene:saveScene});
-        }catch(e){
-          return res.json({error:"FAILCREATE"});
-        }
+      }catch(e){
+        console.log(e);
+        return res.json({error:"GET Scenes FAIL"});
       }
     }
   }
 
   //edit update
-  if(req.method == 'PATCH'){
-    let data = req.body;
-    //console.log(data)
-    let query={
-      id:data.id
+  if(req.method == 'PUT'){
+    const {api} = req.body;
+    if(isEmpty(api)){
+      return res.json({error:"FAIL Scene Post"});
     }
-    let update={
-      name:data.sceneName,
-      //description:data.description
+    if(api==API.DEFAULT){
+      let data = req.body;
+      const Project = db.model('Project');
+      try{
+        let query={
+          projectid:data.projectid
+        }
+        let update={
+          defaultsceneid:data.id
+          //, description:data.description || ""
+        }
+  
+        const updateProject = await Project.findOneAndUpdate(query,update,{new:true})
+          .select('projectid id objectid  name description')
+          .exec();
+        console.log(updateProject);
+  
+        return res.json({
+          api:API.UPDATE
+          , project:updateProject
+        });
+      }catch(e){
+        console.log(e);
+        return res.json({error:"UPDATE Project FAIL"});
+      }
     }
-    try{
-      let patchScene = await Scene.findOneAndUpdate(query,update,{new:true}).exec();
-
-      return res.json({action:'PATCH',scene:patchScene});
-    }catch(e){
-      return res.json({error:"FAILUPDATE"});
+  
+    if(api==API.UPDATE){
+      let data = req.body;
+      try{
+        let query={
+          objectid:data.id
+        }
+        let update={
+            name:data.name
+          //, description:data.description || ""
+        }
+        if(data.description){
+          update.description = data.description
+        }
+  
+        const updateScene = await Scene.findOneAndUpdate(query,update,{new:true})
+          .select('projectid id objectid  name description')
+          .exec();
+        console.log(updateScene);
+  
+        return res.json({
+          api:API.UPDATE
+          , scene:updateScene
+        });
+      }catch(e){
+        console.log(e);
+        return res.json({error:"UPDATE Scenes FAIL"});
+      }
     }
   }
 
   if(req.method == 'DELETE'){
-    let data = req.body;
-    if(!data.id){
-      return res.json({error:"FAIL"});    
+    const {api} = req.body;
+    if(isEmpty(api)){
+      return res.json({error:"FAIL Scene Post"});
     }
-    try{
-      let deleteScene = await Scene.findOneAndDelete({id:data.id});
-      console.log('deleteScene:' , deleteScene)
-
-      return res.json({action:'DELETE',id:data.id});
-    }catch(e){
-      return res.json({error:"FAILDELETE"});
+    if(api== API.DELETE){
+      let data = req.body;
+      try{
+        let deleteScene = await Scene.deleteOne({objectid: data.id}).exec();
+          console.log(deleteScene);
+        return res.json({
+          api:API.DELETE
+          , id:data.id
+        });
+      }catch(e){
+        console.log(e);
+        return res.json({error:"GET Scenes FAIL"});
+      }
     }
   }
 

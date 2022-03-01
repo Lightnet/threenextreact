@@ -24,12 +24,13 @@ export default NextAuth({
         //console.log("CHECKING AUTH !!!");
         //const user = { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         //return user;
+        console.log("process.env.HOST: ", process.env.HOST)
         
         let hosturl;
         if(process.env.NODE_ENV == 'development'){
-          hosturl=process.env.HOST + '/api/signin';
+          hosturl=process.env.NEXTAUTH_URL + '/api/signin';
         }else{
-          hosturl=process.env.HOST +'/api/signin';
+          hosturl=process.env.NEXTAUTH_URL +'/api/signin';
         }
         //console.log(hosturl);
         let user;
@@ -144,12 +145,12 @@ export default NextAuth({
   // https://github.com/nextauthjs/next-auth/discussions/791
   // https://next-auth.js.org/configuration/pages
   pages: {
-    signIn: '/auth/signin',  // Displays signin buttons
+    //signIn: '/auth/signin',  // Displays signin buttons
     // signOut: '/auth/signout', // Displays form with sign out button
     error: '/auth/error', // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // Used for check email page
     // newUser: '/auth/new-user' // If set, new users will be directed here on first sign in
-    newUser: '/auth/signup' // If set, new users will be directed here on first sign in
+    //newUser: '/auth/signup' // If set, new users will be directed here on first sign in
   },
   theme: 'light',
   debug: true

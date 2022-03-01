@@ -86,25 +86,12 @@ export default function EntityObjectRender(props){
 ```
   There are two methods to pass position.
 
-
-  
-### Next.js:
-  Server React and pre-render react.js is on hold.
-
-- next.js (on hold / broken api )
-  
-### Express.js:
-  Server with simple react webpack stand with simple request api.
-
-- express.js ( revamping the code layout / work in progress )
-  - rework to have stand alone
-  
 ### Database:
  The database will be used is MongoDB to able save and load data for editing and game to manage them in json format.
 
 ## React Three Editor:
 - Server package:
-  - Next.js ( broken )
+  - Next.js ( tested, work in progress )
   - Express.js ( tested, work in progress )
 
 - Editor:
@@ -193,8 +180,10 @@ export default function EntityObjectRender(props){
 ## next.js:
 - next-auth ( auth check user login )
 - next (react server pre-render)
+- Server Next.js, pre-render, react.js and compiler.
 ## express.js:
 - express
+- Server with simple express, react and webpack with simple request api. That is bundle to one javascript file.
 
 # Physics:
   After some testing for enable and disable physics react components. 

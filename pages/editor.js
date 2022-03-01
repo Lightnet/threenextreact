@@ -6,13 +6,15 @@
     The url is process to load project files
 */
 
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AuthAccess from '../components/system/authaccess';
-import EditorSection from '../components/editor/editorsection';
 import { useRouter } from 'next/router';
-import { EditorProvider } from '../components/editor/context/editorprovider';
+import { ProjectProvider } from '../components/three/context/ProjectProvider';
+import { EditorProvider } from '../components/three/context/EditorProvider';
+import Editor from '../components/three/Editor';
+import { EntityProvider } from '../components/three/context/EntityProvider';
 
-export default function Editor(){
+export default function EditorPage(){
 
   const router = useRouter();
   const [projectID, setProjectID] = useState(null);
@@ -20,6 +22,7 @@ export default function Editor(){
   useEffect(() => {
     const {projectid } = router.query;
     if(projectid){
+      //console.log(projectid);
       setProjectID(projectid);
     }
     return () => {
@@ -29,12 +32,13 @@ export default function Editor(){
 
   return(<>
     <AuthAccess>
-      <EditorProvider>
-        <EditorSection editorid={projectID}></EditorSection>
-      </EditorProvider>
+      <ProjectProvider>
+        <EditorProvider>
+          <EntityProvider>
+            <Editor projectid={projectID} />          
+          </EntityProvider>
+        </EditorProvider>
+      </ProjectProvider>
     </AuthAccess>
   </>)
 }
-/*
-
-*/

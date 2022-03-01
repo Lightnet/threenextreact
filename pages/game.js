@@ -4,22 +4,12 @@
 */
 
 import { useEffect, useState } from 'react';
-import { getSession } from "next-auth/react";
-import GameMain from '../components/game/gamemain';
 import AuthAccess from '../components/system/authaccess';
-import { GameProvider } from '../components/game/gameprovider';
 import { useRouter } from 'next/router';
+import { EntityProvider } from '../components/three/context/EntityProvider';
+import DebugPlay from '../components/three/game/DebugPlay';
 
-
-export async function getServerSideProps(ctx) {
-  return {
-    props:{
-      session: await getSession(ctx)//,
-    }
-  }
-}
-
-export default function GamePage({session}){
+export default function GamePage(){
 
   const router = useRouter();
   const [gameID, setGameID] = useState(null);
@@ -31,29 +21,17 @@ export default function GamePage({session}){
       //console.log("assign project id???")
       setGameID(projectid);
     }
-
     if(sceneid){
       //console.log("assign project id???")
       setSceneID(sceneid);
     }
-    
   },[router])
-
-  //if(!session){
-    //return(<>
-      //<label>Loading...</label>
-    //</>);  
-  //}
 
   return(<>
     <AuthAccess>
-      <GameProvider>
-        <GameMain gameid={gameID} sceneid={sceneID} >
-        </GameMain>
-      </GameProvider>
+      <EntityProvider>
+        <DebugPlay gameid={gameID} />
+      </EntityProvider>
     </AuthAccess>
   </>);
 }
-/*
-
-*/

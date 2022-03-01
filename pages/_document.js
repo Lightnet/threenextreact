@@ -9,6 +9,7 @@
 // https://stackoverflow.com/questions/51905803/next-js-how-to-change-css-of-root-div-next-on-specific-page
 
 //import Script from 'next/script'
+import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
@@ -26,7 +27,7 @@ class MyDocument extends Document {
           <meta property="custom" content="test" />
           <script id="test">
             {
-              console.log("[server see] _doc console.log test")
+              //console.log("[server see] _doc console.log test")
             }
           </script>
 
