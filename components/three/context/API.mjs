@@ -1,6 +1,10 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+
+  Information:
+    This is array and not react as it need server and client to read data for api request and response.
+
 */
 
 //import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight.jsx";

@@ -35,12 +35,16 @@ export default function EntityComponentAdd(){
 
   function onSelectComp(e){
     setSelectComponent(e.target.value);
-  } 
+  }
+
+  function onClose(){
+    setSelectComponent("");
+  }
 
   function renderViewComponent(){
     console.log(selectComponent);
     if(selectComponent=="material"){
-      return <CreateMaterial />
+      return <CreateMaterial onClose={onClose} />
     }else if(selectComponent=="script"){
       return <CreateScript />
     }
@@ -50,9 +54,9 @@ export default function EntityComponentAdd(){
   return <>
   <div key={keySelect} >
     <div>
-      <label> Commponent </label>
+      <label> Component </label>
       <select value={selectComponent} onChange={onSelectComp}>
-        <option value="" disabled> Select Component </option>
+        <option value="" > Select Component </option>
         {entityComponents.map(item=><option key={item} value={item}> {item} </option>)
         }
       </select>

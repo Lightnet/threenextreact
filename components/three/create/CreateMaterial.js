@@ -12,7 +12,7 @@ var materialtypes=[
   , 'lineBasicMaterial'
 ];
 
-export default function CreateMaterial(){
+export default function CreateMaterial({onClose}){
 
   const {selectObjectID} = useEditor();
 
@@ -69,6 +69,9 @@ export default function CreateMaterial(){
       , keyType:"material"
       , value:material
     })
+    if(onClose){
+      onClose();
+    }
   }
 
   return <>

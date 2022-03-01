@@ -99,6 +99,15 @@ var ENTITIES=[
 
 ]
 
-export default {
-  ENTITIES:ENTITIES
+export {
+  ENTITIES
+}
+
+export function AddCompEntity(name,datatype,comp,compref){
+  ENTITIES.push({
+    name:name
+    , dataType:datatype
+    , comp:comp
+    , compRef:compref
+  })
 }

@@ -101,6 +101,7 @@ export default function EntityMaterials({selectobject}){
   }
 
   return <>
+    {material &&
      <div>
       <div>
         <label> Materials: </label>
@@ -112,7 +113,6 @@ export default function EntityMaterials({selectobject}){
           </tbody>
         </table>
       </div>
-    </div>
-  
+    </div>}
   </>
 }

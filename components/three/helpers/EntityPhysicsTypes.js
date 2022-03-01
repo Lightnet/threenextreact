@@ -6,20 +6,16 @@
 import React from 'react';
 import { useBox, useCylinder, usePlane, useSphere } from '@react-three/cannon';
 import {DefaultBoxRef} from '../entity/DefaultBox';
-//import { EntityPlaneRef } from '../entity/EntityPlane';
-//import { EntityBoxRef } from '../entity/EntityBox';
 
-import EntityComponets from "../context/EntityComponets";
+import { ENTITIES } from "../context/EntityComponets";
 import API from '../context/API.mjs';
-const ENTITIES = EntityComponets.ENTITIES;
-//console.log(ENTITIES);
 
 export default function EntityPhysicsTypes(props) {
   let ref;
+  //console.log("shapePhysics:", props.shapePhysics)
+  //console.log(props);
 
   if(props.shapePhysics==API.SHAPETYPES.BOX){
-    //console.log("shapePhysics BOX?")
-    //console.log(props);
     [ref] = useBox(() => ({ ...props }));
   }
 
@@ -42,23 +38,7 @@ export default function EntityPhysicsTypes(props) {
     }
   }
 
-  /*
-  if(props.datatype=='box'){
-    return (
-      <EntityBoxRef
-        ref={ref}
-        //key={props.objectid}
-        {...props}
-      />
-    )
-  }else if(props.dataType=="plane"){
-    return(<EntityPlaneRef
-      //key={props.objectid}
-      {...props}
-    />)
-  }
-  */
-
+  //if not found return box object render
   return (
     <DefaultBoxRef
       ref={ref}
