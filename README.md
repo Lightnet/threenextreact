@@ -6,13 +6,9 @@
 
 ## Stage Dev:
 - Idea / Prototyping
-- Work in progress
 - Stable build.
-- Reworked the React Three Editor.
-- A lot of files changes that still need work on.
 - components/three <- stable (three editor)
-- components/editor <- will be remove later. (three editor)
-- Tested simple Physics box and plane.
+- Note some files may change and folders for matching UI and name meaning.
 
 ## Information:
   Work in progress builds and testing ideas.
@@ -32,6 +28,7 @@
 
   The idea base on the graph save database with json file format.
 
+  Work in progress and design may change.
 ```js
 var entityObject3D1={
     objectid:"012345678901234567890012"
@@ -56,9 +53,7 @@ var entityObject3D2={
   }
 }
 ```
-  Note some code might conflict with the props base on passing with the variable like the position.
-
-  This could be used as component add to the entity like material.
+  Note some code might conflict with the props base on passing with the variable like the position. This could be used as component add to the entity like material. 
 
 ```js
 var entityObject3D2={
@@ -154,10 +149,11 @@ export default function EntityObjectRender(props){
   - Cone ( added )
   
   - Camera ( work in progress)
-  - Light ( added 
+  - Light ( added )
   - PointLight ( added )
   - AmbientLight ( added )
   - OrbitControl ( added )
+
 - Physics: ( work in progress )
   - toggle physics on and off ( added )
   - add entity enable physics ( added )
@@ -190,12 +186,6 @@ export default function EntityObjectRender(props){
 ## express.js:
 - express
 
-# Next Three ToDoList:
-  [Next Three Doc To Do List](/docs/nextthree.md)
-
-# Express Three ToDoList:
-  [Express Three Doc To Do List](/docs/expressthree.md)
-
 # Physics:
   After some testing for enable and disable physics react components. 
   
@@ -213,8 +203,7 @@ const [ref, api] = useBox()
 
 ## Root dir project:
  - src ( server files )
-    - editor (old build)
-    - three (new build / work in progress)
+    - three ( work in progress)
  - app.mjs ( express server )
  - components ( react components )
  - lib (helper / database / server /client)
