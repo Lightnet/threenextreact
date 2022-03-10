@@ -120,6 +120,7 @@ function reducerEntity(state, action) {
       item.isPhysics = action.isPhysics || false;
 
       if(action.dataType){item.dataType = action.dataType;}
+      /*
       if(action.dataType=="BOX"){
         item.material=[]
         item.material=[
@@ -133,6 +134,12 @@ function reducerEntity(state, action) {
           }
         ]
       }
+      */
+
+      if(action.material){
+        item.material = action.material;
+      }
+
       if(action.parameters){item.parameters = action.parameters;}
 
       if(action.shapePhysics){

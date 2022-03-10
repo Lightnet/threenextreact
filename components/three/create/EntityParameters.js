@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { useProject } from "../context/ProjectProvider.js";
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityParameters({name,datatype,shape,parms,mass}){
+export default function EntityParameters({name,datatype,shape,parms,mass,material}){
   const {projectID} = useProject();
 
   const {sceneID, dispatchEntity} = useEntity();
@@ -20,8 +20,17 @@ export default function EntityParameters({name,datatype,shape,parms,mass}){
   const [parameters, setParameters] = useState(null)
   const [_parameters, _setParameters] = useState(null)
 
+  const [_material, setMaterial] = useState(null)
+
   const [isParameters, setIsParameters] = useState(false)
   const [selectParameters, setSelectParameters] = useState(0)
+
+  useEffect(()=>{
+    if(typeof material == "object"){
+      setMaterial(material);
+    }
+    
+  },[material])
 
   useEffect(()=>{
     if(name){
@@ -63,6 +72,7 @@ export default function EntityParameters({name,datatype,shape,parms,mass}){
       , shapePhysics: shapePhysics
       , isPhysics: false
       , mass: _mass
+      , material: _material
     })
   }
 

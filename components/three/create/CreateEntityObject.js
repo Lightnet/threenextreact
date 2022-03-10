@@ -47,7 +47,7 @@ export default function CreateEntityObject(){
           datatype={API.ENTITIES[idx].dataType}
           parms={API.ENTITIES[idx].parameters}
           shape={API.ENTITIES[idx].shape}
-          
+          material={API.ENTITIES[idx].material}
           />
         //break;
       }

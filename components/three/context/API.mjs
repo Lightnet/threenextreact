@@ -7,6 +7,8 @@
 
 */
 
+import { nanoid32 } from "../../../lib/helper.mjs";
+
 //import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight.jsx";
 
 // https://threejs.org/docs/?q=scene#api/en/scenes/Scene
@@ -103,7 +105,15 @@
           , heightSegments: 1 
           , depthSegments: 1 
         }
-      ]
+      ],
+      material:[{
+          index:0
+        , objectid:nanoid32()
+        , dataType:"meshStandardMaterial"
+        , name:"meshStandardMaterial"
+        , color:"#ffffff"
+        , wireframe:false
+      }]
     },
 
     {
@@ -122,7 +132,15 @@
         , thetaStart : 0
         , thetaLength : 2 * Math.PI
       }
-    ]
+    ],
+    material:[{
+        index:0
+      , objectid:nanoid32()
+      , dataType:"meshStandardMaterial"
+      , name:"meshStandardMaterial"
+      , color:"#ffffff"
+      , wireframe:false
+    }]
     },
 
     {
@@ -145,7 +163,15 @@
         , thetaStart: 0
         , thetaLength: 2*Math.PI
       }
-    ]
+    ],
+    material:[{
+        index:0
+      , objectid:nanoid32()
+      , dataType:"meshStandardMaterial"
+      , name:"meshStandardMaterial"
+      , color:"#ffffff"
+      , wireframe:false
+    }]
     },
 
     {
@@ -170,7 +196,16 @@
         , thetaStart    : 0
         , thetaLength     : 2*Math.PI
       }
-    ]
+    ],
+    material:[{
+        index:0
+      , objectid:nanoid32()
+      , dataType:"meshStandardMaterial"
+      , name:"meshStandardMaterial"
+      , color:"#ffffff"
+      , wireframe:false
+    }]
+
     },
 
     {
@@ -189,7 +224,15 @@
         , widthSegments: 1 
         , heightSegments: 1 
       }
-    ]
+    ],
+      material:[{
+        index:0
+      , objectid:nanoid32()
+      , dataType:"meshStandardMaterial"
+      , name:"meshStandardMaterial"
+      , color:"#ffffff"
+      , wireframe:false
+    }]
     },
     
     {
@@ -212,7 +255,15 @@
           ,thetaStart :0
           ,thetaLength :Math.PI
         }
-      ]
+      ],
+      material:[{
+          index:0
+        , objectid:nanoid32()
+        , dataType:"meshStandardMaterial"
+        , name:"meshStandardMaterial"
+        , color:"#ffffff"
+        , wireframe:false
+      }]
     },
 
     {
@@ -225,8 +276,10 @@
           color:0x404040
           , intensity:1
         }
-      ]
+      ],
+      material:null,
     },
+    
 
     {
       name:"pointlight"
@@ -240,7 +293,8 @@
         , distance:1000
         , decay:1
         }
-      ]
+      ],
+      material:null,
     },
     {
       name:"perspectivecamera"
@@ -254,7 +308,8 @@
           , near:1
           , far:100
         }
-      ]
+      ],
+      material:null,
     },
 
     {
@@ -262,13 +317,12 @@
     , dataType:"ORTHOGRAPHICCAMERA"
     , shape:"BOX"
     , mass:1
-    , parameters:[
-        {
+    , parameters:[{
           far:2000
-          , near:0.1
-          , zoom:1
-        }
-      ]
+        , near:0.1
+        , zoom:1
+      }],
+      material:null,
     }
 
   ]
