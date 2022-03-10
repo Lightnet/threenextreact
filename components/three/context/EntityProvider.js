@@ -144,6 +144,11 @@ function reducerEntity(state, action) {
         //log(item)
         //log(action)
         if(item.objectid == action.id){
+
+          if(action.keyType=="visible"){
+            item.visible=action.value
+          }
+
           if(action.keyType=="position"){
             item.position=action.value
           }

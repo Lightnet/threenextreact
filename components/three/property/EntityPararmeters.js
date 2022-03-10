@@ -10,9 +10,7 @@ import { useEntity } from "../context/EntityProvider.js";
 export default function EntityPararmeters({selectid}){
 
   const {
-      sceneID
-    , setSceneID
-    , entities
+      entities
     , dispatchEntity
   } = useEntity()
 

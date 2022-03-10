@@ -13,7 +13,7 @@ export default function EntityOrthographicCamera(props, ref){
     ref = useRef();
   }
 
-  useHelper(ref, CameraHelper,1,'hotpink')
+  useHelper(props.visible && ref, CameraHelper,1,'hotpink')
 
   //const [params, setParams] = useState([])
 

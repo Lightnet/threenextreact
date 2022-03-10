@@ -11,6 +11,9 @@ import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.js";
 import EntityShapePararmeters from "./EntityPararmeters.js";
 import { useEditor } from "../context/EditorProvider.js";
 import EntityMaterials from "./EntityMaterials.js";
+import EntityObjectScale from "./EntityObjectScale.js";
+import EntityObjectPosition from "./EntityObjectPosition.js";
+import EntityObjectRotation from "./EntityObjectRotation.js";
 
 export default function EntitySelectObject(){
 
@@ -22,21 +25,14 @@ export default function EntitySelectObject(){
 
   const [onSelectID, setOnSelectID] = useState("");
   const [selectObject, setSelectObject] = useState(null);
-  const [isRadian, setIsRadian] = useState(true);
-
   const [isDisplayTransform, setIsDisplayTransform] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const {
     entities
   , dispatchEntity
 } = useEntity()
 
-  const onSelectEntity = e=>{
-    setOnSelectID(e.target.value)
-    setSelectObjectID(e.target.value)
-  };
-
-  
   useEffect(()=>{
     if(isEmpty(onSelectID)){
       setSelectObject(null)
@@ -45,7 +41,6 @@ export default function EntitySelectObject(){
     setSelectObject(entities.find(item=>item.objectid==onSelectID));
   },[onSelectID])
   
-
   useEffect(()=>{
     if(isEmpty(selectObjectID)){
       setSelectObject(null);
@@ -69,91 +64,26 @@ export default function EntitySelectObject(){
     }
   },[deleteObjectID])
 
-
-  function inputPosition(event){
-    //console.log(event.target.type)
-    //console.log(event.target.name)
-    //console.log(event.target.value)
-    let position = selectObject.position;
-    position[event.target.name]=Number(event.target.value);//convert to number and not string.
-    dispatchEntity({
-        type:"update"
-      , id: selectObject.objectid
-      , keyType:"position"
-      , value: position
-    })
-    setSelectObject(state=>({...state, position: position}))
-  }
-
-  function inputRotation(event){
-    let rotation = selectObject.rotation;
-    let val = Number(event.target.value);
-    if(!isRadian){
-      val = val *  Math.PI / 180
-    }
-
-    rotation[event.target.name]=val;//convert to number and not string.
-    dispatchEntity({
-        type:"update"
-      , id: selectObject.objectid
-      , keyType:"rotation"
-      , value: rotation
-    })
-    setSelectObject(state=>({...state, rotation: rotation}))
-  }
-  function inputScale(event){
-    let scale = selectObject.scale;
-    scale[event.target.name]=Number(event.target.value);//convert to number and not string.
-    dispatchEntity({
-        type:"update"
-      , id: selectObject.objectid
-      , keyType:"scale"
-      , value: scale
-    })
-    setSelectObject(state=>({...state, scale: scale}))
-  }
-
-  function renderPosition(){
-    return <div>
-      <div><label>Position:</label></div>
-      <div><label>X:</label><input type="number" name="0" value={selectObject.position[0]} onChange={inputPosition} /></div>
-      <div><label>Y:</label><input type="number" name="1" value={selectObject.position[1]} onChange={inputPosition} /></div>
-      <div><label>Z:</label><input type="number" name="2" value={selectObject.position[2]} onChange={inputPosition} /></div>
-    </div>
-  }
-
-  function convertCheckRadian(val){
-    if(isRadian){
-      return val;
-    }else{
-      return val * 180 / Math.PI;
-    }
-  }
-
-  function clickIsRadian(){
-    setIsRadian(state=>!state);
-  }
-
-  function renderRotation(){
-    return <div>
-      <div><label>Rotation:</label> <button onClick={clickIsRadian}> {isRadian ? ("Radian") : ("Degree")} </button></div>
-      <div><label>X:</label><input type="number" name="0" value={convertCheckRadian(selectObject.rotation[0])} onChange={inputRotation} /></div>
-      <div><label>Y:</label><input type="number" name="1" value={convertCheckRadian(selectObject.rotation[1])} onChange={inputRotation} /></div>
-      <div><label>Z:</label><input type="number" name="2" value={convertCheckRadian(selectObject.rotation[2])} onChange={inputRotation} /></div>
-    </div>
-  }
-
-  function renderScale(){
-    return <div>
-      <div><label>Scale:</label></div>
-      <div><label>X:</label><input type="number" name="0" value={selectObject.scale[0]} onChange={inputScale} /></div>
-      <div><label>Y:</label><input type="number" name="1" value={selectObject.scale[1]} onChange={inputScale} /></div>
-      <div><label>Z:</label><input type="number" name="2" value={selectObject.scale[2]} onChange={inputScale} /></div>
-    </div>
-  }
+  const onSelectEntity = e=>{
+    setOnSelectID(e.target.value)
+    setSelectObjectID(e.target.value)
+  };
 
   function toggleTransform(){
     setIsDisplayTransform(state=>!state);
+  }
+
+  function toggleVisible(e){
+    setIsVisible(e.target.checked)
+
+    dispatchEntity({
+        type:"update"
+      , id: selectObject.objectid
+      , keyType:"visible"
+      , value: e.target.checked
+    })
+
+    //setSelectObject(state=>({...state, visible: e.target.checked}))
   }
 
   return <>
@@ -161,7 +91,7 @@ export default function EntitySelectObject(){
       <div>
         <label> Select Entity: </label> 
         <select value={onSelectID} onChange={onSelectEntity}>
-          <option value="" disabled> Select Entity  </option>
+          <option value="" > Select Entity  </option>
           {entities.map((item)=>{
             return <option key={item.objectid} value={item.objectid}> {item.name} :{item.objectid}  </option>
           })}
@@ -170,11 +100,14 @@ export default function EntitySelectObject(){
       <div>
         {onSelectID}
       </div>
+      {selectObject && <div>
+         <input type="checkbox" checked={selectObject?.visible} onChange={toggleVisible}/> <label> Visible </label>
+      </div>}
       <div>
         {selectObject && <div> <button onClick={toggleTransform}> Transform </button> </div>}
-        {selectObject && isDisplayTransform && renderPosition()}
-        {selectObject && isDisplayTransform && renderRotation()}
-        {selectObject && isDisplayTransform && renderScale()}
+        {selectObject && isDisplayTransform && <EntityObjectPosition selectobject={selectObject} />}
+        {selectObject && isDisplayTransform && <EntityObjectRotation selectobject={selectObject} />}
+        {selectObject && isDisplayTransform && <EntityObjectScale selectobject={selectObject} />}
       </div>
       <div>
         {
@@ -200,6 +133,5 @@ export default function EntitySelectObject(){
         }
       </div>
     </div>
-
   </>
 }

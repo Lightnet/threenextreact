@@ -8,6 +8,7 @@ import { getSession } from "next-auth/react";
 import Link from 'next/link';
 import SignArea from "../components/system/signarea";
 import Projects from '../components/three/Projects';
+import { log } from '../lib/log.mjs';
 
 export async function getServerSideProps(ctx) {
   log("[[=== INDEX getServerSideProps ===]");

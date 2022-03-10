@@ -16,7 +16,7 @@ export default function EntityLight(props, ref){
     ref = useRef();
   }
 
-  useHelper(ref, PointLightHelper,1,'hotpink')
+  useHelper( props.visible && ref, PointLightHelper,1,'hotpink')
 
   return (
   <>

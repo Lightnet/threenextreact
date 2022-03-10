@@ -2,11 +2,9 @@
   LICENSE: MIT
   Created by: Lightnet
 */
+// https://github.com/pmndrs/drei#select
 
-//import { useHelper } from '@react-three/drei';
 import React,{ useRef} from 'react';
-import {  useHelper } from '@react-three/drei'
-import { PointLightHelper } from 'three';
 
 export default function EntityAmbientLight(props, ref){
 
@@ -14,8 +12,6 @@ export default function EntityAmbientLight(props, ref){
   if(!ref){
     ref = useRef();
   }
-
-  useHelper(ref, PointLightHelper,1,'hotpink');
 
   return (
   <>

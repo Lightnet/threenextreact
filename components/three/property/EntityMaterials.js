@@ -10,7 +10,7 @@ import { useEntity } from "../context/EntityProvider.js";
 export default function EntityMaterials({selectobject}){
 
   const {
-  entities
+    entities
   , dispatchEntity
 } = useEntity()
 

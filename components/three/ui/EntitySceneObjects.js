@@ -48,7 +48,7 @@ export default function EntitySceneObjects(){
       ,overflow: "scroll"
     }}>
       <div>
-        <label> Entity List: </label>
+        <label> Entity Scene Objects: </label>
       </div>
       {renderObject3DList()}
     </div>

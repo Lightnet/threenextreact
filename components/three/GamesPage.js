@@ -3,11 +3,19 @@
   Created by: Lightnet
 */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function GamesPage(){
 
   const [gameList, setGameList] = useState([]);
+
+  useEffect(()=>{
+    getGames();
+  },[])
+
+  function getGames(){
+
+  }
 
   function loadGame(e,id){
     e.preventDefault();
@@ -19,11 +27,15 @@ export default function GamesPage(){
     console.log("REMOVE GAME",id);
   }
 
+  if(gameList.length == 0){
+    return <div>
+      <label>No Games listed yet. </label>
+    </div>
+  }
 
   return(<>
     <div>
     <label>Game List</label>
-    
     <table>
       <thead>
         <tr>
@@ -62,7 +74,6 @@ export default function GamesPage(){
           </tr>
           );
         })}
-
       </tbody>
     </table>
     </div>
