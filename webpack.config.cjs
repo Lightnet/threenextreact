@@ -11,6 +11,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js','.mjs','.jsx']
+    ,fallback:{path:false}
   },
   module: {
     //rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }]

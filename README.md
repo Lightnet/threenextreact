@@ -6,7 +6,7 @@
 
 ## Stage Dev:
 - Idea / Prototyping
-- Stable build.
+- Un/Stable builds.
 - components/three <- stable (three editor)
 - Note some files may change and folders for matching UI and name meaning.
 

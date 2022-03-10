@@ -20,6 +20,6 @@ export default function IndexPage(){
   }
 
   return (<>
-    <Sign/><br/>
+    <label> Home </label>
   </>)
 }

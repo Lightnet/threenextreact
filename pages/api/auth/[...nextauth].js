@@ -5,7 +5,7 @@
 
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { log } from "../../../lib/log";
+import { log } from "../../../lib/log.mjs";
 
 export default NextAuth({
   providers: [
