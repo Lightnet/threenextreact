@@ -16,6 +16,7 @@ export default function EntityPararmeters({selectid}){
 
   const [selectObject, setSelectObject] = useState(null);
   const [parameters, setParameters] = useState(null)
+  const [isDisplay, setIsDisplay] = useState(false);
 
   useEffect(()=>{
     if(isEmpty(selectid)){
@@ -98,15 +99,16 @@ export default function EntityPararmeters({selectid}){
   return <>
     <div>
       <div>
-        <label> Params: </label>
+        <label> Params: </label> <button onClick={()=>setIsDisplay(state=>!state)}> {isDisplay ? ("+"):("-")} </button>
       </div>
+      {isDisplay &&
       <div>
         <table>
           <tbody>
             {renderParams()}
           </tbody>
         </table>
-      </div>
+      </div>}
     </div>
   </>
 }

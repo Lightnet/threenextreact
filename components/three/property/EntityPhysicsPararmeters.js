@@ -17,6 +17,7 @@ export default function EntityPhysicsPararmeters({selectid}){
 
   const [selectObject, setSelectObject] = useState(null);
   const [parameters, setParameters] = useState(null);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   useEffect(()=>{
     if(isEmpty(selectid)){
@@ -103,15 +104,16 @@ export default function EntityPhysicsPararmeters({selectid}){
   return <>
     <div>
       <div>
-        <label> Physics: </label>
+        <label> Physics: </label> <button onClick={()=>setIsDisplay(state=>!state)}> {isDisplay ? ("+"):("-")} </button>
       </div>
+      {isDisplay &&
       <div>
         <table>
           <tbody>
             {renderParams()}
           </tbody>
         </table>
-      </div>
+      </div>}
     </div>
   </>
 }

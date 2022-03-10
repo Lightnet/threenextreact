@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react"
 import { isEmpty } from "../../../lib/helper.mjs";
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityMaterials({selectobject}){
+export default function EntityObjectMaterials({selectobject}){
 
   const {
     entities
@@ -17,6 +17,7 @@ export default function EntityMaterials({selectobject}){
   const [selectObject, setSelectObject] = useState(null);
   const [materials, setMaterials] = useState([]);
   const [material, setMaterial] = useState(null);
+  const [isDisplay, setIsDisplay] = useState(false);
 
   useEffect(()=>{
     console.log("material check...")
@@ -104,15 +105,16 @@ export default function EntityMaterials({selectobject}){
     {material &&
      <div>
       <div>
-        <label> Materials: </label>
+        <label> Materials: </label><button onClick={()=>setIsDisplay(state=>!state)}> {isDisplay ? ("+"):("-")} </button>
       </div>
+      {isDisplay &&
       <div>
         <table>
           <tbody>
             {renderMaterials()}
           </tbody>
         </table>
-      </div>
+      </div>}
     </div>}
   </>
 }

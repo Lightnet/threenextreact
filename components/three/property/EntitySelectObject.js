@@ -10,7 +10,7 @@ import EntityComponentAdd from "./EntityComponentAdd.js";
 import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.js";
 import EntityShapePararmeters from "./EntityPararmeters.js";
 import { useEditor } from "../context/EditorProvider.js";
-import EntityMaterials from "./EntityMaterials.js";
+import EntityObjectMaterials from "./EntityObjectMaterials.js";
 import EntityObjectScale from "./EntityObjectScale.js";
 import EntityObjectPosition from "./EntityObjectPosition.js";
 import EntityObjectRotation from "./EntityObjectRotation.js";
@@ -26,7 +26,6 @@ export default function EntitySelectObject(){
   const [onSelectID, setOnSelectID] = useState("");
   const [selectObject, setSelectObject] = useState(null);
   const [isDisplayTransform, setIsDisplayTransform] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
 
   const {
     entities
@@ -69,12 +68,7 @@ export default function EntitySelectObject(){
     setSelectObjectID(e.target.value)
   };
 
-  function toggleTransform(){
-    setIsDisplayTransform(state=>!state);
-  }
-
   function toggleVisible(e){
-    setIsVisible(e.target.checked)
 
     dispatchEntity({
         type:"update"
@@ -82,8 +76,21 @@ export default function EntitySelectObject(){
       , keyType:"visible"
       , value: e.target.checked
     })
-
     //setSelectObject(state=>({...state, visible: e.target.checked}))
+  }
+
+  function renderTransform(){
+    if(selectObject?.position || selectObject?.rotation || selectObject?.scale){
+      return <div>
+        <div> <label> Transform: </label> <button onClick={()=>setIsDisplayTransform(state=>!state)}> {isDisplayTransform?("+"):("-")} </button> </div>
+        {isDisplayTransform && <>
+        <EntityObjectPosition selectobject={selectObject} />
+        <EntityObjectRotation selectobject={selectObject} />
+        <EntityObjectScale selectobject={selectObject} />
+        </>}
+      </div>
+    }
+    return <></>
   }
 
   return <>
@@ -93,7 +100,7 @@ export default function EntitySelectObject(){
         <select value={onSelectID} onChange={onSelectEntity}>
           <option value="" > Select Entity  </option>
           {entities.map((item)=>{
-            return <option key={item.objectid} value={item.objectid}> {item.name} :{item.objectid}  </option>
+            return <option key={item.objectid} value={item.objectid}>{item.name}</option>
           })}
         </select>
       </div>
@@ -103,30 +110,16 @@ export default function EntitySelectObject(){
       {selectObject && <div>
          <input type="checkbox" checked={selectObject?.visible} onChange={toggleVisible}/> <label> Visible </label>
       </div>}
+      {renderTransform()}
       <div>
-        {selectObject && <div> <button onClick={toggleTransform}> Transform </button> </div>}
-        {selectObject && isDisplayTransform && <EntityObjectPosition selectobject={selectObject} />}
-        {selectObject && isDisplayTransform && <EntityObjectRotation selectobject={selectObject} />}
-        {selectObject && isDisplayTransform && <EntityObjectScale selectobject={selectObject} />}
+        {selectObject &&<EntityShapePararmeters selectid={onSelectID}/>}
       </div>
       <div>
-        {
-        selectObject &&<EntityShapePararmeters selectid={onSelectID}/>
-        }
+        {selectObject &&<EntityPhysicsPararmeters selectid={onSelectID}/>}
       </div>
-
       <div>
-        {
-        selectObject &&<EntityPhysicsPararmeters selectid={onSelectID}/>
-        }
+        {selectObject &&<EntityObjectMaterials selectobject={selectObject}/>}
       </div>
-
-      <div>
-        {
-        selectObject &&<EntityMaterials selectobject={selectObject}/>
-        }
-      </div>
-
       <div>
         {
         selectObject &&<EntityComponentAdd selectobject={selectObject}/>

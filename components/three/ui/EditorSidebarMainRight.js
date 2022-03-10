@@ -21,8 +21,7 @@ export default function EditorSidebarMainRight(){
       ,overflow: "scroll"
     }}>
       {/* over lap can used mouse event */}
-      <EntityViewProperty style={{height:"50%"}} view={API.VIEWS.SCENES} />
-      <EntityViewProperty style={{height:"50%"}} view={API.VIEWS.ENTITYSELECTOBJECT} />
+      <EntityViewProperty style={{height:"100%"}} view={API.VIEWS.ENTITYSELECTOBJECT} />
       
     </div>
   </>

@@ -4,7 +4,9 @@
 */
 // https://github.com/pmndrs/drei#select
 
+import { useHelper } from '@react-three/drei';
 import React,{ useRef} from 'react';
+import { PointLightHelper } from 'three';
 
 export default function EntityAmbientLight(props, ref){
 
@@ -13,8 +15,9 @@ export default function EntityAmbientLight(props, ref){
     ref = useRef();
   }
 
-  return (
-  <>
+  useHelper(ref, PointLightHelper,1,'hotpink')
+
+  return (<>
     <ambientLight
       ref={ref}
       color={props.parameters.color}
@@ -22,8 +25,7 @@ export default function EntityAmbientLight(props, ref){
       {...props}
       >
     </ambientLight>
-  </>
-  )
+  </>)
 }
 
 export const EntityAmbientLightRef = React.forwardRef(EntityAmbientLight);
