@@ -25,20 +25,24 @@ export function EditorProvider(props){
   const [selectObjectID, setSelectObjectID] = useState("");
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
+  const [deleteObjectID, setDeleteObjectID] = useState("");
+
   const value = useMemo(()=>({
     editorID, setEditorID,
     editorName, setEditorName,
     settings, setSettings,
     selectObject, setSelectObject,
     enableOrbitControl, setEnableOrbitControl,
-    selectObjectID, setSelectObjectID
+    selectObjectID, setSelectObjectID,
+    deleteObjectID, setDeleteObjectID
   }),[
     editorID,
     editorName,
     settings,
     selectObject,
     selectObjectID,
-    enableOrbitControl
+    enableOrbitControl,
+    deleteObjectID
   ])
 
   return <EditorContext.Provider value={value} {...props} />

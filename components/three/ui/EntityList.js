@@ -4,11 +4,18 @@
 */
 
 import React from "react";
+import { log } from "../../../lib/log.mjs";
+import { useEditor } from "../context/EditorProvider.js";
 import { useEntity } from "../context/EntityProvider.js";
 
 export default function EntityList(){
 
-  const {entities, dispatchEntity} = useEntity()
+  const {setDeleteObjectID} = useEditor();
+
+  const {
+    entities
+    , dispatchEntity
+  } = useEntity()
 
   function renderObject3DList(){
     return entities.map((item)=>{
@@ -28,6 +35,7 @@ export default function EntityList(){
       type:"remove"
       , id:id
     })
+    setDeleteObjectID(id);
   }
 
   return <>

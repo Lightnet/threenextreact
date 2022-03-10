@@ -120,6 +120,19 @@ function reducerEntity(state, action) {
       item.isPhysics = action.isPhysics || false;
 
       if(action.dataType){item.dataType = action.dataType;}
+      if(action.dataType=="BOX"){
+        item.material=[]
+        item.material=[
+          {
+              index:0
+            , objectid:nanoid32()
+            , dataType:"meshStandardMaterial"
+            , name:"meshStandardMaterial"
+            , color:"#ff00ff"
+            , wireframe:false
+          }
+        ]
+      }
       if(action.parameters){item.parameters = action.parameters;}
 
       if(action.shapePhysics){
@@ -210,7 +223,21 @@ function reducerEntity(state, action) {
         return item;
       });
 
-      //return data;
+    case 'updateEntity':
+
+      return state.map((item) => {
+        //let data = state.map((item) => {
+          //log(item)
+          //log(action)
+          if(item.objectid == action.id){
+            item = action.entity;
+
+            apiUpdateEntity(item)
+
+            return item;
+          }
+          return item;
+        });
 
     case 'remove':
       apiDeleteEntity(action.id)

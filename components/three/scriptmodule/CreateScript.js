@@ -7,8 +7,6 @@ import React,{ useState } from "react";
 
 export default function CreateScript(){
 
-  console.log()
-
   const [scriptName, setScriptName] = useState("None");
   const [scripText, setScriptText] = useState('console.log("Hello world script")');
 

@@ -4,6 +4,7 @@
 */
 
 import React,{ useState } from "react";
+import { nanoid32 } from "../../../lib/helper.mjs";
 import { useEditor } from "../context/EditorProvider";
 import { useEntity } from "../context/EntityProvider";
 
@@ -14,9 +15,16 @@ var materialtypes=[
 
 export default function CreateMaterial({onClose}){
 
-  const {selectObjectID} = useEditor();
+  const {
+      selectObjectID
+    , setSelectObjectID
+  } = useEditor();
 
-  const {sceneID, dispatchEntity} = useEntity();
+  const {
+    sceneID
+  , entities
+  , dispatchEntity
+  } = useEntity();
 
   const [materialName, setMaterialName] = useState('meshStandardMaterial');
   const [color, setColor] = useState('#000000');
@@ -58,6 +66,7 @@ export default function CreateMaterial({onClose}){
       , wireframe: wireframe
     }
     //console.log(material)
+    /*
     dispatchEntity({
         type:'addMaterial'
       , id:selectObjectID
@@ -69,9 +78,35 @@ export default function CreateMaterial({onClose}){
       , keyType:"material"
       , value:material
     })
-    if(onClose){
-      onClose();
-    }
+    */
+    let dataEntity = entities.find(item=>item.objectid == selectObjectID)
+    console.log(dataEntity);
+
+    dataEntity.material=[]
+    dataEntity.material=[
+      {
+          index:0
+        , objectid:nanoid32()
+        , dataType:"meshStandardMaterial"
+        , name:"meshStandardMaterial"
+        , color:"#ffffff"
+        , wireframe:false
+      }
+    ]
+
+    dispatchEntity({
+      type:'update'
+      , id:selectObjectID
+      , entity:dataEntity
+    })
+
+    setSelectObjectID("");
+    setSelectObjectID(selectObjectID);
+
+
+    //if(onClose){
+      //onClose();
+    //}
   }
 
   return <>

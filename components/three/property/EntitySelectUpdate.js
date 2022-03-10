@@ -14,7 +14,11 @@ import EntityMaterials from "./EntityMaterials.js";
 
 export default function EntitySelectUpdate(){
 
-  const {setSelectObjectID} = useEditor();
+  const {
+    selectObjectID,
+    deleteObjectID,
+    setSelectObjectID
+  } = useEditor();
 
   const [onSelectID, setOnSelectID] = useState("");
   const [selectObject, setSelectObject] = useState(null);
@@ -23,9 +27,7 @@ export default function EntitySelectUpdate(){
   const [isDisplayTransform, setIsDisplayTransform] = useState(false);
 
   const {
-    sceneID
-  , setSceneID
-  , entities
+    entities
   , dispatchEntity
 } = useEntity()
 
@@ -34,19 +36,39 @@ export default function EntitySelectUpdate(){
     setSelectObjectID(e.target.value)
   };
 
+  
   useEffect(()=>{
     if(isEmpty(onSelectID)){
       setSelectObject(null)
       return;
     }
-    for(let idx in entities){
-      if(entities[idx].objectid == onSelectID){
-        console.log(entities[idx]);
-        setSelectObject(entities[idx]);
-        break;
+    setSelectObject(entities.find(item=>item.objectid==onSelectID));
+  },[onSelectID])
+  
+
+  useEffect(()=>{
+    if(isEmpty(selectObjectID)){
+      setSelectObject(null);
+    }
+    let select = entities.find(item=>item.objectid==selectObjectID)
+    if(select){
+      setSelectObject(select);
+    }else{
+      setSelectObject(null);
+    }
+  },[selectObjectID])
+
+  useEffect(()=>{
+    if(isEmpty(deleteObjectID)){
+      return;
+    }
+    if(selectObject!=null){
+      if(selectObject.objectid == deleteObjectID){
+        setSelectObject(null)
       }
     }
-  },[onSelectID])
+  },[deleteObjectID])
+
 
   function inputPosition(event){
     //console.log(event.target.type)
@@ -174,7 +196,7 @@ export default function EntitySelectUpdate(){
 
       <div>
         {
-        selectObject &&<EntityComponentAdd/>
+        selectObject &&<EntityComponentAdd selectobject={selectObject}/>
         }
       </div>
     </div>
