@@ -20,8 +20,8 @@ export default function EditorSidebarMainRight(){
       ,overflow: "scroll"
     }}>
       {/* over lap can used mouse event */}
-      <EntityViewProperty view={"Scenes"} />
-      <EntityViewProperty view={"Entity Object"} />
+      <EntityViewProperty style={{height:"50%"}} view={"Scenes"} />
+      <EntityViewProperty style={{height:"50%"}} view={"Entity Object"} />
       
     </div>
   </>

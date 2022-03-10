@@ -10,8 +10,8 @@ import SignArea from "../components/system/signarea";
 import Projects from '../components/three/Projects';
 
 export async function getServerSideProps(ctx) {
-  console.log("[[=== INDEX getServerSideProps ===]");
-  //console.log(ctx);
+  log("[[=== INDEX getServerSideProps ===]");
+  //log(ctx);
   return {
     props:{
       session: await getSession(ctx)
@@ -57,8 +57,6 @@ export default function IndexPage({
       <Link href="/editor">Editor</Link><span> | </span>
       <Link href="/games">Games</Link><span> | </span>
       {renderSection()}
-      
-      
       <br/>
       <p>Next.js and Three.js development builds!</p>
       <p>Work in progress!</p>

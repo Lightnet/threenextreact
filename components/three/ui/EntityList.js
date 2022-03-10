@@ -13,14 +13,14 @@ export default function EntityList(){
   function renderObject3DList(){
     return entities.map((item)=>{
       return <div key={item.objectid}>
-        <button onClick={()=>clickInfo(item)} > {item.objectid}  </button>
-        <button onClick={()=>clickDelete(item.objectid)} > Delete </button>
+        <button onClick={()=>clickInfo(item)} > {item.name}  </button>
+        <button style={{float:"right"}} onClick={()=>clickDelete(item.objectid)} > Delete </button>
       </div>
     })
   }
 
   function clickInfo(item){
-    console.log(item)
+    log(item)
   }
 
   function clickDelete(id){
@@ -34,7 +34,7 @@ export default function EntityList(){
     <div style={{//right bar
       width:'100%'
       //,height:'100%'
-      ,height:'50%'
+      ,height:'100%'
       //,height:'calc(100% - 56px)'
       //,background:'#778899'
       ,overflow: "scroll"

@@ -11,12 +11,12 @@ import { log } from "../../lib/log";
 export default async (req, res) => {
 
   const session = await getSession({ req })
-  //console.log("session:", session);
+  //log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
-  //console.log(error);
-  //console.log(userid);
-  //console.log(username);
+  //log(error);
+  //log(userid);
+  //log(username);
   if(error){
     return res.json({error:"FAIL"});
   }
@@ -27,7 +27,7 @@ export default async (req, res) => {
   if(req.method == 'GET'){
     try{
       let objectDatas = await ObjectData.find().exec();
-      //console.log(scenes)
+      //log(scenes)
       return res.json({action:"OBJECTDATAS",objectdatas:objectDatas});
     }catch(e){
       return res.json({error:"FAILSCENES"});

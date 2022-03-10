@@ -11,12 +11,12 @@ import { nanoid32 } from "../../lib/helper.mjs";
 export default async (req, res) => {
 
   const session = await getSession({ req });
-  //console.log("session:", session);
+  //log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
-  //console.log(error);
-  //console.log(userid);
-  //console.log(username);
+  //log(error);
+  //log(userid);
+  //log(username);
   if(error){
     return res.json({error:"FAIL"});
   }
@@ -26,14 +26,14 @@ export default async (req, res) => {
 
   if(req.method == 'GET'){
     const editors = await Editor.find({userid: userid}).exec();
-    //console.log(editors);
-    //console.log("API PROJECT LIST")
+    //log(editors);
+    //log("API PROJECT LIST")
     return res.json({action:'LIST',editors:editors});
   }
 
   if(req.method == 'POST'){
     let data = req.body;
-    //console.log(data);
+    //log(data);
     if(data){
       if(data.action){
         if(data.action == 'CREATE'){
@@ -63,11 +63,11 @@ export default async (req, res) => {
             let saveEditor = await newEditor.save();
             //if (err) return handleError(err);
             // saved!
-            console.log("save user");
-            console.log(saveEditor);
+            //log("save user");
+            //log(saveEditor);
 
             let saveScene = await newScene.save();
-            console.log(saveScene);
+            //log(saveScene);
 
             return res.json({action:'CREATE',editor:saveEditor});
           }catch(e){
@@ -78,7 +78,7 @@ export default async (req, res) => {
         if(data.action == 'INFO'){
           try{
             const editor = await Editor.findOne({id: data.editorid}).exec();
-            //console.log(editor);
+            //log(editor);
             return res.json({
               action:"UPDATE",
               sceneid:editor.defaultsceneid,
@@ -115,7 +115,7 @@ export default async (req, res) => {
     let data = req.body;
     try{
       const deleteEditor = await Editor.deleteOne({id:data.editorid}).exec();
-      console.log(deleteEditor);
+      log(deleteEditor);
 
       return res.json({action:"DELETE",id:data.editorid});
     }catch(e){

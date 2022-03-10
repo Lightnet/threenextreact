@@ -12,13 +12,13 @@ import API from '../../../../../components/three/context/API.mjs';
 
 router.get('/project', async(req, res) => {
   //res.json({ error: 'Not found' });
-  //console.log(req.session);
+  //log(req.session);
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
-  //console.log(error)
-  //console.log(userid)
-  //console.log(username)
+  //log(error)
+  //log(userid)
+  //log(username)
   if(error){
-    //console.log("Error! session check...");
+    //log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -33,18 +33,18 @@ router.get('/project', async(req, res) => {
 
 router.post('/project', async(req, res) => {
   //res.json({ error: 'Not found' });
-  //console.log(req.session);
-  //console.log(req.body);
+  //log(req.session);
+  //log(req.body);
   const {api} = req.body;
   if(isEmpty(api)){
     return res.json({error:"FAIL"});
   }
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
-  //console.log(error)
-  //console.log(userid)
-  //console.log(username)
+  //log(error)
+  //log(userid)
+  //log(username)
   if(error){
-    //console.log("Error! session check...");
+    //log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -62,7 +62,7 @@ router.post('/project', async(req, res) => {
         , name: project.name
       });
     }catch(e){
-      //console.log(e);
+      //log(e);
       return res.json({error:"GET PROJECT FAIL"});
     }
   }
@@ -95,16 +95,17 @@ router.post('/project', async(req, res) => {
       let saveProject = await newProject.save();
       //if (err) return handleError(err);
       // saved!
-      //console.log("saveProject");
-      //console.log(saveProject);
+      //log("saveProject");
+      //log(saveProject);
 
-      let saveScene = await newScene.save();
-      console.log(saveScene);
+      await newScene.save();
+      //let saveScene = await newScene.save();
+      //log(saveScene);
 
       return res.json({api:'CREATE',project:saveProject});
 
     }catch(e){
-      //console.log(e);
+      //log(e);
       return res.json({error:"CREATE PROJECT FAIL"});
     }
   }
@@ -113,18 +114,18 @@ router.post('/project', async(req, res) => {
 
 router.put('/project', async(req, res) => {
   //res.json({ error: 'Not found' });
-  //console.log(req.session);
-  //console.log(req.body);
+  //log(req.session);
+  //log(req.body);
   const {api} = req.body;
   if(isEmpty(api)){
     return res.json({error:"FAIL"});
   }
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
-  //console.log(error)
-  //console.log(userid)
-  //console.log(username)
+  //log(error)
+  //log(userid)
+  //log(username)
   if(error){
-    //console.log("Error! session check...");
+    //log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -142,7 +143,7 @@ router.put('/project', async(req, res) => {
       const updateProject = await Project.findOneAndUpdate(query,update,{new:true}).exec();
       return res.json({api:'UPDATE',project:updateProject});
     }catch(e){
-      //console.log(e);
+      //log(e);
       return res.json({error:"UPDATE PROJECT FAIL"});
     }
   }
@@ -151,16 +152,16 @@ router.put('/project', async(req, res) => {
 
 router.delete('/project', async(req, res) => {
   //res.json({ error: 'Not found' });
-  //console.log(req.session);
-  //console.log(req.body);
+  //log(req.session);
+  //log(req.body);
   const {api} = req.body;
   if(isEmpty(api)){return res.json({error:"FAIL"});}
   const {error, userid, username} = await expressSessionTokenCheck(req.session);
-  //console.log(error)
-  //console.log(userid)
-  //console.log(username)
+  //log(error)
+  //log(userid)
+  //log(username)
   if(error){
-    //console.log("Error! session check...");
+    //log("Error! session check...");
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
@@ -170,14 +171,14 @@ router.delete('/project', async(req, res) => {
     const Scene = db.model('Scene');
     try{
       const deleteProject = await Project.deleteOne({id:data.id}).exec();
-      //console.log(deleteProject);
+      //log(deleteProject);
       //need to delete scene, object3d
       const deleteScene = await Scene.deleteMany({projectid:data.id}).exec();
-      //console.log(deleteScene);
+      //log(deleteScene);
 
       return res.json({api:API.DELETE,projectid:data.id});
     }catch(e){
-      //console.log(e);
+      //log(e);
       return res.json({error:"DELTE PROJECT FAIL"});
     }
   }

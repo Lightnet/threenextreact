@@ -36,7 +36,7 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
   },[resize])
 
   useEffect(() => { 
-    //console.log("isOpen: ", isOpen)
+    //log("isOpen: ", isOpen)
     if(typeof isOpen !='undefined'){
       setIsModal(isOpen);
     }
@@ -49,7 +49,7 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
       setTitle('Window');
     }
     if(pos){
-      //console.log(pos);
+      //log(pos);
       setPosX(pos[0]);
       setPosY(pos[1]);
     }
@@ -89,7 +89,7 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
       return;
     }
     if (isPress) {
-      //console.log("move?");
+      //log("move?");
       e = e || window.event;
       e.preventDefault();
       setPosX(e.pageX - relX);
@@ -107,7 +107,7 @@ export default function Modal({children,title,isOpen,pos,pheight,pwidth,onClose,
 
   function closeEWindow(e){
     e.preventDefault();
-    console.log('close');
+    //log('close');
     if(typeof onClose !== 'undefined'){
       if(typeof updatePos !== 'undefined'){
         updatePos([posX,posY]);

@@ -18,8 +18,8 @@ export default function EditorSidebarMainLeft(){
       ,background:'#778899'
     }}>
       {/* over lap can used mouse event */}
-      <EntityViewProperty view={"Create Entity Object"} />
-      <EntityViewProperty view={"Entity List"} />
+      <EntityViewProperty style={{height:"50%"}} view={"Create Entity Object"} />
+      <EntityViewProperty style={{height:"50%"}} view={"Entity List"} />
     </div>
   </>
 }

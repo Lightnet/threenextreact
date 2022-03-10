@@ -19,16 +19,16 @@ export function SignOutPage() {
   const navigate = useNavigate();
 
   async function clickSignOut(){
-    console.log("clickSignOut")
-    console.log("login")
+    //log("clickSignOut")
+    //log("login")
     let data = await useFetch('/signout',{
       method:'POST'
       , headers: {"Content-Type": "application/json"}
       , body:JSON.stringify({token})
     })
-    console.log(data)
+    //log(data)
     if(data.error){
-      console.log('Fetch Error Signout');
+      log('Fetch Error Signout');
       return;
     }
     if(data.action){
@@ -41,7 +41,7 @@ export function SignOutPage() {
   }
 
   function clickCancel(){
-    console.log("index")
+    log("index")
     navigate('/')
   }
 

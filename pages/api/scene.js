@@ -12,12 +12,12 @@ import { log } from "../../lib/log";
 export default async (req, res) => {
 
   const session = await getSession({ req })
-  //console.log("session:", session);
+  //log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
-  //console.log(error);
-  //console.log(userid);
-  //console.log(username);
+  //log(error);
+  //log(userid);
+  //log(username);
   if(error){
     return res.json({error:"FAIL"});
   }
@@ -48,14 +48,12 @@ export default async (req, res) => {
           , name: data.name
           , description: data.description
         })
-  
-        let saveScene = await newScene.save();
-        console.log(saveScene);
-  
+        await newScene.save();
+        //let saveScene = await newScene.save();
+        //log(saveScene);
         return res.json({api:'CREATE',scene:saveScene});
-  
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"CREATE SCENE FAIL"});
       }
     }
@@ -66,13 +64,13 @@ export default async (req, res) => {
         let scenes = await Scene.find({projectid: data.projectid})
           .select('projectid id objectid  name description')
           .exec();
-          console.log(scenes);
+          //log(scenes);
         return res.json({
           api:API.SCENES
           , scenes:scenes
         });
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"GET Scenes FAIL"});
       }
     }
@@ -99,14 +97,14 @@ export default async (req, res) => {
         const updateProject = await Project.findOneAndUpdate(query,update,{new:true})
           .select('projectid id objectid  name description')
           .exec();
-        console.log(updateProject);
+        //log(updateProject);
   
         return res.json({
           api:API.UPDATE
           , project:updateProject
         });
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"UPDATE Project FAIL"});
       }
     }
@@ -128,14 +126,14 @@ export default async (req, res) => {
         const updateScene = await Scene.findOneAndUpdate(query,update,{new:true})
           .select('projectid id objectid  name description')
           .exec();
-        console.log(updateScene);
+        //log(updateScene);
   
         return res.json({
           api:API.UPDATE
           , scene:updateScene
         });
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"UPDATE Scenes FAIL"});
       }
     }
@@ -150,13 +148,13 @@ export default async (req, res) => {
       let data = req.body;
       try{
         let deleteScene = await Scene.deleteOne({objectid: data.id}).exec();
-          console.log(deleteScene);
+        //log(deleteScene);
         return res.json({
           api:API.DELETE
           , id:data.id
         });
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"GET Scenes FAIL"});
       }
     }

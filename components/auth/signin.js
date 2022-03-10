@@ -19,7 +19,7 @@ export function SignInPage() {
   const [status, setStatus] = useState('');
   
   async function clickLogin(){
-    //console.log("login")
+    //log("login")
     let data = await useFetch('/signin',{
       method:'POST'
       , headers: {"Content-Type": "application/json"}
@@ -27,9 +27,9 @@ export function SignInPage() {
       //, body:JSON.stringify({userName:userName, password:password})
       //, body:{userName:userName, password:password}
     })
-    console.log(data)
+    //log(data)
     if(data.error){
-      console.log('Fetch error Login');
+      //log('Fetch error Login');
       if(data.error=='PASSWORDFAIL'){
         setStatus('Password Fail!');
       }
@@ -51,7 +51,7 @@ export function SignInPage() {
   }
 
   function clickCancel(){
-    console.log("index")
+    //log("index")
     navigate('/')
   }
 

@@ -24,9 +24,9 @@ export function SignUpPage() {
       , headers: {"Content-Type": "application/json"}
       , body:JSON.stringify({user,password})
     })
-    console.log(data)
+    //log(data)
     if(data.error){
-      console.log('Fetch error Sign Up');
+      log('Fetch error Sign Up');
       return;
     }
     if(data.action){
@@ -41,7 +41,7 @@ export function SignUpPage() {
   }
 
   function clickCancel(){
-    console.log("index")
+    //log("index")
     navigate('/')
   }
 

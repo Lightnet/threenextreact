@@ -17,17 +17,17 @@ export default function DebugGamePage({gameid}){
   const [searchParams] = useSearchParams();
 
   useEffect(()=>{
-    //console.log(projectid);
+    //log(projectid);
     if(!isEmpty(gameid)){
       setProjectID(gameid)
     }else{
-      console.log("props.gameid NULL!")
+      log("props.gameid NULL!")
     }
   },[gameid])
 
   useEffect(()=>{
     const currentParams = Object.fromEntries([...searchParams]);
-    //console.log(currentParams);
+    //log(currentParams);
     if(currentParams?.gameid){
       setProjectID(currentParams.gameid)
     }

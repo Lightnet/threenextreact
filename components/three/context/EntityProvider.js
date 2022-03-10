@@ -5,6 +5,7 @@
 
 import React,{ createContext, useState, useMemo, useContext, useReducer } from "react";
 import { isEmpty, nanoid32 } from "../../../lib/helper.mjs";
+import { log } from "../../../lib/log.js";
 import useFetch from "../../hook/useFetch.mjs";
 
 export const EntityContext = createContext();
@@ -32,7 +33,7 @@ export function useEntities(){
 // fetch for saving data
 async function apiSaveEntity(projectid, sceneid, entity){
   if(isEmpty(projectid)||isEmpty(sceneid)){
-    console.log('save entity empty fields ids.');
+    log('save entity empty fields ids.');
     return;
   }
   let data = await useFetch('api/entity',{
@@ -44,19 +45,19 @@ async function apiSaveEntity(projectid, sceneid, entity){
       , sceneid: sceneid
       , data:entity})
   });
-  //console.log(data);
+  //log(data);
   if(data.error){
-    console.log("ERROR FETCH Save Entity!");
+    log("ERROR FETCH Save Entity!");
     //msgError('Fetch Error on Save Object3D');
     return;
   }
-  console.log("useFetch save Entity!");
+  log("useFetch save Entity!");
 }
 
 // fetch for delete data
 async function apiDeleteEntity(id){
   if(isEmpty(id)){
-    console.log('delete entity null.');
+    log('delete entity null.');
     return;
   }
   let data = await useFetch('api/entity',{
@@ -67,19 +68,19 @@ async function apiDeleteEntity(id){
       , objectid: id
     })
   });
-  //console.log(data);
+  //log(data);
   if(data.error){
-    console.log("ERROR FETCH DELETE Entity!");
+    log("ERROR FETCH DELETE Entity!");
     //msgError('Fetch Error on Save Object3D');
     return;
   }
-  console.log("useFetch delete Entity!");
+  log("useFetch delete Entity!");
 }
 
 // fetch for update data
 async function apiUpdateEntity(entity){
   if(!entity){
-    console.log('update entity null.');
+    log('update entity null.');
     return;
   }
   let data = await useFetch('api/entity',{
@@ -90,24 +91,24 @@ async function apiUpdateEntity(entity){
       , data: entity
     })
   });
-  //console.log(data);
+  //log(data);
   if(data.error){
-    console.log("ERROR FETCH UPDATE Entity!");
+    log("ERROR FETCH UPDATE Entity!");
     //msgError('Fetch Error on Save Object3D');
     return;
   }
-  console.log("useFetch UPDATE Entity!");
+  log("useFetch UPDATE Entity!");
 }
 
 // this is dispatch events
 function reducerEntity(state, action) {
-  //console.log(action);
+  //log(action);
   switch (action.type) {
     // do something with the action
     case 'add':
       // do checks arg or params
       //need to do check for object, material, models
-      //console.log(action)
+      //log(action)
       let item = {};
       item.objectid = action.id || nanoid32();
       item.name = action.name || nanoid32();
@@ -135,8 +136,8 @@ function reducerEntity(state, action) {
       // keep every item except the one we want to remove
       return state.map((item) => {
       //let data = state.map((item) => {
-        //console.log(item)
-        //console.log(action)
+        //log(item)
+        //log(action)
         if(item.objectid == action.id){
           if(action.keyType=="position"){
             item.position=action.value
@@ -151,7 +152,7 @@ function reducerEntity(state, action) {
             item.parameters=action.value
           }
           if(action.keyType=="physics"){
-            console.log(action.value)
+            //log(action.value)
             item.isPhysics = action.value.isPhysics;
             item.mass = action.value.mass;
             item.shapePhysics = action.value.shapePhysics;
@@ -159,10 +160,10 @@ function reducerEntity(state, action) {
           }
 
           if(action.keyType=="material"){
-            //console.log("MATERIAL???")
-            //console.log(action.value)
+            //log("MATERIAL???")
+            //log(action.value)
             if(item.material){
-              //console.log("other?")
+              //log("other?")
               if(item.material.length==0){
                 let material = item.material;
                 item.material = [...material, {
@@ -175,9 +176,9 @@ function reducerEntity(state, action) {
                 }]
               }else{
                 item.material = item.material.map(obj=>{
-                  //console.log(obj)
+                  //log(obj)
                   if(obj.objectid == action.value.objectid){
-                    //console.log(obj)
+                    //log(obj)
                     obj.name = action.value.name
                     obj.dataType = action.value.dataType
                     obj.color = action.value.color
@@ -216,7 +217,7 @@ function reducerEntity(state, action) {
       // keep every item except the one we want to remove
       return state.filter((item) => item.objectid != action.id);
     case 'array':
-      console.log("Fetch Entities len:", action.entities.length)
+      log("Fetch Entities len:", action.entities.length)
       // array for loading from fetch
       if(action.entities.length ==0){
         return [];  
@@ -225,13 +226,13 @@ function reducerEntity(state, action) {
     case 'clear':
       return [];
     case 'addMaterial':
-      console.log("render??");
+      log("render??");
       return state.map((item) => {
         if(item.objectid == action.id){
           if(item.material){
 
           }else{
-            console.log("Add Material")
+            log("Add Material")
             item.material=[];
           }
           return item;
@@ -239,7 +240,7 @@ function reducerEntity(state, action) {
         return item;
       });
     case 'render':
-      console.log("render??");
+      log("render??");
       return state.map((item) => {
         if(item.objectid == action.id){
           if(action.keyType=="material"){

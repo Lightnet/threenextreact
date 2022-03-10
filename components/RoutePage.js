@@ -43,8 +43,8 @@ export default function RoutePage(){
   return (<>
     <NavAccess/>
     <Routes>
-      <Route path="/" element={<ProjectsPage />} />
-      <Route path="projects" element={<ProjectsPage />} />
+      <Route index element={<ProjectsPage />} />
+      <Route path="projects/*" element={<ProjectsPage />} />
       <Route path="editor/*" element={<EditorPage />} />
       <Route path="games" element={<GamesPage />} />
       <Route path="game/*" element={<GamePage />} />
@@ -55,6 +55,3 @@ export default function RoutePage(){
     </Routes>
   </>)
 }
-/*
-
-*/

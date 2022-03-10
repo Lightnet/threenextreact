@@ -9,9 +9,10 @@ import EntityList from '../ui/EntityList';
 import EntityScenes from './EntityScenes';
 import EntitySelectUpdate from './EntitySelectUpdate';
 
-export default function EntityViewProperty({view}){
+export default function EntityViewProperty({view,style}){
 
-  const [viewType, setViewType] = useState("Scenes")
+  const [viewType, setViewType] = useState("Scenes");
+  const [_style, setStyle] = useState({});
   const [views, setViews] = useState([
       "Scenes"
     , "Create Entity"
@@ -21,14 +22,20 @@ export default function EntityViewProperty({view}){
   ])
 
   useEffect(()=>{
+    if(typeof style != "undefined"){
+      setStyle(style);
+    }
+  },[style])
+
+  useEffect(()=>{
     if(typeof view != "undefined"){
       setViewType(view);
     }
   },[view])
 
   function renderView(){
-    //console.log("viewType:", viewType)
-    //console.log(typeof viewType)
+    //log("viewType:", viewType)
+    //log(typeof viewType)
     if(viewType == "Create Entity Object"){
       return <CreateEntityObject/>
     }else if(viewType == "Entity List"){
@@ -47,14 +54,14 @@ export default function EntityViewProperty({view}){
   }
 
   return <>
-    <div>
+    <div style={_style}>
       <div>
         <label> View </label>
         <select value={viewType} onChange={onSelectView}>
           {views.map(item=><option key={item} value={item}>{item}</option>)}
         </select>
       </div>
-      <div>
+      <div style={{height:"calc(100% - 19px)"}} >
         {renderView()}
       </div>
     </div>

@@ -12,12 +12,12 @@ import API from "../../components/three/context/API.mjs";
 export default async (req, res) => {
 
   const session = await getSession({ req });
-  //console.log("session:", session);
+  //log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
-  //console.log(error);
-  //console.log(userid);
-  //console.log(username);
+  //log(error);
+  //log(userid);
+  //log(username);
   if(error){
     return res.json({error:"FAIL"});
   }
@@ -53,7 +53,7 @@ export default async (req, res) => {
           , name: project.name
         });
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"GET PROJECT FAIL"});
       }
     }
@@ -84,16 +84,15 @@ export default async (req, res) => {
         let saveProject = await newProject.save();
         //if (err) return handleError(err);
         // saved!
-        console.log("saveProject");
-        console.log(saveProject);
+        //log("saveProject");
+        //log(saveProject);
   
-        let saveScene = await newScene.save();
-        console.log(saveScene);
-  
+        await newScene.save();
+        //let saveScene = await newScene.save();
+        //log(saveScene);
         return res.json({api:'CREATE',project:saveProject});
-  
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"CREATE PROJECT FAIL"});
       }
     }
@@ -119,7 +118,7 @@ export default async (req, res) => {
         const updateProject = await Project.findOneAndUpdate(query,update,{new:true}).exec();
         return res.json({api:'UPDATE',project:updateProject});
       }catch(e){
-        //console.log(e);
+        //log(e);
         return res.json({error:"UPDATE PROJECT FAIL"});
       }
     }
@@ -134,14 +133,14 @@ export default async (req, res) => {
       const Scene = db.model('Scene');
       try{
         const deleteProject = await Project.deleteOne({id:data.id}).exec();
-        console.log(deleteProject);
+        log(deleteProject);
         //need to delete scene, object3d
         const deleteScene = await Scene.deleteMany({projectid:data.id}).exec();
-        console.log(deleteScene);
+        log(deleteScene);
   
         return res.json({api:API.DELETE,projectid:data.id});
       }catch(e){
-        console.log(e);
+        log(e);
         return res.json({error:"DELTE PROJECT FAIL"});
       }
     }

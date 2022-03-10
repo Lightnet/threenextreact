@@ -5,6 +5,7 @@
 
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { log } from "../../../lib/log";
 
 export default NextAuth({
   providers: [
@@ -21,10 +22,10 @@ export default NextAuth({
         passphrase: {  label: "Passphrase", type: "password", placeholder:"PASSWORD" }
       },
       async authorize(credentials, req) {
-        //console.log("CHECKING AUTH !!!");
+        log("CHECKING AUTH !!!");
         //const user = { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
         //return user;
-        console.log("process.env.HOST: ", process.env.HOST)
+        //console.log("process.env.HOST: ", process.env.HOST)
         
         let hosturl;
         if(process.env.NODE_ENV == 'development'){
@@ -48,10 +49,10 @@ export default NextAuth({
           return null;
         }
          
-        console.log("[[[=== CredentialsProvider user ===]]]");
-        console.log(user);
+        //console.log("[[[=== CredentialsProvider user ===]]]");
+        //console.log(user);
         if(user.error=="FAIL"){
-          console.log("NOTFOUND! USER!");
+          //console.log("NOTFOUND! USER!");
           return null;
         }else if(user.error == "EXIST"){
           throw new Error('USEREXIST');
@@ -86,7 +87,7 @@ export default NextAuth({
   callbacks: {
     //first process user login
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("[[[=== callbacks jwt ===]]");
+      //console.log("[[[=== callbacks jwt ===]]");
       //console.log(token);
       //console.log(user);
       //console.log(account);
@@ -104,7 +105,7 @@ export default NextAuth({
     },
     //after jwt finish this is process
     async session({ session, user, token }) {
-      console.log("[[[=== callbacks session ===]]]");
+      //console.log("[[[=== callbacks session ===]]]");
       //console.log(session);
       //console.log(user);
       //console.log(token);

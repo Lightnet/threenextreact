@@ -22,12 +22,12 @@ export default function ProjectsPage({onLoadEditor}){
 
   async function getProejctList(){
     let data = await useFetch("/api/project");
-    //console.log(data);
+    //log(data);
     if(data.error){
-      console.log("ERROR FETCH PROJECT LIST")
+      log("ERROR FETCH PROJECT LIST")
       return;
     }
-    //console.log(data);
+    //log(data);
     if(data.api=='LIST'){
       setProjects(data.projects);
     }
@@ -43,7 +43,7 @@ export default function ProjectsPage({onLoadEditor}){
 
   async function createProject(e){
     if((isEmpty(projectName))||isEmpty(projectDescription)){
-      console.log("Empty fields!");
+      log("Empty fields!");
       return;
     }
     let data = await useFetch('api/project',{
@@ -56,12 +56,12 @@ export default function ProjectsPage({onLoadEditor}){
       })
     });
     if(data.error){
-      console.log("ERROR FETCH CREATE PROJECT");
+      log("ERROR FETCH CREATE PROJECT");
       return;
     }
-    console.log(data);
+    log(data);
     if(data.api=='CREATE'){
-      console.log('API created Project!');
+      log('API created Project!');
       setProjects(state=>[...state,data.project])
       setIsOpenModal(false);
     }
@@ -93,7 +93,7 @@ export default function ProjectsPage({onLoadEditor}){
 
   async function updateProject(e){
     if((isEmpty(projectName))||isEmpty(projectDescription)){
-      console.log("Empty fields!");
+      log("Empty fields!");
       return;
     }
     let data = await useFetch('api/project',{
@@ -107,12 +107,12 @@ export default function ProjectsPage({onLoadEditor}){
       })
     });
     if(data.error){
-      console.log("ERROR FETCH CREATE PROJECT");
+      log("ERROR FETCH CREATE PROJECT");
       return;
     }
-    console.log(data);
+    log(data);
     if(data.api=='UPDATE'){
-      console.log('API created Project!');
+      log('API created Project!');
       setProjects(projects.map(item=> item.id == data.project.id ? {...item, name:data.project.name,description:data.project.description   }: item ))
       setIsOpenModal(false);
     }
@@ -120,7 +120,7 @@ export default function ProjectsPage({onLoadEditor}){
 
   async function deleteProject(){
     if(isEmpty(projectID)){
-      console.log("Empty projectID!");
+      log("Empty projectID!");
       return;
     }
     let data = await useFetch('api/project',{
@@ -132,23 +132,23 @@ export default function ProjectsPage({onLoadEditor}){
       })
     });
     if(data.error){
-      console.log("ERROR FETCH DELETE PROJECT");
+      log("ERROR FETCH DELETE PROJECT");
       return;
     }
-    console.log(data);
+    log(data);
     if(data.api=='DELETE'){
-      console.log('API created Project!');
+      log('API created Project!');
       setProjects(projects.filter(item=> item.id != data.projectid ))
       setIsOpenModal(false);
     }
   }
 
   function clickEditID(id){
-    console.log("edit id:",id)
+    log("edit id:",id)
     setProjectID(id)
     setDataType('edit');
     for (let idx in projects){
-      console.log(projects[idx]);
+      log(projects[idx]);
       if(projects[idx].id == id){
         setProjectName(projects[idx].name);
         setProjectDescription(projects[idx].description);
@@ -161,7 +161,7 @@ export default function ProjectsPage({onLoadEditor}){
   function clickLoadID(id){
     setProjectID(id)
     for (let idx in projects){
-      console.log(projects[idx]);
+      log(projects[idx]);
       if(projects[idx].id == id){
         setProjectName(projects[idx].name);
         setProjectDescription(projects[idx].description);
@@ -175,7 +175,7 @@ export default function ProjectsPage({onLoadEditor}){
   function clickDeleteID(id){
     setProjectID(id)
     for (let idx in projects){
-      console.log(projects[idx]);
+      log(projects[idx]);
       if(projects[idx].id == id){
         setProjectName(projects[idx].name);
         setProjectDescription(projects[idx].description);

@@ -9,8 +9,8 @@ import React, { useEffect, useState } from "react";
 //import { useNavigate } from "react-router-dom";
 import { useRouter } from 'next/router';
 import { isEmpty } from "../../lib/helper.mjs";
-import useFetch from "../hook/usefetch.js";
-import Modal from "../modal/modal.js"
+import useFetch from "../hook/useFetch.mjs";
+import Modal from "../modal/modal.jsx"
 
 export default function Projects({onLoadEditor}){
 

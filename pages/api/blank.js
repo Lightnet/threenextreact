@@ -15,17 +15,16 @@ import { log } from "../../lib/log";
 
 export default async (req, res) => {
   const session = await getSession({ req })
-  //console.log("session", session);
+  //log("session", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
-  //console.log(error);
-  //console.log(userid);
-  //console.log(username);
+  //log(error);
+  //log(userid);
+  //log(username);
   if(error){
     return res.json({error:"FAIL"});
   }
   const db = await clientDB();
-
 
   //res.end();
   return res.json({error:"FAIL"});

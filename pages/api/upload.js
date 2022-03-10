@@ -19,6 +19,7 @@ import path from "path";
 
 import { getSession } from "next-auth/react";
 import clientDB,{ sessionTokenCheck } from "../../lib/database";
+import { log } from '../../lib/log';
 
 export const config = {
   api: {
@@ -29,12 +30,12 @@ export const config = {
 export default async function handler(req, res) {
 
   const session = await getSession({ req })
-  //console.log("session:", session);
+  //log("session:", session);
 
   let {error, userid, username} = await sessionTokenCheck(session);
-  //console.log(error);
-  //console.log(userid);
-  //console.log(username);
+  //log(error);
+  //log(userid);
+  //log(username);
   if(error){
     return res.json({error:"FAIL"});
   }
@@ -67,8 +68,8 @@ export default async function handler(req, res) {
         reject(res.status(500).send('Aborted'));
         return;
       }
-      console.log(fields);
-      console.log(files);
+      log(fields);
+      log(files);
       //res.json({ fields, files });
       resolve(res.status(200).send('done'));
     });
@@ -83,12 +84,12 @@ export default async function handler(req, res) {
     form
       .on("file", async (name, file) => {
         const data = fs.readFileSync(file.path);
-        //console.log("name: ", name); //   <input name="[file]" type="file" />
-        //console.log("file.path: ", file.path);
-        //console.log("ext: ", path.extname(file.path));
-        //console.log("file: ", file.name);
-        //console.log(data);
-        //console.log(data.toString('base64'));
+        //log("name: ", name); //   <input name="[file]" type="file" />
+        //log("file.path: ", file.path);
+        //log("ext: ", path.extname(file.path));
+        //log("file: ", file.name);
+        //log(data);
+        //log(data.toString('base64'));
 
         let datafile = file.name.split(".");
 
@@ -102,21 +103,21 @@ export default async function handler(req, res) {
         })
         await objectData.save();
         //let saveObjectData = await objectData.save();
-        //console.log("saveObjectData: ",saveObjectData);
+        //log("saveObjectData: ",saveObjectData);
 
         if(path.extname(file.path)){
-          console.log("FOUND EXT.")
+          log("FOUND EXT.")
         }else{
-          console.log("NOT FOUND EXT.")
+          log("NOT FOUND EXT.")
         }
         fs.unlinkSync(file.path);
       })
       .on("aborted", () => {
-        console.log("Aborted...");
+        log("Aborted...");
         reject(res.status(500).send('Aborted'));
       })
       .once("end", () => {
-        console.log("Done!");
+        log("Done!");
         resolve(res.status(200).send('done'));
       });
     

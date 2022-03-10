@@ -33,10 +33,10 @@ export default function AssetsPage(){
       })
     })
     if(data.error){
-      console.log("ERROR FETCH GET ASSETS");
+      log("ERROR FETCH GET ASSETS");
       return;
     }
-    console.log(data);
+    //log(data);
     if(data.api=="ASSETS"){
       setAssets(data.assets)
     }
@@ -52,22 +52,22 @@ export default function AssetsPage(){
     setPercent(0)
     setStatus("uploading...")
     
-    console.log(selectFile)
+    log(selectFile)
     if(!selectFile){
-      console.log("FILE EMPTY!");
+      log("FILE EMPTY!");
       setStatus("Empty File select!")
       return;
     }
     
     const formData = new FormData();
     formData.append('myfiles', selectFile);
-    console.log(projectID)
+    log(projectID)
     formData.append('projectid', projectID);
 
     const config = {
       onUploadProgress: function(progressEvent) {
         var percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-        console.log(percentCompleted)
+        log(percentCompleted)
         setPercent(percentCompleted);
         setStatus(String(percentCompleted)+"%")
       },
@@ -78,14 +78,14 @@ export default function AssetsPage(){
 
     axios.post("/upload", formData, config)
       .then(res => {
-        console.log(res)
+        log(res)
         if(res.statusText=="OK"){
           setStatus("File Uploaded!")
           getAssets();
         }
       })
       .catch(err =>{ 
-        console.log(err)
+        log(err)
         setStatus("Error Upload!");
       })
   }
@@ -100,10 +100,10 @@ export default function AssetsPage(){
       })
     })
     if(data.error){
-      console.log("ERROR FETCH GET ASSETS");
+      log("ERROR FETCH GET ASSETS");
       return;
     }
-    console.log(data);
+    log(data);
     if(data.api=="DELETE"){
       //setAssets(data.id)
       setAssets(state=>state.filter(item=>item.id != data.id))
