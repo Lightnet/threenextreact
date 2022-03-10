@@ -4,6 +4,7 @@
 */
 
 import React,{ useRef, useEffect, useState } from 'react';
+import EntityMaterialParse from '../material/EntityMaterialParse';
 
 export default function EntityCone(props,ref) {
   // This reference will give us direct access to the THREE.Mesh object
@@ -34,9 +35,13 @@ export default function EntityCone(props,ref) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <coneGeometry args={params} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      
+      {props.material && <EntityMaterialParse {...props} />}
     </mesh>
   )
 }
 
 export const EntityConeRef = React.forwardRef(EntityCone);
+/*
+<meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+*/

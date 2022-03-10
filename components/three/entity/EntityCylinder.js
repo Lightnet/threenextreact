@@ -4,6 +4,7 @@
 */
 
 import React,{ useRef, useEffect, useState } from 'react';
+import EntityMaterialParse from '../material/EntityMaterialParse';
 
 export default function EntityCylinder(props, ref) {
 
@@ -33,7 +34,7 @@ export default function EntityCylinder(props, ref) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <cylinderGeometry args={params} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      {props.material && <EntityMaterialParse {...props} />}
     </mesh>
   )
 }

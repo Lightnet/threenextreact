@@ -4,6 +4,7 @@
 */
 
 import React, { useRef, useState, useEffect } from 'react';
+import EntityMaterialParse from '../material/EntityMaterialParse';
 
 export default function EntityPlane(props, ref){
 
@@ -29,26 +30,6 @@ export default function EntityPlane(props, ref){
     console.log(props);
   }
 
-  function renderMaterial(){
-    if(props.material){
-      //need work later for material id for layers....
-      return (<>
-      {props.material.map((item,index)=>{
-        if(item.datatype == 'meshStandardMaterial'){
-          return <meshStandardMaterial key={index} wireframe={item.wireframe} color={hovered ? 'hotpink' : item.color} />
-        }
-      })}
-      </>)
-      //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    }else{
-      return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-      //return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
-    }
-    return <></>
-  }
-
-  //console.log(props)
-
   return (
     <mesh
       ref={ref}
@@ -62,9 +43,7 @@ export default function EntityPlane(props, ref){
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <planeGeometry args={params} />
-      {
-      //renderMaterial()
-      }
+      {props.material && <EntityMaterialParse {...props} />}
     </mesh>
   )
 }

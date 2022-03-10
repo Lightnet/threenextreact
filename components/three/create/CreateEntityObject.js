@@ -42,14 +42,17 @@ export default function CreateEntityObject(){
       if(API.ENTITIES[idx].name == selectCreate){
         //console.log(API.ENTITIES[idx].name)
         //setCreateType(state=>[...state, API.ENTITIES[idx].name])
-        return <EntityParameters key={idx}
-          name={API.ENTITIES[idx].name}
-          datatype={API.ENTITIES[idx].dataType}
-          parms={API.ENTITIES[idx].parameters}
-          shape={API.ENTITIES[idx].shape}
-          material={API.ENTITIES[idx].material}
-          />
-        //break;
+
+        let props = {};
+        props.name=API.ENTITIES[idx].name
+        props.datatype=API.ENTITIES[idx].dataType
+        props.parms=API.ENTITIES[idx].parameters
+        props.shape=API.ENTITIES[idx].shape
+        if(API.ENTITIES[idx].material){
+          props.material=API.ENTITIES[idx].material
+        }
+        
+        return <EntityParameters key={idx} {...props}/>
       }
     }
 

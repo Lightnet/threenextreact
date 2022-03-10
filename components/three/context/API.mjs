@@ -277,7 +277,6 @@ import { nanoid32 } from "../../../lib/helper.mjs";
           , intensity:1
         }
       ],
-      material:null,
     },
     
 
@@ -294,7 +293,6 @@ import { nanoid32 } from "../../../lib/helper.mjs";
         , decay:1
         }
       ],
-      material:null,
     },
     {
       name:"perspectivecamera"
@@ -309,7 +307,6 @@ import { nanoid32 } from "../../../lib/helper.mjs";
           , far:100
         }
       ],
-      material:null,
     },
 
     {
@@ -322,7 +319,6 @@ import { nanoid32 } from "../../../lib/helper.mjs";
         , near:0.1
         , zoom:1
       }],
-      material:null,
     }
 
   ]

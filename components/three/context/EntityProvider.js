@@ -120,21 +120,6 @@ function reducerEntity(state, action) {
       item.isPhysics = action.isPhysics || false;
 
       if(action.dataType){item.dataType = action.dataType;}
-      /*
-      if(action.dataType=="BOX"){
-        item.material=[]
-        item.material=[
-          {
-              index:0
-            , objectid:nanoid32()
-            , dataType:"meshStandardMaterial"
-            , name:"meshStandardMaterial"
-            , color:"#ff00ff"
-            , wireframe:false
-          }
-        ]
-      }
-      */
 
       if(action.material){
         item.material = action.material;

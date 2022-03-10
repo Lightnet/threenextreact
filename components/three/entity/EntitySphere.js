@@ -4,6 +4,7 @@
 */
 
 import React,{ useRef, useEffect, useState } from 'react';
+import EntityMaterialParse from '../material/EntityMaterialParse';
 
 export default function EntitySphere(props, ref){
 
@@ -29,24 +30,6 @@ export default function EntitySphere(props, ref){
     console.log(props);
   }
 
-  function renderMaterial(){
-    if(props.material){
-      //need work later for material id for layers....
-      return (<>
-      {props.material.map((item,index)=>{
-        if(item.datatype == 'meshStandardMaterial'){
-          return <meshStandardMaterial key={index} wireframe={item.wireframe} color={hovered ? 'hotpink' : item.color} />
-        }
-      })}
-      </>)
-      //return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-    }else{
-      return <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
-      //return <meshStandardMaterial wireframe color={hovered ? 'hotpink' : 'orange'} />
-    }
-    return <></>
-  }
-
   return (
     <mesh
       ref={ref}
@@ -61,7 +44,7 @@ export default function EntitySphere(props, ref){
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <sphereGeometry args={params} />
-      {renderMaterial()}
+      {props.material && <EntityMaterialParse {...props} />}
     </mesh>
   )
 }
