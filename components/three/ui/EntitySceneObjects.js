@@ -8,7 +8,7 @@ import { log } from "../../../lib/log.mjs";
 import { useEditor } from "../context/EditorProvider.js";
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityList(){
+export default function EntitySceneObjects(){
 
   const {setDeleteObjectID} = useEditor();
 

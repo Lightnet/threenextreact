@@ -32,6 +32,13 @@ export default function EntityBox(props,ref) {
   const [hovered, setHover] = useState(false);
   const [active, setActive] = useState(false);
 
+  function renderCheckMaterial(props){
+    if(props.material){
+      return <EntityMaterialParse {...props} />
+    }
+    return <meshStandardMaterial color={'orange'} />
+  }
+
   return (
     <mesh
       {...props}
@@ -46,7 +53,12 @@ export default function EntityBox(props,ref) {
       >
 
       <boxGeometry args={params} />
-      {props.material && <EntityMaterialParse {...props} />}
+      {hovered ? (
+        <meshStandardMaterial color={'hotpink'} />
+      ):(
+        renderCheckMaterial(props)
+      ) }
+      
     </mesh>
   )
 }

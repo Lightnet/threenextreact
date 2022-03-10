@@ -13,13 +13,7 @@ export default function Error() {
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
-    //console.log("router.pathname");
-    //console.log(router.pathname)
-    //console.log("router.query")
-    //console.log(router.query)
     let { error } = router.query;
-    //console.log("error");
-    //console.log(error);
     setErrorMessage(error);
   }, [router]);//need to load query since null mount then it process later
 

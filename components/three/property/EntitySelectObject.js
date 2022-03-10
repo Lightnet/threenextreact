@@ -12,7 +12,7 @@ import EntityShapePararmeters from "./EntityPararmeters.js";
 import { useEditor } from "../context/EditorProvider.js";
 import EntityMaterials from "./EntityMaterials.js";
 
-export default function EntitySelectUpdate(){
+export default function EntitySelectObject(){
 
   const {
     selectObjectID,

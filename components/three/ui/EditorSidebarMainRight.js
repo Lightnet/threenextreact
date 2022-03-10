@@ -4,6 +4,7 @@
 */
 
 import React from "react"
+import API from "../context/API.mjs"
 //import EntitySelectUpdate from "../property/EntitySelectUpdate"
 import EntityViewProperty from "../property/EntityViewProperty"
 
@@ -20,8 +21,8 @@ export default function EditorSidebarMainRight(){
       ,overflow: "scroll"
     }}>
       {/* over lap can used mouse event */}
-      <EntityViewProperty style={{height:"50%"}} view={"Scenes"} />
-      <EntityViewProperty style={{height:"50%"}} view={"Entity Object"} />
+      <EntityViewProperty style={{height:"50%"}} view={API.VIEWS.SCENES} />
+      <EntityViewProperty style={{height:"50%"}} view={API.VIEWS.ENTITYSELECTOBJECT} />
       
     </div>
   </>

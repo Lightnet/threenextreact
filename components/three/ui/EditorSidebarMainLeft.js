@@ -4,6 +4,7 @@
 */
 
 import React from "react"
+import API from "../context/API.mjs"
 import EntityViewProperty from "../property/EntityViewProperty"
 
 export default function EditorSidebarMainLeft(){
@@ -18,8 +19,8 @@ export default function EditorSidebarMainLeft(){
       ,background:'#778899'
     }}>
       {/* over lap can used mouse event */}
-      <EntityViewProperty style={{height:"50%"}} view={"Create Entity Object"} />
-      <EntityViewProperty style={{height:"50%"}} view={"Entity List"} />
+      <EntityViewProperty style={{height:"50%"}} view={API.VIEWS.CREATEENTITYOBJECT} />
+      <EntityViewProperty style={{height:"50%"}} view={API.VIEWS.ENTITYSCENEOBJECTS} />
     </div>
   </>
 }

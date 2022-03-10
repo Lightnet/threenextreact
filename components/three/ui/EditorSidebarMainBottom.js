@@ -15,7 +15,7 @@ export default function EditorSidebarMainBottom(){
       ,left:'0px'
       //,width:'100%'
       ,width:'100%'
-      ,height:'28px'
+      ,height:'20px'
       ,background:'gray'
     }}>
 

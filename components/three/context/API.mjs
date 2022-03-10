@@ -61,6 +61,15 @@ import { nanoid32 } from "../../../lib/helper.mjs";
     , ORBITCONTROLS:"ORBITCONTROLS"
   },
 
+  //deal with easy and miss spelling
+  VIEWS:{
+      SCENE:"Scene"
+    , SCENES:"Scenes"
+    , CREATEENTITYOBJECT:"Create Entity Object"
+    , ENTITYSCENEOBJECTS:"Entity Scene Objects"
+    , ENTITYSELECTOBJECT:"Entity Select Object"
+  },
+
   ENTITIES:[
     {
       name:"scene"

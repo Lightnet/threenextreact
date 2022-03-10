@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { getSession } from "next-auth/react";
 import Link from 'next/link';
 import SignArea from "../components/system/signarea";

@@ -34,12 +34,12 @@ export default function Viewport3D(){
 
     <div style={{ //threejs canvas
       position:'absolute'
-      ,top:'0px'
+      ,top:'20px'
       //,left:'0px'
       ,left:'300px'
       //,width:'100%'
       ,width:'calc(100% - 600px)'
-      ,height:'calc(100% - 56px)'
+      ,height:'calc(100% - 40px)'
     }}>
     
     <Canvas>

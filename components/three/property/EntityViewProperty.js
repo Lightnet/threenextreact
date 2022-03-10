@@ -4,21 +4,21 @@
 */
 
 import React,{ useEffect, useState } from 'react';
+import API from '../context/API.mjs';
 import CreateEntityObject from '../create/CreateEntityObject';
-import EntityList from '../ui/EntityList';
+import EntitySceneObjects from '../ui/EntitySceneObjects';
 import EntityScenes from './EntityScenes';
-import EntitySelectUpdate from './EntitySelectUpdate';
+import EntitySelectObject from './EntitySelectObject';
 
 export default function EntityViewProperty({view,style}){
 
   const [viewType, setViewType] = useState("Scenes");
   const [_style, setStyle] = useState({});
   const [views, setViews] = useState([
-      "Scenes"
-    , "Create Entity"
-    , "Create Entity Object"
-    , "Entity Object"
-    , "Entity List"
+      API.VIEWS.SCENES
+    , API.VIEWS.CREATEENTITYOBJECT
+    , API.VIEWS.ENTITYSELECTOBJECT
+    , API.VIEWS.ENTITYSCENEOBJECTS
   ])
 
   useEffect(()=>{
@@ -33,24 +33,24 @@ export default function EntityViewProperty({view,style}){
     }
   },[view])
 
+  function onSelectView(e){
+    setViewType(e.target.value);
+  }
+
   function renderView(){
     //log("viewType:", viewType)
     //log(typeof viewType)
-    if(viewType == "Create Entity Object"){
+    if(viewType == API.VIEWS.CREATEENTITYOBJECT){
       return <CreateEntityObject/>
-    }else if(viewType == "Entity List"){
-      return <EntityList/>
-    }else if(viewType == "Entity Object"){
-      return <EntitySelectUpdate/>
-    }else if(viewType == "Scenes"){
+    }else if(viewType == API.VIEWS.ENTITYSCENEOBJECTS){
+      return <EntitySceneObjects/>
+    }else if(viewType == API.VIEWS.ENTITYSELECTOBJECT){
+      return <EntitySelectObject/>
+    }else if(viewType == API.VIEWS.SCENES){
       return <EntityScenes/>
     }else{
       return <></>
     }
-  }
-
-  function onSelectView(e){
-    setViewType(e.target.value);
   }
 
   return <>

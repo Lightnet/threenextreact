@@ -23,7 +23,7 @@ export default function EditorHeaderMain(){
     setIsOpenProject(true)
   }
   function onCloseProject(){
-    console.log("close???")
+    //console.log("close???")
     setIsOpenProject(false);
   }
 
@@ -31,7 +31,7 @@ export default function EditorHeaderMain(){
     setIsOpenAssets(true)
   }
   function onCloseAssets(){
-    console.log("close???")
+    //console.log("close???")
     setIsOpenAssets(false);
   }
 
@@ -51,7 +51,7 @@ export default function EditorHeaderMain(){
       ,left:'0px'
       //,width:'100%'
       ,width:'100%'
-      ,height:'28px'
+      ,height:'20px'
       ,background:'gray'
     }}>
       <button onClick={clickOpenProject}> Projects </button>
