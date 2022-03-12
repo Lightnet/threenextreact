@@ -16,7 +16,7 @@ export default function EntityPhysicsTypes(props) {
   //console.log(props);
 
   if(props.shapePhysics==API.SHAPETYPES.BOX){
-    [ref] = useBox(() => ({ ...props }));
+    [ref] = useBox(() => ({ ...props, onCollide:onCollide }));
   }
 
   if(props.shapePhysics==API.SHAPETYPES.PLANE){
@@ -29,6 +29,11 @@ export default function EntityPhysicsTypes(props) {
 
   if(props.shapePhysics==API.SHAPETYPES.CYLINDER){
     [ref] = useCylinder(() => ({ ...props }));
+  }
+
+
+  const onCollide=(e) => {
+    console.log('Collision event on Trigger', e)
   }
 
   for(let idx in ENTITIES){

@@ -15,10 +15,13 @@ import EntityOrbitControl from "../entity/EntityOrbitControl";
 import { useEditor } from "../context/EditorProvider";
 import EntityObjectTypes from "../helpers/EntityObjectTypes";
 import EntityPhysicsTypes from "../helpers/EntityPhysicsTypes";
+import EntityModalGLTF from "../model/EntityModalGLTF";
+import EntityModalOBJ from "../model/EntityModalOBJ";
+import EntityModalFBX from "../model/EntityModalFBX";
 
 //import EntityRenderModel from "../EntityRenderModel";
 
-export default function Viewport3D(){
+export default function EditorViewport3D(){
 
   const {
     enableOrbitControl
@@ -59,6 +62,8 @@ export default function Viewport3D(){
             return <EntityObjectTypes key={entity.objectid} {...entity}/>
           }
         })}
+
+
       </Physics>
       { enableOrbitControl && <EntityOrbitControl /> }
       <GizmoHelper
@@ -71,6 +76,9 @@ export default function Viewport3D(){
       */}
     </Canvas>
     </div>
-  
   </>
 }
+/*
+<EntityModalGLTF/>
+
+*/

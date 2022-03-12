@@ -70,7 +70,7 @@ export function main(){
 
   //console.log(__dirname);
   //public | dist > folder
-  //app.use(express.static('public'))
+  app.use(express.static('public'))
   app.use(express.static('dist'));
 
   //console.log(process.env.PORT)

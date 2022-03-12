@@ -15,7 +15,7 @@ import { useEditor } from "./context/EditorProvider.js";
 import { useProject } from "./context/ProjectProvider.js";
 import { useEntity } from "./context/EntityProvider.js";
 
-import Viewport3D from "./ui/Viewport3D.js";
+import EditorViewport3D from "./ui/EditorViewport3D.js";
 import EditorHeaderMain from "./ui/EditorHeaderMain.js";
 import EditorSidebarMainRight from "./ui/EditorSidebarMainRight.js";
 import EditorSidebarMainBottom from "./ui/EditorSidebarMainBottom.js";
@@ -136,7 +136,7 @@ export default function Editor({projectid}){
 
   return(<>
     
-    <Viewport3D/>
+    <EditorViewport3D/>
 
     <EditorSidebarMainLeft/>
 

@@ -17,6 +17,11 @@ import route_upload from './routes/route_upload.mjs';
 
 import auth from './routes/auth.mjs';
 //router.use(route_download);
+router.use((req,res,next)=>{
+
+  next();
+});
+
 
 router.use(auth);
 router.use("/api",route_three);
