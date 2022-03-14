@@ -4,12 +4,12 @@
 */
 
 import React, { useState } from "react"
-import Modal from "../../modal/modal";
+import Modal from "../../modal/Modal";
 import ThemeLink from "../../theme/ThemeLink";
 import { useEntity } from "../context/EntityProvider";
 import { useProject } from "../context/ProjectProvider";
-import ProjectsPage from "../ProjectsPage";
 import AssetsPage from "./AssetsPage";
+import EditorProjectsPage from "./EditorProjectsPage";
 
 export default function EditorHeaderMain(){
 
@@ -66,7 +66,7 @@ export default function EditorHeaderMain(){
     </div>
 
     <Modal title="Projects" pwidth="800" pheight="300" isOpen={isOpenProject} onClose={onCloseProject}>
-      <ProjectsPage />
+      <EditorProjectsPage />
     </Modal>
 
     <Modal title="Assets" pwidth="800" pheight="300" isOpen={isOpenAssets} onClose={onCloseAssets}>

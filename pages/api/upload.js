@@ -13,13 +13,14 @@
 // https://stackoverflow.com/questions/60465564/create-upload-files-api-in-next-js
 // https://www.section.io/engineering-education/uploading-files-using-formidable-nodejs/
 
-import formidable from 'formidable';
-import fs from "fs";
-import path from "path";
 
+//import fs from "fs";
+//import path from "path";
+
+import formidable from 'formidable';
 import { getSession } from "next-auth/react";
 import clientDB,{ sessionTokenCheck } from "../../lib/database";
-import { log } from '../../lib/log';
+//import { log } from '../../lib/log';
 
 export const config = {
   api: {

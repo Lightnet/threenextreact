@@ -3,10 +3,10 @@
   Created by: Lightnet
 */
 
-import React,{ useEffect, useRef, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { isEmpty, nanoid16 } from '../../../lib/helper.mjs';
 import useFetch from '../../hook/useFetch.mjs';
-import Modal from '../../modal/modal.jsx';
+import Modal from '../../modal/Modal.jsx';
 import API from '../context/API.mjs';
 import { useEntity } from '../context/EntityProvider';
 import { useProject } from '../context/ProjectProvider';

@@ -31,7 +31,7 @@ export default function RoutePage(){
     return <>
     <Sign/><br/>
     <Routes>
-      <Route path="/" element={<SignInPage />} />
+      <Route index element={<SignInPage />} />
       <Route path="signin" element={<SignInPage />} />
       <Route path="signup" element={<SignUpPage />} />
       <Route path="signout" element={<SignOutPage />} />

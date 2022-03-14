@@ -4,13 +4,13 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { isEmpty } from "../../lib/helper.mjs";
-import { log } from "../../lib/log.mjs";
-import useFetch from "../hook/useFetch.mjs";
-import Modal from "../modal/Modal.jsx"
+//import { useNavigate } from "react-router-dom";
+import { isEmpty } from "../../../lib/helper.mjs";
+import { log } from "../../../lib/log.mjs";
+import useFetch from "../../hook/useFetch.mjs";
+import Modal from "../../modal/Modal.jsx"
 
-export default function ProjectsPage({onLoadEditor}){
+export default function EditorProjectsPage({onLoadEditor}){
 
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
@@ -19,7 +19,7 @@ export default function ProjectsPage({onLoadEditor}){
 
   const [projects, setProjects] = useState([]);
   const [dataType, setDataType] = useState(null);
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   async function getProejctList(){
     let data = await useFetch("/api/project");
@@ -77,7 +77,7 @@ export default function ProjectsPage({onLoadEditor}){
       })
       return;
     }
-    navigate("/editor?projectid="+projectID);
+    //navigate("/editor?projectid="+projectID);
   }
 
   function clickLoadProject(id){
@@ -89,7 +89,7 @@ export default function ProjectsPage({onLoadEditor}){
       })
       return;
     }
-    navigate("/editor?projectid="+id);
+    //navigate("/editor?projectid="+id);
   }
 
   async function updateProject(e){

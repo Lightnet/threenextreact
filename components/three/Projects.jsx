@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from 'next/router';
 import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/useFetch.mjs";
-import Modal from "../modal/modal.jsx"
+import Modal from "../modal/Modal.jsx"
 
 export default function Projects({onLoadEditor}){
 

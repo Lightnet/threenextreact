@@ -13,8 +13,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const uploadFolder = path.join(__dirname, "../../public", "files");
 log(uploadFolder)
 
-import { log } from "../../lib/log";
-
 export default async (req, res) => {
   const session = await getSession({ req })
   //log("session", session);
