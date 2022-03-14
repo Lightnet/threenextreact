@@ -45,9 +45,10 @@ export default function CreateEntityObject(){
 
         let props = {};
         props.name=API.ENTITIES[idx].name
+        props.istransform=API.ENTITIES[idx].isTransform
         props.datatype=API.ENTITIES[idx].dataType
         props.parms=API.ENTITIES[idx].parameters
-        props.shape=API.ENTITIES[idx].shape
+        props.shape=API.ENTITIES[idx].shape || null
         if(API.ENTITIES[idx].material){
           props.material=API.ENTITIES[idx].material
         }

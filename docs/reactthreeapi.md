@@ -44,6 +44,20 @@ onCollide={(e) => {
 }}
 ```
 
+https://onion2k.github.io/r3f-by-example/examples/basic/background-color/
+
+https://github.com/pmndrs/react-three-fiber/issues/304
+<color attach="background" args={["gray"]} />
+
+
+https://codesandbox.io/examples/package/react-three-fiber
+
+
+
+
+
+https://github.com/pmndrs/react-postprocessing
+
 
 
 

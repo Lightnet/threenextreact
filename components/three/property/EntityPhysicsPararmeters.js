@@ -28,11 +28,21 @@ export default function EntityPhysicsPararmeters({selectid}){
         //console.log(entities[idx]);
         setSelectObject(entities[idx]);
         //setParameters(null);
-        setParameters({
-            shapePhysics: entities[idx].shapePhysics
-          , isPhysics: entities[idx].isPhysics
-          , mass: entities[idx].mass
-        })
+
+        let physicsData ={};
+
+        if(entities[idx].isPhysics !=null){
+          physicsData.isPhysics= entities[idx].isPhysics
+        }
+
+        if(entities[idx].shapePhysics !=null){
+          physicsData.shapePhysics= entities[idx].shapePhysics
+        }
+
+        if(entities[idx].mass !=null){
+          physicsData.mass= entities[idx].mass
+        }
+        setParameters(physicsData)
         break;
       }
     }

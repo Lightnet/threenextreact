@@ -9,33 +9,86 @@ import React, { useEffect, useState } from "react";
 import { useProject } from "../context/ProjectProvider.js";
 import { useEntity } from "../context/EntityProvider.js";
 
-export default function EntityParameters({name,datatype,shape,parms,mass,material}){
+export default function EntityParameters({
+    istransform
+  , ispos
+  , isrot
+  , isscale
+  , name
+  , datatype
+  , shape
+  , parms
+  , mass
+  , material
+}){
   const {projectID} = useProject();
 
   const {sceneID, dispatchEntity} = useEntity();
   const [_name, setName] = useState("box");
   const [dataType, setDataType] = useState("box")
-  const [shapePhysics, setShapePhysics] = useState("box")
-  const [_mass, setMass] = useState(1)
+  // param
   const [parameters, setParameters] = useState(null)
   const [_parameters, _setParameters] = useState(null)
+  // 
+  const [shapePhysics, setShapePhysics] = useState(null)
+  const [isPhysics, setIsPhysics] = useState(false)
+  const [_mass, setMass] = useState(null)
 
   const [_material, setMaterial] = useState(null)
 
   const [isParameters, setIsParameters] = useState(false)
   const [selectParameters, setSelectParameters] = useState(0)
 
+  const [isTransform, setIsTransform] = useState(false);
+  const [position, setPosition] = useState(null);
+  const [rotation, setRotation] = useState(null);
+  const [scale, setScale] = useState(null);
+
+  useEffect(()=>{
+    if(typeof istransform == "boolean"){
+      setIsTransform(istransform);
+      setPosition([0,0,0]);
+      setRotation([0,0,0]);
+      setScale([1,1,1]);
+    }
+  },[istransform])
+
+  useEffect(()=>{
+    if(typeof ispos == "boolean"){
+      setPosition([0,0,0]);
+    }
+  },[ispos])
+
+  useEffect(()=>{
+    if(typeof isrot == "boolean"){
+      setRotation([0,0,0]);
+    }
+  },[isrot])
+
+  useEffect(()=>{
+    if(typeof isscale == "boolean"){
+      setScale([1,1,1]);
+    }
+  },[isscale])
+
   useEffect(()=>{
     if(typeof material == "object"){
       setMaterial(material);
     }
-    
   },[material])
 
   useEffect(()=>{
     if(name){
       setName(name);
     }
+  },[name])
+  useEffect(()=>{
+    if(datatype){
+      setDataType(datatype);
+    }
+  },[datatype])
+
+  useEffect(()=>{
     if(parms){
       //console.log(parms)
       _setParameters(parms)
@@ -45,18 +98,19 @@ export default function EntityParameters({name,datatype,shape,parms,mass,materia
       }else{
         setParameters(parms[0]);
       }
-      
     }
-    if(datatype){
-      setDataType(datatype);
-    }
+  },[parms])
+  useEffect(()=>{
     if(shape){
       setShapePhysics(shape);
+      setMass(0)
     }
+  },[shape])
+  useEffect(()=>{
     if(typeof mass != 'undefined'){
       setMass(mass);
     }
-  },[name,datatype,parms,shape])
+  },[mass])
 
   const typeName = e => setName(e.target.value);
   const typeMass = e => setMass(e.target.value);
@@ -67,10 +121,14 @@ export default function EntityParameters({name,datatype,shape,parms,mass,materia
       , sceneid: sceneID
       , projectid: projectID
       , name: _name
+      , isTransform: isTransform
+      , position: position
+      , rotation: rotation
+      , scale: scale
       , dataType: dataType
       , parameters: parameters
       , shapePhysics: shapePhysics
-      , isPhysics: false
+      , isPhysics: isPhysics
       , mass: _mass
       , material: _material
     })
@@ -153,10 +211,10 @@ export default function EntityParameters({name,datatype,shape,parms,mass,materia
     <tbody>
       <tr>
         <td>
-          <label> Shape: </label>
+          <label> Data Type: </label>
         </td>
         <td>
-          <label> Box </label>
+          <label> {dataType} </label>
         </td>
       </tr>
       <tr>
@@ -183,22 +241,24 @@ export default function EntityParameters({name,datatype,shape,parms,mass,materia
         </td>
       </tr>}
       {renderParams()}
-      <tr>
-        <td>
-        <label> Physics: </label>
-        </td>
-        <td>
-        
-        </td>
-      </tr>
-      <tr>
-        <td>
-        <label> Mass: </label>
-        </td>
-        <td>
-        <input type="number" value={_mass} onChange={typeMass} />
-        </td>
-      </tr>
+      {shapePhysics &&<>
+        <tr>
+          <td>
+          <label> Physics: </label>
+          </td>
+          <td>
+          
+          </td>
+        </tr>
+        <tr>
+          <td>
+          <label> Mass: </label>
+          </td>
+          <td>
+          <input type="number" value={_mass} onChange={typeMass} />
+          </td>
+        </tr>
+      </>}
 
       <tr>
         <td>

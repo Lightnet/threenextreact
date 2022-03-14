@@ -59,6 +59,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
     , PERSPECTIVECAMERA:"PERSPECTIVECAMERA"
     , ORTHOGRAPHICCAMERA:"ORTHOGRAPHICCAMERA"
     , ORBITCONTROLS:"ORBITCONTROLS"
+    , COLOR:"COLOR"
   },
 
   //deal with easy and miss spelling
@@ -73,6 +74,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
   ENTITIES:[
     {
       name:"scene"
+    , isTransform:true
     , dataType:"SCENE"
     , shape:"BOX"
     , mass:1
@@ -89,6 +91,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"group"
+    , isTransform:true
     , dataType:"GROUP"
     , shape:"BOX"
     , mass:1
@@ -97,6 +100,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
         name:"box"
+      , isTransform:true
       , dataType:"BOX"
       , shape:"BOX"
       , mass:1
@@ -127,6 +131,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"circle"
+    , isTransform:true
     , dataType:"CIRCLE"
     , shape:"BOX"
     , mass:1
@@ -154,6 +159,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"cone"
+    , isTransform:true
     , dataType:"CONE"
     , shape:"BOX"
     , mass:1
@@ -185,6 +191,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"cylinder"
+    , isTransform:true
     , dataType:"CYLINDER"
     , shape:"CYLINDER"
     , mass:1
@@ -219,6 +226,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"plane"
+    , isTransform:true
     , dataType:"PLANE"
     , shape:"PLANE"
     , mass:0
@@ -246,6 +254,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
     
     {
       name:"sphere"
+    , isTransform:true
     , dataType:"SPHERE"
     , shape:"SPHERE"
     , mass:1
@@ -277,6 +286,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"ambientlight"
+    , isTransform:false
     , dataType:"AMBIENTLIGHT"
     , shape:"BOX"
     , mass:1
@@ -291,6 +301,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"pointlight"
+    , isTransform:true
     , dataType:"POINTLIGHT"
     , shape:"BOX"
     , mass:1
@@ -303,8 +314,10 @@ import { nanoid32 } from "../../../lib/helper.mjs";
         }
       ],
     },
+
     {
       name:"perspectivecamera"
+    , isTransform:true
     , dataType:"PERSPECTIVECAMERA"
     , shape:"BOX"
     , mass:1
@@ -320,6 +333,7 @@ import { nanoid32 } from "../../../lib/helper.mjs";
 
     {
       name:"orthographiccamera"
+    , isTransform:true
     , dataType:"ORTHOGRAPHICCAMERA"
     , shape:"BOX"
     , mass:1
@@ -327,6 +341,16 @@ import { nanoid32 } from "../../../lib/helper.mjs";
           far:2000
         , near:0.1
         , zoom:1
+      }],
+    },
+
+    {
+      name:"color"
+    , isTransform:false
+    , dataType:"COLOR"
+    , shape:null
+    , parameters:[{
+          color:"#000000"
       }],
     }
 

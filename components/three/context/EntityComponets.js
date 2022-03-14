@@ -12,6 +12,7 @@
 import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight";
 import EntityBox, { EntityBoxRef } from "../entity/EntityBox";
 import EntityCircle, { EntityCircleRef } from "../entity/EntityCircle";
+import EntityColor, { EntityColorRef } from "../entity/EntityColor";
 import EntityCone, { EntityConeRef } from "../entity/EntityCone";
 import EntityCylinder, { EntityCylinderRef } from "../entity/EntityCylinder";
 import EntityGroup, { EntityGroupRef } from "../entity/EntityGroup";
@@ -95,7 +96,14 @@ var ENTITIES=[
     , dataType:API.ENTITYTYPES.ORTHOGRAPHICCAMERA
     , comp:EntityOrthographicCamera
     , compRef:EntityOrthographicCameraRef
+  },
+  {
+    name:"color"
+    , dataType:API.ENTITYTYPES.COLOR
+    , comp:EntityColor
+    , compRef:EntityColorRef
   }
+
 
 ]
 

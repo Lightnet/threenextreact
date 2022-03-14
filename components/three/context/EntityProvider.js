@@ -113,9 +113,19 @@ function reducerEntity(state, action) {
       item.objectid = action.id || nanoid32();
       item.name = action.name || nanoid32();
       item.children = action.children || [];
-      item.position = action.position || [0,0,0];
-      item.rotation = action.rotation || [0,0,0];
-      item.scale = action.scale || [1,1,1];
+
+      if(action.isTransform){
+        if(action.position){
+          item.position = action.position || [0,0,0];
+        }
+        if(action.rotation){
+          item.rotation = action.rotation || [0,0,0];
+        }
+        if(action.scale){
+          item.scale = action.scale || [1,1,1];;
+        }
+      }
+      
       item.visible = action.visible || true;
       item.isPhysics = action.isPhysics || false;
 

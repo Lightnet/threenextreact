@@ -45,7 +45,10 @@ export default function EditorViewport3D(){
       ,height:'calc(100% - 40px)'
     }}>
     
-    <Canvas>
+    <Canvas style={{ height: "100%", width: "100%" }}>
+
+    <color attach="background" args={["gray"]} />
+
       <Physics>
         {entities.map((entity)=>{
           //if(entity.isPhysics == true)
@@ -62,9 +65,9 @@ export default function EditorViewport3D(){
             return <EntityObjectTypes key={entity.objectid} {...entity}/>
           }
         })}
-
-
       </Physics>
+
+      
       { enableOrbitControl && <EntityOrbitControl /> }
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
@@ -80,5 +83,9 @@ export default function EditorViewport3D(){
 }
 /*
 <EntityModalGLTF/>
+<axesHelper/>
+<arrowHelper/>
+<gridHelper/>
 
+<axisHelper/>//not used
 */
