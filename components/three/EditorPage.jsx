@@ -6,10 +6,10 @@
 // https://ultimatecourses.com/blog/query-strings-search-params-react-router
 
 import React, { useEffect, useState } from "react";
-import { EditorProvider } from "./context/EditorProvider.js";
-import { ProjectProvider } from "./context/ProjectProvider.js";
-import { EntityProvider } from "./context/EntityProvider.js";
-import Editor from "./Editor.js";
+import { EditorProvider } from "./context/EditorProvider.jsx";
+import { ProjectProvider } from "./context/ProjectProvider.jsx";
+import { EntityProvider } from "./context/EntityProvider.jsx";
+import Editor from "./Editor.jsx";
 import {
   useSearchParams
 } from "react-router-dom";

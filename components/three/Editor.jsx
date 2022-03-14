@@ -11,15 +11,15 @@ import React, { useEffect, useState } from "react";
 // Dev
 import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/useFetch.mjs";
-import { useEditor } from "./context/EditorProvider.js";
-import { useProject } from "./context/ProjectProvider.js";
-import { useEntity } from "./context/EntityProvider.js";
+import { useEditor } from "./context/EditorProvider.jsx";
+import { useProject } from "./context/ProjectProvider.jsx";
+import { useEntity } from "./context/EntityProvider.jsx";
 
-import EditorViewport3D from "./ui/EditorViewport3D.js";
-import EditorHeaderMain from "./ui/EditorHeaderMain.js";
-import EditorSidebarMainRight from "./ui/EditorSidebarMainRight.js";
-import EditorSidebarMainBottom from "./ui/EditorSidebarMainBottom.js";
-import EditorSidebarMainLeft from "./ui/EditorSidebarMainLeft.js";
+import EditorViewport3D from "./ui/EditorViewport3D.jsx";
+import EditorHeaderMain from "./ui/EditorHeaderMain.jsx";
+import EditorSidebarMainRight from "./ui/EditorSidebarMainRight.jsx";
+import EditorSidebarMainBottom from "./ui/EditorSidebarMainBottom.jsx";
+import EditorSidebarMainLeft from "./ui/EditorSidebarMainLeft.jsx";
 
 export default function Editor({projectid}){
 

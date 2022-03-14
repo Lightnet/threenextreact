@@ -8,9 +8,9 @@
 */
 
 import React from "react";
-import Notification from "./notification.js";
-import NotifyContainer from "./notifycontainer.js";
-import { useNotifty } from "./notifyprovider.js";
+import Notification from "./notification.jsx";
+import NotifyContainer from "./NotifyContainer.jsx";
+import { useNotifty } from "./NotifyProvider.jsx";
 
 export default function NotifyManager(){
 

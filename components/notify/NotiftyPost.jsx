@@ -4,8 +4,7 @@
 */
 
 import React, { useState } from 'react';
-//import { nanoid16 } from '../../lib/helper.js';
-import { useNotifty } from './notifyprovider.js';
+import { useNotifty } from './NotifyProvider.jsx';
 
 export default function NotiftyPost(){
 

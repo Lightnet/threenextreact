@@ -12,8 +12,8 @@ functions as these will not be cloned.
 
 import React, { useEffect, useState } from "react";
 import { nanoid16 } from "../../../lib/helper.mjs";
-import CreateMaterial from "../create/CreateMaterial.js";
-import CreateScript from "../scriptmodule/CreateScript.js";
+import CreateMaterial from "../create/CreateMaterial.jsx";
+import CreateScript from "../scriptmodule/CreateScript.jsx";
 
 export default function EntityComponentAdd(){
 

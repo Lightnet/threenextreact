@@ -8,11 +8,11 @@
 import "../styles/global.css";
 import React from "react";
 
-import NotifyManager from "./notify/notifymanager";
-import { NotifyProvider } from "./notify/notifyprovider";
-import { ThemeProvider } from "./theme/themeprovider";
+import NotifyManager from "./notify/NotifyManager";
+import { NotifyProvider } from "./notify/NotifyProvider";
+import { ThemeProvider } from "./theme/ThemeProvider";
 import RoutePage from "./RoutePage";
-import { AuthProvider } from "./auth/auth";
+import { AuthProvider } from "./auth/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
 
 export default function App(props){

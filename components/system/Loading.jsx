@@ -9,7 +9,7 @@
 import React from "react";
 import styles from "./loading.module.css";
 
-export default function Component(props) {
+export default function Loading(props) {
   
   //useEffect(async () => { 
   //}, []);

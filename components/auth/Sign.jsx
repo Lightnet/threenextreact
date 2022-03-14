@@ -3,12 +3,11 @@
   Created by: Lightnet
 */
 
-import React, { useState } from 'react';
-import { useAuth } from './auth.js';
-
+import React from 'react';
 import {
   Link
 } from "react-router-dom";
+import { useAuth } from './AuthProvider';
 
 export default function Sign(){
 

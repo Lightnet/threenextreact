@@ -8,9 +8,9 @@
 import React from "react";
 import { useSession, signOut, signIn } from "next-auth/react"
 import Link from 'next/link';
-import ThemeLink from "../theme/themelink";
+import ThemeLink from "../theme/ThemeLink";
 
-export default function Component() {
+export default function SignArea() {
   
   const { data: session, status } = useSession()
 

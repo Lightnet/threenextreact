@@ -6,7 +6,7 @@
 import React, { useEffect, useState } from "react"
 import { isEmpty } from "../../../lib/helper.mjs";
 
-import { useEntity } from "../context/EntityProvider.js";
+import { useEntity } from "../context/EntityProvider.jsx";
 
 export default function EntityPhysicsPararmeters({selectid}){
 

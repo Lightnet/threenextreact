@@ -5,7 +5,7 @@
 //import '../style/globals.css'
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from "./components/app.js"
+import App from "./components/App.jsx"
 
 window.addEventListener('load', (event) => {
   let loading = document.getElementById("loading");

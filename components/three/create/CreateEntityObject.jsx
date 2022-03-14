@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import API from "../context/API.mjs";
-import EntityParameters from "./EntityParameters.js";
+import EntityParameters from "./EntityParameters.jsx";
 
 export default function CreateEntityObject(){
 

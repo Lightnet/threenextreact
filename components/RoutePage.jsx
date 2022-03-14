@@ -10,17 +10,17 @@
 
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import { useAuth } from "./auth/auth";
-import Sign from "./auth/sign";
-import { SignInPage } from "./auth/signin";
-import { SignOutPage } from "./auth/signout";
-import { SignUpPage } from "./auth/signup";
-import ErrorPage from "./system/errorpage";
+import { useAuth } from "./auth/AuthProvider";
+import Sign from "./auth/Sign";
+import { SignInPage } from "./auth/SignInPage";
+import { SignOutPage } from "./auth/SignOutPage";
+import { SignUpPage } from "./auth/SignUpPage";
+import ErrorPage from "./system/ErrorPage";
 import EditorPage from "./three/EditorPage";
 import GamePage from "./three/GamePage";
 import GamesPage from "./three/GamesPage";
 import ProjectsPage from "./three/ProjectsPage";
-import ThreePage from "./three/ThreePage";
+//import ThreePage from "./three/ThreePage";
 import NavAccess from "./ui/NavAccess";
 
 export default function RoutePage(){

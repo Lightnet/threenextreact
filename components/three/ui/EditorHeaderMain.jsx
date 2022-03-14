@@ -5,7 +5,7 @@
 
 import React, { useState } from "react"
 import Modal from "../../modal/modal";
-import ThemeLink from "../../theme/themelink";
+import ThemeLink from "../../theme/ThemeLink";
 import { useEntity } from "../context/EntityProvider";
 import { useProject } from "../context/ProjectProvider";
 import ProjectsPage from "../ProjectsPage";

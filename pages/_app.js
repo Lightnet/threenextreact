@@ -13,11 +13,11 @@ import React, { useState, useEffect } from "react";
 import { SessionProvider } from 'next-auth/react';
 import { useRouter } from "next/router";
 //import getConfig from 'next/config';
-import Loading from "../components/system/loading";
-import { NotifyProvider } from "../components/notify/notifyprovider";
+import Loading from "../components/system/Loading";
+import { NotifyProvider } from "../components/notify/NotifyProvider";
 
-import NotifyManager from "../components/notify/notifymanager";
-import {ThemeProvider} from "../components/theme/themeprovider"
+import NotifyManager from "../components/notify/NotifyManager";
+import {ThemeProvider} from "../components/theme/ThemeProvider"
 export default function App({Component, pageProps}){
   //console.log("[[[=== _app.js ===]]]");
   //console.log("session: ",session);

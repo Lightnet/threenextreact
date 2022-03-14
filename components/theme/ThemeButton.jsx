@@ -4,17 +4,18 @@
 */
 
 import React from "react";
-import { useTheme } from "./themeprovider.js";
+import { useTheme } from "./ThemeProvider";
 
-export default function ThemeLink(){
+export default function ThemeButton(){
 
   const {theme, setTheme} = useTheme();
 
   function clickTheme(event){
     event.preventDefault();
-    //console.log('theme');
+    
     let currentTheme = theme;
     let targetTheme = "light";
+    //console.log('theme:', currentTheme);
 
     if (currentTheme === "light") {
       targetTheme = "dark";
@@ -25,9 +26,5 @@ export default function ThemeLink(){
     localStorage.setItem('theme', targetTheme);
   }
 
-  function capitalizeFirstLetter(s) {
-    return s && s[0].toUpperCase() + s.slice(1);
-  }
-
-  return <a style={{cursor: 'pointer'}} onClick={clickTheme}>Theme {capitalizeFirstLetter(theme)}</a>
+  return <button onClick={clickTheme}> Theme {theme}</button>
 }

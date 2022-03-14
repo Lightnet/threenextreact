@@ -21,9 +21,9 @@ export default function DefaultBox(props) {
     <mesh key={props.objectid}
       {...props}
       ref={ref}
-      position={[props.position[0],props.position[1],props.position[2]]}
-      rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
-      scale={[props.scale[0],props.scale[1],props.scale[2]]}
+      //position={[props.position[0],props.position[1],props.position[2]]}
+      //rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
+      //scale={[props.scale[0],props.scale[1],props.scale[2]]}
       onClick={clickObject}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}
@@ -50,9 +50,9 @@ export const DefaultBoxRef = React.forwardRef((props, ref) => {
     <mesh key={props.objectid}
       {...props}
       ref={ref}
-      position={[props.position[0],props.position[1],props.position[2]]}
-      rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
-      scale={[props.scale[0],props.scale[1],props.scale[2]]}
+      //position={[props.position[0],props.position[1],props.position[2]]}
+      //rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
+      //scale={[props.scale[0],props.scale[1],props.scale[2]]}
       onClick={clickObject}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}

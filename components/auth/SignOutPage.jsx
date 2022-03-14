@@ -9,7 +9,7 @@ import useFetch from "../hook/useFetch.mjs";
 import {
   useNavigate
 } from "react-router-dom";
-import { useAuth } from './auth.js';
+import { useAuth } from './AuthProvider';
 
 export function SignOutPage() {
   //const [token, setToken] = useState('');

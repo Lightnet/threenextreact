@@ -9,6 +9,7 @@ import useFetch from "../hook/useFetch.mjs";
 import {
   useNavigate
 } from "react-router-dom";
+import { log } from '../../lib/log.mjs';
 
 export function SignUpPage() {
 

@@ -5,83 +5,78 @@
 
 import React, { useEffect, useState } from "react"
 import { isEmpty } from "../../../lib/helper.mjs";
-import { useEntity } from "../context/EntityProvider.js";
+import { useEntity } from "../context/EntityProvider.jsx";
 
-export default function EntityObjectMaterials({selectobject}){
+export default function EntityPararmeters({selectid}){
 
   const {
-    entities
-  , dispatchEntity
-} = useEntity()
+      entities
+    , dispatchEntity
+  } = useEntity()
 
   const [selectObject, setSelectObject] = useState(null);
-  const [materials, setMaterials] = useState([]);
-  const [material, setMaterial] = useState(null);
+  const [parameters, setParameters] = useState(null)
   const [isDisplay, setIsDisplay] = useState(false);
 
   useEffect(()=>{
-    console.log("material check...")
-    if(!selectobject){
-      setMaterials([])
-      setMaterial({})
+    if(isEmpty(selectid)){
       return;
     }
-    if(!selectobject.material){
-      setMaterials([])
-      setMaterial(null)
-      return;
+    for(let idx in entities){
+      if(entities[idx].objectid == selectid){
+        //console.log(entities[idx]);
+        setSelectObject(entities[idx]);
+        setParameters(entities[idx].parameters);
+        console.log(entities[idx].parameters)
+        break;
+      }
     }
-    setSelectObject(selectobject);
-    if(selectobject.material){
-      setMaterials(selectobject.material)
-      setMaterial(selectobject.material[0])
-    }
-  },[selectobject])
+  },[selectid])
 
   useEffect(()=>{
-    if(material){
+    if(parameters){
       dispatchEntity({
           type:"update"
         , id: selectObject.objectid
-        , keyType: "material"
-        , value: material
+        , keyType: "parameters"
+        , value: parameters
       })
     }
-  },[material])
+  },[parameters])
 
   function handleChange(evt) {
     const value = evt.target.value;
     //console.log(evt.target.type)
     //const name = evt.target.name;
     if(evt.target.type=="number"){
-      setMaterial(state => ({...state, [evt.target.name]: Number(value)}));
+      setParameters(state => ({...state, [evt.target.name]: Number(value)}));
     }
     if(evt.target.type=="checkbox"){
       //console.log("evt.target.checked");
       //console.log(evt.target.checked);
-      setMaterial(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
+      setParameters(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
     }
     if(evt.target.type=="color"){
       //console.log(value);
-      setMaterial(state => ({...state, [evt.target.name]: value}));
+      setParameters(state => ({...state, [evt.target.name]: value}));
     }
   }
 
-  function renderMaterials(){
-    if(material){
-      return Object.keys(material).reduce(function(result, key) {
+  function renderParams(){
+    if(parameters){
+      return Object.keys(parameters).reduce(function(result, key) {
         //console.log("Type:", typeof parameters[key], key)
         let type="text";
         let item;
-        if(typeof material[key] == "number"){
+        if(typeof parameters[key] == "number"){
           //console.log("number////////")
           type="number";
-        }else if(typeof material[key] == "boolean"){
+        }else if(typeof parameters[key] == "boolean"){
           //console.log("boolean////////")
           type="checkbox";
           item = <tr key={key}>
           <td><label> {key} </label> </td>
-          <td><input name={key} type={type} value={material[key]} checked={material[key]}  onChange={handleChange}/></td>
+          <td><input name={key} type={type} value={parameters[key]} checked={parameters[key]}  onChange={handleChange}/></td>
           </tr>
           return [ ...result,item]
         }
@@ -92,29 +87,28 @@ export default function EntityObjectMaterials({selectobject}){
         }
         item = <tr key={key}>
           <td><label> {key} </label> </td>
-          <td><input name={key} type={type} value={material[key]} onChange={handleChange}/></td>
+          <td><input name={key} type={type} value={parameters[key]} onChange={handleChange}/></td>
           </tr>
   
         return [ ...result,item]
       }, [])
     }
     return <></>
-  }
+  } 
 
   return <>
-    {material &&
-     <div>
+    <div>
       <div>
-        <label> Materials: </label><button onClick={()=>setIsDisplay(state=>!state)}> {isDisplay ? ("+"):("-")} </button>
+        <label> Params: </label> <button onClick={()=>setIsDisplay(state=>!state)}> {isDisplay ? ("+"):("-")} </button>
       </div>
       {isDisplay &&
       <div>
         <table>
           <tbody>
-            {renderMaterials()}
+            {renderParams()}
           </tbody>
         </table>
       </div>}
-    </div>}
+    </div>
   </>
 }

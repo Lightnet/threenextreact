@@ -5,8 +5,8 @@
 
 import React from "react";
 import { log } from "../../../lib/log.mjs";
-import { useEditor } from "../context/EditorProvider.js";
-import { useEntity } from "../context/EntityProvider.js";
+import { useEditor } from "../context/EditorProvider.jsx";
+import { useEntity } from "../context/EntityProvider.jsx";
 
 export default function EntitySceneObjects(){
 

@@ -5,15 +5,15 @@
 
 import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
-import { useEntity } from "../context/EntityProvider.js";
-import EntityComponentAdd from "./EntityComponentAdd.js";
-import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.js";
-import EntityShapePararmeters from "./EntityPararmeters.js";
-import { useEditor } from "../context/EditorProvider.js";
-import EntityObjectMaterials from "./EntityObjectMaterials.js";
-import EntityObjectScale from "./EntityObjectScale.js";
-import EntityObjectPosition from "./EntityObjectPosition.js";
-import EntityObjectRotation from "./EntityObjectRotation.js";
+import { useEntity } from "../context/EntityProvider.jsx";
+import EntityComponentAdd from "./EntityComponentAdd.jsx";
+import EntityPhysicsPararmeters from "./EntityPhysicsPararmeters.jsx";
+import EntityShapePararmeters from "./EntityPararmeters.jsx";
+import { useEditor } from "../context/EditorProvider.jsx";
+import EntityObjectMaterials from "./EntityObjectMaterials.jsx";
+import EntityObjectScale from "./EntityObjectScale.jsx";
+import EntityObjectPosition from "./EntityObjectPosition.jsx";
+import EntityObjectRotation from "./EntityObjectRotation.jsx";
 
 export default function EntitySelectObject(){
 

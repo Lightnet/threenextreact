@@ -9,11 +9,12 @@
 // https://stackoverflow.com/questions/66265608/react-router-v6-get-path-pattern-for-current-route
 
 import React, { useEffect } from "react";
-import Sign from "../auth/sign";
+import Sign from "../auth/Sign";
 
 import {
     useLocation
 } from "react-router-dom";
+import ThemeLink from "../theme/ThemeLink";
 
 export default function NavAccess(){
   
@@ -24,6 +25,6 @@ export default function NavAccess(){
   }
 
   return <div>
-    <Sign/>
+    <Sign/><span> | </span><ThemeLink/>
   </div>
 }

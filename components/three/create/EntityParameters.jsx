@@ -6,8 +6,8 @@
 // https://www.pluralsight.com/guides/handling-multiple-inputs-with-single-onchange-handler-react
 
 import React, { useEffect, useState } from "react";
-import { useProject } from "../context/ProjectProvider.js";
-import { useEntity } from "../context/EntityProvider.js";
+import { useProject } from "../context/ProjectProvider.jsx";
+import { useEntity } from "../context/EntityProvider.jsx";
 
 export default function EntityParameters({
     istransform

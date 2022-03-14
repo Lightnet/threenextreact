@@ -4,7 +4,7 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { useEntity } from "../context/EntityProvider.js";
+import { useEntity } from "../context/EntityProvider.jsx";
 
 export default function EntityObjectPosition({selectobject}){
 

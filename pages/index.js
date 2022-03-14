@@ -24,26 +24,9 @@ export default function IndexPage({
   session
 }) {
 
-  const [selectType, setselectType] = useState("projects");
-
-  function selSection(event, id){
-    event.preventDefault();
-    setselectType(id);
-  }
-
-  function renderSection(){
-    if(selectType == "gamelist"){
-      //return(<GameList></GameList>);
-    }else if(selectType == "projects"){
-      return(<Projects/>);
-    }else{
-      return(<div></div>);
-    }
-  }
-
   if ((!session)) {//if there no sesson then render here basic login page.
     return(<>
-      <SignArea></SignArea>
+      <SignArea/>
       <p>Next.js and Three.js development builds!</p>
       <p>Work in progress!</p>
     </>)
@@ -54,13 +37,7 @@ export default function IndexPage({
       <div>
         <SignArea></SignArea>
       </div>
-      <a href="#" onClick={(e)=>selSection(e,"projects")}>Projects</a> <span> | </span>
-      <Link href="/editor">Editor</Link><span> | </span>
-      <Link href="/games">Games</Link><span> | </span>
-      {renderSection()}
-      <br/>
-      <p>Next.js and Three.js development builds!</p>
-      <p>Work in progress!</p>
+      <Projects/>
     </>
   );
 }

@@ -4,8 +4,8 @@
 */
 
 import React from 'react';
-import { nanoid16 } from '../../lib/helper.js';
-import { useNotifty } from './notifyprovider.js';
+import { nanoid16 } from '../../lib/helper.mjs';
+import { useNotifty } from './NotifyProvider.jsx';
 
 export function clickInfo0(){// not correct // not react component
   const {dispatchNotify} = useNotifty();
@@ -16,7 +16,7 @@ export function clickInfo0(){// not correct // not react component
   })
 }
 
-export default function NotiftyTestv2(){
+export default function NotiftyTest(){
 
   const {dispatchNotify} = useNotifty();
 
