@@ -15,7 +15,7 @@ export default function EntityAmbientLight(props, ref){
     ref = useRef();
   }
 
-  useHelper(ref, PointLightHelper,1,'hotpink')
+  //useHelper(ref, PointLightHelper,1,'hotpink')
 
   return (<>
     <ambientLight

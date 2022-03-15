@@ -3,5 +3,5 @@
 # layout:
 - three
 - editor
-- gane
+- game
 - debug game
