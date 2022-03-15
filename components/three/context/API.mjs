@@ -7,13 +7,11 @@
 
 */
 
-import { nanoid32 } from "../../../lib/helper.mjs";
-
+//import { nanoid32 } from "../../../lib/helper.mjs";
 //import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight.jsx";
-
 // https://threejs.org/docs/?q=scene#api/en/scenes/Scene
 
- const API = {
+const API = {
     EVENT:"EVENT"
   , FAIL:"FAIL"
   , DELETE:"DELETE"

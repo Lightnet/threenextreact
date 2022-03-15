@@ -1,6 +1,7 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
+  Information: Not use.
 */
 
 // https://www.tabnine.com/code/javascript/classes/react-three-fiber/pointLight

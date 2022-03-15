@@ -39,10 +39,6 @@ export default function EditorPage({projectid}){
     }
   },[searchParams])
 
-  //if(isEmpty(projectID)){
-    //return <label> Project ID NULL </label>
-  //}
-
   return(<>
     <ProjectProvider>
       <EditorProvider>

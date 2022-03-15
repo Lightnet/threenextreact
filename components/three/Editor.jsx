@@ -50,8 +50,7 @@ export default function Editor({projectid}){
 
   //check for project id load from props
   useEffect(()=>{
-    //console.log("projectid")
-    //console.log(projectid)
+    //console.log("projectid: ", projectid)
     if(!isEmpty(projectid)){
       //console.log("found project ID:" + projectid)
       setProjectID(projectid);
@@ -62,8 +61,7 @@ export default function Editor({projectid}){
 
   //check for project id from assign set<name>
   useEffect(()=>{
-    //console.log("projectID")
-    //console.log(projectID)
+    //console.log("projectID: ", projectID)
     if(!isEmpty(projectID)){
       //console.log("found project ID")
       getProjectData();

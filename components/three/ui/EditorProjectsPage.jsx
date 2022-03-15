@@ -4,7 +4,6 @@
 */
 
 import React, { useEffect, useState } from "react";
-//import { useNavigate } from "react-router-dom";
 import { isEmpty } from "../../../lib/helper.mjs";
 import { log } from "../../../lib/log.mjs";
 import useFetch from "../../hook/useFetch.mjs";
@@ -19,7 +18,6 @@ export default function EditorProjectsPage({onLoadEditor}){
 
   const [projects, setProjects] = useState([]);
   const [dataType, setDataType] = useState(null);
-  //const navigate = useNavigate();
 
   async function getProejctList(){
     let data = await useFetch("/api/project");
@@ -221,13 +219,11 @@ export default function EditorProjectsPage({onLoadEditor}){
                 <label>{item.description}</label>
               </th>
               <th>
-                <button onClick={(e)=>clickEditID(item.id)}>Edit</button>
+                <button onClick={(e)=>clickEditID(item.id)}> Edit </button>
                 <span> | </span>
-                <button onClick={(e)=>clickLoadID(item.id)}>Load</button>
+                <button onClick={(e)=>clickLoadProject(item.id)}> Load </button>
                 <span> | </span>
-                <button onClick={(e)=>clickLoadProject(item.id)}>Load 2</button>
-                <span> | </span>
-                <button onClick={(e)=>clickDeleteID(item.id)}>Remove</button>
+                <button onClick={(e)=>clickDeleteID(item.id)}> Remove </button>
               </th>
             </tr>
             )
@@ -237,6 +233,7 @@ export default function EditorProjectsPage({onLoadEditor}){
     </table>
     </>)
   }
+  // <button onClick={(e)=>clickLoadID(item.id)}>Load</button>
 
   function renderModalMessage(){
     if(dataType == 'create'){

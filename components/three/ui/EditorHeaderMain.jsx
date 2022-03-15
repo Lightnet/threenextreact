@@ -13,7 +13,7 @@ import EditorProjectsPage from "./EditorProjectsPage";
 
 export default function EditorHeaderMain(){
 
-  const{ projectID, projectName } = useProject();
+  const{ projectID, projectName,setProjectID } = useProject();
   const{ enablePhysics, setEnablePhysics } = useEntity();
 
   const [isOpenProject, setIsOpenProject] = useState(false);
@@ -43,6 +43,11 @@ export default function EditorHeaderMain(){
     window.open(("/game?gameid="+projectID), "_ThreeDebug");
   }
 
+  function onLoadProject(e){
+
+    setProjectID(e.target.value)
+  }
+
   return <>
     <div style={{ //top
       position:'absolute'
@@ -66,7 +71,7 @@ export default function EditorHeaderMain(){
     </div>
 
     <Modal title="Projects" pwidth="800" pheight="300" isOpen={isOpenProject} onClose={onCloseProject}>
-      <EditorProjectsPage />
+      <EditorProjectsPage onLoadEditor={onLoadProject} />
     </Modal>
 
     <Modal title="Assets" pwidth="800" pheight="300" isOpen={isOpenAssets} onClose={onCloseAssets}>

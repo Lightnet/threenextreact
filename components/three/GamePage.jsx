@@ -15,7 +15,7 @@ export default function GamePage({gameid}){
 
   const [projectID, setProjectID] = useState("");
   const [searchParams] = useSearchParams();
-
+  //check props var
   useEffect(()=>{
     //console.log(projectid);
     if(!isEmpty(gameid)){
@@ -24,7 +24,7 @@ export default function GamePage({gameid}){
       console.log("props.gameid NULL!")
     }
   },[gameid])
-
+  //check url oaram var 
   useEffect(()=>{
     const currentParams = Object.fromEntries([...searchParams]);
     //console.log(currentParams);
@@ -39,6 +39,3 @@ export default function GamePage({gameid}){
     </EntityProvider>
   </>)
 }
-/*
-
-*/

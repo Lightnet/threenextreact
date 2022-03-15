@@ -77,7 +77,7 @@ export default function AssetsPage(){
       }
     }
 
-    axios.post("/upload", formData, config)
+    axios.post("/api/upload", formData, config)
       .then(res => {
         log(res)
         if(res.statusText=="OK"){

@@ -1,9 +1,8 @@
 /*
   LICENSE: MIT
   Created by: Lightnet
-
-  not used or there will be conflict
-  object3d
+  Information:
+    Not used or there will be conflict object3D
 */
 
 // https://github.com/pmndrs/react-three-fiber/discussions/437
