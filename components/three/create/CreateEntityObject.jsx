@@ -4,8 +4,11 @@
 */
 
 import React, { useEffect, useState } from "react";
-import API from "../context/API.mjs";
+import { getEntities } from "../context/EntityComponets.jsx";
+//import API from "../context/API.mjs";
 import EntityParameters from "./EntityParameters.jsx";
+
+const ENTITIES = getEntities();
 
 export default function CreateEntityObject(){
 
@@ -16,11 +19,11 @@ export default function CreateEntityObject(){
   const [selectCreate, setSelectCreate] = useState("box");
 
   useEffect(()=>{
-    //console.log(API.ENTITIES[0])
-    //console.log(API.ENTITIES[0].parameters.length)
-    for(let idx in API.ENTITIES){
-      //console.log(API.ENTITIES[idx].name)
-      setCreateType(state=>[...state, API.ENTITIES[idx].name])
+    //console.log(ENTITIES[0])
+    //console.log(ENTITIES[0].parameters.length)
+    for(let idx in ENTITIES){
+      //console.log(ENTITIES[idx].name)
+      setCreateType(state=>[...state, ENTITIES[idx].name])
     }
     //setCreateType();
   },[])
@@ -38,19 +41,19 @@ export default function CreateEntityObject(){
 
   function renderCreateSelect(){
 
-    for(let idx in API.ENTITIES){
-      if(API.ENTITIES[idx].name == selectCreate){
-        //console.log(API.ENTITIES[idx].name)
-        //setCreateType(state=>[...state, API.ENTITIES[idx].name])
+    for(let idx in ENTITIES){
+      if(ENTITIES[idx].name == selectCreate){
+        //console.log(ENTITIES[idx].name)
+        //setCreateType(state=>[...state, ENTITIES[idx].name])
 
         let props = {};
-        props.name=API.ENTITIES[idx].name
-        props.istransform=API.ENTITIES[idx].isTransform
-        props.datatype=API.ENTITIES[idx].dataType
-        props.parms=API.ENTITIES[idx].parameters
-        props.shape=API.ENTITIES[idx].shape || null
-        if(API.ENTITIES[idx].material){
-          props.material=API.ENTITIES[idx].material
+        props.name=ENTITIES[idx].name
+        props.istransform=ENTITIES[idx].isTransform
+        props.datatype=ENTITIES[idx].dataType
+        props.parms=ENTITIES[idx].parameters
+        props.shape=ENTITIES[idx].shape || null
+        if(ENTITIES[idx].material){
+          props.material=ENTITIES[idx].material
         }
         
         return <EntityParameters key={idx} {...props}/>

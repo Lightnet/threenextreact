@@ -2,8 +2,14 @@
 
 
 - https://www.npmjs.com/package/troika-three-text
+- https://threejs.org/editor/
 
- 
+https://stackoverflow.com/questions/32363612/how-to-add-translate-rotate-scale-tool-to-my-threejs-scene
+
+
+https://threejs.org/examples/misc_controls_transform.html
+
+
 
 # class :
 - AxesHelper 

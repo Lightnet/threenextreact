@@ -39,7 +39,7 @@ export default function EntityText2D(props,ref) {
         direction="auto"
         anchorX="center"
         anchorY="middle"
-        font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
+        //font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
         //anchorX="center" 
         //anchorY="middle"
         >
