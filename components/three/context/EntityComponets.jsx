@@ -11,7 +11,7 @@
 
 import { nanoid32 } from "../../../lib/helper.mjs";
 import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight";
-import EntityAxeHelper, { EntityAxeHelperRef } from "../entity/EntityAxeHelper.jsx";
+import EntityAxesHelper, { EntityAxesHelperRef } from "../entity/EntityAxesHelper.jsx";
 import EntityBox, { EntityBoxRef } from "../entity/EntityBox";
 import EntityCircle, { EntityCircleRef } from "../entity/EntityCircle";
 import EntityColor, { EntityColorRef } from "../entity/EntityColor";
@@ -260,8 +260,8 @@ AddCompObjEntity({
 AddCompObjEntity({
   name:"axesHelper"
   , dataType:API.ENTITYTYPES.AXESHELPER
-  , comp:EntityAxeHelper
-  , compRef:EntityAxeHelperRef
+  , comp:EntityAxesHelper
+  , compRef:EntityAxesHelperRef
   , shape:null
   , isTransform:true
   , parameters:[

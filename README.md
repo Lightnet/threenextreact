@@ -24,67 +24,10 @@
   Network co-op is just idea but not work on it yet for to deal with editor co-op.
 
 ### Entity and object3D:
-  To handle the object in form of Entity prefixed as it to have modular design. Since the name is take from the react three fiber.
+
+  To handle the object in form of Entity prefixed as it to have modular design. Since the name is take from the react three fiber. There are prebuild objects from the three.js and other communities.
 
   The idea base on the graph save database with json file format.
-
-  Work in progress and design may change.
-```js
-var entityObject3D1={
-    objectid:"012345678901234567890012"
-  , datatype:"object3d"
-  , name:"1"
-  , position:[0,0,0]
-  , rotation:[0,0,0]
-  , scale:[0,0,0]
-}
-
-var entityObject3D2={
-    objectid:"012345678901234567890012"
-  , datatype:"object3d"
-  , name:"2"
-  , position:[0,0,0]
-  , rotation:[0,0,0]
-  , scale:[0,0,0]
-  , physics:{
-    isPhysics:false
-    , shapetype:"box"
-    , mass:0
-  }
-}
-```
-  Note some code might conflict with the props base on passing with the variable like the position. This could be used as component add to the entity like material. 
-
-```js
-var entityObject3D2={
-    objectid:"012345678901234567890012"
-  , datatype:"object3d"
-  , name:"2"
-  , position:[0,0,0]
-  , rotation:[0,0,0]
-  , scale:[0,0,0]
-  , physics:{
-    isPhysics:false
-    , shapetype:"box"
-    , mass:0
-  },
-  material:{
-    idx:0
-    , name:""
-  }
-}
-```
-
-```js
-export default function EntityObjectRender(props){
-//...
-  <EntityBox position={props.position} //this set up
-   />
-//...
-<EntityBox {...props} /> // pass that match varaibles
-//...
-```
-  There are two methods to pass position.
 
 ### Database:
  The database will be used is MongoDB to able save and load data for editing and game to manage them in json format.
@@ -297,6 +240,12 @@ $ ncu // check package to updates
 ```
 
 # Credits:
+  Thanks to search engine and the people working on react, three, three-fiber and other forums. For finding the problems.
+## 
+- react-three-fiber as @react-three/fiber
+  - https://github.com/pmndrs/react-three-fiber
+  - https://github.com/pmndrs/react-three-fiber/issues/43
+
 ## svgrepo:
   Free svg icons.
 - https://www.svgrepo.com

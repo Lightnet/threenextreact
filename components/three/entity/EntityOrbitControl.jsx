@@ -23,6 +23,7 @@ export default function EntityOrbitControl(props){
       />
     </PerspectiveCamera>
     <OrbitControls 
+      enabled={props.enabled}
       enablePan={true}
       enableZoom={true} 
       enableRotate={true}

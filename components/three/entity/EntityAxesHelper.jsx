@@ -3,9 +3,9 @@
   Created by: Lightnet
 */
 
-import React,{ useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-export default function EntityAxeHelper(props,ref) {
+export default function EntityAxesHelper(props,ref) {
   // This reference will give us direct access to the THREE.Mesh object
   if(!ref){
     ref = useRef();
@@ -26,7 +26,7 @@ export default function EntityAxeHelper(props,ref) {
       position={[props.position[0],props.position[1],props.position[2]]}
       rotation={[props.rotation[0],props.rotation[1],props.rotation[2]]}
       scale={[props.scale[0],props.scale[1],props.scale[2]]}
-      />)
+  />)
 }
 
-export const EntityAxeHelperRef = React.forwardRef(EntityAxeHelper);
+export const EntityAxesHelperRef = React.forwardRef(EntityAxesHelper);

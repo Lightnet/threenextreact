@@ -1,4 +1,16 @@
 
+# important:
+- canvas can't use context top need to.
+- forwarding context
+- https://github.com/pmndrs/react-three-fiber/issues/43
+```js
+//@react-three/drei
+const ContextBridge = useContextBridge(ThemeContext, GreetingContext)
+```
+
+
+
+
 
 
 - https://www.npmjs.com/package/troika-three-text

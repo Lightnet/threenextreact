@@ -6,27 +6,22 @@
 
 */
 
-import React from "react";
+import React, { useMemo } from "react";
 import { Physics } from "@react-three/cannon";
-import { GizmoHelper, GizmoViewport } from "@react-three/drei";
+import { GizmoHelper, GizmoViewport, useContextBridge } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEntity } from "../context/EntityProvider";
-import EntityOrbitControl from "../entity/EntityOrbitControl";
-import { useEditor } from "../context/EditorProvider";
+import { EntityProvider, useEntity } from "../context/EntityProvider";
+import { EditorContext, EditorProvider, useEditor } from "../context/EditorProvider";
 import EntityObjectTypes from "../helpers/EntityObjectTypes";
 import EntityPhysicsTypes from "../helpers/EntityPhysicsTypes";
-import EntityModalGLTF from "../model/EntityModalGLTF";
-import EntityModalOBJ from "../model/EntityModalOBJ";
-import EntityModalFBX from "../model/EntityModalFBX";
-import EntityText2D from "../entity/EntityText2D";
-import EntityTransformControl from "../helpers/EntityTransformControl";
-
-//import EntityRenderModel from "../EntityRenderModel";
+import EntityTransformControl, { EntityTransformControlRef } from "../helpers/EntityTransformControl";
+import EntityOrbitControl from "../entity/EntityOrbitControl";
 
 export default function EditorViewport3D(){
 
   const {
-    enableOrbitControl
+    enableOrbitControl,
+    setEnableOrbitControl
   }= useEditor();
 
   const {
@@ -34,6 +29,12 @@ export default function EditorViewport3D(){
     , dispatchEntity
     , enablePhysics
   } = useEntity();
+
+  //const valueEditor = useEditor();
+
+  const ContextBridge = useContextBridge(EditorContext)
+
+  console.log("outside canvas enableOrbitControl:",enableOrbitControl)
 
   return <>
 
@@ -48,9 +49,7 @@ export default function EditorViewport3D(){
     }}>
     
     <Canvas style={{ height: "100%", width: "100%" }}>
-
-    <color attach="background" args={["gray"]} />
-
+      <ContextBridge>
       <Physics>
         {entities.map((entity)=>{
           //if(entity.isPhysics == true)
@@ -68,10 +67,11 @@ export default function EditorViewport3D(){
           }
         })}
       </Physics>
-      <EntityTransformControl/>
+      <EntityTransformControlRef/>
       
       { 
-      //enableOrbitControl && <EntityOrbitControl /> 
+      //enableOrbitControl && <EntityOrbitControl />
+      <EntityOrbitControl enabled={enableOrbitControl}/> 
       }
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
@@ -81,11 +81,13 @@ export default function EditorViewport3D(){
       </GizmoHelper>
       {/*
       */}
+      </ContextBridge>
     </Canvas>
     </div>
   </>
 }
 /*
+<color attach="background" args={["gray"]} />
 <EntityText2D/>
 <EntityModalGLTF/>
 <axesHelper/>

@@ -14,7 +14,7 @@ export const EntityContext = createContext();
 export function useEntity(){
   const context = useContext(EntityContext);
   if (!context) {
-    throw new Error(`useThree must be used within a EntityContext`)
+    throw new Error(`useEntity must be used within a EntityContext`)
   }
   return context;
 }
@@ -298,6 +298,7 @@ export function EntityProvider(props){
   const [scenes, setScenes] = useState([]);
 
   const [enablePhysics, setEnablePhysics ] = useState(false);
+  const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const {selectObject, setSelectObject} = useState();
 
@@ -306,13 +307,15 @@ export function EntityProvider(props){
     sceneName, setSceneName,
     scenes, setScenes,
     entities, dispatchEntity,
-    enablePhysics, setEnablePhysics 
+    enablePhysics, setEnablePhysics,
+    enableOrbitControl, setEnableOrbitControl
   }),[
     sceneID,
     sceneName,
     scenes,
     entities,
-    enablePhysics
+    enablePhysics,
+    enableOrbitControl
   ])
 
   return <EntityContext.Provider value={value} {...props} />

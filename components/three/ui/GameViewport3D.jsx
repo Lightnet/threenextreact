@@ -3,7 +3,6 @@
   Created by: Lightnet
 
   over lap divs can't used mouse event 
-
 */
 
 import React from "react";
@@ -62,10 +61,11 @@ export default function GameViewport3D(){
             return <EntityObjectTypes key={entity.objectid} {...entity}/>
           }
         })}
-
-
       </Physics>
-      { enableOrbitControl && <EntityOrbitControl /> }
+      {
+       //enableOrbitControl && <EntityOrbitControl /> 
+       <EntityOrbitControl enabled={enableOrbitControl}/>
+      }
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
         margin={[80, 80]} // widget margins (X, Y)
