@@ -19,6 +19,7 @@ import EntityModalGLTF from "../model/EntityModalGLTF";
 import EntityModalOBJ from "../model/EntityModalOBJ";
 import EntityModalFBX from "../model/EntityModalFBX";
 import EntityText2D from "../entity/EntityText2D";
+import EntityTransformControl from "../helpers/EntityTransformControl";
 
 //import EntityRenderModel from "../EntityRenderModel";
 
@@ -67,9 +68,11 @@ export default function EditorViewport3D(){
           }
         })}
       </Physics>
-
+      <EntityTransformControl/>
       
-      { enableOrbitControl && <EntityOrbitControl /> }
+      { 
+      //enableOrbitControl && <EntityOrbitControl /> 
+      }
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
         margin={[80, 80]} // widget margins (X, Y)

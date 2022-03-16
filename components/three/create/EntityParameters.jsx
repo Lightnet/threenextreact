@@ -202,7 +202,7 @@ export default function EntityParameters({
       if(typeof parameters[key] == "object"){
         type="text";
       }
-      console.log("key:",key," TYPE:", type)
+      //console.log("key:",key," TYPE:", type)
       
       let item = <tr key={key}>
         <td><label> {key} </label> </td>
