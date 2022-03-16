@@ -21,11 +21,11 @@ export default function EntityText2D(props,ref) {
   }
   const { viewport } = useThree()
   const [color, setColor] = useState("#EC2D2D");
-  const [fontSize, setfontSize] = useState(16.5);
-  const [maxWidth, setMaxWidth] = useState(100);
-  const [lineHeight, setlineHeight] = useState(0.75);
-  const [letterSpacing, setletterSpacing] = useState(-0.08);
-  const [textAlign, settextAlign] = useState("left");
+  //const [fontSize, setfontSize] = useState(16.5);
+  //const [maxWidth, setMaxWidth] = useState(100);
+  //const [lineHeight, setlineHeight] = useState(0.75);
+  //const [letterSpacing, setletterSpacing] = useState(-0.08);
+  //const [textAlign, settextAlign] = useState("left");
 
   //useEffect(()=>{
     //setColor(props.parameters.color)

@@ -188,6 +188,12 @@ export default function EntityParameters({
         //console.log("color////////")
         type="color";
       }
+      if(key=="colorCenterLine"){ 
+        type="color";
+      }
+      if(key=="colorGrid"){ 
+        type="color";
+      }
       //console.log(typeof parameters[key])
       //console.log(typeof parameters[key])
       if(typeof parameters[key] == "undefined"){
@@ -196,6 +202,7 @@ export default function EntityParameters({
       if(typeof parameters[key] == "object"){
         type="text";
       }
+      console.log("key:",key," TYPE:", type)
       
       let item = <tr key={key}>
         <td><label> {key} </label> </td>

@@ -58,6 +58,8 @@ const API = {
     , ORTHOGRAPHICCAMERA:"ORTHOGRAPHICCAMERA"
     , ORBITCONTROLS:"ORBITCONTROLS"
     , COLOR:"COLOR"
+    , AXESHELPER:"AXESHELPER"
+    , GRIDHELPER:"GRIDHELPER"
   },
 
   //deal with easy and miss spelling

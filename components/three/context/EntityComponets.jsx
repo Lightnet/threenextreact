@@ -11,11 +11,13 @@
 
 import { nanoid32 } from "../../../lib/helper.mjs";
 import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight";
+import EntityAxeHelper, { EntityAxeHelperRef } from "../entity/EntityAxeHelper.jsx";
 import EntityBox, { EntityBoxRef } from "../entity/EntityBox";
 import EntityCircle, { EntityCircleRef } from "../entity/EntityCircle";
 import EntityColor, { EntityColorRef } from "../entity/EntityColor";
 import EntityCone, { EntityConeRef } from "../entity/EntityCone";
 import EntityCylinder, { EntityCylinderRef } from "../entity/EntityCylinder";
+import EntityGridHelper, { EntityGridHelperRef } from "../entity/EntityGridHelper.jsx";
 import EntityGroup, { EntityGroupRef } from "../entity/EntityGroup";
 import EntityOrthographicCamera, { EntityOrthographicCameraRef } from "../entity/EntityOrthographicCamera";
 import EntityPerspectiveCamera, { EntityPerspectiveCameraRef } from "../entity/EntityPerspectiveCamera";
@@ -254,6 +256,43 @@ AddCompObjEntity({
     , wireframe:false
   }]
 })
+
+AddCompObjEntity({
+  name:"axesHelper"
+  , dataType:API.ENTITYTYPES.AXESHELPER
+  , comp:EntityAxeHelper
+  , compRef:EntityAxeHelperRef
+  , shape:null
+  , isTransform:true
+  , parameters:[
+    {
+      size:1
+    }
+  ]
+})
+
+AddCompObjEntity({
+  name:"gridHelper"
+  , dataType:API.ENTITYTYPES.GRIDHELPER
+  , comp:EntityGridHelper
+  , compRef:EntityGridHelperRef
+  , shape:null
+  , isTransform:true
+  , parameters:[
+    {
+      size:10
+    , divisions:10
+  },
+  {
+    size:10
+  , divisions:10
+  , colorCenterLine:"#444444"
+  , colorGrid :"#888888"
+  }
+  ]
+})
+
+
 AddCompObjEntity({
   name:"ambientlight"
   , dataType:API.ENTITYTYPES.AMBIENTLIGHT

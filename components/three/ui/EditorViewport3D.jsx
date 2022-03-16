@@ -68,7 +68,7 @@ export default function EditorViewport3D(){
         })}
       </Physics>
 
-      <EntityText2D/>
+      
       { enableOrbitControl && <EntityOrbitControl /> }
       <GizmoHelper
         alignment="bottom-right" // widget alignment within scene
@@ -83,6 +83,7 @@ export default function EditorViewport3D(){
   </>
 }
 /*
+<EntityText2D/>
 <EntityModalGLTF/>
 <axesHelper/>
 <arrowHelper/>

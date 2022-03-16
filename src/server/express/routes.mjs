@@ -26,7 +26,7 @@ router.use((req,res,next)=>{
 router.use(auth);
 router.use("/api",route_three);
 router.use(route_test);
-router.use(route_upload);
+router.use("/api",route_upload);
 // added last for error or url does not exist
 router.get('*', (req, res) => {
   //res.send(

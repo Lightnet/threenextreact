@@ -85,6 +85,12 @@ export default function EntityPararmeters({selectid}){
           //console.log("color////////")
           type="color";
         }
+        if(key=="colorCenterLine"){ 
+          type="color";
+        }
+        if(key=="colorGrid"){ 
+          type="color";
+        }
         item = <tr key={key}>
           <td><label> {key} </label> </td>
           <td><input name={key} type={type} value={parameters[key]} onChange={handleChange}/></td>
