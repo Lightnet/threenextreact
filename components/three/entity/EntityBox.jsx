@@ -4,6 +4,7 @@
 */
 
 import React,{ useRef, useState, useEffect } from 'react';
+import { EditorContext } from '../context/EditorProvider';
 import EntityMaterialParse from '../material/EntityMaterialParse';
 
 export default function EntityBox(props,ref) {
@@ -11,6 +12,13 @@ export default function EntityBox(props,ref) {
   if(!ref){
     ref = useRef();
   }
+
+  const editor = React.useContext(EditorContext)
+
+  const {
+    setSelectObjectUUID,
+    setSelectObjectID
+  } = editor;
   
   const [params, setParams] = useState([])
 
@@ -26,6 +34,8 @@ export default function EntityBox(props,ref) {
     //console.log(event);
     console.log("REF: ",ref);
     console.log(props);
+    setSelectObjectUUID(ref.current.uuid);
+    setSelectObjectID(props.objectid);
   }
 
   // Set up state for the hovered and active state

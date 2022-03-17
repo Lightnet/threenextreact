@@ -107,3 +107,7 @@ https://codesandbox.io/s/r3f-troika-text-eb4mx?file=/src/index.js:274-282
 
 
 https://tympanus.net/codrops/2020/09/30/creating-mirrors-in-react-three-fiber-and-three-js/
+
+
+
+https://stackoverflow.com/questions/19426559/three-js-access-scene-objects-by-name-or-id

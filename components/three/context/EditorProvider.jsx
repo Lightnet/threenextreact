@@ -23,6 +23,7 @@ export function EditorProvider(props){
 
   const [selectObject, setSelectObject] = useState(null);
   const [selectObjectID, setSelectObjectID] = useState("");
+  const [selectObjectUUID, setSelectObjectUUID] = useState("");
   const [enableOrbitControl, setEnableOrbitControl] = useState(true);
 
   const [deleteObjectID, setDeleteObjectID] = useState("");
@@ -34,7 +35,8 @@ export function EditorProvider(props){
     selectObject, setSelectObject,
     enableOrbitControl, setEnableOrbitControl,
     selectObjectID, setSelectObjectID,
-    deleteObjectID, setDeleteObjectID
+    deleteObjectID, setDeleteObjectID,
+    selectObjectUUID, setSelectObjectUUID
   }),[
     editorID,
     editorName,
@@ -42,7 +44,8 @@ export function EditorProvider(props){
     selectObject,
     selectObjectID,
     enableOrbitControl,
-    deleteObjectID
+    deleteObjectID,
+    selectObjectUUID
   ])
 
   return <EditorContext.Provider value={value} {...props} />
