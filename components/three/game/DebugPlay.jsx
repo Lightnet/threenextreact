@@ -4,11 +4,12 @@
 */
 
 import { Physics } from "@react-three/cannon";
-import { GizmoHelper, GizmoViewport } from "@react-three/drei";
+import { GizmoHelper, GizmoViewport, useContextBridge } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
 import { isEmpty } from "../../../lib/helper.mjs";
 import useFetch from "../../hook/useFetch.mjs";
+import { EditorContext } from "../context/EditorProvider.jsx";
 import { useEntity } from "../context/EntityProvider";
 import EntityOrbitControl from "../entity/EntityOrbitControl";
 import EntityObjectTypes from "../helpers/EntityObjectTypes";
@@ -110,8 +111,11 @@ export default function DebugPlay({gameid}){
     }
   }
 
+  const ContextBridge = useContextBridge(EditorContext)
+
   return(<>
     <Canvas>
+      <ContextBridge>
       <Physics>
         {entities.map((entity)=>{
           //if(entity.isPhysics == true)
@@ -136,6 +140,7 @@ export default function DebugPlay({gameid}){
         >
         <GizmoViewport axisColors={['red', 'green', 'blue']} labelColor="black" />
       </GizmoHelper>
+      </ContextBridge>
       {/*
       */}
     </Canvas>

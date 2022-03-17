@@ -10,6 +10,7 @@ import {
   useSearchParams
 } from "react-router-dom";
 import { isEmpty } from "../../lib/helper.mjs";
+import { EditorProvider } from "./context/EditorProvider";
 
 export default function DebugGamePage({gameid}){
 
@@ -34,8 +35,10 @@ export default function DebugGamePage({gameid}){
   },[searchParams])
 
   return(<>
-    <EntityProvider>
-      <DebugPlay gameid={projectID}/>
-    </EntityProvider>
+    <EditorProvider>
+      <EntityProvider>
+        <DebugPlay gameid={projectID}/>
+      </EntityProvider>
+    </EditorProvider>
   </>)
 }

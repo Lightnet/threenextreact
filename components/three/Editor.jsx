@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 // Dev
 import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/useFetch.mjs";
-import { useEditor } from "./context/EditorProvider.jsx";
+//import { useEditor } from "./context/EditorProvider.jsx";
 import { useProject } from "./context/ProjectProvider.jsx";
 import { useEntity } from "./context/EntityProvider.jsx";
 
@@ -23,8 +23,7 @@ import EditorSidebarMainLeft from "./ui/EditorSidebarMainLeft.jsx";
 
 export default function Editor({projectid}){
 
-  //const [enableOrbitControl, setEnableOrbitControl] = useState(true);
-
+  /*
   const {
       settings
     , setSettings
@@ -33,6 +32,7 @@ export default function Editor({projectid}){
     , enableOrbitControl
     , setEnableOrbitControl
   }= useEditor();
+  */
 
   const {
       sceneID
@@ -41,7 +41,6 @@ export default function Editor({projectid}){
     , dispatchEntity
   } = useEntity();
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const {
       projectID
     , setProjectID

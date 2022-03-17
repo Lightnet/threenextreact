@@ -300,7 +300,6 @@ export default function Projects({onLoadEditor}){
     <label> Projects </label>
     <button onClick={clickCreateProject}> Create Project </button>
     {renderProjectList()}
-
     <Modal 
       isOpen={isOpenModal}
       onClose={closeModal}
@@ -310,6 +309,5 @@ export default function Projects({onLoadEditor}){
         renderModalMessage()
       }
     </Modal>
-
   </>)
 }

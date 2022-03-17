@@ -4,7 +4,7 @@
 */
 
 import React, { useEffect, useState } from "react";
-import { isEmpty } from "../../lib/helper.mjs";
+//import { isEmpty } from "../../lib/helper.mjs";
 import useFetch from "../hook/useFetch.mjs";
 import Editor from "./EditorPage.js";
 import GamesPage from "./GamesPage.js";
@@ -13,16 +13,10 @@ import ProjectsPage from "./ProjectsPage.js";
 
 export default function ThreePage(){
 
-  const [view, setView] = useState('default');//default, project ,editor, games
-  //const [editorID, setEditorID] = useState('');
+  const [view, setView] = useState('default');  //default, project ,editor, games
   const [projectID, setProjectID] = useState('');
   //const [gameID, setGameID] = useState('');
   //const navigate = useNavigate();
-
-  function onSelectView(name){
-    //setView(name);
-    //navigate("/editor");
-  }
 
   async function clickFetchTest(){
     let data = await useFetch("/api")
@@ -62,13 +56,6 @@ export default function ThreePage(){
     setView("editor");
     setProjectID(event.target.value);
   }
-
-  //useEffect(()=>{
-    //if(!isEmpty(projectID)){
-      //console.log(projectID);
-      //setView("editor");
-    //}
-  //},[projectID])
 
   function renderView(){
     if(view=="default"){
