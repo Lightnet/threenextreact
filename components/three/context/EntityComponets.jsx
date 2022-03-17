@@ -9,8 +9,10 @@
 
 */
 
+import { Vector3 } from "three";
 import { nanoid32 } from "../../../lib/helper.mjs";
 import EntityAmbientLight, { EntityAmbientLightRef } from "../entity/EntityAmbientLight";
+import EntityArrowHelper, { EntityArrowHelperRef } from "../entity/EntityArrowHelper.jsx";
 import EntityAxesHelper, { EntityAxesHelperRef } from "../entity/EntityAxesHelper.jsx";
 import EntityBox, { EntityBoxRef } from "../entity/EntityBox";
 import EntityCircle, { EntityCircleRef } from "../entity/EntityCircle";
@@ -25,6 +27,9 @@ import EntityPlane, { EntityPlaneRef } from "../entity/EntityPlane";
 import EntityPointLight, { EntityPointLightRef } from "../entity/EntityPointLight";
 import EntityScene, { EntitySceneRef } from "../entity/EntityScene";
 import EntitySphere, { EntitySphereRef } from "../entity/EntitySphere";
+import EntityModalFBX, { EntityModalFBXRef } from "../model/EntityModalFBX.jsx";
+import EntityModalGLTF, { EntityModalGLTFRef } from "../model/EntityModalGLTF.jsx";
+import EntityModalOBJ, { EntityModalOBJRef } from "../model/EntityModalOBJ.jsx";
 import API from "./API.mjs";
 
 var ENTITIES=[]
@@ -366,6 +371,70 @@ AddCompObjEntity({
       color:"#000000"
   }]
 })
+
+AddCompObjEntity({
+  name:"arrowHelper"
+  , dataType:API.ENTITYTYPES.ARROWHELPER
+  , comp:EntityArrowHelper
+  , compRef:EntityArrowHelperRef
+  , isTransform:true
+  , shape:null
+  , parameters:[{
+      dir:new Vector3(1,0,1)
+    , origin: new Vector3(0,0,0)
+    , length :1
+    , hex: "#ffff00"
+  },{
+    dir:new Vector3(1,0,1)
+  , origin: new Vector3(0,0,0)
+  , length :1
+  , hex: "#ffff00"
+  , headLength: 0.2 * 1
+  , headWidth: 0.2 * 1
+  }]
+})
+
+AddCompObjEntity({
+  name:"modelfbx"
+  , dataType:API.ENTITYTYPES.MODELFBX
+  , comp:EntityModalFBX
+  , compRef:EntityModalFBXRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:0
+  , parameters:[{
+      url:"/box.fbx"
+  }]
+})
+
+AddCompObjEntity({
+  name:"modelobj"
+  , dataType:API.ENTITYTYPES.MODELOBJ
+  , comp:EntityModalOBJ
+  , compRef:EntityModalOBJRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:0
+  , parameters:[{
+      url:"/box.obj"
+  }]
+})
+
+AddCompObjEntity({
+  name:"modelgltf"
+  , dataType:API.ENTITYTYPES.MODELGLTF
+  , comp:EntityModalGLTF
+  , compRef:EntityModalGLTFRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:0
+  , parameters:[{
+      url:"/box.gltf"
+  }]
+})
+
+
+
 loaded=true
 global.ENTITIES=ENTITIES;
 }
@@ -381,10 +450,10 @@ export function getEntities(){
 }
 
 export function AddCompObjEntity(args){
-  console.log(args)
+  //console.log(args)
   let item = ENTITIES.find(item=>item.name==args.name)
-  console.log(ENTITIES);
-  console.log(item);
+  //console.log(ENTITIES);
+  //console.log(item);
   if(!item){
     ENTITIES.push(args)
   }

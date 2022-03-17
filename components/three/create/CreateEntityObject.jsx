@@ -44,8 +44,12 @@ export default function CreateEntityObject(){
         props.istransform=ENTITIES[idx].isTransform
         props.datatype=ENTITIES[idx].dataType
         props.parms=ENTITIES[idx].parameters
-        props.shape=ENTITIES[idx].shape || null
-        props.mass=ENTITIES[idx].mass || null
+        if(ENTITIES[idx].shape){
+          props.shape=ENTITIES[idx].shape
+        }
+        if(ENTITIES[idx].mass){
+          props.mass=ENTITIES[idx].mass
+        }
         if(ENTITIES[idx].material){
           props.material=ENTITIES[idx].material
         }   

@@ -19,7 +19,6 @@ export default function EntityTransformControl(props,ref){
   const { camera, gl } = useThree()
   //const [ref, mesh] = useResource()
   const meshRef = useRef(null)
-
   const editor = React.useContext(EditorContext)
 
   const {
@@ -34,7 +33,7 @@ export default function EntityTransformControl(props,ref){
       const controls = transform.current
       const callback = event => {
         //(orbit.current.enabled = !event.value)
-        console.log(event.value);
+        //console.log(event.value);
         setEnableOrbitControl(!event.value)
       }
       controls.addEventListener('dragging-changed', callback)

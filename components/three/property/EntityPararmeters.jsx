@@ -60,6 +60,9 @@ export default function EntityPararmeters({selectid}){
       //console.log(value);
       setParameters(state => ({...state, [evt.target.name]: value}));
     }
+    if(evt.target.type=="text"){
+      setParameters(state => ({...state, [evt.target.name]: String(value)}));
+    }
   }
 
   function renderParams(){
@@ -79,6 +82,9 @@ export default function EntityPararmeters({selectid}){
           <td><input name={key} type={type} value={parameters[key]} checked={parameters[key]}  onChange={handleChange}/></td>
           </tr>
           return [ ...result,item]
+        }else if(typeof parameters[key] == "string"){
+          //console.log("boolean////////")
+          type="text";
         }
         //added last as it didn't detect as color unit
         if(key=="color"){
@@ -91,6 +97,7 @@ export default function EntityPararmeters({selectid}){
         if(key=="colorGrid"){ 
           type="color";
         }
+        //console.log(typeof parameters[key],"key:",key," TYPE:", type)
         item = <tr key={key}>
           <td><label> {key} </label> </td>
           <td><input name={key} type={type} value={parameters[key]} onChange={handleChange}/></td>

@@ -60,6 +60,10 @@ const API = {
     , COLOR:"COLOR"
     , AXESHELPER:"AXESHELPER"
     , GRIDHELPER:"GRIDHELPER"
+    , ARROWHELPER:"ARROWHELPER"
+    , MODELFBX:"MODELFBX"
+    , MODELGLTF:"MODELGLTF"
+    , MODELOBJ:"MODELOBJ"
   },
 
   //deal with easy and miss spelling

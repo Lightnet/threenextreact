@@ -25,9 +25,20 @@
 
 ### Entity and object3D:
 
-  To handle the object in form of Entity prefixed as it to have modular design. Since the name is take from the react three fiber. There are prebuild objects from the three.js and other communities.
+  To handle objects from three and other communities packages that predefine name. It would used entity prefixed entity as the canvas can render threejs object3d and filters. The three packages will be test or used when the editor and game is being built.
 
   The idea base on the graph save database with json file format.
+
+## GUI / UI:
+  The idea is have modular build but required testing ideas.
+
+  Since the raectjs is module components.
+
+  But it required to set up the user interface to scale with camera as there no pipline but user made UI.
+
+  The idea base on flex. Need to test later.
+
+- https://github.com/pmndrs/react-three-flex  
 
 ### Database:
  The database will be used is MongoDB to able save and load data for editing and game to manage them in json format.
@@ -38,6 +49,12 @@
   - Express.js ( tested, work in progress )
 
 - Editor:
+  - UI
+    - camera 
+    - simple ( work in progress )
+    - modules
+    - script
+    - 
   - Entity:
     - Save ( added )
     - Update ( added / position / rotation / scale )

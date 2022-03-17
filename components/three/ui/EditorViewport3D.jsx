@@ -29,12 +29,9 @@ export default function EditorViewport3D(){
     , dispatchEntity
     , enablePhysics
   } = useEntity();
-
   //const valueEditor = useEditor();
-
   const ContextBridge = useContextBridge(EditorContext)
-
-  console.log("outside canvas enableOrbitControl:",enableOrbitControl)
+  //console.log("outside canvas enableOrbitControl:",enableOrbitControl)
 
   return <>
 

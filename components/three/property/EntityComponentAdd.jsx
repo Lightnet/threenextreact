@@ -42,7 +42,7 @@ export default function EntityComponentAdd(){
   }
 
   function renderViewComponent(){
-    console.log(selectComponent);
+    //console.log(selectComponent);
     if(selectComponent=="material"){
       return <CreateMaterial onClose={onClose} />
     }else if(selectComponent=="script"){

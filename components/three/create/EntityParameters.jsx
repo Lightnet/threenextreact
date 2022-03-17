@@ -101,16 +101,17 @@ export default function EntityParameters({
     }
   },[parms])
   useEffect(()=>{
-    if(shape){
+    if(shape!=null){
       setShapePhysics(shape);
       setMass(0)
     }
   },[shape])
   useEffect(()=>{
-    if(typeof mass != 'undefined'){
+    if(typeof mass !== 'undefined'){
+      console.log("MAS>>>>>>",mass)
       setMass(mass);
     }
-  },[mass])
+  },[mass,shape])
 
   const typeName = e => setName(e.target.value);
   const typeMass = e => setMass(e.target.value);
@@ -150,6 +151,9 @@ export default function EntityParameters({
       //console.log(value);
       setParameters(state => ({...state, [evt.target.name]: value}));
     }
+    if(evt.target.type=="text"){
+      setParameters(state => ({...state, [evt.target.name]: String(value)}));
+    }
   }
 
   function onSelectParameters(e){
@@ -182,8 +186,10 @@ export default function EntityParameters({
       }else if(typeof parameters[key] == "boolean"){
         //console.log("boolean////////")
         type="checkbox";
+      }else if(typeof parameters[key] == "string"){
+        //console.log("boolean////////")
+        type="text";
       }
-      
       if(key=="color"){ //added last as it didn't detect as color unit
         //console.log("color////////")
         type="color";
@@ -194,15 +200,16 @@ export default function EntityParameters({
       if(key=="colorGrid"){ 
         type="color";
       }
-      //console.log(typeof parameters[key])
-      //console.log(typeof parameters[key])
+      if(key=="hex"){ 
+        type="color";
+      }
       if(typeof parameters[key] == "undefined"){
         type="text";
       }
       if(typeof parameters[key] == "object"){
         type="text";
       }
-      //console.log("key:",key," TYPE:", type)
+      //console.log(typeof parameters[key],"key:",key," TYPE:", type)
       
       let item = <tr key={key}>
         <td><label> {key} </label> </td>
