@@ -21,6 +21,8 @@ export default function EntityArrowHelper(props,ref) {
     } ,[]))
   },[props.parameters])
 
+  console.log(params);
+
 
   return (<arrowHelper
     {...props}

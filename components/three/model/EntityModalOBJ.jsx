@@ -5,7 +5,7 @@
 
 // https://docs.pmnd.rs/react-three-fiber/tutorials/loading-models
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { useLoader } from '@react-three/fiber'
 

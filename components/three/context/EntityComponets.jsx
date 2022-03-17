@@ -380,13 +380,13 @@ AddCompObjEntity({
   , isTransform:true
   , shape:null
   , parameters:[{
-      dir:new Vector3(1,0,1)
-    , origin: new Vector3(0,0,0)
+      dir:[0,0,1]
+    , origin:[0,0,0]
     , length :1
     , hex: "#ffff00"
   },{
-    dir:new Vector3(1,0,1)
-  , origin: new Vector3(0,0,0)
+    dir:[1,0,1]
+  , origin: [0,0,0]
   , length :1
   , hex: "#ffff00"
   , headLength: 0.2 * 1

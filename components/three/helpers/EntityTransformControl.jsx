@@ -5,6 +5,9 @@
 
 // https://codesandbox.io/s/react-three-fiber-react-spring-30lfq?file=/src/index.js:897-1316
 // https://github.com/pmndrs/react-three-fiber/issues/150
+// https://threejs.org/examples/#misc_controls_transform
+// https://github.com/mrdoob/three.js/blob/master/examples/misc_controls_transform.html
+// https://github.com/pmndrs/drei/blob/master/src/core/TransformControls.tsx
 
 import { OrbitControls, TransformControls } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber'
@@ -36,8 +39,29 @@ export default function EntityTransformControl(props,ref){
         //console.log(event.value);
         setEnableOrbitControl(!event.value)
       }
+      function controlTransform(e){
+        console.log(e.code)
+        switch ( e.code ) {
+          case 'KeyW': // W
+            controls.setMode( 'translate' );
+						break;
+					case 'KeyE': // E
+            controls.setMode( 'rotate' );
+						break;
+					case 'KeyR': // R
+            controls.setMode( 'scale' );
+						break;
+          case 'Escape': // Esc
+            //controls.reset(); // nope
+            break;
+        }
+      }
+      window.addEventListener( 'keydown', controlTransform);
       controls.addEventListener('dragging-changed', callback)
-      return () => controls.removeEventListener('dragging-changed', callback)
+      return () => {
+        controls.removeEventListener('dragging-changed', callback)
+        window.removeEventListener('keydown',controlTransform)
+      }
     }
   })
   
