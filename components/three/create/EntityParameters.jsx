@@ -108,7 +108,7 @@ export default function EntityParameters({
   },[shape])
   useEffect(()=>{
     if(typeof mass !== 'undefined'){
-      console.log("MAS>>>>>>",mass)
+      //console.log("MAS>>>>>>",mass)
       setMass(mass);
     }
   },[mass,shape])
@@ -141,17 +141,16 @@ export default function EntityParameters({
     //const name = evt.target.name;
     if(evt.target.type=="number"){
       setParameters(state => ({...state, [evt.target.name]: Number(value)}));
-    }
-    if(evt.target.type=="checkbox"){
+    }else if(evt.target.type=="checkbox"){
       //console.log("evt.target.checked");
       //console.log(evt.target.checked);
       setParameters(state => ({...state, [evt.target.name]: Boolean(evt.target.checked)}));
-    }
-    if(evt.target.type=="color"){
+    }else if(evt.target.type=="color"){
       //console.log(value);
       setParameters(state => ({...state, [evt.target.name]: value}));
-    }
-    if(evt.target.type=="text"){
+    }else if(evt.target.type=="text"){
+      setParameters(state => ({...state, [evt.target.name]: String(value)}));
+    }else{
       setParameters(state => ({...state, [evt.target.name]: String(value)}));
     }
   }
@@ -206,10 +205,10 @@ export default function EntityParameters({
       if(typeof parameters[key] == "undefined"){
         type="text";
       }
-      if(typeof parameters[key] == "object"){
-        type="text";
-      }
-      //console.log(typeof parameters[key],"key:",key," TYPE:", type)
+      //if(typeof parameters[key] == "object"){
+        //type="text";
+      //}
+      //console.log(typeof parameters[key],parameters[key],"key:",key," TYPE:", type)
       
       let item = <tr key={key}>
         <td><label> {key} </label> </td>

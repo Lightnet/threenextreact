@@ -40,8 +40,8 @@ if(global.ENTITIES){
 }
 
 if(!loaded){
-  console.log("loaded",loaded)
-  console.log("global",global)
+  //console.log("loaded",loaded)
+  //console.log("global",global)
 AddCompObjEntity({
   name:"scene"
   , isTransform:true
@@ -432,9 +432,6 @@ AddCompObjEntity({
       url:"/box.gltf"
   }]
 })
-
-
-
 loaded=true
 global.ENTITIES=ENTITIES;
 }

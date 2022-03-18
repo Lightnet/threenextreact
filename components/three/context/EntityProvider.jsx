@@ -251,7 +251,7 @@ function reducerEntity(state, action) {
       // keep every item except the one we want to remove
       return state.filter((item) => item.objectid != action.id);
     case 'array':
-      log("Fetch Entities len:", action.entities.length)
+      //log("Fetch Entities len:", action.entities.length)
       // array for loading from fetch
       if(action.entities.length ==0){
         return [];  
@@ -260,7 +260,7 @@ function reducerEntity(state, action) {
     case 'clear':
       return [];
     case 'addMaterial':
-      log("render??");
+      //log("addMaterial??");
       return state.map((item) => {
         if(item.objectid == action.id){
           if(item.material){
@@ -274,7 +274,7 @@ function reducerEntity(state, action) {
         return item;
       });
     case 'render':
-      log("render??");
+      //log("render??");
       return state.map((item) => {
         if(item.objectid == action.id){
           if(action.keyType=="material"){

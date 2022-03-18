@@ -37,13 +37,13 @@ export default function EntityTransformControl(props,ref){
   //useFrame(() => orbit.current.update())
 
   useEffect(()=>{
-    console.log(selectObjectUUID)
+    //console.log(selectObjectUUID)
     //let meshobj = scene.getObjectById(selectObjectUUID);
     let meshobj = scene.getObjectByProperty('uuid',selectObjectUUID);
-    console.log(meshobj);
+    //console.log(meshobj);
     if(meshobj){
-      console.log(meshobj.position)
-      console.log(meshRef.current.position)
+      //console.log(meshobj.position)
+      //console.log(meshRef.current.position)
       let pos = meshobj.position
       meshRef.current.parent.position.set(pos.x,pos.y,pos.z);
       //meshRef.current.position = meshobj.position;
@@ -56,11 +56,11 @@ export default function EntityTransformControl(props,ref){
   useEffect(() => {
     if(meshRef.current){
       if(selectMesh.current){
-        console.log("update?")
+        //console.log("update?")
         //update when transform but not update object on move time.
         let pos = meshRef.current.parent.position
-        console.log(meshRef.current);
-        console.log(meshRef.current.position);
+        //console.log(meshRef.current);
+        //console.log(meshRef.current.position);
         selectMesh.current.position.set(pos.x,pos.y,pos.z);
       }
     }
