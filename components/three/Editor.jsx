@@ -23,17 +23,6 @@ import EditorSidebarMainLeft from "./ui/EditorSidebarMainLeft.jsx";
 
 export default function Editor({projectid}){
 
-  /*
-  const {
-      settings
-    , setSettings
-    , selectObject
-    , setSelectObject
-    , enableOrbitControl
-    , setEnableOrbitControl
-  }= useEditor();
-  */
-
   const {
       sceneID
     , setSceneID

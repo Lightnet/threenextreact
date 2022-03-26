@@ -18,45 +18,29 @@
   "author": "Lightnet",
   "license": "MIT",
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.17.0",
-    "@babel/preset-env": "^7.16.11",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/runtime": "^7.17.2",
     "axios": "^0.26.1",
-    "babel-loader": "^8.2.3",
-    "body-parser": "^1.19.2",
     "chalk": "^5.0.1",
     "classnames": "^2.3.1",
     "connect-mongo": "^4.6.0",
     "cors": "^2.8.5",
-    "css-loader": "^6.7.1",
-    "dayjs": "^1.10.8",
+    "dayjs": "^1.11.0",
     "dotenv": "^16.0.0",
-    "eventemitter3": "^4.0.7",
     "express": "^4.17.3",
     "express-session": "^1.17.2",
-    "formidable": "^3.2.1",
-    "gun": "^0.2020.1235",
+    "formidable": "^2.0.1",
+    "gun": "^0.2020.1236",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.5",
+    "mongoose": "^6.2.8",
     "nanoid": "^3.3.1",
-    "next": "^12.1.0",
-    "next-auth": "^4.2.1",
+    "next": "^12.1.1",
+    "next-auth": "^4.3.1",
     "nodemon": "^2.0.15",
     "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.2",
     "socket.io": "^4.4.1",
-    "style-loader": "^3.3.1",
-    "three": "^0.138.3",
-    "webpack": "^5.70.0",
-    "webpack-cli": "^4.9.2"
-  },
-  "peerDependencies": {
-    "@react-three/cannon": "^4.7.0",
-    "@react-three/drei": "^8.10.0",
-    "@react-three/fiber": "^7.0.26",
-    "react-dom": ">=17.0.2"
+    "three": "^0.139.0"
   },
   "exports": {
     ".": {
@@ -68,5 +52,19 @@
     "ignore": [
       "./components"
     ]
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.10",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/runtime": "^7.17.8",
+    "@react-three/cannon": "^5.1.0",
+    "@react-three/drei": "^8.19.4",
+    "@react-three/fiber": "^7.0.26",
+    "babel-loader": "^8.2.4",
+    "css-loader": "^6.7.1",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   }
 }

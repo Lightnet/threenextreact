@@ -113,7 +113,11 @@ router.post('/signout',async function (req, res) {
 
 router.get('/session',async function (req, res) {
   //console.log(req.session);
-  return res.json(req.session);
+  //return res.json(req.session);
+  return res.json({
+    user:req.session.user,
+    token:req.session.token
+  });
 })
 
 router.get('/cookie', function (req, res) {

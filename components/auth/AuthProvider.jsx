@@ -27,6 +27,7 @@ export function AuthProvider(props){
   //safe?
   useEffect(async()=>{
     setStatus('loading')
+    console.log("testing....")
     let data = await useFetch('/session');
     if(data.error){
       console.log('Fetch Error Session!');
@@ -35,13 +36,15 @@ export function AuthProvider(props){
     }
 
     if(data.token){
+      console.log("data",data)
       setToken(data.token);
       setUser(data.user);
-      //setStatus('auth');
+      setStatus('auth');
     }else{
       setStatus('unauth')
     }
   },[])
+
 
   useEffect(()=>{
     if(!isEmpty(token)){

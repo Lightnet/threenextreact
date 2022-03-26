@@ -10,7 +10,7 @@ import React, { useMemo } from "react";
 import { Physics } from "@react-three/cannon";
 import { GizmoHelper, GizmoViewport, useContextBridge } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { EntityProvider, useEntity } from "../context/EntityProvider";
+import { EntityContext, useEntity } from "../context/EntityProvider";
 import { EditorContext, EditorProvider, useEditor } from "../context/EditorProvider";
 import EntityObjectTypes from "../helpers/EntityObjectTypes";
 import EntityPhysicsTypes from "../helpers/EntityPhysicsTypes";
@@ -26,11 +26,10 @@ export default function EditorViewport3D(){
 
   const {
       entities
-    , dispatchEntity
     , enablePhysics
   } = useEntity();
-  //const valueEditor = useEditor();
-  const ContextBridge = useContextBridge(EditorContext)
+  
+  const ContextBridge = useContextBridge(EditorContext, EntityContext)
   //console.log("outside canvas enableOrbitControl:",enableOrbitControl)
 
   return <>
