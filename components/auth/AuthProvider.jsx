@@ -45,7 +45,6 @@ export function AuthProvider(props){
     }
   },[])
 
-
   useEffect(()=>{
     if(!isEmpty(token)){
       //console.log("TOKEN")

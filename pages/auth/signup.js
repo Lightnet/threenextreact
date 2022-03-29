@@ -4,7 +4,7 @@
 */
 
 // https://next-auth.js.org/configuration/pages
-import React from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import { getCsrfToken } from "next-auth/react";
 import Link from 'next/link';
 
@@ -18,6 +18,13 @@ export async function getServerSideProps(context) {
 }
 
 export default function SignUp({ csrfToken }) {
+
+  const inputRef = createRef(null);
+  
+  useEffect(()=>{
+    inputRef.current.focus()
+  },[])
+
   return (
     <center>
       <form method="post" action="/api/auth/callback/credentials">
@@ -27,10 +34,10 @@ export default function SignUp({ csrfToken }) {
           <tbody>
             <tr>
               <td>
-                <label>Username</label>
+                <label>User Name</label>
               </td>
               <td>
-                <input name="alias" type="text" />
+                <input ref={inputRef} name="alias" type="text" />
               </td>
             </tr>
             <tr>

@@ -31,7 +31,6 @@ export default function EditorPage(){
   }, [router]);
 
   return(<>
-    <AuthAccess>
       <ProjectProvider>
         <EditorProvider>
           <EntityProvider>
@@ -39,6 +38,9 @@ export default function EditorPage(){
           </EntityProvider>
         </EditorProvider>
       </ProjectProvider>
-    </AuthAccess>
   </>)
 }
+/*
+<AuthAccess>
+</AuthAccess>
+*/

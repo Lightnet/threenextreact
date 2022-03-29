@@ -7,6 +7,9 @@ import React,{ createContext, useState, useMemo, useContext, useReducer } from "
 import { isEmpty, nanoid32 } from "../../../lib/helper.mjs";
 import { log } from "../../../lib/log.mjs";
 import useFetch from "../../hook/useFetch.mjs";
+import EntityConfig from "./EntityConfig.mjs";
+
+//EntityConfig.setSave(true);
 
 export const EntityContext = createContext();
 
@@ -102,6 +105,7 @@ async function apiUpdateEntity(entity){
 
 // this is dispatch events
 function reducerEntity(state, action) {
+  //console.log(EntityConfig)
   //log(action);
   switch (action.type) {
     // do something with the action
@@ -141,8 +145,9 @@ function reducerEntity(state, action) {
         item.shapePhysics = action.shapePhysics;
         item.mass = action.mass;
       }
-
-      apiSaveEntity(action.projectid, action.sceneid ,item);
+      if(EntityConfig.autoSave){
+        apiSaveEntity(action.projectid, action.sceneid ,item);
+      }
 
       return [...state,item];
 
@@ -222,7 +227,9 @@ function reducerEntity(state, action) {
             }
           }
 
-          apiUpdateEntity(item)
+          if(EntityConfig.autoSave){
+            apiUpdateEntity(item)
+          }
 
           return item;
           //return {...item, position: action.value};
@@ -247,7 +254,9 @@ function reducerEntity(state, action) {
         });
 
     case 'remove':
-      apiDeleteEntity(action.id)
+      if(EntityConfig.autoSave){
+        apiDeleteEntity(action.id)
+      }
       // keep every item except the one we want to remove
       return state.filter((item) => item.objectid != action.id);
     case 'array':

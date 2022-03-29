@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import useFetch from "../hook/useFetch.mjs";
 
 import {
@@ -12,11 +12,18 @@ import {
 import { useAuth } from './AuthProvider';
 
 export function SignInPage() {
+
+  const inputRef = createRef(null);
+
   const [userName, setUserName] = useState('q');
   const [password, setPassword] = useState('q');
   const {setUser,setToken} = useAuth();
   const navigate = useNavigate();
   const [status, setStatus] = useState('');
+
+  useEffect(()=>{
+    inputRef.current.focus()
+  },[])
   
   async function clickLogin(){
     //log("login")
@@ -76,7 +83,7 @@ export function SignInPage() {
 
           <tr>
             <td>
-              <input value={userName} onChange={typingUser}></input>
+              <input ref={inputRef} value={userName} onChange={typingUser}></input>
             </td>
           </tr>
 

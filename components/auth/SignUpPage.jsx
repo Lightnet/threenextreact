@@ -3,7 +3,7 @@
   Created by: Lightnet
 */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import useFetch from "../hook/useFetch.mjs";
 
 import {
@@ -13,11 +13,16 @@ import { log } from '../../lib/log.mjs';
 
 export function SignUpPage() {
 
+  const inputRef = createRef(null);
   const [status, setStatus] = useState('');
 
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    inputRef.current.focus()
+  },[])
 
   async function clickRegister(){
     let data = await useFetch('/signup',{
@@ -63,13 +68,13 @@ export function SignUpPage() {
         <tbody>
           <tr>
             <td>
-              <label> User: </label>
+              <label> User Name: </label>
             </td>
           </tr>
 
           <tr>
             <td>
-              <input value={user} onChange={typingUser}></input>
+              <input ref={inputRef} value={user} onChange={typingUser}></input>
             </td>
           </tr>
           <tr>

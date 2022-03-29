@@ -29,6 +29,7 @@ export default function IndexPage({
       <SignArea/>
       <p>Next.js and Three.js development builds!</p>
       <p>Work in progress!</p>
+      <p> <a href='/editor'> Three Editor </a> </p>
     </>)
   }
 
