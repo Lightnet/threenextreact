@@ -10,6 +10,10 @@
 - components/three <- stable (three editor)
 - Note some files may change and folders for matching UI and name meaning.
 
+# Project:
+  I ported same project to vue js as to learn and compare frameworks. It almost the same layout just the code design is little different.
+- https://github.com/Lightnet/jsvuegunui
+
 ## Information:
   Work in progress builds and testing ideas.
 
