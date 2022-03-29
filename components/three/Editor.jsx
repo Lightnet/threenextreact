@@ -20,6 +20,7 @@ import EditorHeaderMain from "./ui/EditorHeaderMain.jsx";
 import EditorSidebarMainRight from "./ui/EditorSidebarMainRight.jsx";
 import EditorSidebarMainBottom from "./ui/EditorSidebarMainBottom.jsx";
 import EditorSidebarMainLeft from "./ui/EditorSidebarMainLeft.jsx";
+import EntityConfig from "./context/EntityConfig.mjs"
 
 export default function Editor({projectid}){
 
@@ -42,8 +43,10 @@ export default function Editor({projectid}){
     if(!isEmpty(projectid)){
       //console.log("found project ID:" + projectid)
       setProjectID(projectid);
+      EntityConfig.setSave(true)
     }else{
       //console.log("None project ID from props")
+      EntityConfig.setSave(false)
     }
   },[projectid])
 

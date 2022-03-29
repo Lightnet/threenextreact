@@ -5,6 +5,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import EntityMaterialParse from '../material/EntityMaterialParse';
+import { EditorContext } from '../context/EditorProvider';
 
 export default function EntityPlane(props, ref){
 
@@ -12,6 +13,11 @@ export default function EntityPlane(props, ref){
   if(!ref){
     ref = useRef();
   }
+
+  const {
+    setSelectObjectUUID,
+    setSelectObjectID
+  } = React.useContext(EditorContext)
 
   const [params, setParams] = useState([])
   const [hovered, setHover] = useState(false)
@@ -25,9 +31,8 @@ export default function EntityPlane(props, ref){
   },[props.parameters])
 
   function clickObject(event){
-    //console.log(event);
-    console.log("REF: ",ref);
-    console.log(props);
+    setSelectObjectUUID(ref.current.uuid);
+    setSelectObjectID(props.objectid);
   }
 
   return (

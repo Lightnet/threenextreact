@@ -13,12 +13,10 @@ export default function EntityBox(props,ref) {
     ref = useRef();
   }
 
-  const editor = React.useContext(EditorContext)
-
   const {
     setSelectObjectUUID,
     setSelectObjectID
-  } = editor;
+  } = React.useContext(EditorContext)
   
   const [params, setParams] = useState([])
 

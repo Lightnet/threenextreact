@@ -5,6 +5,7 @@
 
 import React,{ useRef, useEffect, useState } from 'react';
 import EntityMaterialParse from '../material/EntityMaterialParse';
+import { EditorContext } from '../context/EditorProvider';
 
 export default function EntityCone(props,ref) {
   // This reference will give us direct access to the THREE.Mesh object
@@ -12,6 +13,11 @@ export default function EntityCone(props,ref) {
   if(!ref){
     ref = useRef();
   }
+
+  const {
+    setSelectObjectUUID,
+    setSelectObjectID
+  } = React.useContext(EditorContext)
   
   const [params, setParams] = useState([])
 
@@ -26,12 +32,17 @@ export default function EntityCone(props,ref) {
     } ,[]))
   },[props.parameters])
 
+  function clickObject(event){
+    setSelectObjectUUID(ref.current.uuid);
+    setSelectObjectID(props.objectid);
+  }
+
   return (
     <mesh
       {...props}
       ref={ref}
       //scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
+      onClick={clickObject}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <coneGeometry args={params} />

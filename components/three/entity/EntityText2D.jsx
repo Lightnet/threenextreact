@@ -21,15 +21,6 @@ export default function EntityText2D(props,ref) {
   }
   const { viewport } = useThree()
   const [color, setColor] = useState("#EC2D2D");
-  //const [fontSize, setfontSize] = useState(16.5);
-  //const [maxWidth, setMaxWidth] = useState(100);
-  //const [lineHeight, setlineHeight] = useState(0.75);
-  //const [letterSpacing, setletterSpacing] = useState(-0.08);
-  //const [textAlign, settextAlign] = useState("left");
-
-  //useEffect(()=>{
-    //setColor(props.parameters.color)
-  //},[props?.parameters?.color])
 
   return (<>
     <React.Suspense fallback={null}>
@@ -50,17 +41,3 @@ export default function EntityText2D(props,ref) {
 }
 
 export const EntityText2DRef = React.forwardRef(EntityText2D);
-/*
-<Text
-      color={color}
-      fontSize={fontSize}
-      maxWidth={(viewport.width / 100) * maxWidth}
-      //lineHeight={lineHeight}
-      //letterSpacing={letterSpacing}
-      //textAlign={textAlign}
-      //font="https://fonts.gstatic.com/s/raleway/v14/1Ptrg8zYS_SKggPNwK4vaqI.woff"
-      anchorX="center"
-      anchorY="middle">
-      Test
-    </Text>
-*/
