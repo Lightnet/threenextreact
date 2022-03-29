@@ -17,9 +17,7 @@
 ## Test Build:
 
 - https://stackblitz.com/edit/node-zby8hd
-```
-npm run devn
-```
+  - Note that webpack take a while to load.
 
 
 ## Information:
