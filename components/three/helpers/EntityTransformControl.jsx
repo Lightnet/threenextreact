@@ -25,8 +25,6 @@ export default function EntityTransformControl(props,ref){
   const selectMesh = useRef(null)
   const editor = useContext(EditorContext)
   const entityContext = useContext(EntityContext);
-  //console.log(editor)
-  //console.log(entityContext)
   const {dispatchEntity} = entityContext;
 
   const {
@@ -38,33 +36,13 @@ export default function EntityTransformControl(props,ref){
 
   useEffect(()=>{
     //console.log(selectObjectUUID)
-    //let meshobj = scene.getObjectById(selectObjectUUID);
     let meshobj = scene.getObjectByProperty('uuid',selectObjectUUID);
-    //console.log(meshobj);
     if(meshobj){
-      //console.log(meshobj.position)
-      //console.log(meshRef.current.position)
-      let pos = meshobj.position
-      meshRef.current.parent.position.set(pos.x,pos.y,pos.z);
-      //meshRef.current.position = meshobj.position;
-      //meshRef.current = meshobj;
-      selectMesh.current = meshobj;
-      //transform.current.attach(meshobj)
+      transform.current.attach(meshobj)
+    }else{
+      transform.current.detach();
     }
   },[selectObjectUUID])
-
-  useEffect(() => {//update...
-    if(meshRef.current){
-      if(selectMesh.current){
-        //console.log("update?")
-        //update when transform but not update object on move time.
-        //let pos = meshRef.current.parent.position
-        //console.log(meshRef.current);
-        //console.log(meshRef.current.position);
-        //selectMesh.current.position.set(pos.x,pos.y,pos.z);
-      }
-    }
-  })
 
   const callback = event => {
     //(orbit.current.enabled = !event.value)
@@ -73,11 +51,14 @@ export default function EntityTransformControl(props,ref){
     if(event.value==false){
       if((transform.current!=null)&&(isEmpty(selectObjectID) == false)){
         console.log(transform.current.mode)
-        if(meshRef.current == null){
+        console.log(transform.current)
+        console.log(transform.current.object)
+        if(transform.current.object == null){//select transform
           return;
         }
+
         if(transform.current.mode=='translate'){ 
-          let pos = meshRef.current.parent.position
+          let pos = transform.current.object.position
           console.log("update entity object")
           dispatchEntity({
               type:"update"
@@ -87,7 +68,7 @@ export default function EntityTransformControl(props,ref){
           })
         }
         if(transform.current.mode=='rotate'){ 
-          let rot = meshRef.current.parent.rotation
+          let rot = transform.current.object.rotation
           console.log("update entity object")
           dispatchEntity({
               type:"update"
@@ -97,7 +78,7 @@ export default function EntityTransformControl(props,ref){
           })
         }
         if(transform.current.mode=='scale'){ 
-          let scale = meshRef.current.parent.scale
+          let scale = transform.current.object.scale
           console.log("update entity object")
           dispatchEntity({
               type:"update"
@@ -106,6 +87,7 @@ export default function EntityTransformControl(props,ref){
             , value: [scale.x,scale.y,scale.z]
           })
         }
+        
       }
     }
   }
@@ -144,7 +126,8 @@ export default function EntityTransformControl(props,ref){
     <mesh ref={meshRef}>  
     </mesh>
     {
-    meshRef.current && <TransformControls ref={transform} args={[camera, gl.domElement]} onUpdate={self => self.attach(meshRef.current)} />
+    //meshRef.current && <TransformControls ref={transform} args={[camera, gl.domElement]} onUpdate={self => self.attach(meshRef.current)} />
+    <TransformControls ref={transform} args={[camera, gl.domElement]} />
     }
   </>)
 }
