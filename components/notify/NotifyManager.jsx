@@ -8,7 +8,7 @@
 */
 
 import React from "react";
-import Notification from "./notification.jsx";
+import Notification from "./Notification.jsx";
 import NotifyContainer from "./NotifyContainer.jsx";
 import { useNotifty } from "./NotifyProvider.jsx";
 
