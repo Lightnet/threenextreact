@@ -17,7 +17,7 @@ import routes from './routes.mjs';
 import cors from "cors";
 import fs from "fs";
 
-import MongoStore from 'connect-mongo';
+//import MongoStore from 'connect-mongo';
 
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -93,7 +93,7 @@ export function main(){
 
   app.use(session({
     secret: 'keyboard cat',
-    store: MongoStore.create({ mongoUrl: DATABASE_URL }),
+    //store: MongoStore.create({ mongoUrl: DATABASE_URL }),
     resave: true,
     saveUninitialized: true,
     cookie: { secure: false }

@@ -4,7 +4,7 @@
 */
 //import '../style/globals.css'
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom/client';
 import App from "./components/App.jsx"
 
 window.addEventListener('load', (event) => {
@@ -13,13 +13,15 @@ window.addEventListener('load', (event) => {
     //loading.remove();
     document.body.removeChild(loading)
   }
-  
-  //console.log('React page is fully loaded');
-  //let root = document.createElement("div");
-  //root.setAttribute("id", "root");
-  //document.body.appendChild(root);
-  //ReactDOM.render(<App />, document.getElementById('root'));
-  ReactDOM.render(<App />, document.getElementById('app'));
+
+  const container = document.getElementById('app');
+
+  // Create a root.
+  const root = ReactDOM.createRoot(container);
+
+  // Initial render
+  root.render(<App/>);
+
 });
 window.addEventListener("beforeunload", function(event) {
   //fetch('/exit');

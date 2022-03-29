@@ -22,6 +22,7 @@ import GamesPage from "./three/GamesPage";
 import ProjectsPage from "./three/ProjectsPage";
 //import ThreePage from "./three/ThreePage";
 import NavAccess from "./ui/NavAccess";
+import HomePage from "./pages/HomePage";
 
 export default function RoutePage(){
 
@@ -31,10 +32,11 @@ export default function RoutePage(){
     return <>
     <Sign/><br/>
     <Routes>
-      <Route index element={<SignInPage />} />
+      <Route index element={<HomePage />} />
       <Route path="signin" element={<SignInPage />} />
       <Route path="signup" element={<SignUpPage />} />
       <Route path="signout" element={<SignOutPage />} />
+      <Route path="editor/*" element={<EditorPage />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
     </>

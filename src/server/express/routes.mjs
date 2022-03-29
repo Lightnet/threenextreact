@@ -22,7 +22,6 @@ router.use((req,res,next)=>{
   next();
 });
 
-
 router.use(auth);
 router.use("/api",route_three);
 router.use(route_test);

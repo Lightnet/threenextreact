@@ -25,6 +25,7 @@ export function AuthProvider(props){
   const [status, setStatus] = useState('unauth'); //loading, auth, unauth
 
   //safe?
+  /*
   useEffect(async()=>{
     setStatus('loading')
     console.log("testing....")
@@ -43,7 +44,9 @@ export function AuthProvider(props){
     }else{
       setStatus('unauth')
     }
+    
   },[])
+  */
 
   useEffect(()=>{
     if(!isEmpty(token)){
