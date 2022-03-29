@@ -12,7 +12,7 @@
 
 # Project:
   I ported same project to vue js as to learn and compare frameworks. It almost the same layout just the code design is little different.
-- https://github.com/Lightnet/jsvuegunui
+- https://github.com/Lightnet/vuethreeeditor
 
 ## Information:
   Work in progress builds and testing ideas.
@@ -263,9 +263,9 @@ $ ncu // check package to updates
 # Credits:
   Thanks to search engine and the people working on react, three, three-fiber and other forums. For finding the problems.
 ## 
-- react-three-fiber as @react-three/fiber
-  - https://github.com/pmndrs/react-three-fiber
-  - https://github.com/pmndrs/react-three-fiber/issues/43
+ - react-three-fiber as @react-three/fiber
+ - https://github.com/pmndrs/react-three-fiber
+ - https://github.com/pmndrs/react-three-fiber/issues/43
 
 ## svgrepo:
   Free svg icons.
