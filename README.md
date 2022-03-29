@@ -14,6 +14,14 @@
   I ported same project to vue js as to learn and compare frameworks. It almost the same layout just the code design is little different.
 - https://github.com/Lightnet/vuethreeeditor
 
+## Test Build:
+
+- https://stackblitz.com/edit/node-zby8hd
+```
+npm run devn
+```
+
+
 ## Information:
   Work in progress builds and testing ideas.
 
