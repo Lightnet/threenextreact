@@ -16,6 +16,7 @@ import EntityArrowHelper, { EntityArrowHelperRef } from "../entity/EntityArrowHe
 import EntityAxesHelper, { EntityAxesHelperRef } from "../entity/EntityAxesHelper.jsx";
 import EntityBox, { EntityBoxRef } from "../entity/EntityBox";
 import EntityCircle, { EntityCircleRef } from "../entity/EntityCircle";
+import EntityCapsule, { EntityCapsuleRef } from "../entity/EntityCapsule";
 import EntityColor, { EntityColorRef } from "../entity/EntityColor";
 import EntityCone, { EntityConeRef } from "../entity/EntityCone";
 import EntityCylinder, { EntityCylinderRef } from "../entity/EntityCylinder";
@@ -31,6 +32,13 @@ import EntityModalFBX, { EntityModalFBXRef } from "../model/EntityModalFBX.jsx";
 import EntityModalGLTF, { EntityModalGLTFRef } from "../model/EntityModalGLTF.jsx";
 import EntityModalOBJ, { EntityModalOBJRef } from "../model/EntityModalOBJ.jsx";
 import API from "./API.mjs";
+import EntityDodecahedron, { EntityDodecahedronRef } from "../entity/EntityDodecahedron.jsx";
+import EntityOctahedron, { EntityOctahedronRef } from "../entity/EntityOctahedron.jsx";
+import EntityTorus, { EntityTorusRef } from "../entity/EntityTorus.jsx";
+import EntityTorusKnot, { EntityTorusKnotRef } from "../entity/EntityTorusKnot.jsx";
+import EntityTetrahedron, { EntityTetrahedronRef } from "../entity/EntityTetrahedron.jsx";
+import EntityIcosahedron, { EntityIcosahedronRef } from "../entity/EntityIcosahedron.jsx";
+import EntityRing, { EntityRingRef } from "../entity/EntityRing.jsx";
 
 var ENTITIES=[]
 var loaded;
@@ -60,6 +68,7 @@ AddCompObjEntity({
     }
   ]
 })
+
 AddCompObjEntity({
   name:"group"
   , isTransform:true
@@ -70,6 +79,7 @@ AddCompObjEntity({
   , mass:1
   , parameters:[]
 })
+
 AddCompObjEntity({
   name:"box"
   , isTransform:true
@@ -102,6 +112,34 @@ AddCompObjEntity({
     , wireframe:false
   }]
 })
+
+AddCompObjEntity({
+  name:"Capsule"
+  , isTransform:true
+  , dataType:API.ENTITYTYPES.CAPSULE
+  , comp:EntityCapsule
+  , compRef:EntityCapsuleRef
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , length: 1 
+      , capSegments: 4 
+      , radialSegments: 8
+    },
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
+
 AddCompObjEntity({
   name:"circle"
   , isTransform:true
@@ -199,6 +237,79 @@ AddCompObjEntity({
     , wireframe:false
   }]
 })
+
+AddCompObjEntity({
+  name:"Dodecahedron"
+  , dataType:API.ENTITYTYPES.DODECAHEDRON
+  , comp:EntityDodecahedron
+  , compRef:EntityDodecahedronRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , detail: 0
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
+AddCompObjEntity({
+  name:"Icosahedron"
+  , dataType:API.ENTITYTYPES.ICOSAHEDRON
+  , comp:EntityIcosahedron
+  , compRef:EntityIcosahedronRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , detail: 0
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
+AddCompObjEntity({
+  name:"Octahedron"
+  , dataType:API.ENTITYTYPES.OCTAHEDRON
+  , comp:EntityOctahedron
+  , compRef:EntityOctahedronRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , detail: 0
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
 AddCompObjEntity({
   name:"plane"
   , isTransform:true
@@ -228,6 +339,35 @@ AddCompObjEntity({
     , wireframe:false
   }]
 })
+
+AddCompObjEntity({
+  name:"Ring"
+  , dataType:API.ENTITYTYPES.RING
+  , comp:EntityRing
+  , compRef:EntityRingRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      innerRadius: 0.5
+      , outerRadius: 1
+      , thetaSegments: 8
+      , phiSegments: 1
+      , thetaStart: 0
+      , thetaLength: Math.PI * 2
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
 AddCompObjEntity({
   name:"sphere"
   , dataType:API.ENTITYTYPES.SPHERE
@@ -250,6 +390,83 @@ AddCompObjEntity({
       ,phiLength :Math.PI * 2
       ,thetaStart :0
       ,thetaLength :Math.PI
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
+AddCompObjEntity({
+  name:"Tetrahedron"
+  , dataType:API.ENTITYTYPES.TETERAHEDRON
+  , comp:EntityTetrahedron
+  , compRef:EntityTetrahedronRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , detail: 0
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
+AddCompObjEntity({
+  name:"Torus"
+  , dataType:API.ENTITYTYPES.TORUS
+  , comp:EntityTorus
+  , compRef:EntityTorusRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , tube : 0.4
+      , radialSegments: 8
+      , tubularSegments: 6
+      , arc: Math.PI * 2
+    }
+  ],
+  material:[{
+      index:0
+    , objectid:nanoid32()
+    , dataType:"meshStandardMaterial"
+    , name:"meshStandardMaterial"
+    , color:"#ffffff"
+    , wireframe:false
+  }]
+})
+
+AddCompObjEntity({
+  name:"TorusKnot"
+  , dataType:API.ENTITYTYPES.TORUSKNOT
+  , comp:EntityTorusKnot
+  , compRef:EntityTorusKnotRef
+  , isTransform:true
+  , shape:"BOX"
+  , mass:1
+  , parameters:[
+    {
+      radius: 1
+      , tube: 0.4
+      , tubularSegments: 64
+      , radialSegments : 8
     }
   ],
   material:[{
